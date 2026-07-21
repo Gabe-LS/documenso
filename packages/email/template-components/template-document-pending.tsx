@@ -21,7 +21,13 @@ export const TemplateDocumentPending = ({ documentName, assetBaseUrl }: Template
         <Section className="mb-4">
           <Column align="center">
             <Text className="font-semibold text-base text-foreground">
-              <Img src={getAssetUrl('/static/clock.png')} className="-mt-0.5 mr-2 inline h-7 w-7 align-middle" alt="" />
+              <Img
+                src={getAssetUrl('/static/clock.png')}
+                className="-mt-0.5 mr-2 inline h-7 w-7 align-middle"
+                alt=""
+                width={28}
+                height={28}
+              />
               <Trans>Waiting for others</Trans>
             </Text>
           </Column>

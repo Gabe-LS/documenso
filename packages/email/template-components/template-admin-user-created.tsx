@@ -1,3 +1,4 @@
+import { SUPPORT_EMAIL } from '@documenso/lib/constants/app';
 import { Trans } from '@lingui/react/macro';
 
 import { Button, Link, Section, Text } from '../components';
@@ -13,7 +14,7 @@ export const TemplateAdminUserCreated = ({ resetPasswordLink, assetBaseUrl }: Te
     <>
       <TemplateDocumentImage className="mt-6" assetBaseUrl={assetBaseUrl} />
 
-      <Section className="flex-row items-center justify-center">
+      <Section>
         <Text className="mx-auto mb-0 max-w-[80%] text-center font-semibold text-foreground text-lg">
           <Trans>Welcome to Documenso!</Trans>
         </Text>
@@ -28,7 +29,7 @@ export const TemplateAdminUserCreated = ({ resetPasswordLink, assetBaseUrl }: Te
 
         <Section className="mt-8 mb-6 text-center">
           <Button
-            className="inline-flex items-center justify-center rounded-lg bg-primary px-6 py-3 text-center font-medium text-primary-foreground text-sm no-underline"
+            className="rounded-lg bg-primary px-6 py-3 text-center font-medium text-primary-foreground text-sm no-underline"
             href={resetPasswordLink}
           >
             <Trans>Set Password</Trans>
@@ -44,7 +45,7 @@ export const TemplateAdminUserCreated = ({ resetPasswordLink, assetBaseUrl }: Te
           <Text className="text-center text-muted-foreground text-sm">
             <Trans>
               If you didn't expect this account or have any questions, please{' '}
-              <Link href="mailto:support@documenso.com" className="text-primary">
+              <Link href={`mailto:${SUPPORT_EMAIL}`} className="text-foreground underline">
                 contact support
               </Link>
               .

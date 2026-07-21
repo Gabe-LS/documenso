@@ -22,7 +22,7 @@ export const TemplateDocumentSelfSigned = ({ documentName, assetBaseUrl }: Templ
     <>
       <TemplateDocumentImage className="mt-6" assetBaseUrl={assetBaseUrl} />
 
-      <Section className="flex-row items-center justify-center">
+      <Section>
         <Section>
           <Column align="center">
             <Text className="font-semibold text-base text-foreground">
@@ -30,6 +30,8 @@ export const TemplateDocumentSelfSigned = ({ documentName, assetBaseUrl }: Templ
                 src={getAssetUrl('/static/completed.png')}
                 className="-mt-0.5 mr-2 inline h-7 w-7 align-middle"
                 alt=""
+                width={28}
+                height={28}
               />
               <Trans>Completed</Trans>
             </Text>
@@ -43,7 +45,7 @@ export const TemplateDocumentSelfSigned = ({ documentName, assetBaseUrl }: Templ
         <Text className="mx-auto mt-1 mb-6 max-w-[80%] text-center text-base text-muted-foreground">
           <Trans>
             Create a{' '}
-            <Link href={signUpUrl} target="_blank" className="whitespace-nowrap text-primary hover:text-primary">
+            <Link href={signUpUrl} target="_blank" rel="noopener noreferrer" className="whitespace-nowrap text-foreground underline">
               free account
             </Link>{' '}
             to access your signed documents at any time.
@@ -59,6 +61,8 @@ export const TemplateDocumentSelfSigned = ({ documentName, assetBaseUrl }: Templ
               src={getAssetUrl('/static/user-plus.png')}
               className="mr-2 mb-0.5 inline h-5 w-5 align-middle"
               alt=""
+              width={20}
+              height={20}
             />
             <Trans>Create account</Trans>
           </Button>
@@ -67,7 +71,13 @@ export const TemplateDocumentSelfSigned = ({ documentName, assetBaseUrl }: Templ
             className="rounded-lg border border-border border-solid px-4 py-2 text-center font-medium text-foreground text-sm no-underline"
             href="https://documenso.com/pricing"
           >
-            <Img src={getAssetUrl('/static/review.png')} className="mr-2 mb-0.5 inline h-5 w-5 align-middle" alt="" />
+            <Img
+              src={getAssetUrl('/static/review.png')}
+              className="mr-2 mb-0.5 inline h-5 w-5 align-middle"
+              alt=""
+              width={20}
+              height={20}
+            />
             <Trans>View plans</Trans>
           </Button>
         </Section>

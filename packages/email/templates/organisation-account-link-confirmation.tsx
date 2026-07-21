@@ -2,8 +2,9 @@ import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 import { Trans } from '@lingui/react/macro';
 
-import { Body, Button, Container, Head, Hr, Html, Preview, Section, Text } from '../components';
+import { Body, Button, Container, Hr, Html, Preview, Section, Text } from '../components';
 import { TemplateBrandingLogo } from '../template-components/template-branding-logo';
+import { TemplateEmailHead } from '../template-components/template-email-head';
 import { TemplateFooter } from '../template-components/template-footer';
 import TemplateImage from '../template-components/template-image';
 
@@ -29,20 +30,26 @@ export const OrganisationAccountLinkConfirmationTemplate = ({
 
   return (
     <Html>
-      <Head />
-      <Body className="mx-auto my-auto font-sans">
+      <TemplateEmailHead />
+      <Body className="mx-auto my-auto bg-background font-sans">
         <Preview>{_(previewText)}</Preview>
 
-        <Section className="bg-background">
-          <Container className="mx-auto mt-8 mb-2 max-w-xl rounded-lg border border-border border-solid px-2 pt-2 backdrop-blur-sm">
-            <TemplateBrandingLogo assetBaseUrl={assetBaseUrl} className="mb-4 h-6 p-2" />
+        <Section>
+          <Container className="mx-auto mt-8 mb-2 max-w-xl rounded-lg border border-border border-solid p-4">
+            <TemplateBrandingLogo assetBaseUrl={assetBaseUrl} className="mb-4 h-6" />
 
             <Section>
-              <TemplateImage className="mx-auto h-12 w-12" assetBaseUrl={assetBaseUrl} staticAsset="building-2.png" />
+              <TemplateImage
+                className="mx-auto h-12 w-12"
+                assetBaseUrl={assetBaseUrl}
+                staticAsset="building-2.png"
+                width={48}
+                height={48}
+              />
             </Section>
 
-            <Section className="p-2 text-muted-foreground">
-              <Text className="text-center font-medium text-foreground text-lg">
+            <Section className="p-2">
+              <Text className="text-center font-semibold text-foreground text-lg">
                 {type === 'create' ? (
                   <Trans>Account creation request</Trans>
                 ) : (
@@ -50,7 +57,7 @@ export const OrganisationAccountLinkConfirmationTemplate = ({
                 )}
               </Text>
 
-              <Text className="text-center text-base">
+              <Text className="text-center text-base text-muted-foreground">
                 {type === 'create' ? (
                   <Trans>
                     <span className="font-bold">{organisationName}</span> has requested to create an account on your
@@ -64,38 +71,9 @@ export const OrganisationAccountLinkConfirmationTemplate = ({
                 )}
               </Text>
 
-              {/* Placeholder text if we want to have the warning in the email as well. */}
-              {/* <Section className="mt-6">
-                <Text className="my-0 text-sm">
-                  <Trans>
-                    By accepting this request, you will be granting{' '}
-                    <strong>{organisationName}</strong> full access to:
-                  </Trans>
-                </Text>
-
-                <ul className="mb-0 mt-2">
-                  <li className="text-sm">
-                    <Trans>Your account, and everything associated with it</Trans>
-                  </li>
-                  <li className="mt-1 text-sm">
-                    <Trans>Something something something</Trans>
-                  </li>
-                  <li className="mt-1 text-sm">
-                    <Trans>Something something something</Trans>
-                  </li>
-                </ul>
-
-                <Text className="mt-2 text-sm">
-                  <Trans>
-                    You can unlink your account at any time in your security settings on Documenso{' '}
-                    <Link href={`${assetBaseUrl}/settings/security/linked-accounts`}>here.</Link>
-                  </Trans>
-                </Text>
-              </Section> */}
-
               <Section className="mt-8 mb-6 text-center">
                 <Button
-                  className="inline-flex items-center justify-center rounded-lg bg-primary px-6 py-3 text-center font-medium text-primary-foreground text-sm no-underline"
+                  className="rounded-lg bg-primary px-6 py-3 text-center font-medium text-primary-foreground text-sm no-underline"
                   href={confirmationLink}
                 >
                   <Trans>Review request</Trans>
@@ -103,7 +81,7 @@ export const OrganisationAccountLinkConfirmationTemplate = ({
               </Section>
             </Section>
 
-            <Text className="text-center text-muted-foreground text-xs">
+            <Text className="text-center text-muted-foreground text-sm">
               <Trans>Link expires in 30 minutes.</Trans>
             </Text>
           </Container>

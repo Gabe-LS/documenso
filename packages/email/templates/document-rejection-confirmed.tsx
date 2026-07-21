@@ -1,9 +1,10 @@
 import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 
-import { Body, Container, Head, Html, Preview, Section } from '../components';
+import { Body, Container, Hr, Html, Preview, Section } from '../components';
 import { TemplateBrandingLogo } from '../template-components/template-branding-logo';
 import { TemplateDocumentRejectionConfirmed } from '../template-components/template-document-rejection-confirmed';
+import { TemplateEmailHead } from '../template-components/template-email-head';
 import { TemplateFooter } from '../template-components/template-footer';
 
 export type DocumentRejectionConfirmedEmailProps = {
@@ -12,6 +13,7 @@ export type DocumentRejectionConfirmedEmailProps = {
   documentOwnerName: string;
   reason: string;
   assetBaseUrl?: string;
+  reportUrl?: string;
 };
 
 export function DocumentRejectionConfirmedEmail({
@@ -20,6 +22,7 @@ export function DocumentRejectionConfirmedEmail({
   documentOwnerName,
   reason,
   assetBaseUrl = 'http://localhost:3002',
+  reportUrl,
 }: DocumentRejectionConfirmedEmailProps) {
   const { _ } = useLingui();
 
@@ -27,13 +30,13 @@ export function DocumentRejectionConfirmedEmail({
 
   return (
     <Html>
-      <Head />
+      <TemplateEmailHead />
 
       <Body className="mx-auto my-auto bg-background font-sans">
         <Preview>{previewText}</Preview>
 
         <Section>
-          <Container className="mx-auto mt-8 mb-2 max-w-xl rounded-lg border border-border border-solid p-4 backdrop-blur-sm">
+          <Container className="mx-auto mt-8 mb-2 max-w-xl rounded-lg border border-border border-solid p-4">
             <Section>
               <TemplateBrandingLogo assetBaseUrl={assetBaseUrl} className="mb-4 h-6" />
 
@@ -42,12 +45,15 @@ export function DocumentRejectionConfirmedEmail({
                 documentName={documentName}
                 documentOwnerName={documentOwnerName}
                 reason={reason}
+                assetBaseUrl={assetBaseUrl}
               />
             </Section>
           </Container>
 
+          <Hr className="mx-auto mt-12 max-w-xl" />
+
           <Container className="mx-auto max-w-xl">
-            <TemplateFooter />
+            <TemplateFooter reportUrl={reportUrl} />
           </Container>
         </Section>
       </Body>

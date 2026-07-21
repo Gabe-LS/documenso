@@ -21,7 +21,7 @@ export const TemplateFooter = ({ isDocument = true, reportUrl }: TemplateFooterP
         <Text className="my-4 text-base text-muted-foreground">
           <Trans>
             Did not expect this email?{' '}
-            <Link className="text-primary" href={reportUrl}>
+            <Link className="text-foreground underline" href={reportUrl}>
               Click here to report the sender
             </Link>
             . Never sign a document you don't recognize or weren't expecting.
@@ -33,7 +33,7 @@ export const TemplateFooter = ({ isDocument = true, reportUrl }: TemplateFooterP
         <Text className="my-4 text-base text-muted-foreground">
           <Trans>
             This document was sent using{' '}
-            <Link className="text-primary" href="https://documen.so/mail-footer">
+            <Link className="text-foreground underline" href="https://documen.so/mail-footer">
               Documenso
             </Link>
             .
@@ -56,7 +56,7 @@ export const TemplateFooter = ({ isDocument = true, reportUrl }: TemplateFooterP
 
       {branding.brandingEnabled && safeBrandingUrl && (
         <Text className="my-8 text-muted-foreground text-sm">
-          <Link href={safeBrandingUrl} target="_blank">
+          <Link href={safeBrandingUrl} target="_blank" rel="noopener noreferrer" className="underline">
             {safeBrandingUrl}
           </Link>
         </Text>

@@ -1,7 +1,10 @@
-import { msg, Trans } from '@lingui/macro';
+import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
+import { Trans } from '@lingui/react/macro';
 
-import { Body, Container, Head, Html, Preview, Section, Text } from '../components';
+import { Body, Container, Hr, Html, Preview, Section, Text } from '../components';
+import { TemplateBrandingLogo } from '../template-components/template-branding-logo';
+import { TemplateEmailHead } from '../template-components/template-email-head';
 import { TemplateFooter } from '../template-components/template-footer';
 
 export interface BulkSendCompleteEmailProps {
@@ -21,6 +24,7 @@ export const BulkSendCompleteEmail = ({
   successCount,
   failedCount,
   errors,
+  assetBaseUrl = 'http://localhost:3002',
 }: BulkSendCompleteEmailProps) => {
   const { _ } = useLingui();
 
@@ -28,13 +32,15 @@ export const BulkSendCompleteEmail = ({
 
   return (
     <Html>
-      <Head />
+      <TemplateEmailHead />
       <Body className="mx-auto my-auto bg-background font-sans">
         <Preview>{_(previewText)}</Preview>
 
         <Section>
-          <Container className="mx-auto mt-8 mb-2 max-w-xl rounded-lg border border-border border-solid p-4 backdrop-blur-sm">
+          <Container className="mx-auto mt-8 mb-2 max-w-xl rounded-lg border border-border border-solid p-4">
             <Section>
+              <TemplateBrandingLogo assetBaseUrl={assetBaseUrl} className="mb-4 h-6" />
+
               <Text className="text-sm">
                 <Trans>Hi {userName},</Trans>
               </Text>
@@ -83,6 +89,8 @@ export const BulkSendCompleteEmail = ({
               </Text>
             </Section>
           </Container>
+
+          <Hr className="mx-auto mt-12 max-w-xl" />
 
           <Container className="mx-auto max-w-xl">
             <TemplateFooter isDocument={false} />

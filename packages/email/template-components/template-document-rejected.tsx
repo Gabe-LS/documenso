@@ -1,12 +1,14 @@
 import { Trans } from '@lingui/react/macro';
 
-import { Button, Heading, Text } from '../components';
+import { Button, Section, Text } from '../components';
+import { TemplateDocumentImage } from './template-document-image';
 
 export interface TemplateDocumentRejectedProps {
   documentName: string;
   recipientName: string;
   rejectionReason?: string;
   documentUrl: string;
+  assetBaseUrl?: string;
 }
 
 export function TemplateDocumentRejected({
@@ -14,12 +16,15 @@ export function TemplateDocumentRejected({
   recipientName: signerName,
   rejectionReason,
   documentUrl,
+  assetBaseUrl = 'http://localhost:3002',
 }: TemplateDocumentRejectedProps) {
   return (
     <div className="mt-4">
-      <Heading className="mb-4 text-center font-semibold text-2xl text-foreground">
+      <TemplateDocumentImage className="mt-6" assetBaseUrl={assetBaseUrl} />
+
+      <Text className="mb-0 text-center font-semibold text-foreground text-lg">
         <Trans>Document Rejected</Trans>
-      </Heading>
+      </Text>
 
       <Text className="mb-4 text-base">
         <Trans>
@@ -28,7 +33,7 @@ export function TemplateDocumentRejected({
       </Text>
 
       {rejectionReason && (
-        <Text className="mb-4 text-base text-muted-foreground">
+        <Text className="mt-4 text-center text-base text-muted-foreground italic">
           <Trans>Reason for rejection: {rejectionReason}</Trans>
         </Text>
       )}
@@ -37,12 +42,14 @@ export function TemplateDocumentRejected({
         <Trans>You can view the document and its status by clicking the button below.</Trans>
       </Text>
 
-      <Button
-        href={documentUrl}
-        className="inline-flex items-center justify-center rounded-lg bg-primary px-6 py-3 text-center font-medium text-primary-foreground text-sm no-underline"
-      >
-        <Trans>View Document</Trans>
-      </Button>
+      <Section className="mt-8 mb-6 text-center">
+        <Button
+          href={documentUrl}
+          className="rounded-lg bg-primary px-6 py-3 text-center font-medium text-primary-foreground text-sm no-underline"
+        >
+          <Trans>View Document</Trans>
+        </Button>
+      </Section>
     </div>
   );
 }

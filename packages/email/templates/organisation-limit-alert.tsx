@@ -3,8 +3,9 @@ import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 import { Trans } from '@lingui/react/macro';
 import { match } from 'ts-pattern';
-import { Body, Container, Head, Hr, Html, Preview, Section, Text } from '../components';
+import { Body, Container, Hr, Html, Preview, Section, Text } from '../components';
 import { TemplateBrandingLogo } from '../template-components/template-branding-logo';
+import { TemplateEmailHead } from '../template-components/template-email-head';
 import { TemplateFooter } from '../template-components/template-footer';
 
 export type OrganisationLimitAlertEmailProps = {
@@ -28,16 +29,16 @@ export const OrganisationLimitAlertEmailTemplate = ({
 
   return (
     <Html>
-      <Head />
-      <Body className="mx-auto my-auto font-sans">
+      <TemplateEmailHead />
+      <Body className="mx-auto my-auto bg-background font-sans">
         <Preview>{_(previewText)}</Preview>
 
-        <Section className="bg-background text-muted-foreground">
-          <Container className="mx-auto mt-8 mb-2 max-w-xl rounded-lg border border-border border-solid p-2 backdrop-blur-sm">
-            <TemplateBrandingLogo assetBaseUrl={assetBaseUrl} className="mb-4 h-6 p-2" />
+        <Section>
+          <Container className="mx-auto mt-8 mb-2 max-w-xl rounded-lg border border-border border-solid p-4">
+            <TemplateBrandingLogo assetBaseUrl={assetBaseUrl} className="mb-4 h-6" />
 
-            <Section className="p-2 text-muted-foreground">
-              <Text className="text-center font-medium text-foreground text-lg">
+            <Section className="p-2">
+              <Text className="text-center font-semibold text-foreground text-lg">
                 {kind === 'quotaNearing' ? (
                   <Trans>Approaching Your Plan Limits</Trans>
                 ) : (
@@ -45,13 +46,13 @@ export const OrganisationLimitAlertEmailTemplate = ({
                 )}
               </Text>
 
-              <div className="mx-auto my-2 w-fit rounded-lg bg-muted px-4 py-2 font-medium text-base text-muted-foreground">
+              <div className="mx-auto my-2 inline-block rounded-lg bg-muted px-4 py-2 font-medium text-base text-muted-foreground">
                 {organisationName}
               </div>
 
               {match(kind)
                 .with('quota', () => (
-                  <Text className="text-center text-base">
+                  <Text className="text-center text-base text-muted-foreground">
                     {match(counter)
                       .with('document', () => (
                         <Trans>
@@ -76,7 +77,7 @@ export const OrganisationLimitAlertEmailTemplate = ({
                   </Text>
                 ))
                 .with('rateLimit', () => (
-                  <Text className="text-center text-base">
+                  <Text className="text-center text-base text-muted-foreground">
                     {match(counter)
                       .with('document', () => (
                         <Trans>
@@ -100,7 +101,7 @@ export const OrganisationLimitAlertEmailTemplate = ({
                   </Text>
                 ))
                 .with('quotaNearing', () => (
-                  <Text className="text-center text-base">
+                  <Text className="text-center text-base text-muted-foreground">
                     {match(counter)
                       .with('document', () => (
                         <Trans>
@@ -125,7 +126,7 @@ export const OrganisationLimitAlertEmailTemplate = ({
                 ))
                 .exhaustive()}
 
-              <Text className="text-center text-base">
+              <Text className="text-center text-base text-muted-foreground">
                 {kind === 'quotaNearing' ? (
                   <Trans>
                     If you expect to need higher limits, please contact support at {SUPPORT_EMAIL} and we will review

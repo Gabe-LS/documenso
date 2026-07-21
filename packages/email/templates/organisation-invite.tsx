@@ -2,8 +2,9 @@ import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 import { Trans } from '@lingui/react/macro';
 
-import { Body, Button, Container, Head, Hr, Html, Preview, Section, Text } from '../components';
+import { Body, Button, Container, Hr, Html, Preview, Section, Text } from '../components';
 import { TemplateBrandingLogo } from '../template-components/template-branding-logo';
+import { TemplateEmailHead } from '../template-components/template-email-head';
 import { TemplateFooter } from '../template-components/template-footer';
 import TemplateImage from '../template-components/template-image';
 
@@ -28,46 +29,52 @@ export const OrganisationInviteEmailTemplate = ({
 
   return (
     <Html>
-      <Head />
-      <Body className="mx-auto my-auto font-sans">
+      <TemplateEmailHead />
+      <Body className="mx-auto my-auto bg-background font-sans">
         <Preview>{_(previewText)}</Preview>
 
-        <Section className="bg-background text-muted-foreground">
-          <Container className="mx-auto mt-8 mb-2 max-w-xl rounded-lg border border-border border-solid p-2 backdrop-blur-sm">
-            <TemplateBrandingLogo assetBaseUrl={assetBaseUrl} className="mb-4 h-6 p-2" />
+        <Section>
+          <Container className="mx-auto mt-8 mb-2 max-w-xl rounded-lg border border-border border-solid p-4">
+            <TemplateBrandingLogo assetBaseUrl={assetBaseUrl} className="mb-4 h-6" />
 
             <Section>
-              <TemplateImage className="mx-auto" assetBaseUrl={assetBaseUrl} staticAsset="add-user.png" />
+              <TemplateImage
+                className="mx-auto h-[120px] w-[120px]"
+                assetBaseUrl={assetBaseUrl}
+                staticAsset="add-user.png"
+                width={120}
+                height={120}
+              />
             </Section>
 
-            <Section className="p-2 text-muted-foreground">
-              <Text className="text-center font-medium text-foreground text-lg">
+            <Section className="p-2">
+              <Text className="text-center font-semibold text-foreground text-lg">
                 <Trans>Join {organisationName} on Documenso</Trans>
               </Text>
 
-              <Text className="my-1 text-center text-base">
+              <Text className="my-1 text-center text-base text-muted-foreground">
                 <Trans>You have been invited to join the following organisation</Trans>
               </Text>
 
-              <div className="mx-auto my-2 w-fit rounded-lg bg-muted px-4 py-2 font-medium text-base text-muted-foreground">
+              <div className="mx-auto my-2 inline-block rounded-lg bg-muted px-4 py-2 font-medium text-base text-muted-foreground">
                 {organisationName}
               </div>
 
-              <Text className="my-1 text-center text-base">
+              <Text className="my-1 text-center text-base text-muted-foreground">
                 <Trans>
                   by <span className="text-foreground">{senderName}</span>
                 </Trans>
               </Text>
 
-              <Section className="mt-6 mb-6 text-center">
+              <Section className="mt-8 mb-6 text-center">
                 <Button
-                  className="inline-flex items-center justify-center rounded-lg bg-primary px-6 py-3 text-center font-medium text-primary-foreground text-sm no-underline"
+                  className="rounded-lg bg-primary px-6 py-3 text-center font-medium text-primary-foreground text-sm no-underline"
                   href={`${baseUrl}/organisation/invite/${token}`}
                 >
                   <Trans>Accept</Trans>
                 </Button>
                 <Button
-                  className="ml-4 inline-flex items-center justify-center rounded-lg bg-muted px-6 py-3 text-center font-medium text-muted-foreground text-sm no-underline"
+                  className="ml-4 rounded-lg bg-muted px-6 py-3 text-center font-medium text-muted-foreground text-sm no-underline"
                   href={`${baseUrl}/organisation/decline/${token}`}
                 >
                   <Trans>Decline</Trans>

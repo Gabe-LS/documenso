@@ -1,12 +1,14 @@
 import { Trans } from '@lingui/react/macro';
 
-import { Container, Heading, Section, Text } from '../components';
+import { Container, Section, Text } from '../components';
+import { TemplateDocumentImage } from './template-document-image';
 
 interface TemplateDocumentRejectionConfirmedProps {
   recipientName: string;
   documentName: string;
   documentOwnerName: string;
   reason?: string;
+  assetBaseUrl?: string;
 }
 
 export function TemplateDocumentRejectionConfirmed({
@@ -14,13 +16,16 @@ export function TemplateDocumentRejectionConfirmed({
   documentName,
   documentOwnerName,
   reason,
+  assetBaseUrl = 'http://localhost:3002',
 }: TemplateDocumentRejectionConfirmedProps) {
   return (
     <Container>
+      <TemplateDocumentImage className="mt-6" assetBaseUrl={assetBaseUrl} />
+
       <Section>
-        <Heading className="font-semibold text-2xl">
+        <Text className="mb-0 text-center font-semibold text-foreground text-lg">
           <Trans>Rejection Confirmed</Trans>
-        </Heading>
+        </Text>
 
         <Text className="text-base text-foreground">
           <Trans>
@@ -30,7 +35,7 @@ export function TemplateDocumentRejectionConfirmed({
         </Text>
 
         {reason && (
-          <Text className="font-medium text-base text-muted-foreground">
+          <Text className="mt-4 text-center text-base text-muted-foreground italic">
             <Trans>Rejection reason: {reason}</Trans>
           </Text>
         )}

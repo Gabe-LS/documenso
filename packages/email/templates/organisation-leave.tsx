@@ -2,8 +2,9 @@ import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 import { Trans } from '@lingui/react/macro';
 
-import { Body, Container, Head, Hr, Html, Preview, Section, Text } from '../components';
+import { Body, Container, Hr, Html, Preview, Section, Text } from '../components';
 import { TemplateBrandingLogo } from '../template-components/template-branding-logo';
+import { TemplateEmailHead } from '../template-components/template-email-head';
 import { TemplateFooter } from '../template-components/template-footer';
 import TemplateImage from '../template-components/template-image';
 
@@ -30,24 +31,30 @@ export const OrganisationLeaveEmailTemplate = ({
 
   return (
     <Html>
-      <Head />
-      <Body className="mx-auto my-auto font-sans">
+      <TemplateEmailHead />
+      <Body className="mx-auto my-auto bg-background font-sans">
         <Preview>{_(previewText)}</Preview>
 
-        <Section className="bg-background text-muted-foreground">
-          <Container className="mx-auto mt-8 mb-2 max-w-xl rounded-lg border border-border border-solid p-2 backdrop-blur-sm">
-            <TemplateBrandingLogo assetBaseUrl={assetBaseUrl} className="mb-4 h-6 p-2" />
+        <Section>
+          <Container className="mx-auto mt-8 mb-2 max-w-xl rounded-lg border border-border border-solid p-4">
+            <TemplateBrandingLogo assetBaseUrl={assetBaseUrl} className="mb-4 h-6" />
 
             <Section>
-              <TemplateImage className="mx-auto" assetBaseUrl={assetBaseUrl} staticAsset="delete-user.png" />
+              <TemplateImage
+                className="mx-auto h-[87px] w-[102px]"
+                assetBaseUrl={assetBaseUrl}
+                staticAsset="delete-user.png"
+                width={102}
+                height={87}
+              />
             </Section>
 
-            <Section className="p-2 text-muted-foreground">
-              <Text className="text-center font-medium text-foreground text-lg">
+            <Section className="p-2">
+              <Text className="text-center font-semibold text-foreground text-lg">
                 <Trans>A member has left your organisation {organisationName}</Trans>
               </Text>
 
-              <div className="mx-auto my-2 w-fit rounded-lg bg-muted px-4 py-2 font-medium text-base text-muted-foreground">
+              <div className="mx-auto my-2 inline-block rounded-lg bg-muted px-4 py-2 font-medium text-base text-muted-foreground">
                 {memberName || memberEmail}
               </div>
             </Section>

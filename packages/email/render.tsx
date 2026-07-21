@@ -4,6 +4,7 @@ import { resolveEmailBrandingColors } from '@documenso/lib/utils/email-branding-
 import type { I18n } from '@lingui/core';
 import { I18nProvider } from '@lingui/react';
 import * as ReactEmail from '@react-email/render';
+import { pixelBasedPreset } from '@react-email/tailwind';
 
 import { Tailwind } from './components';
 import { BrandingProvider, type BrandingSettings } from './providers/branding';
@@ -66,6 +67,7 @@ export const render = async (element: React.ReactNode, options?: RenderOptions) 
     <BrandingProvider branding={branding}>
       <Tailwind
         config={{
+          presets: [pixelBasedPreset],
           theme: {
             extend: {
               colors: tailwindColors,
@@ -94,6 +96,7 @@ export const renderWithI18N = async (element: React.ReactNode, options?: RenderO
       <BrandingProvider branding={branding}>
         <Tailwind
           config={{
+            presets: [pixelBasedPreset],
             theme: {
               extend: {
                 colors: tailwindColors,

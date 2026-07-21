@@ -4,17 +4,19 @@ import { useLingui } from '@lingui/react';
 import { Trans } from '@lingui/react/macro';
 import { RecipientRole } from '@prisma/client';
 
-import { Body, Button, Container, Head, Html, Preview, Section, Text } from '../components';
+import { Body, Button, Container, Hr, Html, Preview, Section, Text } from '../components';
 import { TemplateBrandingLogo } from '../template-components/template-branding-logo';
 import TemplateDocumentImage from '../template-components/template-document-image';
+import { TemplateEmailHead } from '../template-components/template-email-head';
 import { TemplateFooter } from '../template-components/template-footer';
 
-export type DocumentCompletedEmailTemplateProps = {
+export type DocumentCreatedFromDirectTemplateEmailTemplateProps = {
   recipientName?: string;
   recipientRole?: RecipientRole;
   documentLink?: string;
   documentName?: string;
   assetBaseUrl?: string;
+  reportUrl?: string;
 };
 
 export const DocumentCreatedFromDirectTemplateEmailTemplate = ({
@@ -23,7 +25,8 @@ export const DocumentCreatedFromDirectTemplateEmailTemplate = ({
   documentLink = 'http://localhost:3000',
   documentName = 'Open Source Pledge.pdf',
   assetBaseUrl = 'http://localhost:3002',
-}: DocumentCompletedEmailTemplateProps) => {
+  reportUrl,
+}: DocumentCreatedFromDirectTemplateEmailTemplateProps) => {
   const { _ } = useLingui();
 
   const action = _(RECIPIENT_ROLES_DESCRIPTION[recipientRole].actioned).toLowerCase();
@@ -32,12 +35,12 @@ export const DocumentCreatedFromDirectTemplateEmailTemplate = ({
 
   return (
     <Html>
-      <Head />
-      <Body className="mx-auto my-auto font-sans">
+      <TemplateEmailHead />
+      <Body className="mx-auto my-auto bg-background font-sans">
         <Preview>{_(previewText)}</Preview>
 
-        <Section className="bg-background">
-          <Container className="mx-auto mt-8 mb-2 max-w-xl rounded-lg border border-border border-solid p-2 backdrop-blur-sm">
+        <Section>
+          <Container className="mx-auto mt-8 mb-2 max-w-xl rounded-lg border border-border border-solid p-4">
             <Section className="p-2">
               <TemplateBrandingLogo assetBaseUrl={assetBaseUrl} className="mb-4 h-6" />
 
@@ -50,13 +53,13 @@ export const DocumentCreatedFromDirectTemplateEmailTemplate = ({
                   </Trans>
                 </Text>
 
-                <div className="mx-auto my-2 w-fit rounded-lg bg-muted px-4 py-2 text-muted-foreground text-sm">
+                <div className="mx-auto my-2 inline-block rounded-lg bg-muted px-4 py-2 text-muted-foreground text-sm">
                   {documentName}
                 </div>
 
                 <Section className="my-6 text-center">
                   <Button
-                    className="inline-flex items-center justify-center rounded-lg bg-primary px-6 py-3 text-center font-medium text-primary-foreground text-sm no-underline"
+                    className="rounded-lg bg-primary px-6 py-3 text-center font-medium text-primary-foreground text-sm no-underline"
                     href={documentLink}
                   >
                     <Trans>View document</Trans>
@@ -66,8 +69,10 @@ export const DocumentCreatedFromDirectTemplateEmailTemplate = ({
             </Section>
           </Container>
 
+          <Hr className="mx-auto mt-12 max-w-xl" />
+
           <Container className="mx-auto max-w-xl">
-            <TemplateFooter />
+            <TemplateFooter reportUrl={reportUrl} />
           </Container>
         </Section>
       </Body>

@@ -1,9 +1,10 @@
 import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 
-import { Body, Container, Head, Html, Preview, Section } from '../components';
+import { Body, Container, Hr, Html, Preview, Section } from '../components';
 import { TemplateBrandingLogo } from '../template-components/template-branding-logo';
 import { TemplateDocumentRecipientSigned } from '../template-components/template-document-recipient-signed';
+import { TemplateEmailHead } from '../template-components/template-email-head';
 import { TemplateFooter } from '../template-components/template-footer';
 
 export interface DocumentRecipientSignedEmailTemplateProps {
@@ -11,6 +12,7 @@ export interface DocumentRecipientSignedEmailTemplateProps {
   recipientName?: string;
   recipientEmail?: string;
   assetBaseUrl?: string;
+  reportUrl?: string;
 }
 
 export const DocumentRecipientSignedEmailTemplate = ({
@@ -18,6 +20,7 @@ export const DocumentRecipientSignedEmailTemplate = ({
   recipientName = 'John Doe',
   recipientEmail = 'lucas@documenso.com',
   assetBaseUrl = 'http://localhost:3002',
+  reportUrl,
 }: DocumentRecipientSignedEmailTemplateProps) => {
   const { _ } = useLingui();
 
@@ -27,12 +30,12 @@ export const DocumentRecipientSignedEmailTemplate = ({
 
   return (
     <Html>
-      <Head />
-      <Body className="mx-auto my-auto font-sans">
+      <TemplateEmailHead />
+      <Body className="mx-auto my-auto bg-background font-sans">
         <Preview>{_(previewText)}</Preview>
 
-        <Section className="bg-background">
-          <Container className="mx-auto mt-8 mb-2 max-w-xl rounded-lg border border-border border-solid p-2 backdrop-blur-sm">
+        <Section>
+          <Container className="mx-auto mt-8 mb-2 max-w-xl rounded-lg border border-border border-solid p-4">
             <Section className="p-2">
               <TemplateBrandingLogo assetBaseUrl={assetBaseUrl} className="mb-4 h-6" />
 
@@ -45,8 +48,10 @@ export const DocumentRecipientSignedEmailTemplate = ({
             </Section>
           </Container>
 
+          <Hr className="mx-auto mt-12 max-w-xl" />
+
           <Container className="mx-auto max-w-xl">
-            <TemplateFooter />
+            <TemplateFooter reportUrl={reportUrl} />
           </Container>
         </Section>
       </Body>

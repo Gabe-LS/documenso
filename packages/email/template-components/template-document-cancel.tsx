@@ -38,7 +38,7 @@ export const TemplateDocumentCancel = ({
         </Text>
 
         {cancellationReason && (
-          <Text className="mt-4 text-center text-base">
+          <Text className="mt-4 text-center text-base text-muted-foreground italic">
             <Trans>Reason for cancellation: {cancellationReason}</Trans>
           </Text>
         )}

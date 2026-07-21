@@ -5,11 +5,12 @@ import { Trans } from '@lingui/react/macro';
 import type { RecipientRole } from '@prisma/client';
 import { OrganisationType } from '@prisma/client';
 
-import { Body, Container, Head, Hr, Html, Link, Preview, Section, Text } from '../components';
+import { Body, Container, Hr, Html, Link, Preview, Section, Text } from '../components';
 import { TemplateBrandingLogo } from '../template-components/template-branding-logo';
 import { TemplateCustomMessageBody } from '../template-components/template-custom-message-body';
 import type { TemplateDocumentInviteProps } from '../template-components/template-document-invite';
 import { TemplateDocumentInvite } from '../template-components/template-document-invite';
+import { TemplateEmailHead } from '../template-components/template-email-head';
 import { TemplateFooter } from '../template-components/template-footer';
 
 export type DocumentInviteEmailTemplateProps = Partial<TemplateDocumentInviteProps> & {
@@ -55,13 +56,13 @@ export const DocumentInviteEmailTemplate = ({
 
   return (
     <Html>
-      <Head />
+      <TemplateEmailHead />
 
       <Body className="mx-auto my-auto bg-background font-sans">
         <Preview>{_(previewText)}</Preview>
 
         <Section>
-          <Container className="mx-auto mt-8 mb-2 max-w-xl rounded-lg border border-border border-solid p-4 backdrop-blur-sm">
+          <Container className="mx-auto mt-8 mb-2 max-w-xl rounded-lg border border-border border-solid p-4">
             <Section>
               <TemplateBrandingLogo assetBaseUrl={assetBaseUrl} className="mb-4 h-6" />
 
@@ -86,7 +87,7 @@ export const DocumentInviteEmailTemplate = ({
                 <Text className="my-4 font-semibold text-base">
                   <Trans>
                     {inviterName}{' '}
-                    <Link className="font-normal text-muted-foreground" href={`mailto:${inviterEmail}`}>
+                    <Link className="font-normal text-muted-foreground underline" href={`mailto:${inviterEmail}`}>
                       ({inviterEmail})
                     </Link>
                   </Trans>

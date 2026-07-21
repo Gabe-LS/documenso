@@ -22,10 +22,10 @@ export const TemplateBrandingLogo = ({ assetBaseUrl, className = 'mb-4 h-6' }: T
   if (!hasCustomBrandingLogo) {
     const documensoLogoUrl = new URL('/static/logo.png', assetBaseUrl).toString();
 
-    return <Img src={documensoLogoUrl} alt="Documenso Logo" className={className} />;
+    return <Img src={documensoLogoUrl} alt="" className={className} width={163} height={24} />;
   }
 
-  const brandingLogo = <Img src={branding.brandingLogo} alt="Branding Logo" className={className} />;
+  const brandingLogo = <Img src={branding.brandingLogo} alt="" className={`${className} max-w-full`} />;
 
   const safeBrandingUrl = getSafeBrandingUrl(branding.brandingUrl);
 
@@ -34,7 +34,7 @@ export const TemplateBrandingLogo = ({ assetBaseUrl, className = 'mb-4 h-6' }: T
   }
 
   return (
-    <Link href={safeBrandingUrl} target="_blank">
+    <Link href={safeBrandingUrl} target="_blank" rel="noopener noreferrer" className="underline">
       {brandingLogo}
     </Link>
   );

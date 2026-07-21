@@ -1,20 +1,24 @@
 import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 
-import { Body, Container, Head, Hr, Html, Preview, Section } from '../components';
+import { Body, Container, Hr, Html, Preview, Section } from '../components';
 import { TemplateBrandingLogo } from '../template-components/template-branding-logo';
 import {
   TemplateDocumentDelete,
   type TemplateDocumentDeleteProps,
 } from '../template-components/template-document-super-delete';
+import { TemplateEmailHead } from '../template-components/template-email-head';
 import { TemplateFooter } from '../template-components/template-footer';
 
-export type DocumentDeleteEmailTemplateProps = Partial<TemplateDocumentDeleteProps>;
+export type DocumentDeleteEmailTemplateProps = Partial<TemplateDocumentDeleteProps> & {
+  reportUrl?: string;
+};
 
 export const DocumentSuperDeleteEmailTemplate = ({
   documentName = 'Open Source Pledge.pdf',
   assetBaseUrl = 'http://localhost:3002',
   reason = 'Unknown',
+  reportUrl,
 }: DocumentDeleteEmailTemplateProps) => {
   const { _ } = useLingui();
 
@@ -22,13 +26,13 @@ export const DocumentSuperDeleteEmailTemplate = ({
 
   return (
     <Html>
-      <Head />
+      <TemplateEmailHead />
 
       <Body className="mx-auto my-auto bg-background font-sans">
         <Preview>{_(previewText)}</Preview>
 
         <Section>
-          <Container className="mx-auto mt-8 mb-2 max-w-xl rounded-lg border border-border border-solid p-4 backdrop-blur-sm">
+          <Container className="mx-auto mt-8 mb-2 max-w-xl rounded-lg border border-border border-solid p-4">
             <Section>
               <TemplateBrandingLogo assetBaseUrl={assetBaseUrl} className="mb-4 h-6" />
 
@@ -39,7 +43,7 @@ export const DocumentSuperDeleteEmailTemplate = ({
           <Hr className="mx-auto mt-12 max-w-xl" />
 
           <Container className="mx-auto max-w-xl">
-            <TemplateFooter />
+            <TemplateFooter reportUrl={reportUrl} />
           </Container>
         </Section>
       </Body>

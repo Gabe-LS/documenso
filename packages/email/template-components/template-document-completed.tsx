@@ -32,6 +32,8 @@ export const TemplateDocumentCompleted = ({
                 src={getAssetUrl('/static/completed.png')}
                 className="-mt-0.5 mr-2 inline h-7 w-7 align-middle"
                 alt=""
+                width={28}
+                height={28}
               />
               <Trans>Completed</Trans>
             </Text>
@@ -51,7 +53,13 @@ export const TemplateDocumentCompleted = ({
             className="rounded-lg border border-border border-solid px-4 py-2 text-center font-medium text-foreground text-sm no-underline"
             href={downloadLink}
           >
-            <Img src={getAssetUrl('/static/download.png')} className="mr-2 mb-0.5 inline h-5 w-5 align-middle" alt="" />
+            <Img
+              src={getAssetUrl('/static/download.png')}
+              className="mr-2 mb-0.5 inline h-5 w-5 align-middle"
+              alt=""
+              width={20}
+              height={20}
+            />
             <Trans>Download</Trans>
           </Button>
         </Section>

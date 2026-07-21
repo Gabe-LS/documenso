@@ -15,7 +15,7 @@ export const TemplateDocumentDelete = ({ reason, documentName, assetBaseUrl }: T
       <TemplateDocumentImage className="mt-6" assetBaseUrl={assetBaseUrl} />
 
       <Section>
-        <Text className="mt-6 mb-0 text-left font-semibold text-foreground text-lg">
+        <Text className="mt-6 mb-0 text-center font-semibold text-foreground text-lg">
           <Trans>Your document has been deleted by an admin!</Trans>
         </Text>
 
@@ -34,7 +34,7 @@ export const TemplateDocumentDelete = ({ reason, documentName, assetBaseUrl }: T
           <Trans>The reason provided for deletion is the following:</Trans>
         </Text>
 
-        <Text className="mx-auto mt-1 mb-6 text-left text-base text-muted-foreground italic">{reason}</Text>
+        <Text className="mt-4 text-center text-base text-muted-foreground italic">{reason}</Text>
       </Section>
     </>
   );
