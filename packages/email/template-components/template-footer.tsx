@@ -18,7 +18,7 @@ export const TemplateFooter = ({ isDocument = true, reportUrl }: TemplateFooterP
   return (
     <Section>
       {reportUrl && (
-        <Text className="my-4 text-base text-muted-foreground">
+        <Text className="my-2 text-muted-foreground text-sm">
           <Trans>
             Did not expect this email?{' '}
             <Link className="text-foreground underline" href={reportUrl}>
@@ -30,7 +30,7 @@ export const TemplateFooter = ({ isDocument = true, reportUrl }: TemplateFooterP
       )}
 
       {isDocument && !branding.brandingHidePoweredBy && (
-        <Text className="my-4 text-base text-muted-foreground">
+        <Text className="my-2 text-muted-foreground text-sm">
           <Trans>
             This document was sent using{' '}
             <Link className="text-foreground underline" href="https://documen.so/mail-footer">
@@ -42,7 +42,7 @@ export const TemplateFooter = ({ isDocument = true, reportUrl }: TemplateFooterP
       )}
 
       {branding.brandingEnabled && branding.brandingCompanyDetails && (
-        <Text className="my-8 text-muted-foreground text-sm">
+        <Text className="mt-4 mb-2 text-muted-foreground text-xs">
           {branding.brandingCompanyDetails.split('\n').map((line, idx) => {
             return (
               <Fragment key={idx}>
@@ -55,7 +55,7 @@ export const TemplateFooter = ({ isDocument = true, reportUrl }: TemplateFooterP
       )}
 
       {branding.brandingEnabled && safeBrandingUrl && (
-        <Text className="my-8 text-muted-foreground text-sm">
+        <Text className="mt-2 mb-4 text-muted-foreground text-xs">
           <Link href={safeBrandingUrl} target="_blank" rel="noopener noreferrer" className="underline">
             {safeBrandingUrl}
           </Link>
@@ -63,7 +63,7 @@ export const TemplateFooter = ({ isDocument = true, reportUrl }: TemplateFooterP
       )}
 
       {!branding.brandingEnabled && (
-        <Text className="my-8 text-muted-foreground text-sm">
+        <Text className="mt-4 mb-6 text-muted-foreground text-xs">
           Documenso, Inc.
           <br />
           2261 Market Street, #5211, San Francisco, CA 94114, USA

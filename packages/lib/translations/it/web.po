@@ -967,7 +967,7 @@ msgstr "Un dispositivo in grado di accedere, aprire e leggere documenti"
 
 #: packages/lib/jobs/definitions/emails/send-signing-email.handler.ts
 msgid "A document was created by your direct template that requires you to {recipientActionVerb} it."
-msgstr "Un documento è stato creato dal tuo modello diretto che richiede di {recipientActionVerb}."
+msgstr "Un documento creato dal tuo modello diretto richiede di {recipientActionVerb}."
 
 #: apps/remix/app/components/dialogs/template-use-dialog.tsx
 msgid "A draft document will be created"
@@ -2068,7 +2068,7 @@ msgstr "Approvare"
 #: packages/lib/constants/recipient-roles.ts
 msgctxt "Recipient role action verb"
 msgid "Approve"
-msgstr "Approva"
+msgstr "Approvare"
 
 #: apps/remix/app/components/general/document-signing/document-signing-mobile-widget.tsx
 #: apps/remix/app/components/general/document-signing/document-signing-page-view-v1.tsx
@@ -2169,7 +2169,7 @@ msgstr "Team Assegnati"
 #: packages/lib/constants/recipient-roles.ts
 msgctxt "Recipient role action verb"
 msgid "Assist"
-msgstr "Assisti"
+msgstr "Assistere"
 
 #: apps/remix/app/components/general/document-signing/document-signing-mobile-widget.tsx
 #: apps/remix/app/components/general/document-signing/document-signing-page-view-v1.tsx
@@ -8247,7 +8247,7 @@ msgstr "I piani senza un trasporto utilizzano il mailer di sistema predefinito."
 #. placeholder {0}: _(actionVerb).toLowerCase()
 #: packages/email/template-components/template-document-invite.tsx
 msgid "Please {0} your document<0/>\"{documentName}\""
-msgstr "Per favore {0} il tuo documento<0/>\"{documentName}\""
+msgstr "Ti chiediamo di {0} il tuo documento<0/>\"{documentName}\""
 
 #: packages/email/templates/document-invite.tsx
 msgid "Please {action} your document {documentName}"
@@ -8255,15 +8255,15 @@ msgstr "Per favore {action} il tuo documento {documentName}"
 
 #: packages/lib/jobs/definitions/emails/send-signing-email.handler.ts
 msgid "Please {recipientActionVerb} this document"
-msgstr "Per favore {recipientActionVerb} questo documento"
+msgstr "Ti chiediamo di {recipientActionVerb} questo documento"
 
 #: packages/lib/jobs/definitions/emails/send-signing-email.handler.ts
 msgid "Please {recipientActionVerb} this document created by your direct template"
-msgstr "Per favore {recipientActionVerb} questo documento creato dal tuo modello diretto"
+msgstr "Ti chiediamo di {recipientActionVerb} questo documento creato dal tuo modello diretto"
 
 #: packages/lib/jobs/definitions/emails/send-signing-email.handler.ts
 msgid "Please {recipientActionVerb} your document"
-msgstr "Per favore {recipientActionVerb} il tuo documento"
+msgstr "Ti chiediamo di {recipientActionVerb} il tuo documento"
 
 #: apps/remix/app/components/dialogs/organisation-member-invite-dialog.tsx
 msgid "Please check the CSV file and make sure it is according to our format"
@@ -9008,20 +9008,20 @@ msgstr "Promemoria: {0} ti ha invitato a {recipientActionVerb} un documento"
 #. placeholder {0}: _(actionVerb).toLowerCase()
 #: packages/email/template-components/template-document-reminder.tsx
 msgid "Reminder: Please {0} your document<0/>\"{documentName}\""
-msgstr "Promemoria: per favore {0} il tuo documento<0/>\"{documentName}\""
+msgstr "Promemoria: ti chiediamo di {0} il tuo documento<0/>\"{documentName}\""
 
 #. placeholder {0}: envelope.title
 #: packages/lib/jobs/definitions/internal/process-signing-reminder.handler.ts
 msgid "Reminder: Please {recipientActionVerb} the document \"{0}\""
-msgstr "Promemoria: per favore {recipientActionVerb} il documento \"{0}\""
+msgstr "Promemoria: ti chiediamo di {recipientActionVerb} il documento \"{0}\""
 
 #: packages/lib/server-only/document/resend-document.ts
 msgid "Reminder: Please {recipientActionVerb} this document"
-msgstr "Promemoria: per favore {recipientActionVerb} questo documento"
+msgstr "Promemoria: ti chiediamo di {recipientActionVerb} questo documento"
 
 #: packages/lib/server-only/document/resend-document.ts
 msgid "Reminder: Please {recipientActionVerb} your document"
-msgstr "Promemoria: per favore {recipientActionVerb} il tuo documento"
+msgstr "Promemoria: ti chiediamo di {recipientActionVerb} il tuo documento"
 
 #: apps/remix/app/components/general/envelope-editor/envelope-editor-settings-dialog.tsx
 msgid "Reminders"
@@ -9969,7 +9969,7 @@ msgstr "Firma"
 #: packages/lib/constants/recipient-roles.ts
 msgctxt "Recipient role action verb"
 msgid "Sign"
-msgstr "Firma"
+msgstr "Firmare"
 
 #. placeholder {0}: recipient.name
 #. placeholder {1}: recipient.email
@@ -12808,7 +12808,7 @@ msgstr "Visualizza"
 #: packages/lib/constants/recipient-roles.ts
 msgctxt "Recipient role action verb"
 msgid "View"
-msgstr "Visualizza"
+msgstr "Visualizzare"
 
 #: apps/remix/app/routes/_authenticated+/settings+/security._index.tsx
 msgid "View activity"
@@ -13985,7 +13985,7 @@ msgstr "Hai rifiutato l'invito da <0>{0}</0> a unirti alla loro organizzazione."
 #: packages/lib/jobs/definitions/emails/send-signing-email.handler.ts
 #: packages/lib/server-only/document/resend-document.ts
 msgid "You have initiated the document {0} that requires you to {recipientActionVerb} it."
-msgstr "Hai avviato il documento {0} che richiede che tu lo {recipientActionVerb}."
+msgstr "Hai avviato il documento {0}, che ti richiede di {recipientActionVerb}."
 
 #: apps/remix/app/routes/_authenticated+/t.$teamUrl+/settings.webhooks._index.tsx
 msgid "You have no webhooks yet. Your webhooks will be shown here once you create them."
