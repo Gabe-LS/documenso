@@ -39,7 +39,7 @@ export const DocumentCcNotificationEmailTemplate = ({
       </EmailHeading>
 
       <EmailBodyText>
-        <Trans>You'll receive the final signed document as soon as everyone has signed.</Trans>
+        <Trans>You'll be notified as soon as the document has been signed.</Trans>
       </EmailBodyText>
     </EmailLayout>
   );

@@ -16400,9 +16400,8 @@ msgstr ""
 " firmato."
 
 #: packages/email/templates/document-cc-notification.tsx
-msgid ""
-"You'll receive the final signed document as soon as everyone has signed."
-msgstr "Riceverai il documento firmato non appena tutti avranno firmato."
+msgid "You'll be notified as soon as the document has been signed."
+msgstr "Riceverai una notifica non appena il documento sarà stato firmato."
 
 #: apps/remix/app/components/dialogs/ai-features-enable-dialog.tsx
 msgid ""
