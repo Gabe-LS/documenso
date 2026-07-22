@@ -38,10 +38,6 @@ export function TemplateDocumentRejected({
         </EmailCallout>
       )}
 
-      <EmailBodyText>
-        <Trans>You can view the document and its status by clicking the button below.</Trans>
-      </EmailBodyText>
-
       <EmailButtonSection>
         <EmailButton href={documentUrl}>
           <Trans>View Document</Trans>

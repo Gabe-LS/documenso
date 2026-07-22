@@ -1,5 +1,3 @@
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
 import { Trans } from '@lingui/react/macro';
 
 import { EmailHeading, EmailLayout, EmailPill } from '../template-components/email-primitives';
@@ -22,19 +20,9 @@ export const OrganisationLeaveEmailTemplate = ({
   organisationName = 'Organisation Name',
   organisationUrl = 'demo',
 }: OrganisationLeaveEmailProps) => {
-  const { _ } = useLingui();
-
-  const previewText = msg`A member has left your organisation on Documenso`;
-
   return (
-    <EmailLayout assetBaseUrl={assetBaseUrl} preview={_(previewText)} isDocument={false}>
-      <TemplateImage
-        className="mx-auto h-[87px] w-[102px]"
-        assetBaseUrl={assetBaseUrl}
-        staticAsset="delete-user.png"
-        width={102}
-        height={87}
-      />
+    <EmailLayout assetBaseUrl={assetBaseUrl} isDocument={false}>
+      <TemplateImage assetBaseUrl={assetBaseUrl} staticAsset="delete-user.png" width={102} height={87} />
 
       <EmailHeading>
         <Trans>A member has left your organisation {organisationName}</Trans>

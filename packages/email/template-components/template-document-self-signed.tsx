@@ -1,6 +1,6 @@
 import { Trans } from '@lingui/react/macro';
 
-import { EmailHeading, EmailIconLabel } from './email-primitives';
+import { EmailHeading } from './email-primitives';
 import { TemplateDocumentImage } from './template-document-image';
 
 export interface TemplateDocumentSelfSignedProps {
@@ -12,10 +12,6 @@ export const TemplateDocumentSelfSigned = ({ documentName, assetBaseUrl }: Templ
   return (
     <>
       <TemplateDocumentImage assetBaseUrl={assetBaseUrl} />
-
-      <EmailIconLabel assetBaseUrl={assetBaseUrl} icon="completed.png">
-        <Trans>Completed</Trans>
-      </EmailIconLabel>
 
       <EmailHeading>
         <Trans>You have signed "{documentName}"</Trans>

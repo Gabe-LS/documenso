@@ -4,7 +4,7 @@ import { Trans } from '@lingui/react/macro';
 import { RecipientRole } from '@prisma/client';
 import { match } from 'ts-pattern';
 
-import { EmailBodyText, EmailButton, EmailButtonSection, EmailHeading } from './email-primitives';
+import { EmailButton, EmailButtonSection, EmailHeading } from './email-primitives';
 import { TemplateDocumentImage } from './template-document-image';
 
 export interface TemplateDocumentReminderProps {
@@ -39,28 +39,14 @@ export const TemplateDocumentReminder = ({
         </Trans>
       </EmailHeading>
 
-      <EmailBodyText>
-        <Trans>Hi {recipientName},</Trans>
-      </EmailBodyText>
-
-      <EmailBodyText>
-        {match(role)
-          .with(RecipientRole.SIGNER, () => <Trans>Continue by signing the document.</Trans>)
-          .with(RecipientRole.VIEWER, () => <Trans>Continue by viewing the document.</Trans>)
-          .with(RecipientRole.APPROVER, () => <Trans>Continue by approving the document.</Trans>)
-          .with(RecipientRole.CC, () => '')
-          .with(RecipientRole.ASSISTANT, () => <Trans>Continue by assisting with the document.</Trans>)
-          .exhaustive()}
-      </EmailBodyText>
-
       <EmailButtonSection>
         <EmailButton href={signDocumentLink}>
           {match(role)
-            .with(RecipientRole.SIGNER, () => <Trans>Sign Document</Trans>)
-            .with(RecipientRole.VIEWER, () => <Trans>View Document</Trans>)
-            .with(RecipientRole.APPROVER, () => <Trans>Approve Document</Trans>)
+            .with(RecipientRole.SIGNER, () => <Trans>View and sign</Trans>)
+            .with(RecipientRole.VIEWER, () => <Trans context="Viewer invite email CTA">View</Trans>)
+            .with(RecipientRole.APPROVER, () => <Trans>View and approve</Trans>)
             .with(RecipientRole.CC, () => '')
-            .with(RecipientRole.ASSISTANT, () => <Trans>Assist Document</Trans>)
+            .with(RecipientRole.ASSISTANT, () => <Trans>View and assist</Trans>)
             .exhaustive()}
         </EmailButton>
       </EmailButtonSection>

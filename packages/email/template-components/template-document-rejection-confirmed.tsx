@@ -29,7 +29,7 @@ export function TemplateDocumentRejectionConfirmed({
       <EmailBodyText>
         <Trans>
           This email confirms that you have rejected the document{' '}
-          <strong className="font-bold">"{documentName}"</strong> sent by {documentOwnerName}.
+          <span className="font-semibold">"{documentName}"</span> sent by {documentOwnerName}.
         </Trans>
       </EmailBodyText>
 
@@ -38,13 +38,6 @@ export function TemplateDocumentRejectionConfirmed({
           <Trans>Rejection reason: {reason}</Trans>
         </EmailCallout>
       )}
-
-      <EmailBodyText>
-        <Trans>
-          The document owner has been notified of this rejection. No further action is required from you at this time.
-          The document owner may contact you with any questions regarding this rejection.
-        </Trans>
-      </EmailBodyText>
     </>
   );
 }

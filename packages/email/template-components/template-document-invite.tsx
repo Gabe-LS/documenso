@@ -4,7 +4,7 @@ import { Trans } from '@lingui/react/macro';
 import { OrganisationType, RecipientRole } from '@prisma/client';
 import { match, P } from 'ts-pattern';
 
-import { EmailBodyText, EmailButton, EmailButtonSection, EmailHeading } from './email-primitives';
+import { EmailButton, EmailButtonSection, EmailHeading } from './email-primitives';
 import { TemplateDocumentImage } from './template-document-image';
 
 export interface TemplateDocumentInviteProps {
@@ -38,8 +38,7 @@ export const TemplateDocumentInvite = ({
   // Viewers get the "sharing" frame (matching their "Shared with you" subject)
   // rather than the invitation frame; the sharer is the team when the document
   // went out through an organisation, otherwise the person.
-  const sharerName =
-    organisationType === OrganisationType.ORGANISATION && teamName ? teamName : inviterName;
+  const sharerName = organisationType === OrganisationType.ORGANISATION && teamName ? teamName : inviterName;
 
   return (
     <>
@@ -53,52 +52,48 @@ export const TemplateDocumentInvite = ({
           </Trans>
         ) : (
           match({ selfSigner, organisationType, includeSenderDetails, teamName })
-          .with({ selfSigner: true }, () => (
-            <Trans>
-              Please {_(actionVerb).toLowerCase()} your document
-              <br />"{documentName}"
-            </Trans>
-          ))
-          .with(
-            {
-              organisationType: OrganisationType.ORGANISATION,
-              includeSenderDetails: true,
-              teamName: P.string,
-            },
-            () => (
+            .with({ selfSigner: true }, () => (
               <Trans>
-                {inviterName} on behalf of "{teamName}" has invited you to {_(actionVerb).toLowerCase()}
+                Please {_(actionVerb).toLowerCase()} your document
                 <br />"{documentName}"
               </Trans>
-            ),
-          )
-          .with({ organisationType: OrganisationType.ORGANISATION, teamName: P.string }, () => (
-            <Trans>
-              {teamName} has invited you to {_(actionVerb).toLowerCase()}
-              <br />"{documentName}"
-            </Trans>
-          ))
-          .otherwise(() => (
-            <Trans>
-              {inviterName} has invited you to {_(actionVerb).toLowerCase()}
-              <br />"{documentName}"
-            </Trans>
-          ))
+            ))
+            .with(
+              {
+                organisationType: OrganisationType.ORGANISATION,
+                includeSenderDetails: true,
+                teamName: P.string,
+              },
+              () => (
+                <Trans>
+                  {inviterName} on behalf of "{teamName}" has invited you to {_(actionVerb).toLowerCase()}
+                  <br />"{documentName}"
+                </Trans>
+              ),
+            )
+            .with({ organisationType: OrganisationType.ORGANISATION, teamName: P.string }, () => (
+              <Trans>
+                {teamName} has invited you to {_(actionVerb).toLowerCase()}
+                <br />"{documentName}"
+              </Trans>
+            ))
+            .otherwise(() => (
+              <Trans>
+                {inviterName} has invited you to {_(actionVerb).toLowerCase()}
+                <br />"{documentName}"
+              </Trans>
+            ))
         )}
       </EmailHeading>
 
       <EmailButtonSection>
         <EmailButton href={signDocumentLink}>
           {match(role)
-            .with(RecipientRole.SIGNER, () => <Trans>View Document to sign</Trans>)
-            .with(RecipientRole.VIEWER, () => (
-              // Context keeps this distinct from the app-wide "View Document"
-              // string - the viewer email CTA is a single direct word.
-              <Trans context="Viewer invite email CTA">View</Trans>
-            ))
-            .with(RecipientRole.APPROVER, () => <Trans>View Document to approve</Trans>)
+            .with(RecipientRole.SIGNER, () => <Trans>View and sign</Trans>)
+            .with(RecipientRole.VIEWER, () => <Trans context="Viewer invite email CTA">View</Trans>)
+            .with(RecipientRole.APPROVER, () => <Trans>View and approve</Trans>)
             .with(RecipientRole.CC, () => '')
-            .with(RecipientRole.ASSISTANT, () => <Trans>View Document to assist</Trans>)
+            .with(RecipientRole.ASSISTANT, () => <Trans>View and assist</Trans>)
             .exhaustive()}
         </EmailButton>
       </EmailButtonSection>

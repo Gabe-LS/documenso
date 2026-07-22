@@ -62,7 +62,7 @@ import { TemplateFooter } from './template-footer';
  * colours found outside this file is a bug, not a style choice.
  */
 
-const cn = (...classes: Array<string | undefined | false | null>) => classes.filter(Boolean).join(' ');
+export const cn = (...classes: Array<string | undefined | false | null>) => classes.filter(Boolean).join(' ');
 
 /**
  * `text-wrap: balance` on centered text so multi-line headings and centered
@@ -113,7 +113,7 @@ const MSO_FIXED_WIDTH_CLOSE = '<!--[if mso]></td></tr></table><![endif]-->';
 
 export type EmailLayoutProps = {
   assetBaseUrl: string;
-  preview: string;
+  preview?: string;
   children: ReactNode;
   isDocument?: boolean;
   reportUrl?: string;
@@ -146,12 +146,12 @@ export const EmailLayout = ({
       <TemplateEmailHead />
 
       <Body className="mx-auto my-auto bg-background font-sans">
-        <Preview>{preview}</Preview>
+        {preview && <Preview>{preview}</Preview>}
 
         {/* Outlook ignores max-width; pin a fixed 720px table */}
         <Mso html={MSO_FIXED_WIDTH_OPEN} />
         <Section>
-          <Container className="mx-auto mt-8 mb-2 max-w-[720px] rounded-lg border border-border border-solid p-6">
+          <Container className="mx-auto mt-8 mb-2 max-w-[720px] rounded-lg border border-border border-solid px-6 pt-6 pb-8">
             <TemplateBrandingLogo assetBaseUrl={assetBaseUrl} className="mb-4 h-6" />
 
             {children}
@@ -195,7 +195,7 @@ export const EmailHeading = ({ children, className, align = 'center' }: EmailHea
   return (
     <Text
       className={cn(
-        'mx-auto mb-0 max-w-[80%] break-words font-semibold text-foreground text-xl leading-[26px]',
+        'mt-4 mb-0 break-words font-semibold text-foreground text-xl leading-[26px]',
         align === 'center' ? 'text-center' : 'text-left',
         className,
       )}
@@ -212,10 +212,9 @@ export type EmailBodyTextProps = {
   /** Text alignment. Defaults to `center`, matching the main card's copy. */
   align?: 'center' | 'left';
   /**
-   * When `false` (default), the paragraph is boxed to `mx-auto max-w-[80%]`
-   * like the rest of the centered card copy. Set `true` to drop the
-   * max-width for full-bleed left-aligned paragraphs (e.g. secondary
-   * content, long-form notices).
+   * When `false` (default), the paragraph is centered with `mx-auto`. Set
+   * `true` for full-bleed left-aligned paragraphs (e.g. secondary content,
+   * long-form notices).
    */
   fullWidth?: boolean;
 };
@@ -235,10 +234,10 @@ export const EmailBodyText = ({ children, className, align = 'center', fullWidth
   return (
     <Text
       className={cn(
-        'my-1 break-words',
+        'mt-4 mb-1 break-words',
         EMAIL_BODY_TEXT_CLASSES,
         align === 'center' ? 'text-center' : 'text-left',
-        !fullWidth && 'mx-auto max-w-[80%]',
+        !fullWidth && 'mx-auto',
         className,
       )}
       style={align === 'center' ? BALANCED_TEXT_STYLE : undefined}
@@ -260,10 +259,7 @@ export type EmailCalloutProps = {
 export const EmailCallout = ({ children, align = 'center' }: EmailCalloutProps) => {
   return (
     <Text
-      className={cn(
-        'mt-4 text-base text-muted-foreground italic',
-        align === 'center' ? 'text-center' : 'text-left',
-      )}
+      className={cn('mt-4 text-base text-muted-foreground italic', align === 'center' ? 'text-center' : 'text-left')}
       style={align === 'center' ? BALANCED_TEXT_STYLE : undefined}
     >
       {children}
@@ -307,7 +303,7 @@ export type EmailButtonVariant = 'primary' | 'outline' | 'muted';
 const EMAIL_BUTTON_VARIANT_CLASSES: Record<EmailButtonVariant, string> = {
   primary: 'rounded-lg bg-primary px-6 py-3 text-center font-medium text-primary-foreground text-base no-underline',
   outline:
-    'rounded-lg border border-border border-solid px-4 py-2 text-center font-medium text-foreground text-base no-underline',
+    'rounded-lg border border-border border-solid px-6 py-3 text-center font-medium text-foreground text-base no-underline',
   muted: 'rounded-lg bg-muted px-6 py-3 text-center font-medium text-muted-foreground text-base no-underline',
 };
 
@@ -367,7 +363,7 @@ export const EmailButtonSection = ({ children }: EmailButtonSectionProps) => {
   const items = Children.toArray(children).filter(Boolean);
 
   return (
-    <Section className="mt-8 mb-6 text-center">
+    <Section className="mt-8 text-center">
       {items.length > 1
         ? items.map((child, index) => (
             <span key={index} className="mx-2 inline-block">
@@ -484,10 +480,7 @@ export const EmailCodeBox = ({ label, children }: EmailCodeBoxProps) => {
   return (
     <Section className="mt-6 rounded-lg bg-muted p-6 text-center">
       <Text className="mb-2 font-medium text-muted-foreground text-sm">{label}</Text>
-      <Text
-        className="font-bold text-3xl text-foreground leading-[30px] tracking-wider"
-        style={msoExactLineHeight(30)}
-      >
+      <Text className="font-bold text-3xl text-foreground leading-[30px] tracking-wider" style={msoExactLineHeight(30)}>
         {children}
       </Text>
     </Section>

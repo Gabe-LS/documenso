@@ -1,5 +1,6 @@
 import React from 'react';
 
+import { Text } from '../components';
 import { EMAIL_BODY_TEXT_CLASSES } from './email-primitives';
 
 export type TemplateCustomMessageBodyProps = {
@@ -20,14 +21,14 @@ export const TemplateCustomMessageBody = ({ text }: TemplateCustomMessageBodyPro
   const paragraphs = normalized.split('\n\n');
 
   return paragraphs.map((paragraph, i) => (
-    <p key={`p-${i}`} className={`whitespace-pre-line break-words font-sans ${EMAIL_BODY_TEXT_CLASSES}`}>
+    <Text key={`p-${i}`} className={`mt-4 mb-1 whitespace-pre-line break-words ${EMAIL_BODY_TEXT_CLASSES}`}>
       {paragraph.split('\n').map((line, j) => (
         <React.Fragment key={`line-${i}-${j}`}>
           {j > 0 && <br />}
           {line}
         </React.Fragment>
       ))}
-    </p>
+    </Text>
   ));
 };
 

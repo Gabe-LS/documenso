@@ -4,6 +4,7 @@ import { useLingui } from '@lingui/react';
 import { Trans } from '@lingui/react/macro';
 import { match } from 'ts-pattern';
 
+import { Link } from '../components';
 import { EmailBodyText, EmailHeading, EmailLayout, EmailPill } from '../template-components/email-primitives';
 
 export type OrganisationLimitAlertEmailProps = {
@@ -65,20 +66,20 @@ export const OrganisationLimitAlertEmailTemplate = ({
             {match(counter)
               .with('document', () => (
                 <Trans>
-                  We've noticed document activity on your account that exceeds the fair use limits of your current
-                  plan. As a precaution, new document activity has been temporarily paused pending review.
+                  We've noticed document activity on your account that exceeds the fair use limits of your current plan.
+                  As a precaution, new document activity has been temporarily paused pending review.
                 </Trans>
               ))
               .with('email', () => (
                 <Trans>
-                  We've noticed email sending activity on your account that exceeds the fair use limits of your
-                  current plan. As a precaution, new email activity has been temporarily paused pending review.
+                  We've noticed email sending activity on your account that exceeds the fair use limits of your current
+                  plan. As a precaution, new email activity has been temporarily paused pending review.
                 </Trans>
               ))
               .with('api', () => (
                 <Trans>
-                  We've noticed API activity on your account that exceeds the fair use limits of your current plan. As
-                  a precaution, new API activity has been temporarily paused pending review.
+                  We've noticed API activity on your account that exceeds the fair use limits of your current plan. As a
+                  precaution, new API activity has been temporarily paused pending review.
                 </Trans>
               ))
               .exhaustive()}
@@ -113,8 +114,8 @@ export const OrganisationLimitAlertEmailTemplate = ({
             {match(counter)
               .with('document', () => (
                 <Trans>
-                  Your organisation is nearing its fair use limits for creating documents on your current plan. Once
-                  the limit is reached, new document activity will be temporarily paused.
+                  Your organisation is nearing its fair use limits for creating documents on your current plan. Once the
+                  limit is reached, new document activity will be temporarily paused.
                 </Trans>
               ))
               .with('email', () => (
@@ -137,11 +138,20 @@ export const OrganisationLimitAlertEmailTemplate = ({
       <EmailBodyText>
         {kind === 'quotaNearing' ? (
           <Trans>
-            If you expect to need higher limits, please contact support at {SUPPORT_EMAIL} and we will review your
-            account.
+            If you expect to need higher limits, please contact support at{' '}
+            <Link className="text-foreground underline" href={`mailto:${SUPPORT_EMAIL}`}>
+              {SUPPORT_EMAIL}
+            </Link>{' '}
+            and we will review your account.
           </Trans>
         ) : (
-          <Trans>Please contact support at {SUPPORT_EMAIL} and we will review your account.</Trans>
+          <Trans>
+            Please contact support at{' '}
+            <Link className="text-foreground underline" href={`mailto:${SUPPORT_EMAIL}`}>
+              {SUPPORT_EMAIL}
+            </Link>{' '}
+            and we will review your account.
+          </Trans>
         )}
       </EmailBodyText>
     </EmailLayout>

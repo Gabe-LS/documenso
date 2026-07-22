@@ -71,11 +71,7 @@ export const DocumentInviteEmailTemplate = ({
               </EmailBodyText>
             )}
 
-            {customBody && (
-              <EmailBodyText align="left" fullWidth>
-                <TemplateCustomMessageBody text={customBody} />
-              </EmailBodyText>
-            )}
+            {customBody && <TemplateCustomMessageBody text={customBody} />}
           </>
         )
       }

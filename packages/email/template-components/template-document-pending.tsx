@@ -1,6 +1,6 @@
 import { Trans } from '@lingui/react/macro';
 
-import { EmailBodyText, EmailHeading, EmailIconLabel } from './email-primitives';
+import { EmailBodyText, EmailHeading } from './email-primitives';
 import { TemplateDocumentImage } from './template-document-image';
 
 export interface TemplateDocumentPendingProps {
@@ -12,10 +12,6 @@ export const TemplateDocumentPending = ({ documentName, assetBaseUrl }: Template
   return (
     <>
       <TemplateDocumentImage assetBaseUrl={assetBaseUrl} />
-
-      <EmailIconLabel assetBaseUrl={assetBaseUrl} icon="clock.png">
-        <Trans>Waiting for others</Trans>
-      </EmailIconLabel>
 
       <EmailHeading>
         <Trans>You've signed "{documentName}"</Trans>

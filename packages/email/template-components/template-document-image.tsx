@@ -1,6 +1,5 @@
 import { Column, Img, Row, Section } from '../components';
-
-const cn = (...classes: Array<string | undefined | false | null>) => classes.filter(Boolean).join(' ');
+import { cn } from './email-primitives';
 
 export interface TemplateDocumentImageProps {
   assetBaseUrl: string;
@@ -24,11 +23,11 @@ export const TemplateDocumentImage = ({ assetBaseUrl, className }: TemplateDocum
 
         <Column>
           <Img
-            className="mx-auto h-[172px] w-[159px]"
+            className="mx-auto mb-4 h-[138px] w-[110px]"
             src={getAssetUrl('/static/document.png')}
             alt=""
-            width={159}
-            height={172}
+            width={110}
+            height={138}
           />
         </Column>
 

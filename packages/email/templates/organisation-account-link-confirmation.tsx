@@ -34,13 +34,7 @@ export const OrganisationAccountLinkConfirmationTemplate = ({
 
   return (
     <EmailLayout assetBaseUrl={assetBaseUrl} preview={_(previewText)} isDocument={false}>
-      <TemplateImage
-        className="mx-auto h-[120px] w-[120px]"
-        assetBaseUrl={assetBaseUrl}
-        staticAsset="building-2.png"
-        width={120}
-        height={120}
-      />
+      <TemplateImage assetBaseUrl={assetBaseUrl} staticAsset="building-2.png" width={120} height={120} />
 
       <EmailHeading>
         {type === 'create' ? <Trans>Account creation request</Trans> : <Trans>Link your Documenso account</Trans>}
@@ -49,11 +43,11 @@ export const OrganisationAccountLinkConfirmationTemplate = ({
       <EmailBodyText>
         {type === 'create' ? (
           <Trans>
-            <span className="font-bold">{organisationName}</span> has requested to create an account on your behalf.
+            <span className="font-semibold">{organisationName}</span> has requested to create an account on your behalf.
           </Trans>
         ) : (
           <Trans>
-            <span className="font-bold">{organisationName}</span> has requested to link your current Documenso
+            <span className="font-semibold">{organisationName}</span> has requested to link your current Documenso
             account to their organisation.
           </Trans>
         )}

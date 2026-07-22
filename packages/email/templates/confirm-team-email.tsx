@@ -73,13 +73,7 @@ export const ConfirmTeamEmailTemplate = ({
         </>
       }
     >
-      <TemplateImage
-        className="mx-auto h-[123px] w-[120px]"
-        assetBaseUrl={assetBaseUrl}
-        staticAsset="mail-open.png"
-        width={120}
-        height={123}
-      />
+      <TemplateImage assetBaseUrl={assetBaseUrl} staticAsset="mail-open.png" width={120} height={123} />
 
       <EmailHeading>
         <Trans>Verify your team email address</Trans>
@@ -87,7 +81,7 @@ export const ConfirmTeamEmailTemplate = ({
 
       <EmailBodyText>
         <Trans>
-          <span className="font-bold">{teamName}</span> has requested to use your email address for their team on
+          <span className="font-semibold">{teamName}</span> has requested to use your email address for their team on
           Documenso.
         </Trans>
       </EmailBodyText>

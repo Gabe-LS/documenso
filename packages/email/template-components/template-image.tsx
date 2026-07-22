@@ -1,4 +1,5 @@
-import { Img } from '../components';
+import { Img, Section } from '../components';
+import { cn } from './email-primitives';
 
 export interface TemplateImageProps {
   assetBaseUrl: string;
@@ -14,13 +15,9 @@ export const TemplateImage = ({ assetBaseUrl, className, staticAsset, width, hei
   };
 
   return (
-    <Img
-      className={className}
-      src={getAssetUrl(`/static/${staticAsset}`)}
-      alt=""
-      width={width}
-      height={height}
-    />
+    <Section className={cn('mt-6', className)}>
+      <Img className="mx-auto mb-4" src={getAssetUrl(`/static/${staticAsset}`)} alt="" width={width} height={height} />
+    </Section>
   );
 };
 

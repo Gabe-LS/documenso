@@ -4,13 +4,7 @@ import { useLingui } from '@lingui/react';
 import { Trans } from '@lingui/react/macro';
 import { RecipientRole } from '@prisma/client';
 
-import {
-  EmailButton,
-  EmailButtonSection,
-  EmailHeading,
-  EmailLayout,
-  EmailPill,
-} from '../template-components/email-primitives';
+import { EmailButton, EmailButtonSection, EmailHeading, EmailLayout } from '../template-components/email-primitives';
 import TemplateDocumentImage from '../template-components/template-document-image';
 
 export type DocumentCreatedFromDirectTemplateEmailTemplateProps = {
@@ -42,11 +36,9 @@ export const DocumentCreatedFromDirectTemplateEmailTemplate = ({
 
       <EmailHeading>
         <Trans>
-          {recipientName} {action} a document by using one of your direct links
+          {recipientName} {action} "{documentName}" via a direct link
         </Trans>
       </EmailHeading>
-
-      <EmailPill>{documentName}</EmailPill>
 
       <EmailButtonSection>
         <EmailButton href={documentLink}>

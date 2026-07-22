@@ -27,13 +27,7 @@ export const TeamEmailRemovedTemplate = ({
 
   return (
     <EmailLayout assetBaseUrl={assetBaseUrl} preview={_(previewText)} isDocument={false}>
-      <TemplateImage
-        className="mx-auto h-[123px] w-[120px]"
-        assetBaseUrl={assetBaseUrl}
-        staticAsset="mail-open-alert.png"
-        width={120}
-        height={123}
-      />
+      <TemplateImage assetBaseUrl={assetBaseUrl} staticAsset="mail-open-alert.png" width={120} height={123} />
 
       <EmailHeading>
         <Trans>Team email removed</Trans>
@@ -41,7 +35,7 @@ export const TeamEmailRemovedTemplate = ({
 
       <EmailBodyText>
         <Trans>
-          The team email <span className="font-bold">{teamEmail}</span> has been removed from the following team
+          The team email <span className="font-semibold">{teamEmail}</span> has been removed from the following team
         </Trans>
       </EmailBodyText>
 

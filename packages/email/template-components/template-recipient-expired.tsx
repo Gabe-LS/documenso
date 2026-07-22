@@ -1,6 +1,6 @@
 import { Trans } from '@lingui/react/macro';
 
-import { EmailBodyText, EmailButton, EmailButtonSection, EmailHeading } from './email-primitives';
+import { EmailButton, EmailButtonSection, EmailHeading } from './email-primitives';
 import { TemplateDocumentImage } from './template-document-image';
 
 export type TemplateRecipientExpiredProps = {
@@ -26,16 +26,9 @@ export const TemplateRecipientExpired = ({
 
       <EmailHeading>
         <Trans>
-          Signing window expired for "{displayName}" on "{documentName}"
+          Signing window expired for {displayName} on "{documentName}"
         </Trans>
       </EmailHeading>
-
-      <EmailBodyText>
-        <Trans>
-          The signing window for {displayName} on document "{documentName}" has expired. You can resend the document
-          to extend their deadline or cancel the document.
-        </Trans>
-      </EmailBodyText>
 
       <EmailButtonSection>
         <EmailButton href={documentLink}>
