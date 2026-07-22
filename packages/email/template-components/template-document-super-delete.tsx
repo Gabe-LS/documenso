@@ -1,6 +1,6 @@
 import { Trans } from '@lingui/react/macro';
 
-import { Section, Text } from '../components';
+import { EmailBodyText, EmailCallout, EmailHeading } from './email-primitives';
 import { TemplateDocumentImage } from './template-document-image';
 
 export interface TemplateDocumentDeleteProps {
@@ -12,30 +12,28 @@ export interface TemplateDocumentDeleteProps {
 export const TemplateDocumentDelete = ({ reason, documentName, assetBaseUrl }: TemplateDocumentDeleteProps) => {
   return (
     <>
-      <TemplateDocumentImage className="mt-6" assetBaseUrl={assetBaseUrl} />
+      <TemplateDocumentImage assetBaseUrl={assetBaseUrl} />
 
-      <Section>
-        <Text className="mt-6 mb-0 text-center font-semibold text-foreground text-lg">
-          <Trans>Your document has been deleted by an admin!</Trans>
-        </Text>
+      <EmailHeading>
+        <Trans>Your document has been deleted by an admin!</Trans>
+      </EmailHeading>
 
-        <Text className="mx-auto mt-1 mb-6 text-left text-base text-muted-foreground">
-          <Trans>"{documentName}" has been deleted by an admin.</Trans>
-        </Text>
+      <EmailBodyText align="left" fullWidth>
+        <Trans>"{documentName}" has been deleted by an admin.</Trans>
+      </EmailBodyText>
 
-        <Text className="mx-auto mt-1 mb-6 text-left text-base text-muted-foreground">
-          <Trans>
-            This document can not be recovered, if you would like to dispute the reason for future documents please
-            contact support.
-          </Trans>
-        </Text>
+      <EmailBodyText align="left" fullWidth>
+        <Trans>
+          This document can not be recovered, if you would like to dispute the reason for future documents please
+          contact support.
+        </Trans>
+      </EmailBodyText>
 
-        <Text className="mx-auto mt-1 text-left text-base text-muted-foreground">
-          <Trans>The reason provided for deletion is the following:</Trans>
-        </Text>
+      <EmailBodyText align="left" fullWidth>
+        <Trans>The reason provided for deletion is the following:</Trans>
+      </EmailBodyText>
 
-        <Text className="mt-4 text-center text-base text-muted-foreground italic">{reason}</Text>
-      </Section>
+      <EmailCallout align="left">{reason}</EmailCallout>
     </>
   );
 };

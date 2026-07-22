@@ -4,7 +4,7 @@ import { Trans } from '@lingui/react/macro';
 import { OrganisationType, RecipientRole } from '@prisma/client';
 import { match, P } from 'ts-pattern';
 
-import { Button, Section, Text } from '../components';
+import { EmailBodyText, EmailButton, EmailButtonSection, EmailHeading } from './email-primitives';
 import { TemplateDocumentImage } from './template-document-image';
 
 export interface TemplateDocumentInviteProps {
@@ -37,69 +37,64 @@ export const TemplateDocumentInvite = ({
 
   return (
     <>
-      <TemplateDocumentImage className="mt-6" assetBaseUrl={assetBaseUrl} />
+      <TemplateDocumentImage assetBaseUrl={assetBaseUrl} />
 
-      <Section>
-        <Text className="mx-auto mb-0 max-w-[80%] text-center font-semibold text-foreground text-lg">
-          {match({ selfSigner, organisationType, includeSenderDetails, teamName })
-            .with({ selfSigner: true }, () => (
+      <EmailHeading>
+        {match({ selfSigner, organisationType, includeSenderDetails, teamName })
+          .with({ selfSigner: true }, () => (
+            <Trans>
+              Please {_(actionVerb).toLowerCase()} your document
+              <br />"{documentName}"
+            </Trans>
+          ))
+          .with(
+            {
+              organisationType: OrganisationType.ORGANISATION,
+              includeSenderDetails: true,
+              teamName: P.string,
+            },
+            () => (
               <Trans>
-                Please {_(actionVerb).toLowerCase()} your document
+                {inviterName} on behalf of "{teamName}" has invited you to {_(actionVerb).toLowerCase()}
                 <br />"{documentName}"
               </Trans>
-            ))
-            .with(
-              {
-                organisationType: OrganisationType.ORGANISATION,
-                includeSenderDetails: true,
-                teamName: P.string,
-              },
-              () => (
-                <Trans>
-                  {inviterName} on behalf of "{teamName}" has invited you to {_(actionVerb).toLowerCase()}
-                  <br />"{documentName}"
-                </Trans>
-              ),
-            )
-            .with({ organisationType: OrganisationType.ORGANISATION, teamName: P.string }, () => (
-              <Trans>
-                {teamName} has invited you to {_(actionVerb).toLowerCase()}
-                <br />"{documentName}"
-              </Trans>
-            ))
-            .otherwise(() => (
-              <Trans>
-                {inviterName} has invited you to {_(actionVerb).toLowerCase()}
-                <br />"{documentName}"
-              </Trans>
-            ))}
-        </Text>
+            ),
+          )
+          .with({ organisationType: OrganisationType.ORGANISATION, teamName: P.string }, () => (
+            <Trans>
+              {teamName} has invited you to {_(actionVerb).toLowerCase()}
+              <br />"{documentName}"
+            </Trans>
+          ))
+          .otherwise(() => (
+            <Trans>
+              {inviterName} has invited you to {_(actionVerb).toLowerCase()}
+              <br />"{documentName}"
+            </Trans>
+          ))}
+      </EmailHeading>
 
-        <Text className="my-1 text-center text-base text-muted-foreground">
+      <EmailBodyText>
+        {match(role)
+          .with(RecipientRole.SIGNER, () => <Trans>Continue by signing the document.</Trans>)
+          .with(RecipientRole.VIEWER, () => <Trans>Continue by viewing the document.</Trans>)
+          .with(RecipientRole.APPROVER, () => <Trans>Continue by approving the document.</Trans>)
+          .with(RecipientRole.CC, () => '')
+          .with(RecipientRole.ASSISTANT, () => <Trans>Continue by assisting with the document.</Trans>)
+          .exhaustive()}
+      </EmailBodyText>
+
+      <EmailButtonSection>
+        <EmailButton href={signDocumentLink}>
           {match(role)
-            .with(RecipientRole.SIGNER, () => <Trans>Continue by signing the document.</Trans>)
-            .with(RecipientRole.VIEWER, () => <Trans>Continue by viewing the document.</Trans>)
-            .with(RecipientRole.APPROVER, () => <Trans>Continue by approving the document.</Trans>)
+            .with(RecipientRole.SIGNER, () => <Trans>View Document to sign</Trans>)
+            .with(RecipientRole.VIEWER, () => <Trans>View Document</Trans>)
+            .with(RecipientRole.APPROVER, () => <Trans>View Document to approve</Trans>)
             .with(RecipientRole.CC, () => '')
-            .with(RecipientRole.ASSISTANT, () => <Trans>Continue by assisting with the document.</Trans>)
+            .with(RecipientRole.ASSISTANT, () => <Trans>View Document to assist</Trans>)
             .exhaustive()}
-        </Text>
-
-        <Section className="mt-8 mb-6 text-center">
-          <Button
-            className="rounded-lg bg-primary px-6 py-3 text-center font-medium text-sm text-primary-foreground no-underline"
-            href={signDocumentLink}
-          >
-            {match(role)
-              .with(RecipientRole.SIGNER, () => <Trans>View Document to sign</Trans>)
-              .with(RecipientRole.VIEWER, () => <Trans>View Document</Trans>)
-              .with(RecipientRole.APPROVER, () => <Trans>View Document to approve</Trans>)
-              .with(RecipientRole.CC, () => '')
-              .with(RecipientRole.ASSISTANT, () => <Trans>View Document to assist</Trans>)
-              .exhaustive()}
-          </Button>
-        </Section>
-      </Section>
+        </EmailButton>
+      </EmailButtonSection>
     </>
   );
 };

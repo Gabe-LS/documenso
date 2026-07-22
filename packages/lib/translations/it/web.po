@@ -38,12 +38,12 @@ msgid "\"{documentName}\" has been deleted by an admin."
 msgstr "\"{documentName}\" è stato eliminato da un amministratore."
 
 #: packages/email/template-components/template-document-pending.tsx
-msgid "“{documentName}” has been signed"
-msgstr "“{documentName}” è stato firmato"
+msgid "\"{documentName}\" has been signed"
+msgstr "\"{documentName}\" è stato firmato"
 
 #: packages/email/template-components/template-document-completed.tsx
-msgid "“{documentName}” was signed by all signers"
-msgstr "“{documentName}” è stato firmato da tutti i firmatari"
+msgid "\"{documentName}\" was signed by all signers"
+msgstr "\"{documentName}\" è stato firmato da tutti i firmatari"
 
 #: apps/remix/app/components/forms/document-preferences-form.tsx
 msgid "\"{placeholderEmail}\" on behalf of \"Team Name\" has invited you to sign \"example document\"."
@@ -2470,6 +2470,10 @@ msgstr "Copia massiva"
 msgid "Bulk Import"
 msgstr "Importazione Massiva"
 
+#: packages/email/templates/bulk-send-complete.tsx
+msgid "Bulk send complete"
+msgstr "Invio multiplo completato"
+
 #. placeholder {0}: template.title
 #: packages/lib/jobs/definitions/internal/bulk-send-template.handler.ts
 msgid "Bulk Send Complete: {0}"
@@ -3286,10 +3290,6 @@ msgstr "Contatore reimpostato."
 #: apps/remix/app/routes/_profile+/_layout.tsx
 msgid "Create"
 msgstr "Crea"
-
-#: packages/email/template-components/template-document-self-signed.tsx
-msgid "Create a <0>free account</0> to access your signed documents at any time."
-msgstr "Crea un <0>account gratuito</0> per accedere ai tuoi documenti firmati in qualsiasi momento."
 
 #: apps/remix/app/components/forms/signup.tsx
 msgid "Create a new account"
@@ -12922,10 +12922,6 @@ msgstr "Visualizza modello di organizzazione"
 msgid "View owner"
 msgstr "Visualizza proprietario"
 
-#: packages/email/template-components/template-document-self-signed.tsx
-msgid "View plans"
-msgstr "Visualizza piani"
-
 #: apps/remix/app/components/forms/2fa/view-recovery-codes-dialog.tsx
 #: apps/remix/app/components/forms/2fa/view-recovery-codes-dialog.tsx
 msgid "View Recovery Codes"
@@ -14040,8 +14036,8 @@ msgid "You have rejected this document"
 msgstr "Hai rifiutato questo documento"
 
 #: packages/email/template-components/template-document-self-signed.tsx
-msgid "You have signed “{documentName}”"
-msgstr "Hai firmato “{documentName}”"
+msgid "You have signed \"{documentName}\""
+msgstr "Hai firmato \"{documentName}\""
 
 #: apps/remix/app/components/dialogs/organisation-leave-dialog.tsx
 msgid "You have successfully left this organisation."

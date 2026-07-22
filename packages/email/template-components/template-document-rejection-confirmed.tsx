@@ -1,6 +1,6 @@
 import { Trans } from '@lingui/react/macro';
 
-import { Container, Section, Text } from '../components';
+import { EmailBodyText, EmailCallout, EmailHeading } from './email-primitives';
 import { TemplateDocumentImage } from './template-document-image';
 
 interface TemplateDocumentRejectionConfirmedProps {
@@ -19,34 +19,32 @@ export function TemplateDocumentRejectionConfirmed({
   assetBaseUrl = 'http://localhost:3002',
 }: TemplateDocumentRejectionConfirmedProps) {
   return (
-    <Container>
-      <TemplateDocumentImage className="mt-6" assetBaseUrl={assetBaseUrl} />
+    <>
+      <TemplateDocumentImage assetBaseUrl={assetBaseUrl} />
 
-      <Section>
-        <Text className="mb-0 text-center font-semibold text-foreground text-lg">
-          <Trans>Rejection Confirmed</Trans>
-        </Text>
+      <EmailHeading>
+        <Trans>Rejection Confirmed</Trans>
+      </EmailHeading>
 
-        <Text className="text-base text-foreground">
-          <Trans>
-            This email confirms that you have rejected the document{' '}
-            <strong className="font-bold">"{documentName}"</strong> sent by {documentOwnerName}.
-          </Trans>
-        </Text>
+      <EmailBodyText>
+        <Trans>
+          This email confirms that you have rejected the document{' '}
+          <strong className="font-bold">"{documentName}"</strong> sent by {documentOwnerName}.
+        </Trans>
+      </EmailBodyText>
 
-        {reason && (
-          <Text className="mt-4 text-center text-base text-muted-foreground italic">
-            <Trans>Rejection reason: {reason}</Trans>
-          </Text>
-        )}
+      {reason && (
+        <EmailCallout>
+          <Trans>Rejection reason: {reason}</Trans>
+        </EmailCallout>
+      )}
 
-        <Text className="text-base">
-          <Trans>
-            The document owner has been notified of this rejection. No further action is required from you at this time.
-            The document owner may contact you with any questions regarding this rejection.
-          </Trans>
-        </Text>
-      </Section>
-    </Container>
+      <EmailBodyText>
+        <Trans>
+          The document owner has been notified of this rejection. No further action is required from you at this time.
+          The document owner may contact you with any questions regarding this rejection.
+        </Trans>
+      </EmailBodyText>
+    </>
   );
 }

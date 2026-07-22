@@ -8,6 +8,7 @@ import { pixelBasedPreset } from '@react-email/tailwind';
 
 import { Tailwind } from './components';
 import { BrandingProvider, type BrandingSettings } from './providers/branding';
+import { EMAIL_FONT_STACK } from './template-components/template-email-head';
 
 export type RenderOptions = ReactEmail.Options & {
   branding?: BrandingSettings;
@@ -71,6 +72,9 @@ export const render = async (element: React.ReactNode, options?: RenderOptions) 
           theme: {
             extend: {
               colors: tailwindColors,
+              fontFamily: {
+                sans: [...EMAIL_FONT_STACK],
+              },
             },
           },
         }}
@@ -100,6 +104,9 @@ export const renderWithI18N = async (element: React.ReactNode, options?: RenderO
             theme: {
               extend: {
                 colors: tailwindColors,
+                fontFamily: {
+                  sans: [...EMAIL_FONT_STACK],
+                },
               },
             },
           }}

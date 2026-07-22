@@ -38,11 +38,11 @@ msgid "\"{documentName}\" has been deleted by an admin."
 msgstr "\"{documentName}\" 문서는 관리자에 의해 삭제되었습니다."
 
 #: packages/email/template-components/template-document-pending.tsx
-msgid "“{documentName}” has been signed"
+msgid "\"{documentName}\" has been signed"
 msgstr "“{documentName}” 문서가 서명되었습니다."
 
 #: packages/email/template-components/template-document-completed.tsx
-msgid "“{documentName}” was signed by all signers"
+msgid "\"{documentName}\" was signed by all signers"
 msgstr "“{documentName}” 문서가 모든 서명자에게서 서명을 완료했습니다."
 
 #: apps/remix/app/components/forms/document-preferences-form.tsx
@@ -14040,7 +14040,7 @@ msgid "You have rejected this document"
 msgstr "이 문서를 거부했습니다."
 
 #: packages/email/template-components/template-document-self-signed.tsx
-msgid "You have signed “{documentName}”"
+msgid "You have signed \"{documentName}\""
 msgstr "“{documentName}”에 서명했습니다."
 
 #: apps/remix/app/components/dialogs/organisation-leave-dialog.tsx

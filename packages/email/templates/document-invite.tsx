@@ -5,13 +5,11 @@ import { Trans } from '@lingui/react/macro';
 import type { RecipientRole } from '@prisma/client';
 import { OrganisationType } from '@prisma/client';
 
-import { Body, Container, Hr, Html, Link, Preview, Section, Text } from '../components';
-import { TemplateBrandingLogo } from '../template-components/template-branding-logo';
+import { Link } from '../components';
+import { EmailBodyText, EmailLayout } from '../template-components/email-primitives';
 import { TemplateCustomMessageBody } from '../template-components/template-custom-message-body';
 import type { TemplateDocumentInviteProps } from '../template-components/template-document-invite';
 import { TemplateDocumentInvite } from '../template-components/template-document-invite';
-import { TemplateEmailHead } from '../template-components/template-email-head';
-import { TemplateFooter } from '../template-components/template-footer';
 
 export type DocumentInviteEmailTemplateProps = Partial<TemplateDocumentInviteProps> & {
   customBody?: string;
@@ -55,65 +53,48 @@ export const DocumentInviteEmailTemplate = ({
   }
 
   return (
-    <Html>
-      <TemplateEmailHead />
+    <EmailLayout
+      assetBaseUrl={assetBaseUrl}
+      preview={_(previewText)}
+      reportUrl={reportUrl}
+      secondaryContent={
+        <>
+          {organisationType === OrganisationType.PERSONAL && (
+            <EmailBodyText align="left" fullWidth className="font-semibold">
+              <Trans>
+                {inviterName}{' '}
+                <Link className="font-normal text-foreground underline" href={`mailto:${inviterEmail}`}>
+                  ({inviterEmail})
+                </Link>
+              </Trans>
+            </EmailBodyText>
+          )}
 
-      <Body className="mx-auto my-auto bg-background font-sans">
-        <Preview>{_(previewText)}</Preview>
-
-        <Section>
-          <Container className="mx-auto mt-8 mb-2 max-w-xl rounded-lg border border-border border-solid p-4">
-            <Section>
-              <TemplateBrandingLogo assetBaseUrl={assetBaseUrl} className="mb-4 h-6" />
-
-              <TemplateDocumentInvite
-                inviterName={inviterName}
-                inviterEmail={inviterEmail}
-                documentName={documentName}
-                signDocumentLink={signDocumentLink}
-                assetBaseUrl={assetBaseUrl}
-                role={role}
-                selfSigner={selfSigner}
-                organisationType={organisationType}
-                teamName={teamName}
-                includeSenderDetails={includeSenderDetails}
-              />
-            </Section>
-          </Container>
-
-          <Container className="mx-auto mt-12 max-w-xl">
-            <Section>
-              {organisationType === OrganisationType.PERSONAL && (
-                <Text className="my-4 font-semibold text-base">
-                  <Trans>
-                    {inviterName}{' '}
-                    <Link className="font-normal text-muted-foreground underline" href={`mailto:${inviterEmail}`}>
-                      ({inviterEmail})
-                    </Link>
-                  </Trans>
-                </Text>
-              )}
-
-              <Text className="mt-2 text-base text-muted-foreground">
-                {customBody ? (
-                  <TemplateCustomMessageBody text={customBody} />
-                ) : (
-                  <Trans>
-                    {inviterName} has invited you to {action} the document "{documentName}".
-                  </Trans>
-                )}
-              </Text>
-            </Section>
-          </Container>
-
-          <Hr className="mx-auto mt-12 max-w-xl" />
-
-          <Container className="mx-auto max-w-xl">
-            <TemplateFooter reportUrl={reportUrl} />
-          </Container>
-        </Section>
-      </Body>
-    </Html>
+          <EmailBodyText align="left" fullWidth>
+            {customBody ? (
+              <TemplateCustomMessageBody text={customBody} />
+            ) : (
+              <Trans>
+                {inviterName} has invited you to {action} the document "{documentName}".
+              </Trans>
+            )}
+          </EmailBodyText>
+        </>
+      }
+    >
+      <TemplateDocumentInvite
+        inviterName={inviterName}
+        inviterEmail={inviterEmail}
+        documentName={documentName}
+        signDocumentLink={signDocumentLink}
+        assetBaseUrl={assetBaseUrl}
+        role={role}
+        selfSigner={selfSigner}
+        organisationType={organisationType}
+        teamName={teamName}
+        includeSenderDetails={includeSenderDetails}
+      />
+    </EmailLayout>
   );
 };
 

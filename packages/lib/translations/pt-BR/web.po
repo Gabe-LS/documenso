@@ -33,11 +33,11 @@ msgid "\"{documentName}\" has been deleted by an admin."
 msgstr "\"{documentName}\" foi excluído por um administrador."
 
 #: packages/email/template-components/template-document-pending.tsx
-msgid "“{documentName}” has been signed"
+msgid "\"{documentName}\" has been signed"
 msgstr "“{documentName}” foi assinado"
 
 #: packages/email/template-components/template-document-completed.tsx
-msgid "“{documentName}” was signed by all signers"
+msgid "\"{documentName}\" was signed by all signers"
 msgstr "“{documentName}” foi assinado por todos os signatários"
 
 #: apps/remix/app/components/forms/document-preferences-form.tsx
@@ -14035,7 +14035,7 @@ msgid "You have rejected this document"
 msgstr "Você rejeitou este documento"
 
 #: packages/email/template-components/template-document-self-signed.tsx
-msgid "You have signed “{documentName}”"
+msgid "You have signed \"{documentName}\""
 msgstr "Você assinou “{documentName}”"
 
 #: apps/remix/app/components/dialogs/organisation-leave-dialog.tsx

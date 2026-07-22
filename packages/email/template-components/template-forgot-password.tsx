@@ -1,6 +1,6 @@
 import { Trans } from '@lingui/react/macro';
 
-import { Button, Section, Text } from '../components';
+import { EmailBodyText, EmailButton, EmailButtonSection, EmailHeading } from './email-primitives';
 import { TemplateDocumentImage } from './template-document-image';
 
 export type TemplateForgotPasswordProps = {
@@ -11,26 +11,21 @@ export type TemplateForgotPasswordProps = {
 export const TemplateForgotPassword = ({ resetPasswordLink, assetBaseUrl }: TemplateForgotPasswordProps) => {
   return (
     <>
-      <TemplateDocumentImage className="mt-6" assetBaseUrl={assetBaseUrl} />
+      <TemplateDocumentImage assetBaseUrl={assetBaseUrl} />
 
-      <Section>
-        <Text className="mx-auto mb-0 max-w-[80%] text-center font-semibold text-foreground text-lg">
-          <Trans>Forgot your password?</Trans>
-        </Text>
+      <EmailHeading>
+        <Trans>Forgot your password?</Trans>
+      </EmailHeading>
 
-        <Text className="my-1 text-center text-base text-muted-foreground">
-          <Trans>That's okay, it happens! Click the button below to reset your password.</Trans>
-        </Text>
+      <EmailBodyText>
+        <Trans>That's okay, it happens! Click the button below to reset your password.</Trans>
+      </EmailBodyText>
 
-        <Section className="mt-8 mb-6 text-center">
-          <Button
-            className="rounded-lg bg-primary px-6 py-3 text-center font-medium text-primary-foreground text-sm no-underline"
-            href={resetPasswordLink}
-          >
-            <Trans>Reset Password</Trans>
-          </Button>
-        </Section>
-      </Section>
+      <EmailButtonSection>
+        <EmailButton href={resetPasswordLink}>
+          <Trans>Reset Password</Trans>
+        </EmailButton>
+      </EmailButtonSection>
     </>
   );
 };

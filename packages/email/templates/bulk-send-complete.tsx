@@ -2,10 +2,14 @@ import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 import { Trans } from '@lingui/react/macro';
 
-import { Body, Container, Hr, Html, Preview, Section, Text } from '../components';
-import { TemplateBrandingLogo } from '../template-components/template-branding-logo';
-import { TemplateEmailHead } from '../template-components/template-email-head';
-import { TemplateFooter } from '../template-components/template-footer';
+import {
+  EmailBodyText,
+  EmailHeading,
+  EmailLayout,
+  EmailList,
+  EmailListItem,
+  EmailSectionLabel,
+} from '../template-components/email-primitives';
 
 export interface BulkSendCompleteEmailProps {
   userName: string;
@@ -31,72 +35,54 @@ export const BulkSendCompleteEmail = ({
   const previewText = msg`Bulk send operation complete for template "${templateName}"`;
 
   return (
-    <Html>
-      <TemplateEmailHead />
-      <Body className="mx-auto my-auto bg-background font-sans">
-        <Preview>{_(previewText)}</Preview>
+    <EmailLayout assetBaseUrl={assetBaseUrl} preview={_(previewText)} isDocument={false}>
+      <EmailHeading>
+        <Trans>Bulk send complete</Trans>
+      </EmailHeading>
 
-        <Section>
-          <Container className="mx-auto mt-8 mb-2 max-w-xl rounded-lg border border-border border-solid p-4">
-            <Section>
-              <TemplateBrandingLogo assetBaseUrl={assetBaseUrl} className="mb-4 h-6" />
+      <EmailBodyText align="left" fullWidth>
+        <Trans>Hi {userName},</Trans>
+      </EmailBodyText>
 
-              <Text className="text-sm">
-                <Trans>Hi {userName},</Trans>
-              </Text>
+      <EmailBodyText align="left" fullWidth>
+        <Trans>Your bulk send operation for template "{templateName}" has completed.</Trans>
+      </EmailBodyText>
 
-              <Text className="text-sm">
-                <Trans>Your bulk send operation for template "{templateName}" has completed.</Trans>
-              </Text>
+      <EmailSectionLabel>
+        <Trans>Summary:</Trans>
+      </EmailSectionLabel>
 
-              <Text className="font-semibold text-lg">
-                <Trans>Summary:</Trans>
-              </Text>
+      <EmailList>
+        <EmailListItem>
+          <Trans>Total rows processed: {totalProcessed}</Trans>
+        </EmailListItem>
+        <EmailListItem>
+          <Trans>Successfully created: {successCount}</Trans>
+        </EmailListItem>
+        <EmailListItem>
+          <Trans>Failed: {failedCount}</Trans>
+        </EmailListItem>
+      </EmailList>
 
-              <ul className="my-2 ml-4 list-inside list-disc">
-                <li>
-                  <Trans>Total rows processed: {totalProcessed}</Trans>
-                </li>
-                <li className="mt-1">
-                  <Trans>Successfully created: {successCount}</Trans>
-                </li>
-                <li className="mt-1">
-                  <Trans>Failed: {failedCount}</Trans>
-                </li>
-              </ul>
+      {errors && errors.length > 0 && (
+        <>
+          <EmailSectionLabel>
+            <Trans>The following errors occurred:</Trans>
+          </EmailSectionLabel>
 
-              {errors && errors.length > 0 && (
-                <Section className="mt-4">
-                  <Text className="font-semibold text-lg">
-                    <Trans>The following errors occurred:</Trans>
-                  </Text>
+          <EmailList>
+            {errors.map((error, index) => (
+              <EmailListItem key={index}>{error}</EmailListItem>
+            ))}
+          </EmailList>
+        </>
+      )}
 
-                  <ul className="my-2 ml-4 list-inside list-disc">
-                    {errors.map((error, index) => (
-                      <li key={index} className="mt-1 text-destructive text-sm">
-                        {error}
-                      </li>
-                    ))}
-                  </ul>
-                </Section>
-              )}
-
-              <Text className="text-sm">
-                <Trans>
-                  You can view the created documents in your dashboard under the "Documents created from template"
-                  section.
-                </Trans>
-              </Text>
-            </Section>
-          </Container>
-
-          <Hr className="mx-auto mt-12 max-w-xl" />
-
-          <Container className="mx-auto max-w-xl">
-            <TemplateFooter isDocument={false} />
-          </Container>
-        </Section>
-      </Body>
-    </Html>
+      <EmailBodyText align="left" fullWidth>
+        <Trans>
+          You can view the created documents in your dashboard under the "Documents created from template" section.
+        </Trans>
+      </EmailBodyText>
+    </EmailLayout>
   );
 };

@@ -1,6 +1,6 @@
 import { Trans } from '@lingui/react/macro';
 
-import { Section, Text } from '../components';
+import { EmailBodyText, EmailCallout, EmailHeading } from './email-primitives';
 import { TemplateDocumentImage } from './template-document-image';
 
 export interface TemplateDocumentCancelProps {
@@ -19,30 +19,28 @@ export const TemplateDocumentCancel = ({
 }: TemplateDocumentCancelProps) => {
   return (
     <>
-      <TemplateDocumentImage className="mt-6" assetBaseUrl={assetBaseUrl} />
+      <TemplateDocumentImage assetBaseUrl={assetBaseUrl} />
 
-      <Section>
-        <Text className="mx-auto mb-0 max-w-[80%] text-center font-semibold text-foreground text-lg">
-          <Trans>
-            {inviterName} has cancelled the document
-            <br />"{documentName}"
-          </Trans>
-        </Text>
+      <EmailHeading>
+        <Trans>
+          {inviterName} has cancelled the document
+          <br />"{documentName}"
+        </Trans>
+      </EmailHeading>
 
-        <Text className="my-1 text-center text-base text-muted-foreground">
-          <Trans>All signatures have been voided.</Trans>
-        </Text>
+      <EmailBodyText>
+        <Trans>All signatures have been voided.</Trans>
+      </EmailBodyText>
 
-        <Text className="my-1 text-center text-base text-muted-foreground">
-          <Trans>You don't need to sign it anymore.</Trans>
-        </Text>
+      <EmailBodyText>
+        <Trans>You don't need to sign it anymore.</Trans>
+      </EmailBodyText>
 
-        {cancellationReason && (
-          <Text className="mt-4 text-center text-base text-muted-foreground italic">
-            <Trans>Reason for cancellation: {cancellationReason}</Trans>
-          </Text>
-        )}
-      </Section>
+      {cancellationReason && (
+        <EmailCallout>
+          <Trans>Reason for cancellation: {cancellationReason}</Trans>
+        </EmailCallout>
+      )}
     </>
   );
 };

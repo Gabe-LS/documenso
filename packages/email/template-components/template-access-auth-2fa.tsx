@@ -1,6 +1,6 @@
 import { Plural, Trans } from '@lingui/react/macro';
 
-import { Section, Text } from '../components';
+import { EmailBodyText, EmailCodeBox, EmailFinePrint, EmailHeading } from './email-primitives';
 import { TemplateDocumentImage } from './template-document-image';
 
 export type TemplateAccessAuth2FAProps = {
@@ -20,39 +20,32 @@ export const TemplateAccessAuth2FA = ({
   assetBaseUrl = 'http://localhost:3002',
 }: TemplateAccessAuth2FAProps) => {
   return (
-    <div>
-      <TemplateDocumentImage className="mt-6" assetBaseUrl={assetBaseUrl} />
+    <>
+      <TemplateDocumentImage assetBaseUrl={assetBaseUrl} />
 
-      <Section className="mt-8">
-        <Text className="mx-auto mb-0 text-center font-semibold text-foreground text-lg">
-          <Trans>Verification Code Required</Trans>
-        </Text>
+      <EmailHeading>
+        <Trans>Verification Code Required</Trans>
+      </EmailHeading>
 
-        <Text className="mt-2 text-center text-foreground">
-          <Trans>
-            Hi {userName}, you need to enter a verification code to complete the document "{documentTitle}".
-          </Trans>
-        </Text>
+      <EmailBodyText>
+        <Trans>
+          Hi {userName}, you need to enter a verification code to complete the document "{documentTitle}".
+        </Trans>
+      </EmailBodyText>
 
-        <Section className="mt-6 rounded-lg bg-muted p-6 text-center">
-          <Text className="mb-2 font-medium text-muted-foreground text-sm">
-            <Trans>Your verification code:</Trans>
-          </Text>
-          <Text className="font-bold text-2xl text-foreground tracking-wider">{code}</Text>
-        </Section>
+      <EmailCodeBox label={<Trans>Your verification code:</Trans>}>{code}</EmailCodeBox>
 
-        <Text className="mt-4 text-center text-muted-foreground text-sm">
-          <Plural
-            value={expiresInMinutes}
-            one="This code will expire in # minute."
-            other="This code will expire in # minutes."
-          />
-        </Text>
+      <EmailFinePrint>
+        <Plural
+          value={expiresInMinutes}
+          one="This code will expire in # minute."
+          other="This code will expire in # minutes."
+        />
+      </EmailFinePrint>
 
-        <Text className="mt-4 text-center text-muted-foreground text-sm">
-          <Trans>If you didn't request this verification code, you can safely ignore this email.</Trans>
-        </Text>
-      </Section>
-    </div>
+      <EmailFinePrint>
+        <Trans>If you didn't request this verification code, you can safely ignore this email.</Trans>
+      </EmailFinePrint>
+    </>
   );
 };

@@ -38,11 +38,11 @@ msgid "\"{documentName}\" has been deleted by an admin."
 msgstr "“{documentName}”已被管理员删除。"
 
 #: packages/email/template-components/template-document-pending.tsx
-msgid "“{documentName}” has been signed"
+msgid "\"{documentName}\" has been signed"
 msgstr "“{documentName}”已被签署"
 
 #: packages/email/template-components/template-document-completed.tsx
-msgid "“{documentName}” was signed by all signers"
+msgid "\"{documentName}\" was signed by all signers"
 msgstr "“{documentName}”已由所有签署人签署"
 
 #: apps/remix/app/components/forms/document-preferences-form.tsx
@@ -14040,7 +14040,7 @@ msgid "You have rejected this document"
 msgstr "您已拒签此文档"
 
 #: packages/email/template-components/template-document-self-signed.tsx
-msgid "You have signed “{documentName}”"
+msgid "You have signed \"{documentName}\""
 msgstr "您已签署“{documentName}”"
 
 #: apps/remix/app/components/dialogs/organisation-leave-dialog.tsx

@@ -1,7 +1,7 @@
 import { env } from '@documenso/lib/utils/env';
 import { Trans } from '@lingui/react/macro';
 
-import { Button, Section, Text } from '../components';
+import { EmailBodyText, EmailButton, EmailButtonSection, EmailHeading } from './email-primitives';
 import { TemplateDocumentImage } from './template-document-image';
 
 export interface TemplateResetPasswordProps {
@@ -13,26 +13,21 @@ export const TemplateResetPassword = ({ assetBaseUrl }: TemplateResetPasswordPro
 
   return (
     <>
-      <TemplateDocumentImage className="mt-6" assetBaseUrl={assetBaseUrl} />
+      <TemplateDocumentImage assetBaseUrl={assetBaseUrl} />
 
-      <Section>
-        <Text className="mx-auto mb-0 max-w-[80%] text-center font-semibold text-foreground text-lg">
-          <Trans>Password updated!</Trans>
-        </Text>
+      <EmailHeading>
+        <Trans>Password updated!</Trans>
+      </EmailHeading>
 
-        <Text className="my-1 text-center text-base text-muted-foreground">
-          <Trans>Your password has been updated.</Trans>
-        </Text>
+      <EmailBodyText>
+        <Trans>Your password has been updated.</Trans>
+      </EmailBodyText>
 
-        <Section className="mt-8 mb-6 text-center">
-          <Button
-            className="rounded-lg bg-primary px-6 py-3 text-center font-medium text-primary-foreground text-sm no-underline"
-            href={`${NEXT_PUBLIC_WEBAPP_URL ?? 'http://localhost:3000'}/signin`}
-          >
-            <Trans>Sign In</Trans>
-          </Button>
-        </Section>
-      </Section>
+      <EmailButtonSection>
+        <EmailButton href={`${NEXT_PUBLIC_WEBAPP_URL ?? 'http://localhost:3000'}/signin`}>
+          <Trans>Sign In</Trans>
+        </EmailButton>
+      </EmailButtonSection>
     </>
   );
 };

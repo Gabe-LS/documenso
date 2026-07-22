@@ -1,6 +1,6 @@
 import { Trans } from '@lingui/react/macro';
 
-import { Button, Section, Text } from '../components';
+import { EmailBodyText, EmailButton, EmailButtonSection, EmailCallout, EmailHeading } from './email-primitives';
 import { TemplateDocumentImage } from './template-document-image';
 
 export interface TemplateDocumentRejectedProps {
@@ -19,37 +19,34 @@ export function TemplateDocumentRejected({
   assetBaseUrl = 'http://localhost:3002',
 }: TemplateDocumentRejectedProps) {
   return (
-    <div className="mt-4">
-      <TemplateDocumentImage className="mt-6" assetBaseUrl={assetBaseUrl} />
+    <>
+      <TemplateDocumentImage assetBaseUrl={assetBaseUrl} />
 
-      <Text className="mb-0 text-center font-semibold text-foreground text-lg">
+      <EmailHeading>
         <Trans>Document Rejected</Trans>
-      </Text>
+      </EmailHeading>
 
-      <Text className="mb-4 text-base">
+      <EmailBodyText>
         <Trans>
           {signerName} has rejected the document "{documentName}".
         </Trans>
-      </Text>
+      </EmailBodyText>
 
       {rejectionReason && (
-        <Text className="mt-4 text-center text-base text-muted-foreground italic">
+        <EmailCallout>
           <Trans>Reason for rejection: {rejectionReason}</Trans>
-        </Text>
+        </EmailCallout>
       )}
 
-      <Text className="mb-6 text-base">
+      <EmailBodyText>
         <Trans>You can view the document and its status by clicking the button below.</Trans>
-      </Text>
+      </EmailBodyText>
 
-      <Section className="mt-8 mb-6 text-center">
-        <Button
-          href={documentUrl}
-          className="rounded-lg bg-primary px-6 py-3 text-center font-medium text-primary-foreground text-sm no-underline"
-        >
+      <EmailButtonSection>
+        <EmailButton href={documentUrl}>
           <Trans>View Document</Trans>
-        </Button>
-      </Section>
-    </div>
+        </EmailButton>
+      </EmailButtonSection>
+    </>
   );
 }

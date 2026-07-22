@@ -1,6 +1,6 @@
 import { Trans } from '@lingui/react/macro';
 
-import { Column, Img, Section, Text } from '../components';
+import { EmailBodyText, EmailHeading, EmailIconLabel } from './email-primitives';
 import { TemplateDocumentImage } from './template-document-image';
 
 export interface TemplateDocumentRecipientSignedProps {
@@ -16,42 +16,25 @@ export const TemplateDocumentRecipientSigned = ({
   recipientEmail,
   assetBaseUrl,
 }: TemplateDocumentRecipientSignedProps) => {
-  const getAssetUrl = (path: string) => {
-    return new URL(path, assetBaseUrl).toString();
-  };
-
   const recipientReference = recipientName || recipientEmail;
 
   return (
     <>
-      <TemplateDocumentImage className="mt-6" assetBaseUrl={assetBaseUrl} />
+      <TemplateDocumentImage assetBaseUrl={assetBaseUrl} />
 
-      <Section>
-        <Section className="mb-4">
-          <Column align="center">
-            <Text className="font-semibold text-base text-foreground">
-              <Img
-                src={getAssetUrl('/static/completed.png')}
-                className="-mt-0.5 mr-2 inline h-7 w-7 align-middle"
-                alt=""
-                width={28}
-                height={28}
-              />
-              <Trans>Completed</Trans>
-            </Text>
-          </Column>
-        </Section>
+      <EmailIconLabel assetBaseUrl={assetBaseUrl} icon="completed.png">
+        <Trans>Completed</Trans>
+      </EmailIconLabel>
 
-        <Text className="mb-0 text-center font-semibold text-foreground text-lg">
-          <Trans>
-            {recipientReference} has signed "{documentName}"
-          </Trans>
-        </Text>
+      <EmailHeading>
+        <Trans>
+          {recipientReference} has signed "{documentName}"
+        </Trans>
+      </EmailHeading>
 
-        <Text className="mx-auto mt-1 mb-6 max-w-[80%] text-center text-base text-muted-foreground">
-          <Trans>{recipientReference} has completed signing the document.</Trans>
-        </Text>
-      </Section>
+      <EmailBodyText>
+        <Trans>{recipientReference} has completed signing the document.</Trans>
+      </EmailBodyText>
     </>
   );
 };

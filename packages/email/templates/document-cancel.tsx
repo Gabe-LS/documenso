@@ -1,12 +1,9 @@
 import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 
-import { Body, Container, Hr, Html, Preview, Section } from '../components';
-import { TemplateBrandingLogo } from '../template-components/template-branding-logo';
+import { EmailLayout } from '../template-components/email-primitives';
 import type { TemplateDocumentCancelProps } from '../template-components/template-document-cancel';
 import { TemplateDocumentCancel } from '../template-components/template-document-cancel';
-import { TemplateEmailHead } from '../template-components/template-email-head';
-import { TemplateFooter } from '../template-components/template-footer';
 
 export type DocumentCancelEmailTemplateProps = Partial<TemplateDocumentCancelProps> & {
   reportUrl?: string;
@@ -25,35 +22,15 @@ export const DocumentCancelTemplate = ({
   const previewText = msg`${inviterName} has cancelled the document ${documentName}, you don't need to sign it anymore.`;
 
   return (
-    <Html>
-      <TemplateEmailHead />
-
-      <Body className="mx-auto my-auto bg-background font-sans">
-        <Preview>{_(previewText)}</Preview>
-
-        <Section>
-          <Container className="mx-auto mt-8 mb-2 max-w-xl rounded-lg border border-border border-solid p-4">
-            <Section>
-              <TemplateBrandingLogo assetBaseUrl={assetBaseUrl} className="mb-4 h-6" />
-
-              <TemplateDocumentCancel
-                inviterName={inviterName}
-                inviterEmail={inviterEmail}
-                documentName={documentName}
-                assetBaseUrl={assetBaseUrl}
-                cancellationReason={cancellationReason}
-              />
-            </Section>
-          </Container>
-
-          <Hr className="mx-auto mt-12 max-w-xl" />
-
-          <Container className="mx-auto max-w-xl">
-            <TemplateFooter reportUrl={reportUrl} />
-          </Container>
-        </Section>
-      </Body>
-    </Html>
+    <EmailLayout assetBaseUrl={assetBaseUrl} preview={_(previewText)} reportUrl={reportUrl}>
+      <TemplateDocumentCancel
+        inviterName={inviterName}
+        inviterEmail={inviterEmail}
+        documentName={documentName}
+        assetBaseUrl={assetBaseUrl}
+        cancellationReason={cancellationReason}
+      />
+    </EmailLayout>
   );
 };
 

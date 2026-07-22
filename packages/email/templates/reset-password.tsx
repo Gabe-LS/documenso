@@ -3,10 +3,8 @@ import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 import { Trans } from '@lingui/react/macro';
 
-import { Body, Container, Hr, Html, Link, Preview, Section, Text } from '../components';
-import { TemplateBrandingLogo } from '../template-components/template-branding-logo';
-import { TemplateEmailHead } from '../template-components/template-email-head';
-import { TemplateFooter } from '../template-components/template-footer';
+import { Link } from '../components';
+import { EmailBodyText, EmailLayout } from '../template-components/email-primitives';
 import type { TemplateResetPasswordProps } from '../template-components/template-reset-password';
 import { TemplateResetPassword } from '../template-components/template-reset-password';
 
@@ -25,55 +23,35 @@ export const ResetPasswordTemplate = ({
   const previewText = msg`Password Reset Successful`;
 
   return (
-    <Html>
-      <TemplateEmailHead />
+    <EmailLayout
+      assetBaseUrl={assetBaseUrl}
+      preview={_(previewText)}
+      isDocument={false}
+      secondaryContent={
+        <>
+          <EmailBodyText align="left" fullWidth className="font-semibold">
+            <Trans>
+              Hi, {userName}{' '}
+              <Link className="font-normal text-foreground underline" href={`mailto:${userEmail}`}>
+                ({userEmail})
+              </Link>
+            </Trans>
+          </EmailBodyText>
 
-      <Body className="mx-auto my-auto bg-background font-sans">
-        <Preview>{_(previewText)}</Preview>
-
-        <Section>
-          <Container className="mx-auto mt-8 mb-2 max-w-xl rounded-lg border border-border border-solid p-4">
-            <Section>
-              <TemplateBrandingLogo assetBaseUrl={assetBaseUrl} className="mb-4 h-6" />
-
-              <TemplateResetPassword assetBaseUrl={assetBaseUrl} />
-            </Section>
-          </Container>
-
-          <Container className="mx-auto mt-12 max-w-xl">
-            <Section>
-              <Text className="my-4 font-semibold text-base">
-                <Trans>
-                  Hi, {userName}{' '}
-                  <Link className="font-normal text-muted-foreground underline" href={`mailto:${userEmail}`}>
-                    ({userEmail})
-                  </Link>
-                </Trans>
-              </Text>
-
-              <Text className="mt-2 text-base text-muted-foreground">
-                <Trans>We've changed your password as you asked. You can now sign in with your new password.</Trans>
-              </Text>
-              <Text className="mt-2 text-base text-muted-foreground">
-                <Trans>
-                  Didn't request a password change? We are here to help you secure your account, just{' '}
-                  <Link className="font-normal text-foreground underline" href={`mailto:${SUPPORT_EMAIL}`}>
-                    contact us
-                  </Link>
-                  .
-                </Trans>
-              </Text>
-            </Section>
-          </Container>
-
-          <Hr className="mx-auto mt-12 max-w-xl" />
-
-          <Container className="mx-auto max-w-xl">
-            <TemplateFooter isDocument={false} />
-          </Container>
-        </Section>
-      </Body>
-    </Html>
+          <EmailBodyText align="left" fullWidth>
+            <Trans>
+              Didn't request a password change? We are here to help you secure your account, just{' '}
+              <Link className="font-normal text-foreground underline" href={`mailto:${SUPPORT_EMAIL}`}>
+                contact us
+              </Link>
+              .
+            </Trans>
+          </EmailBodyText>
+        </>
+      }
+    >
+      <TemplateResetPassword assetBaseUrl={assetBaseUrl} />
+    </EmailLayout>
   );
 };
 
