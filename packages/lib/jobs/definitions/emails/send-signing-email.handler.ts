@@ -3,13 +3,7 @@ import DocumentInviteEmailTemplate from '@documenso/email/templates/document-inv
 import { isRecipientEmailValidForSending } from '@documenso/lib/utils/recipients';
 import { prisma } from '@documenso/prisma';
 import { msg } from '@lingui/core/macro';
-import {
-  DocumentStatus,
-  EnvelopeType,
-  OrganisationType,
-  RecipientRole,
-  SendStatus,
-} from '@prisma/client';
+import { DocumentStatus, EnvelopeType, OrganisationType, RecipientRole, SendStatus } from '@prisma/client';
 import { createElement } from 'react';
 import { match } from 'ts-pattern';
 
@@ -126,8 +120,11 @@ export const run = async ({ payload, io }: { payload: TSendSigningEmailJobDefini
 
     const ccEmailSubject = i18n._(msg`Sent for signature: ${title}`);
 
+    const ccSenderName =
+      organisationType === OrganisationType.ORGANISATION && team?.name ? team.name : user.name || undefined;
+
     const ccTemplate = createElement(DocumentCcNotificationEmailTemplate, {
-      inviterName: user.name || undefined,
+      inviterName: ccSenderName,
       documentName: envelope.title,
       assetBaseUrl,
       reportUrl,
