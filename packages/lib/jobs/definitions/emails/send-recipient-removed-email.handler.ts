@@ -8,6 +8,7 @@ import { NEXT_PUBLIC_WEBAPP_URL } from '../../../constants/app';
 import { getEmailContext } from '../../../server-only/email/get-email-context';
 import { assertOrganisationRatesAndLimits } from '../../../server-only/rate-limit/assert-organisation-rates-and-limits';
 import { extractDerivedDocumentEmailSettings } from '../../../types/document-email';
+import { trimEmailTitle } from '../../../utils/email-subject';
 import { isRecipientEmailValidForSending } from '../../../utils/recipients';
 import { renderEmailWithI18N } from '../../../utils/render-email-with-i18n';
 import type { JobRunIO } from '../../client/_internal/job';
@@ -84,6 +85,8 @@ export const run = async ({ payload, io }: { payload: TSendRecipientRemovedEmail
 
   const i18n = await getI18nInstance(emailLanguage);
 
+  const title = trimEmailTitle(envelope.title);
+
   await io.runTask('send-recipient-removed-email', async () => {
     const [html, text] = await Promise.all([
       renderEmailWithI18N(template, { lang: emailLanguage, branding }),
@@ -97,7 +100,7 @@ export const run = async ({ payload, io }: { payload: TSendRecipientRemovedEmail
       },
       from: senderEmail,
       replyTo: replyToEmail,
-      subject: i18n._(msg`You have been removed from a document`),
+      subject: i18n._(msg`Access removed: ${title}`),
       html,
       text,
     });

@@ -12,6 +12,7 @@ import { NEXT_PUBLIC_WEBAPP_URL } from '../../../constants/app';
 import { DOCUMENSO_INTERNAL_EMAIL } from '../../../constants/email';
 import { getEmailContext } from '../../../server-only/email/get-email-context';
 import { extractDerivedDocumentEmailSettings } from '../../../types/document-email';
+import { trimEmailTitle } from '../../../utils/email-subject';
 import { unsafeBuildEnvelopeIdQuery } from '../../../utils/envelope';
 import { renderEmailWithI18N } from '../../../utils/render-email-with-i18n';
 import { formatDocumentsPath } from '../../../utils/teams';
@@ -75,6 +76,9 @@ export const run = async ({ payload, io }: { payload: TSendSigningRejectionEmail
 
   const i18n = await getI18nInstance(emailLanguage);
 
+  const title = trimEmailTitle(envelope.title);
+  const name = recipient.name;
+
   // Send confirmation email to the recipient who rejected.
   // Skipped when the organisation has email sending disabled, since this is sent on its behalf.
   // The owner notification below intentionally uses the internal Documenso email, so it still sends.
@@ -104,7 +108,7 @@ export const run = async ({ payload, io }: { payload: TSendSigningRejectionEmail
         },
         from: senderEmail,
         replyTo: replyToEmail,
-        subject: i18n._(msg`Document "${envelope.title}" - Rejection Confirmed`),
+        subject: i18n._(msg`You rejected ${title}`),
         html,
         text,
       });
@@ -136,7 +140,7 @@ export const run = async ({ payload, io }: { payload: TSendSigningRejectionEmail
         address: documentOwner.email,
       },
       from: DOCUMENSO_INTERNAL_EMAIL, // Purposefully using internal email here.
-      subject: i18n._(msg`Document "${envelope.title}" - Rejected by ${recipient.name}`),
+      subject: i18n._(msg`${name} rejected ${title}`),
       html,
       text,
     });

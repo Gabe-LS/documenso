@@ -17,13 +17,14 @@ export const TemplateDocumentRecipientSigned = ({
   assetBaseUrl,
 }: TemplateDocumentRecipientSignedProps) => {
   const recipientReference = recipientName || recipientEmail;
+  const signerName = recipientReference;
 
   return (
     <>
       <TemplateDocumentImage assetBaseUrl={assetBaseUrl} />
 
       <EmailIconLabel assetBaseUrl={assetBaseUrl} icon="completed.png">
-        <Trans>Completed</Trans>
+        <Trans>Signed by {signerName}</Trans>
       </EmailIconLabel>
 
       <EmailHeading>

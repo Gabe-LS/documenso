@@ -16,7 +16,7 @@ export const DocumentPendingEmailTemplate = ({
 }: DocumentPendingEmailTemplateProps) => {
   const { _ } = useLingui();
 
-  const previewText = msg`Pending Document`;
+  const previewText = msg`You've signed ${documentName}, waiting for others`;
 
   return (
     <EmailLayout assetBaseUrl={assetBaseUrl} preview={_(previewText)} reportUrl={reportUrl}>

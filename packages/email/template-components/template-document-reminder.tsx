@@ -13,6 +13,7 @@ export interface TemplateDocumentReminderProps {
   signDocumentLink: string;
   assetBaseUrl: string;
   role: RecipientRole;
+  inviterName: string;
 }
 
 export const TemplateDocumentReminder = ({
@@ -21,10 +22,12 @@ export const TemplateDocumentReminder = ({
   signDocumentLink,
   assetBaseUrl,
   role,
+  inviterName,
 }: TemplateDocumentReminderProps) => {
   const { _ } = useLingui();
 
   const { actionVerb } = RECIPIENT_ROLES_DESCRIPTION[role];
+  const action = _(actionVerb).toLowerCase();
 
   return (
     <>
@@ -32,8 +35,7 @@ export const TemplateDocumentReminder = ({
 
       <EmailHeading>
         <Trans>
-          Reminder: Please {_(actionVerb).toLowerCase()} your document
-          <br />"{documentName}"
+          Reminder: {inviterName} has asked you to {action} "{documentName}"
         </Trans>
       </EmailHeading>
 

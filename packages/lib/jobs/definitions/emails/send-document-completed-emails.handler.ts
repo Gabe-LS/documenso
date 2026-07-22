@@ -12,6 +12,7 @@ import { DOCUMENT_AUDIT_LOG_TYPE } from '../../../types/document-audit-logs';
 import { extractDerivedDocumentEmailSettings } from '../../../types/document-email';
 import { getFileServerSide } from '../../../universal/upload/get-file.server';
 import { createDocumentAuditLogData } from '../../../utils/document-audit-logs';
+import { trimEmailTitle } from '../../../utils/email-subject';
 import { unsafeBuildEnvelopeIdQuery } from '../../../utils/envelope';
 import { isRecipientEmailValidForSending } from '../../../utils/recipients';
 import { renderCustomEmailTemplate } from '../../../utils/render-custom-email-template';
@@ -83,6 +84,8 @@ export const run = async ({ payload, io }: { payload: TSendDocumentCompletedEmai
 
   const { user: owner } = envelope;
 
+  const title = trimEmailTitle(envelope.title);
+
   const completedDocumentEmailAttachments = await Promise.all(
     envelope.envelopeItems.map(async (envelopeItem) => {
       const file = await getFileServerSide(envelopeItem.documentData);
@@ -147,7 +150,7 @@ export const run = async ({ payload, io }: { payload: TSendDocumentCompletedEmai
       ],
       from: senderEmail,
       replyTo: replyToEmail,
-      subject: i18n._(msg`Signing Complete!`),
+      subject: i18n._(msg`Signed by all: ${title}`),
       html,
       text,
       attachments: completedDocumentEmailAttachments,
@@ -247,7 +250,7 @@ export const run = async ({ payload, io }: { payload: TSendDocumentCompletedEmai
         subject:
           isDirectTemplate && envelope.documentMeta?.subject
             ? renderCustomEmailTemplate(envelope.documentMeta.subject, customEmailTemplate)
-            : i18n._(msg`Signing Complete!`),
+            : i18n._(msg`Signed by all: ${title}`),
         html,
         text,
         attachments: completedDocumentEmailAttachments,

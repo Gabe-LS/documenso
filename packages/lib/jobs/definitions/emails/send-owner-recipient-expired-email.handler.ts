@@ -7,6 +7,7 @@ import { getI18nInstance } from '../../../client-only/providers/i18n-server';
 import { NEXT_PUBLIC_WEBAPP_URL } from '../../../constants/app';
 import { getEmailContext } from '../../../server-only/email/get-email-context';
 import { extractDerivedDocumentEmailSettings } from '../../../types/document-email';
+import { trimEmailTitle } from '../../../utils/email-subject';
 import { renderEmailWithI18N } from '../../../utils/render-email-with-i18n';
 import { formatDocumentsPath } from '../../../utils/teams';
 import type { JobRunIO } from '../../client/_internal/job';
@@ -87,6 +88,9 @@ export const run = async ({ payload, io }: { payload: TSendOwnerRecipientExpired
     assetBaseUrl: NEXT_PUBLIC_WEBAPP_URL(),
   });
 
+  const name = recipient.name || recipient.email;
+  const title = trimEmailTitle(envelope.title);
+
   await io.runTask('send-owner-recipient-expired-email', async () => {
     const [html, text] = await Promise.all([
       renderEmailWithI18N(template, { lang: emailLanguage, branding }),
@@ -103,7 +107,7 @@ export const run = async ({ payload, io }: { payload: TSendOwnerRecipientExpired
         address: documentOwner.email,
       },
       from: senderEmail,
-      subject: i18n._(msg`Signing window expired for "${recipient.name || recipient.email}" on "${envelope.title}"`),
+      subject: i18n._(msg`${name} did not sign in time: ${title}`),
       html,
       text,
     });

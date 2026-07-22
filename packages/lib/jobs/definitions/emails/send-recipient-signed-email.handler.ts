@@ -8,6 +8,7 @@ import { getI18nInstance } from '../../../client-only/providers/i18n-server';
 import { NEXT_PUBLIC_WEBAPP_URL } from '../../../constants/app';
 import { getEmailContext } from '../../../server-only/email/get-email-context';
 import { extractDerivedDocumentEmailSettings } from '../../../types/document-email';
+import { trimEmailTitle } from '../../../utils/email-subject';
 import { unsafeBuildEnvelopeIdQuery } from '../../../utils/envelope';
 import { isRecipientEmailValidForSending } from '../../../utils/recipients';
 import { renderEmailWithI18N } from '../../../utils/render-email-with-i18n';
@@ -94,6 +95,9 @@ export const run = async ({ payload, io }: { payload: TSendRecipientSignedEmailJ
     assetBaseUrl,
   });
 
+  const name = recipientReference;
+  const title = trimEmailTitle(envelope.title);
+
   await io.runTask('send-recipient-signed-email', async () => {
     const [html, text] = await Promise.all([
       renderEmailWithI18N(template, { lang: emailLanguage, branding }),
@@ -110,7 +114,7 @@ export const run = async ({ payload, io }: { payload: TSendRecipientSignedEmailJ
         address: owner.email,
       },
       from: senderEmail,
-      subject: i18n._(msg`${recipientReference} has signed "${envelope.title}"`),
+      subject: i18n._(msg`${name} has signed ${title}`),
       html,
       text,
     });

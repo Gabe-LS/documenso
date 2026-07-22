@@ -6,6 +6,7 @@ import { createElement } from 'react';
 import { getI18nInstance } from '../../../client-only/providers/i18n-server';
 import { NEXT_PUBLIC_WEBAPP_URL } from '../../../constants/app';
 import { getEmailContext } from '../../../server-only/email/get-email-context';
+import { trimEmailTitle } from '../../../utils/email-subject';
 import { renderEmailWithI18N } from '../../../utils/render-email-with-i18n';
 import { formatDocumentsPath } from '../../../utils/teams';
 import type { TSendDocumentCreatedFromDirectTemplateEmailJobDefinition } from './send-document-created-from-direct-template-email';
@@ -73,6 +74,8 @@ export const run = async ({ payload }: { payload: TSendDocumentCreatedFromDirect
 
   const i18n = await getI18nInstance(emailLanguage);
 
+  const title = trimEmailTitle(envelope.title);
+
   const [html, text] = await Promise.all([
     renderEmailWithI18N(emailTemplate, { lang: emailLanguage, branding }),
     renderEmailWithI18N(emailTemplate, { lang: emailLanguage, branding, plainText: true }),
@@ -86,7 +89,7 @@ export const run = async ({ payload }: { payload: TSendDocumentCreatedFromDirect
       },
     ],
     from: senderEmail,
-    subject: i18n._(msg`Document created from direct template`),
+    subject: i18n._(msg`From your template: ${title}`),
     html,
     text,
   });

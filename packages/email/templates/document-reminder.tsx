@@ -15,6 +15,7 @@ export type DocumentReminderEmailTemplateProps = {
   customBody?: string;
   role: RecipientRole;
   reportUrl?: string;
+  inviterName?: string;
 };
 
 export const DocumentReminderEmailTemplate = ({
@@ -25,6 +26,7 @@ export const DocumentReminderEmailTemplate = ({
   customBody,
   role = RecipientRole.SIGNER,
   reportUrl,
+  inviterName = 'Lucas Smith',
 }: DocumentReminderEmailTemplateProps) => {
   const { _ } = useLingui();
 
@@ -51,6 +53,7 @@ export const DocumentReminderEmailTemplate = ({
         signDocumentLink={signDocumentLink}
         assetBaseUrl={assetBaseUrl}
         role={role}
+        inviterName={inviterName}
       />
     </EmailLayout>
   );

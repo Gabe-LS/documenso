@@ -11,6 +11,7 @@ import {
   SendStatus,
 } from '@prisma/client';
 import { createElement } from 'react';
+import { match } from 'ts-pattern';
 
 import { getI18nInstance } from '../../../client-only/providers/i18n-server';
 import { NEXT_PUBLIC_WEBAPP_URL } from '../../../constants/app';
@@ -22,6 +23,7 @@ import { updateRecipientNextReminder } from '../../../server-only/recipient/upda
 import { DOCUMENT_AUDIT_LOG_TYPE } from '../../../types/document-audit-logs';
 import { extractDerivedDocumentEmailSettings } from '../../../types/document-email';
 import { createDocumentAuditLogData } from '../../../utils/document-audit-logs';
+import { trimEmailTitle } from '../../../utils/email-subject';
 import { unsafeBuildEnvelopeIdQuery } from '../../../utils/envelope';
 import { renderCustomEmailTemplate } from '../../../utils/render-custom-email-template';
 import { renderEmailWithI18N } from '../../../utils/render-email-with-i18n';
@@ -126,25 +128,36 @@ export const run = async ({ payload, io }: { payload: TSendSigningEmailJobDefini
 
   const recipientActionVerb = i18n._(RECIPIENT_ROLES_DESCRIPTION[recipient.role].actionVerb).toLowerCase();
 
+  const title = trimEmailTitle(envelope.title);
+
+  // The subject is now a single role-based default regardless of self-signer,
+  // direct-template or organisation context - those branches only affect the
+  // body message below.
+  const emailSubject = i18n._(
+    match(recipient.role)
+      .with(RecipientRole.SIGNER, () => msg`Signature requested: ${title}`)
+      .with(RecipientRole.APPROVER, () => msg`Approval requested: ${title}`)
+      .with(RecipientRole.VIEWER, () => msg`Shared with you: ${title}`)
+      .with(RecipientRole.ASSISTANT, () => msg`Assistance requested: ${title}`)
+      .with(RecipientRole.CC, () => msg`Shared with you: ${title}`)
+      .exhaustive(),
+  );
+
   let emailMessage = customEmail?.message || '';
-  let emailSubject = i18n._(msg`Please ${recipientActionVerb} this document`);
 
   if (selfSigner) {
     emailMessage = i18n._(
       msg`You have initiated the document ${`"${envelope.title}"`} that requires you to ${recipientActionVerb} it.`,
     );
-    emailSubject = i18n._(msg`Please ${recipientActionVerb} your document`);
   }
 
   if (isDirectTemplate) {
     emailMessage = i18n._(
       msg`A document was created by your direct template that requires you to ${recipientActionVerb} it.`,
     );
-    emailSubject = i18n._(msg`Please ${recipientActionVerb} this document created by your direct template`);
   }
 
   if (organisationType === OrganisationType.ORGANISATION) {
-    emailSubject = i18n._(msg`${team.name} invited you to ${recipientActionVerb} a document`);
     emailMessage = customEmail?.message ?? '';
 
     if (!emailMessage) {

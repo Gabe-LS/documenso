@@ -4,17 +4,16 @@ import { msg } from '@lingui/core/macro';
 import {
   DocumentDistributionMethod,
   DocumentStatus,
-  OrganisationType,
   RecipientRole,
   SendStatus,
   SigningStatus,
   WebhookTriggerEvents,
 } from '@prisma/client';
 import { createElement } from 'react';
+import { match } from 'ts-pattern';
 
 import { getI18nInstance } from '../../../client-only/providers/i18n-server';
 import { NEXT_PUBLIC_WEBAPP_URL } from '../../../constants/app';
-import { RECIPIENT_ROLES_DESCRIPTION } from '../../../constants/recipient-roles';
 import { buildEnvelopeEmailHeaders } from '../../../server-only/email/build-envelope-email-headers';
 import { getEmailContext } from '../../../server-only/email/get-email-context';
 import { assertOrganisationRatesAndLimits } from '../../../server-only/rate-limit/assert-organisation-rates-and-limits';
@@ -24,6 +23,7 @@ import { DOCUMENT_AUDIT_LOG_TYPE, DOCUMENT_EMAIL_TYPE } from '../../../types/doc
 import { extractDerivedDocumentEmailSettings } from '../../../types/document-email';
 import { mapEnvelopeToWebhookDocumentPayload, ZWebhookDocumentSchema } from '../../../types/webhook-payload';
 import { createDocumentAuditLogData } from '../../../utils/document-audit-logs';
+import { trimEmailTitle } from '../../../utils/email-subject';
 import { renderCustomEmailTemplate } from '../../../utils/render-custom-email-template';
 import { renderEmailWithI18N } from '../../../utils/render-email-with-i18n';
 import type { JobRunIO } from '../../client/_internal/job';
@@ -105,7 +105,6 @@ export const run = async ({ payload, io }: { payload: TProcessSigningReminderJob
   const {
     branding,
     emailLanguage,
-    organisationType,
     senderEmail,
     replyToEmail,
     organisationId,
@@ -130,13 +129,20 @@ export const run = async ({ payload, io }: { payload: TProcessSigningReminderJob
 
   const i18n = await getI18nInstance(emailLanguage);
 
-  const recipientActionVerb = i18n._(RECIPIENT_ROLES_DESCRIPTION[recipient.role].actionVerb).toLowerCase();
+  const title = trimEmailTitle(envelope.title);
 
-  let emailSubject = i18n._(msg`Reminder: Please ${recipientActionVerb} the document "${envelope.title}"`);
-
-  if (organisationType === OrganisationType.ORGANISATION) {
-    emailSubject = i18n._(msg`Reminder: ${envelope.team.name} invited you to ${recipientActionVerb} a document`);
-  }
+  // The subject is now a single role-based default - the organisation-invite
+  // wording used to differ here, but that context lives in the body, not the
+  // subject.
+  let emailSubject = i18n._(
+    match(recipient.role)
+      .with(RecipientRole.SIGNER, () => msg`Reminder to sign: ${title}`)
+      .with(RecipientRole.APPROVER, () => msg`Reminder to approve: ${title}`)
+      .with(RecipientRole.VIEWER, () => msg`Reminder to view: ${title}`)
+      .with(RecipientRole.ASSISTANT, () => msg`Reminder to assist: ${title}`)
+      .with(RecipientRole.CC, () => msg`Reminder to view: ${title}`)
+      .exhaustive(),
+  );
 
   const customEmailTemplate = {
     'signer.name': recipient.name,
@@ -193,6 +199,7 @@ export const run = async ({ payload, io }: { payload: TProcessSigningReminderJob
       customBody: emailMessage,
       role: recipient.role,
       reportUrl,
+      inviterName: envelope.user.name || undefined,
     });
 
     const [html, text] = await Promise.all([

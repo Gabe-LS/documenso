@@ -18,7 +18,7 @@ export const TemplateDocumentPending = ({ documentName, assetBaseUrl }: Template
       </EmailIconLabel>
 
       <EmailHeading>
-        <Trans>"{documentName}" has been signed</Trans>
+        <Trans>You've signed "{documentName}"</Trans>
       </EmailHeading>
 
       <EmailBodyText>

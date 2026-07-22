@@ -5,6 +5,7 @@ import { AppError } from '@documenso/lib/errors/app-error';
 import { DOCUMENT_AUDIT_LOG_TYPE } from '@documenso/lib/types/document-audit-logs';
 import type { ApiRequestMetadata } from '@documenso/lib/universal/extract-request-metadata';
 import { createDocumentAuditLogData } from '@documenso/lib/utils/document-audit-logs';
+import { trimEmailTitle } from '@documenso/lib/utils/email-subject';
 import { renderCustomEmailTemplate } from '@documenso/lib/utils/render-custom-email-template';
 import { prisma } from '@documenso/prisma';
 import { msg } from '@lingui/core/macro';
@@ -18,6 +19,7 @@ import {
   WebhookTriggerEvents,
 } from '@prisma/client';
 import { createElement } from 'react';
+import { match } from 'ts-pattern';
 
 import { getI18nInstance } from '../../client-only/providers/i18n-server';
 import { NEXT_PUBLIC_WEBAPP_URL } from '../../constants/app';
@@ -213,18 +215,30 @@ export const resendDocument = async ({ id, userId, recipients, teamId, requestMe
 
       const recipientActionVerb = i18n._(RECIPIENT_ROLES_DESCRIPTION[recipient.role].actionVerb).toLowerCase();
 
+      const title = trimEmailTitle(envelope.title);
+
+      // The subject is now a single role-based default - the self-signer and
+      // organisation-invite wording used to differ here, but that context
+      // lives in the body, not the subject.
+      let emailSubject = i18n._(
+        match(recipient.role)
+          .with(RecipientRole.SIGNER, () => msg`Reminder to sign: ${title}`)
+          .with(RecipientRole.APPROVER, () => msg`Reminder to approve: ${title}`)
+          .with(RecipientRole.VIEWER, () => msg`Reminder to view: ${title}`)
+          .with(RecipientRole.ASSISTANT, () => msg`Reminder to assist: ${title}`)
+          .with(RecipientRole.CC, () => msg`Reminder to view: ${title}`)
+          .exhaustive(),
+      );
+
       let emailMessage = envelope.documentMeta.message || '';
-      let emailSubject = i18n._(msg`Reminder: Please ${recipientActionVerb} this document`);
 
       if (selfSigner) {
         emailMessage = i18n._(
           msg`You have initiated the document ${`"${envelope.title}"`} that requires you to ${recipientActionVerb} it.`,
         );
-        emailSubject = i18n._(msg`Reminder: Please ${recipientActionVerb} your document`);
       }
 
       if (organisationType === OrganisationType.ORGANISATION) {
-        emailSubject = i18n._(msg`Reminder: ${envelope.team.name} invited you to ${recipientActionVerb} a document`);
         emailMessage =
           envelope.documentMeta.message ||
           i18n._(

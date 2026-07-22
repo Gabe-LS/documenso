@@ -37,10 +37,6 @@ msgstr "\"{0}\" apparirà sul documento poiché ha un fuso orario di \"{1}\"."
 msgid "\"{documentName}\" has been deleted by an admin."
 msgstr "\"{documentName}\" è stato eliminato da un amministratore."
 
-#: packages/email/template-components/template-document-pending.tsx
-msgid "\"{documentName}\" has been signed"
-msgstr "\"{documentName}\" è stato firmato"
-
 #: packages/email/template-components/template-document-completed.tsx
 msgid "\"{documentName}\" was signed by all signers"
 msgstr "\"{documentName}\" è stato firmato da tutti i firmatari"
@@ -300,11 +296,6 @@ msgstr "Campo {0}"
 msgid "{0} has invited you to {recipientActionVerb} the document \"{1}\"."
 msgstr "{0} ti ha invitato a {recipientActionVerb} il documento \"{1}\"."
 
-#. placeholder {0}: team.name
-#: packages/lib/jobs/definitions/emails/send-signing-email.handler.ts
-msgid "{0} invited you to {recipientActionVerb} a document"
-msgstr "{0} ti ha invitato a {recipientActionVerb} un documento"
-
 #. placeholder {0}: remaining.documents
 #. placeholder {1}: quota.documents
 #: apps/remix/app/components/general/document/document-upload-button-legacy.tsx
@@ -423,6 +414,18 @@ msgstr "{MAXIMUM_PASSKEYS, plural, one {Non puoi avere più di # chiave di acces
 msgid "{maximumEnvelopeItemCount, plural, one {You cannot upload more than # item per envelope.} other {You cannot upload more than # items per envelope.}}"
 msgstr "{maximumEnvelopeItemCount, plural, one {Non puoi caricare più di # elemento per busta.} other {Non puoi caricare più di # elementi per busta.}}"
 
+#: packages/lib/jobs/definitions/emails/send-owner-recipient-expired-email.handler.ts
+msgid "{name} did not sign in time: {title}"
+msgstr "{name} non ha firmato in tempo: {title}"
+
+#: packages/lib/jobs/definitions/emails/send-recipient-signed-email.handler.ts
+msgid "{name} has signed {title}"
+msgstr "{name} ha firmato {title}"
+
+#: packages/lib/jobs/definitions/emails/send-rejection-emails.handler.ts
+msgid "{name} rejected {title}"
+msgstr "{name} ha rifiutato {title}"
+
 #: apps/remix/app/components/dialogs/email-transport-delete-dialog.tsx
 msgid "{organisationClaimCount, plural, one {# Organisation claim} other {# Organisation claims}}"
 msgstr "{organisationClaimCount, plural, one {# richiesta di organizzazione} other {# richieste di organizzazione}}"
@@ -451,11 +454,6 @@ msgstr "{recipientName} ha rifiutato il documento '{documentName}'"
 #: packages/email/template-components/template-document-recipient-signed.tsx
 msgid "{recipientReference} has completed signing the document."
 msgstr "{recipientReference} ha completato la firma del documento."
-
-#. placeholder {0}: envelope.title
-#: packages/lib/jobs/definitions/emails/send-recipient-signed-email.handler.ts
-msgid "{recipientReference} has signed \"{0}\""
-msgstr "{recipientReference} ha firmato \"{0}\""
 
 #: packages/email/template-components/template-document-recipient-signed.tsx
 msgid "{recipientReference} has signed \"{documentName}\""
@@ -1122,6 +1120,10 @@ msgstr "Accesso disabilitato"
 msgid "Access enabled"
 msgstr "Accesso abilitato"
 
+#: packages/lib/jobs/definitions/emails/send-recipient-removed-email.handler.ts
+msgid "Access removed: {title}"
+msgstr "Accesso rimosso: {title}"
+
 #: apps/remix/app/components/general/document-signing/document-signing-auth-dialog.tsx
 #: apps/remix/app/components/general/org-menu-switcher.tsx
 #: apps/remix/app/routes/_unauthenticated+/organisation.sso.confirmation.$token.tsx
@@ -1513,7 +1515,7 @@ msgstr "Solo amministratori"
 
 #: apps/remix/app/components/forms/branding-preferences-form.tsx
 msgid "Advanced — Custom CSS"
-msgstr "Avanzate — CSS personalizzato"
+msgstr "Avanzate: CSS personalizzato"
 
 #: packages/ui/primitives/document-flow/add-settings.tsx
 #: packages/ui/primitives/template-flow/add-template-settings.tsx
@@ -1907,11 +1909,11 @@ msgstr "Si è verificato un errore. Per favore riprova più tardi."
 
 #: packages/lib/jobs/definitions/emails/send-organisation-limit-alert-email.handler.ts
 msgid "An organisation has exceeded their fair use limits"
-msgstr "Un'organizzazione ha superato i propri limiti di utilizzo equo (fair use)"
+msgstr "Un'organizzazione ha superato i propri limiti di fair use"
 
 #: packages/lib/jobs/definitions/emails/send-organisation-limit-alert-email.handler.ts
 msgid "An organisation is nearing their fair use limits"
-msgstr "Un'organizzazione si sta avvicinando ai propri limiti di utilizzo equo (fair use)"
+msgstr "Un'organizzazione si sta avvicinando ai propri limiti di fair use"
 
 #: apps/remix/app/routes/_unauthenticated+/organisation.sso.confirmation.$token.tsx
 msgid "An organisation wants to create an account for you. Please review the details below."
@@ -2036,7 +2038,7 @@ msgstr "Token API"
 
 #: apps/remix/app/components/general/organisations/organisation-quota-banner.tsx
 msgid "API usage is approaching fair use limits"
-msgstr "L'utilizzo dell'API si sta avvicinando ai limiti di utilizzo equo (fair use)"
+msgstr "L'utilizzo dell'API si sta avvicinando ai limiti di fair use"
 
 #: apps/remix/app/routes/_authenticated+/admin+/stats.tsx
 msgid "App Version"
@@ -2048,13 +2050,17 @@ msgstr "Applicazione della tua firma in corso"
 
 #: apps/remix/app/components/general/organisations/organisation-quota-banner.tsx
 msgid "Approaching fair use limit"
-msgstr "Limite di utilizzo equo (fair use) in avvicinamento"
+msgstr "Limite di fair use in avvicinamento"
 
 #: packages/email/templates/organisation-limit-alert.tsx
 #: packages/email/templates/organisation-limit-alert.tsx
 #: packages/lib/jobs/definitions/emails/send-organisation-limit-alert-email.handler.ts
 msgid "Approaching Your Plan Limits"
 msgstr "Stai per raggiungere i limiti del tuo piano"
+
+#: packages/lib/jobs/definitions/emails/send-signing-email.handler.ts
+msgid "Approval requested: {title}"
+msgstr "Da approvare: {title}"
 
 #: apps/remix/app/components/general/document-signing/document-signing-complete-dialog.tsx
 #: apps/remix/app/components/general/document-signing/document-signing-complete-dialog.tsx
@@ -2165,6 +2171,10 @@ msgstr "Sei sicuro?"
 #: apps/remix/app/components/tables/organisation-groups-table.tsx
 msgid "Assigned Teams"
 msgstr "Team Assegnati"
+
+#: packages/lib/jobs/definitions/emails/send-signing-email.handler.ts
+msgid "Assistance requested: {title}"
+msgstr "Da compilare: {title}"
 
 #: packages/lib/constants/recipient-roles.ts
 msgctxt "Recipient role action verb"
@@ -2944,7 +2954,6 @@ msgstr "Compila i campi per i seguenti firmatari."
 #: apps/remix/app/components/tables/admin-document-jobs-table.tsx
 #: apps/remix/app/components/tables/organisation-insights-table.tsx
 #: packages/email/template-components/template-document-completed.tsx
-#: packages/email/template-components/template-document-recipient-signed.tsx
 #: packages/email/template-components/template-document-self-signed.tsx
 #: packages/lib/constants/document.ts
 msgid "Completed"
@@ -4161,22 +4170,6 @@ msgstr "Documenso eliminerà <0>tutti i tuoi documenti</0>, insieme a tutti i tu
 msgid "Document"
 msgstr "Documento"
 
-#. placeholder {0}: envelope.title
-#. placeholder {1}: recipient.name
-#: packages/lib/jobs/definitions/emails/send-rejection-emails.handler.ts
-msgid "Document \"{0}\" - Rejected by {1}"
-msgstr "Documento \"{0}\" - Rifiutato da {1}"
-
-#. placeholder {0}: envelope.title
-#: packages/lib/jobs/definitions/emails/send-rejection-emails.handler.ts
-msgid "Document \"{0}\" - Rejection Confirmed"
-msgstr "Documento \"{0}\" - Rifiuto Confermato"
-
-#. placeholder {0}: envelope.title
-#: packages/lib/jobs/definitions/emails/send-document-cancelled-emails.handler.ts
-msgid "Document \"{0}\" Cancelled"
-msgstr "Documento \"{0}\" Annullato"
-
 #: packages/ui/primitives/document-upload-button.tsx
 msgid "Document (Legacy)"
 msgstr "Documento (Legacy)"
@@ -4217,10 +4210,14 @@ msgstr "Documento annullato"
 
 #: apps/remix/app/routes/_recipient+/sign.$token+/_index.tsx
 #: apps/remix/app/routes/_recipient+/sign.$token+/_index.tsx
-#: packages/lib/jobs/definitions/emails/send-document-deleted-emails.handler.ts
 #: packages/lib/server-only/admin/admin-super-delete-document.ts
 msgid "Document Cancelled"
 msgstr "Documento Annullato"
+
+#: packages/lib/jobs/definitions/emails/send-document-cancelled-emails.handler.ts
+#: packages/lib/jobs/definitions/emails/send-document-deleted-emails.handler.ts
+msgid "Document cancelled: {title}"
+msgstr "Documento annullato: {title}"
 
 #: apps/remix/app/components/general/admin-global-settings-section.tsx
 #: apps/remix/app/components/general/document/document-status.tsx
@@ -4265,11 +4262,6 @@ msgstr "Documento creato"
 #: apps/remix/app/components/general/template/template-page-view-recent-activity.tsx
 msgid "Document created by <0>{0}</0>"
 msgstr "Documento creato da <0>{0}</0>"
-
-#: packages/email/templates/document-created-from-direct-template.tsx
-#: packages/lib/jobs/definitions/emails/send-document-created-from-direct-template-email.handler.ts
-msgid "Document created from direct template"
-msgstr "Documento creato da modello diretto"
 
 #: packages/ui/components/document/document-email-checkboxes.tsx
 msgid "Document created from direct template email"
@@ -4504,7 +4496,7 @@ msgstr "Documento caricato"
 
 #: apps/remix/app/components/general/organisations/organisation-quota-banner.tsx
 msgid "Document usage is approaching fair use limits"
-msgstr "L'utilizzo dei documenti si sta avvicinando ai limiti di utilizzo equo (fair use)"
+msgstr "L'utilizzo dei documenti si sta avvicinando ai limiti di fair use"
 
 #: packages/lib/utils/document-audit-logs.ts
 msgctxt "Audit log format"
@@ -4712,7 +4704,7 @@ msgstr "Trascina e rilascia qui il tuo documento."
 
 #: apps/remix/app/components/embed/authoring/configure-document-upload.tsx
 msgid "Drag and drop or click to upload"
-msgstr "Trascina e rilascia o fai clic per caricare"
+msgstr "Trascina e rilascia o clicca per caricare"
 
 #: apps/remix/app/components/general/envelope/envelope-drop-zone-wrapper.tsx
 msgid "Drag and drop your document here"
@@ -4730,7 +4722,7 @@ msgstr "Disegna firma"
 
 #: apps/remix/app/components/dialogs/envelope-item-edit-dialog.tsx
 msgid "Drop PDF here or click to select"
-msgstr "Rilascia qui il PDF o fai clic per selezionarlo"
+msgstr "Rilascia qui il PDF o clicca per selezionarlo"
 
 #: apps/remix/app/components/embed/authoring/configure-document-upload.tsx
 msgid "Drop your document here"
@@ -5074,7 +5066,7 @@ msgstr "Trasporti email"
 
 #: apps/remix/app/components/general/organisations/organisation-quota-banner.tsx
 msgid "Email usage is approaching fair use limits"
-msgstr "L'utilizzo delle email si sta avvicinando ai limiti di utilizzo equo (fair use)"
+msgstr "L'utilizzo delle email si sta avvicinando ai limiti di fair use"
 
 #: apps/remix/app/components/general/document-signing/access-auth-2fa-form.tsx
 msgid "Email verification"
@@ -5702,7 +5694,7 @@ msgstr "Falliti: {failedCount}"
 #: apps/remix/app/components/general/organisations/organisation-quota-banner.tsx
 #: apps/remix/app/utils/toast-error-messages.ts
 msgid "Fair use limit exceeded"
-msgstr "Limite di utilizzo corretto superato."
+msgstr "Limite di fair use superato."
 
 #: apps/remix/app/components/forms/subscription-claim-form.tsx
 #: apps/remix/app/components/tables/admin-claims-table.tsx
@@ -5924,6 +5916,14 @@ msgstr "Indirizzo mittente"
 #: apps/remix/app/components/forms/email-transport-form.tsx
 msgid "From name"
 msgstr "Nome mittente"
+
+#: packages/email/templates/document-created-from-direct-template.tsx
+msgid "From your template: {documentName}"
+msgstr "Dal tuo modello: {documentName}"
+
+#: packages/lib/jobs/definitions/emails/send-document-created-from-direct-template-email.handler.ts
+msgid "From your template: {title}"
+msgstr "Dal tuo modello: {title}"
 
 #: apps/remix/app/components/embed/embed-direct-template-client-page.tsx
 #: apps/remix/app/components/embed/embed-document-signing-page-v1.tsx
@@ -8251,19 +8251,7 @@ msgstr "Ti chiediamo di {0} il tuo documento<0/>\"{documentName}\""
 
 #: packages/email/templates/document-invite.tsx
 msgid "Please {action} your document {documentName}"
-msgstr "Per favore {action} il tuo documento {documentName}"
-
-#: packages/lib/jobs/definitions/emails/send-signing-email.handler.ts
-msgid "Please {recipientActionVerb} this document"
-msgstr "Ti chiediamo di {recipientActionVerb} questo documento"
-
-#: packages/lib/jobs/definitions/emails/send-signing-email.handler.ts
-msgid "Please {recipientActionVerb} this document created by your direct template"
-msgstr "Ti chiediamo di {recipientActionVerb} questo documento creato dal tuo modello diretto"
-
-#: packages/lib/jobs/definitions/emails/send-signing-email.handler.ts
-msgid "Please {recipientActionVerb} your document"
-msgstr "Ti chiediamo di {recipientActionVerb} il tuo documento"
+msgstr "Ti chiediamo di {action} il tuo documento {documentName}"
 
 #: apps/remix/app/components/dialogs/organisation-member-invite-dialog.tsx
 msgid "Please check the CSV file and make sure it is according to our format"
@@ -8989,6 +8977,26 @@ msgstr "Ricarica"
 msgid "Remembered your password? <0>Sign In</0>"
 msgstr "Ricordi la tua password? <0>Accedi</0>"
 
+#: packages/lib/jobs/definitions/internal/process-signing-reminder.handler.ts
+#: packages/lib/server-only/document/resend-document.ts
+msgid "Reminder to approve: {title}"
+msgstr "Ancora da approvare: {title}"
+
+#: packages/lib/jobs/definitions/internal/process-signing-reminder.handler.ts
+#: packages/lib/server-only/document/resend-document.ts
+msgid "Reminder to assist: {title}"
+msgstr "Ancora da compilare: {title}"
+
+#: packages/lib/jobs/definitions/internal/process-signing-reminder.handler.ts
+#: packages/lib/server-only/document/resend-document.ts
+msgid "Reminder to sign: {title}"
+msgstr "Ancora da firmare: {title}"
+
+#: packages/lib/jobs/definitions/internal/process-signing-reminder.handler.ts
+#: packages/lib/server-only/document/resend-document.ts
+msgid "Reminder to view: {title}"
+msgstr "Ancora da visionare: {title}"
+
 #: packages/email/templates/document-reminder.tsx
 msgid "Reminder to {action} {documentName}"
 msgstr "Promemoria per {action} {documentName}"
@@ -8999,29 +9007,9 @@ msgstr "Promemoria per {action} {documentName}"
 msgid "Reminder: {0}"
 msgstr "Promemoria: {0}"
 
-#. placeholder {0}: envelope.team.name
-#: packages/lib/jobs/definitions/internal/process-signing-reminder.handler.ts
-#: packages/lib/server-only/document/resend-document.ts
-msgid "Reminder: {0} invited you to {recipientActionVerb} a document"
-msgstr "Promemoria: {0} ti ha invitato a {recipientActionVerb} un documento"
-
-#. placeholder {0}: _(actionVerb).toLowerCase()
 #: packages/email/template-components/template-document-reminder.tsx
-msgid "Reminder: Please {0} your document<0/>\"{documentName}\""
-msgstr "Promemoria: ti chiediamo di {0} il tuo documento<0/>\"{documentName}\""
-
-#. placeholder {0}: envelope.title
-#: packages/lib/jobs/definitions/internal/process-signing-reminder.handler.ts
-msgid "Reminder: Please {recipientActionVerb} the document \"{0}\""
-msgstr "Promemoria: ti chiediamo di {recipientActionVerb} il documento \"{0}\""
-
-#: packages/lib/server-only/document/resend-document.ts
-msgid "Reminder: Please {recipientActionVerb} this document"
-msgstr "Promemoria: ti chiediamo di {recipientActionVerb} questo documento"
-
-#: packages/lib/server-only/document/resend-document.ts
-msgid "Reminder: Please {recipientActionVerb} your document"
-msgstr "Promemoria: ti chiediamo di {recipientActionVerb} il tuo documento"
+msgid "Reminder: {inviterName} has asked you to {action} \"{documentName}\""
+msgstr "Promemoria: {inviterName} ti chiede di {action} \"{documentName}\""
 
 #: apps/remix/app/components/general/envelope-editor/envelope-editor-settings-dialog.tsx
 msgid "Reminders"
@@ -9918,6 +9906,10 @@ msgstr "Condividi il link"
 msgid "Share your signing experience!"
 msgstr "Condividi la tua esperienza di firma!"
 
+#: packages/lib/jobs/definitions/emails/send-signing-email.handler.ts
+msgid "Shared with you: {title}"
+msgstr "Condiviso con te: {title}"
+
 #: apps/remix/app/routes/_authenticated+/t.$teamUrl+/settings.public-profile.tsx
 msgid "Show"
 msgstr "Mostra"
@@ -10102,6 +10094,10 @@ msgstr "Il pad per la firma non può essere vuoto."
 msgid "Signature Settings"
 msgstr "Impostazioni firma"
 
+#: packages/lib/jobs/definitions/emails/send-signing-email.handler.ts
+msgid "Signature requested: {title}"
+msgstr "Da firmare: {title}"
+
 #: packages/ui/components/document/document-signature-settings-tooltip.tsx
 msgid "Signature types"
 msgstr "Tipi di firma"
@@ -10127,6 +10123,19 @@ msgstr "Firmato"
 msgctxt "Signed document (adjective)"
 msgid "Signed"
 msgstr "Firmato"
+
+#: packages/email/templates/document-completed.tsx
+msgid "Signed by all: {documentName}"
+msgstr "Firmato da tutti: {documentName}"
+
+#: packages/lib/jobs/definitions/emails/send-document-completed-emails.handler.ts
+#: packages/lib/jobs/definitions/emails/send-document-completed-emails.handler.ts
+msgid "Signed by all: {title}"
+msgstr "Firmato da tutti: {title}"
+
+#: packages/email/template-components/template-document-recipient-signed.tsx
+msgid "Signed by {signerName}"
+msgstr "Firmato da {signerName}"
 
 #: apps/remix/app/components/general/envelope-signing/envelope-signer-header.tsx
 msgid "Signer"
@@ -10169,11 +10178,6 @@ msgstr "Il certificato di firma non è valido"
 #: packages/lib/server-only/pdf/render-certificate.ts
 msgid "Signing certificate provided by"
 msgstr "Certificato di firma fornito da"
-
-#: packages/lib/jobs/definitions/emails/send-document-completed-emails.handler.ts
-#: packages/lib/jobs/definitions/emails/send-document-completed-emails.handler.ts
-msgid "Signing Complete!"
-msgstr "Firma completata!"
 
 #: apps/remix/app/routes/_recipient+/sign.$token+/expired.tsx
 msgid "Signing Deadline Expired"
@@ -10218,12 +10222,6 @@ msgstr "Stato della firma"
 #: apps/remix/app/components/embed/embed-recipient-expired.tsx
 msgid "Signing Window Expired"
 msgstr "Finestra di firma scaduta"
-
-#. placeholder {0}: recipient.name || recipient.email
-#. placeholder {1}: envelope.title
-#: packages/lib/jobs/definitions/emails/send-owner-recipient-expired-email.handler.ts
-msgid "Signing window expired for \"{0}\" on \"{1}\""
-msgstr "La finestra di firma è scaduta per \"{0}\" sul documento \"{1}\""
 
 #: packages/email/template-components/template-recipient-expired.tsx
 msgid "Signing window expired for \"{displayName}\" on \"{documentName}\""
@@ -11051,7 +11049,7 @@ msgstr "Grazie per aver utilizzato Documenso per eseguire la firma elettronica d
 
 #: packages/email/template-components/template-forgot-password.tsx
 msgid "That's okay, it happens! Click the button below to reset your password."
-msgstr "Va bene, succede! Fai clic sul pulsante qui sotto per reimpostare la tua password."
+msgstr "Va bene, succede! Clicca sul pulsante qui sotto per reimpostare la tua password."
 
 #: apps/remix/app/components/dialogs/admin-user-delete-dialog.tsx
 msgid "The account has been deleted successfully."
@@ -12982,10 +12980,6 @@ msgstr "In attesa"
 msgid "Waiting for others"
 msgstr "In attesa di altri"
 
-#: packages/lib/jobs/definitions/emails/send-document-pending-email.handler.ts
-msgid "Waiting for others to complete signing."
-msgstr "In attesa che altri completino la firma."
-
 #: apps/remix/app/routes/_recipient+/sign.$token+/complete.tsx
 msgid "Waiting for others to sign"
 msgstr "In attesa degli altri per firmare"
@@ -13392,15 +13386,15 @@ msgstr "Abbiamo cambiato la tua password come richiesto. Ora puoi accedere con l
 
 #: packages/email/templates/organisation-limit-alert.tsx
 msgid "We've noticed API activity on your account that exceeds the fair use limits of your current plan. As a precaution, new API activity has been temporarily paused pending review."
-msgstr "Abbiamo rilevato un'attività API sul tuo account che supera i limiti di utilizzo corretto previsti dal tuo piano attuale. Come precauzione, la nuova attività API è stata temporaneamente messa in pausa in attesa di revisione."
+msgstr "Abbiamo rilevato un'attività API sul tuo account che supera i limiti di fair use previsti dal tuo piano attuale. Come precauzione, la nuova attività API è stata temporaneamente messa in pausa in attesa di revisione."
 
 #: packages/email/templates/organisation-limit-alert.tsx
 msgid "We've noticed document activity on your account that exceeds the fair use limits of your current plan. As a precaution, new document activity has been temporarily paused pending review."
-msgstr "Abbiamo rilevato un'attività sui documenti del tuo account che supera i limiti di utilizzo corretto previsti dal tuo piano attuale. Come precauzione, la nuova attività sui documenti è stata temporaneamente messa in pausa in attesa di revisione."
+msgstr "Abbiamo rilevato un'attività sui documenti del tuo account che supera i limiti di fair use previsti dal tuo piano attuale. Come precauzione, la nuova attività sui documenti è stata temporaneamente messa in pausa in attesa di revisione."
 
 #: packages/email/templates/organisation-limit-alert.tsx
 msgid "We've noticed email sending activity on your account that exceeds the fair use limits of your current plan. As a precaution, new email activity has been temporarily paused pending review."
-msgstr "Abbiamo rilevato un'attività di invio email sul tuo account che supera i limiti di utilizzo corretto previsti dal tuo piano attuale. Come precauzione, la nuova attività email è stata temporaneamente messa in pausa in attesa di revisione."
+msgstr "Abbiamo rilevato un'attività di invio email sul tuo account che supera i limiti di fair use previsti dal tuo piano attuale. Come precauzione, la nuova attività email è stata temporaneamente messa in pausa in attesa di revisione."
 
 #: apps/remix/app/components/general/document-signing/access-auth-2fa-form.tsx
 msgid "We've sent a 6-digit verification code to your email. Please enter it below to complete the document."
@@ -13503,7 +13497,7 @@ msgstr "Quando è abilitata, gli utenti che eseguono l'accesso tramite SSO per l
 
 #: apps/remix/app/components/dialogs/passkey-create-dialog.tsx
 msgid "When you click continue, you will be prompted to add the first available authenticator on your system."
-msgstr "Quando fai clic su continua, ti verrà chiesto di aggiungere il primo autenticatore disponibile sul tuo sistema."
+msgstr "Quando clicchi su continua, ti verrà chiesto di aggiungere il primo autenticatore disponibile sul tuo sistema."
 
 #: apps/remix/app/components/general/document-signing/document-signing-auto-sign.tsx
 msgid "When you sign a document, we can automatically fill in and sign the following fields using information that has already been provided. You can also manually sign or remove any automatically signed fields afterwards if you desire."
@@ -13964,10 +13958,6 @@ msgstr "Sei stato invitato a unirti a {0} su Documenso"
 msgid "You have been invited to join the following organisation"
 msgstr "Sei stato invitato a unirti alla seguente organizzazione"
 
-#: packages/lib/jobs/definitions/emails/send-recipient-removed-email.handler.ts
-msgid "You have been removed from a document"
-msgstr "Sei stato rimosso da un documento"
-
 #: apps/remix/app/components/embed/multisign/multi-sign-document-list.tsx
 msgid "You have been requested to sign the following documents. Review each document carefully and complete the signing process."
 msgstr "Ti è stato richiesto di firmare i seguenti documenti. Esamina ciascun documento con attenzione e completa il processo di firma."
@@ -14233,6 +14223,10 @@ msgstr "Hai precompilato un campo"
 msgid "You rejected the document"
 msgstr "Hai rifiutato il documento"
 
+#: packages/lib/jobs/definitions/emails/send-rejection-emails.handler.ts
+msgid "You rejected {title}"
+msgstr "Hai rifiutato {title}"
+
 #: packages/lib/utils/document-audit-logs.ts
 msgid "You removed a field"
 msgstr "Hai rimosso un campo"
@@ -14345,6 +14339,18 @@ msgstr "Sei un amministratore. Puoi abilitare subito le funzionalità di IA per 
 #: apps/remix/app/components/dialogs/ai-recipient-detection-dialog.tsx
 msgid "You've made too many detection requests. Please wait a minute before trying again."
 msgstr "Hai effettuato troppe richieste di rilevamento. Attendi un minuto prima di riprovare."
+
+#: packages/email/template-components/template-document-pending.tsx
+msgid "You've signed \"{documentName}\""
+msgstr "Hai firmato \"{documentName}\""
+
+#: packages/email/templates/document-pending.tsx
+msgid "You've signed {documentName}, waiting for others"
+msgstr "Hai firmato {documentName}, in attesa di altri"
+
+#: packages/lib/jobs/definitions/emails/send-document-pending-email.handler.ts
+msgid "You've signed {title}"
+msgstr "Hai firmato {title}"
 
 #: apps/remix/app/routes/_unauthenticated+/organisation.sso.confirmation.$token.tsx
 msgid "Your Account"
@@ -14574,23 +14580,23 @@ msgstr "La tua organizzazione è stata aggiornata con successo."
 
 #: apps/remix/app/components/general/organisations/organisation-quota-banner.tsx
 msgid "Your organisation has exceeded a fair use limit"
-msgstr "La tua organizzazione ha superato un limite di utilizzo corretto (fair use)."
+msgstr "La tua organizzazione ha superato un limite di fair use."
 
 #: apps/remix/app/components/general/organisations/organisation-quota-banner.tsx
 msgid "Your organisation has exceeded a fair use limit. Please contact <0>support</0> to review your plan's limits."
-msgstr "La tua organizzazione ha superato un limite di utilizzo corretto (fair use). Contatta <0>l'assistenza</0> per rivedere i limiti del piano."
+msgstr "La tua organizzazione ha superato un limite di fair use. Contatta <0>l'assistenza</0> per rivedere i limiti del piano."
 
 #: apps/remix/app/utils/toast-error-messages.ts
 msgid "Your organisation has reached its plan's fair use limit. Please contact your organisation administrator or support to continue."
-msgstr "La tua organizzazione ha raggiunto il limite di utilizzo corretto (fair use) previsto dal piano. Contatta l'amministratore della tua organizzazione o l'assistenza per continuare."
+msgstr "La tua organizzazione ha raggiunto il limite di fair use previsto dal piano. Contatta l'amministratore della tua organizzazione o l'assistenza per continuare."
 
 #: apps/remix/app/components/general/organisations/organisation-quota-banner.tsx
 msgid "Your organisation is approaching a fair use limit"
-msgstr "La tua organizzazione si sta avvicinando al limite di utilizzo corretto (fair use)"
+msgstr "La tua organizzazione si sta avvicinando al limite di fair use"
 
 #: apps/remix/app/components/general/organisations/organisation-quota-banner.tsx
 msgid "Your organisation is approaching a fair use limit. If you expect to need higher limits, please contact <0>support</0> to review your plan's limits."
-msgstr "La tua organizzazione si sta avvicinando al limite di utilizzo corretto (fair use). Se prevedi di aver bisogno di limiti più elevati, contatta <0>l'assistenza</0> per rivedere i limiti del tuo piano."
+msgstr "La tua organizzazione si sta avvicinando al limite di fair use. Se prevedi di aver bisogno di limiti più elevati, contatta <0>l'assistenza</0> per rivedere i limiti del tuo piano."
 
 #: packages/email/templates/organisation-limit-alert.tsx
 msgid "Your organisation is generating API requests faster than normal, so some requests are being temporarily throttled."
@@ -14606,15 +14612,15 @@ msgstr "La tua organizzazione sta generando email più velocemente del normale, 
 
 #: packages/email/templates/organisation-limit-alert.tsx
 msgid "Your organisation is nearing its fair use limits for creating documents on your current plan. Once the limit is reached, new document activity will be temporarily paused."
-msgstr "La tua organizzazione si sta avvicinando ai limiti di utilizzo corretto (fair use) per la creazione di documenti previsti dal tuo piano attuale. Una volta raggiunto il limite, la nuova attività sui documenti verrà temporaneamente sospesa."
+msgstr "La tua organizzazione si sta avvicinando ai limiti di fair use per la creazione di documenti previsti dal tuo piano attuale. Una volta raggiunto il limite, la nuova attività sui documenti verrà temporaneamente sospesa."
 
 #: packages/email/templates/organisation-limit-alert.tsx
 msgid "Your organisation is nearing its fair use limits for making API requests on your current plan. Once the limit is reached, new API activity will be temporarily paused."
-msgstr "La tua organizzazione si sta avvicinando ai limiti di utilizzo corretto (fair use) per le richieste API previsti dal tuo piano attuale. Una volta raggiunto il limite, la nuova attività API verrà temporaneamente sospesa."
+msgstr "La tua organizzazione si sta avvicinando ai limiti di fair use per le richieste API previsti dal tuo piano attuale. Una volta raggiunto il limite, la nuova attività API verrà temporaneamente sospesa."
 
 #: packages/email/templates/organisation-limit-alert.tsx
 msgid "Your organisation is nearing its fair use limits for sending email on your current plan. Once the limit is reached, new email activity will be temporarily paused."
-msgstr "La tua organizzazione si sta avvicinando ai limiti di utilizzo corretto (fair use) per l'invio di email previsti dal tuo piano attuale. Una volta raggiunto il limite, la nuova attività email verrà temporaneamente sospesa."
+msgstr "La tua organizzazione si sta avvicinando ai limiti di fair use per l'invio di email previsti dal tuo piano attuale. Una volta raggiunto il limite, la nuova attività email verrà temporaneamente sospesa."
 
 #: apps/remix/app/components/forms/password.tsx
 #: apps/remix/app/components/forms/reset-password.tsx

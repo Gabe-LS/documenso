@@ -10,6 +10,7 @@ import { NEXT_PUBLIC_WEBAPP_URL } from '../../../constants/app';
 import { getEmailContext } from '../../../server-only/email/get-email-context';
 import { assertOrganisationRatesAndLimits } from '../../../server-only/rate-limit/assert-organisation-rates-and-limits';
 import { extractDerivedDocumentEmailSettings } from '../../../types/document-email';
+import { trimEmailTitle } from '../../../utils/email-subject';
 import { unsafeBuildEnvelopeIdQuery } from '../../../utils/envelope';
 import { renderEmailWithI18N } from '../../../utils/render-email-with-i18n';
 import type { JobRunIO } from '../../client/_internal/job';
@@ -88,6 +89,8 @@ export const run = async ({ payload, io }: { payload: TSendDocumentCancelledEmai
 
   const i18n = await getI18nInstance(emailLanguage);
 
+  const title = trimEmailTitle(envelope.title);
+
   // Send cancellation emails to recipients who have been sent the document or viewed it.
   // CC recipients are excluded because they were never actually emailed about the document
   // (CC recipients are created with sendStatus=SENT by default but never receive a signing
@@ -149,7 +152,7 @@ export const run = async ({ payload, io }: { payload: TSendDocumentCancelledEmai
           },
           from: senderEmail,
           replyTo: replyToEmail,
-          subject: i18n._(msg`Document "${envelope.title}" Cancelled`),
+          subject: i18n._(msg`Document cancelled: ${title}`),
           html,
           text,
         });

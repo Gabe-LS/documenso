@@ -5,6 +5,7 @@ import { createElement } from 'react';
 import { getI18nInstance } from '../../../client-only/providers/i18n-server';
 import { NEXT_PUBLIC_WEBAPP_URL } from '../../../constants/app';
 import { getEmailContext } from '../../../server-only/email/get-email-context';
+import { trimEmailTitle } from '../../../utils/email-subject';
 import { isRecipientEmailValidForSending } from '../../../utils/recipients';
 import { renderEmailWithI18N } from '../../../utils/render-email-with-i18n';
 import type { JobRunIO } from '../../client/_internal/job';
@@ -35,6 +36,7 @@ export const run = async ({ payload, io }: { payload: TSendDocumentDeletedEmails
 
   const assetBaseUrl = NEXT_PUBLIC_WEBAPP_URL() || 'http://localhost:3000';
   const i18n = await getI18nInstance(emailLanguage);
+  const title = trimEmailTitle(documentName);
 
   for (const recipient of recipients) {
     await io.runTask(`send-document-deleted-emails-${recipient.email}`, async () => {
@@ -61,7 +63,7 @@ export const run = async ({ payload, io }: { payload: TSendDocumentDeletedEmails
         },
         from: senderEmail,
         replyTo: replyToEmail,
-        subject: i18n._(msg`Document Cancelled`),
+        subject: i18n._(msg`Document cancelled: ${title}`),
         html,
         text,
       });

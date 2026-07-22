@@ -8,6 +8,7 @@ import { getI18nInstance } from '../../../client-only/providers/i18n-server';
 import { NEXT_PUBLIC_WEBAPP_URL } from '../../../constants/app';
 import { getEmailContext } from '../../../server-only/email/get-email-context';
 import { extractDerivedDocumentEmailSettings } from '../../../types/document-email';
+import { trimEmailTitle } from '../../../utils/email-subject';
 import { isRecipientEmailValidForSending } from '../../../utils/recipients';
 import { renderEmailWithI18N } from '../../../utils/render-email-with-i18n';
 import type { JobRunIO } from '../../client/_internal/job';
@@ -86,6 +87,8 @@ export const run = async ({ payload }: { payload: TSendDocumentPendingEmailJobDe
 
   const i18n = await getI18nInstance(emailLanguage);
 
+  const title = trimEmailTitle(envelope.title);
+
   await emailTransport.sendMail({
     to: {
       address: email,
@@ -93,7 +96,7 @@ export const run = async ({ payload }: { payload: TSendDocumentPendingEmailJobDe
     },
     from: senderEmail,
     replyTo: replyToEmail,
-    subject: i18n._(msg`Waiting for others to complete signing.`),
+    subject: i18n._(msg`You've signed ${title}`),
     html,
     text,
   });
