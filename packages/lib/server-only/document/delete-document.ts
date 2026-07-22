@@ -1,6 +1,6 @@
 import { prisma } from '@documenso/prisma';
 import type { DocumentMeta, Envelope, Recipient, User } from '@prisma/client';
-import { DocumentStatus, EnvelopeType, RecipientRole, SendStatus, WebhookTriggerEvents } from '@prisma/client';
+import { DocumentStatus, EnvelopeType, SendStatus, WebhookTriggerEvents } from '@prisma/client';
 
 import { AppError, AppErrorCode } from '../../errors/app-error';
 import { jobs } from '../../jobs/client';
@@ -204,12 +204,7 @@ const handleDocumentOwnerDelete = async ({ envelope, user, requestMetadata }: Ha
   // documentMeta) is hard-deleted above, so the job can't look it up later —
   // pass a self-contained payload with the recipients to notify.
   const recipientsToNotify = envelope.recipients
-    .filter(
-      (recipient) =>
-        recipient.sendStatus === SendStatus.SENT &&
-        recipient.role !== RecipientRole.CC &&
-        isRecipientEmailValidForSending(recipient),
-    )
+    .filter((recipient) => recipient.sendStatus === SendStatus.SENT && isRecipientEmailValidForSending(recipient))
     .map((recipient) => ({
       email: recipient.email,
       name: recipient.name,
