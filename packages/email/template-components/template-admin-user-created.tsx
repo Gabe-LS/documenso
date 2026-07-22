@@ -48,7 +48,7 @@ export const TemplateAdminUserCreated = ({ resetPasswordLink, assetBaseUrl }: Te
       <EmailFinePrint>
         <Trans>
           If you didn't expect this account or have any questions, please{' '}
-          <Link href={`mailto:${SUPPORT_EMAIL}`} className="text-foreground underline">
+          <Link href={`mailto:${SUPPORT_EMAIL}`} className="text-muted-foreground underline">
             contact support
           </Link>
           .

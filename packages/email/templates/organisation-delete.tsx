@@ -21,7 +21,7 @@ export const OrganisationDeleteEmailTemplate = ({
 }: OrganisationDeleteEmailProps) => {
   const { _ } = useLingui();
 
-  const previewText = msg`Your organisation has been deleted`;
+  const previewText = msg`Your access to the organisation has ended`;
 
   const title = msg`Your organisation has been deleted`;
 

@@ -23,7 +23,29 @@ export const OrganisationLimitAlertEmailTemplate = ({
 }: OrganisationLimitAlertEmailProps) => {
   const { _ } = useLingui();
 
-  const previewText = kind === 'quotaNearing' ? msg`Approaching Your Plan Limits` : msg`Organisation Review Required`;
+  const previewText = match(kind)
+    .with('quota', () =>
+      match(counter)
+        .with('document', () => msg`You've exceeded your plan's document limit`)
+        .with('email', () => msg`Your plan's email limit has been exceeded`)
+        .with('api', () => msg`You've exceeded your plan's API request limit`)
+        .exhaustive(),
+    )
+    .with('rateLimit', () =>
+      match(counter)
+        .with('document', () => msg`Document creation is temporarily throttled`)
+        .with('email', () => msg`Email sending is temporarily throttled`)
+        .with('api', () => msg`API requests are temporarily throttled`)
+        .exhaustive(),
+    )
+    .with('quotaNearing', () =>
+      match(counter)
+        .with('document', () => msg`You're approaching your plan's document limit`)
+        .with('email', () => msg`You're approaching your plan's email limit`)
+        .with('api', () => msg`You're approaching your plan's API request limit`)
+        .exhaustive(),
+    )
+    .exhaustive();
 
   return (
     <EmailLayout assetBaseUrl={assetBaseUrl} preview={_(previewText)} isDocument={false}>

@@ -39,7 +39,7 @@ export const TemplateBrandingLogo = ({ assetBaseUrl, className = 'mb-4 h-6' }: T
   }
 
   return (
-    <Link href={safeBrandingUrl} target="_blank" rel="noopener noreferrer" className="underline">
+    <Link href={safeBrandingUrl} target="_blank" rel="noopener noreferrer" className="text-foreground underline">
       {brandingLogo}
     </Link>
   );

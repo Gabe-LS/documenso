@@ -45,10 +45,6 @@ export const OrganisationInviteEmailTemplate = ({
         <Trans>Join {organisationName} on Documenso</Trans>
       </EmailHeading>
 
-      <EmailBodyText>
-        <Trans>You have been invited to join the following organisation</Trans>
-      </EmailBodyText>
-
       <EmailPill>{organisationName}</EmailPill>
 
       <EmailBodyText>

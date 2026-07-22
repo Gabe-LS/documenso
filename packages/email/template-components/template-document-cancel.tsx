@@ -32,10 +32,6 @@ export const TemplateDocumentCancel = ({
         <Trans>All signatures have been voided.</Trans>
       </EmailBodyText>
 
-      <EmailBodyText>
-        <Trans>You don't need to sign it anymore.</Trans>
-      </EmailBodyText>
-
       {cancellationReason && (
         <EmailCallout>
           <Trans>Reason for cancellation: {cancellationReason}</Trans>

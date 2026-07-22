@@ -58,28 +58,26 @@ export const DocumentInviteEmailTemplate = ({
       preview={_(previewText)}
       reportUrl={reportUrl}
       secondaryContent={
-        <>
-          {organisationType === OrganisationType.PERSONAL && (
-            <EmailBodyText align="left" fullWidth className="font-semibold">
-              <Trans>
-                {inviterName}{' '}
-                <Link className="font-normal text-foreground underline" href={`mailto:${inviterEmail}`}>
-                  ({inviterEmail})
-                </Link>
-              </Trans>
-            </EmailBodyText>
-          )}
-
-          <EmailBodyText align="left" fullWidth>
-            {customBody ? (
-              <TemplateCustomMessageBody text={customBody} />
-            ) : (
-              <Trans>
-                {inviterName} has invited you to {action} the document "{documentName}".
-              </Trans>
+        (organisationType === OrganisationType.PERSONAL || customBody) && (
+          <>
+            {organisationType === OrganisationType.PERSONAL && (
+              <EmailBodyText align="left" fullWidth className="font-semibold">
+                <Trans>
+                  {inviterName}{' '}
+                  <Link className="font-normal text-foreground underline" href={`mailto:${inviterEmail}`}>
+                    ({inviterEmail})
+                  </Link>
+                </Trans>
+              </EmailBodyText>
             )}
-          </EmailBodyText>
-        </>
+
+            {customBody && (
+              <EmailBodyText align="left" fullWidth>
+                <TemplateCustomMessageBody text={customBody} />
+              </EmailBodyText>
+            )}
+          </>
+        )
       }
     >
       <TemplateDocumentInvite

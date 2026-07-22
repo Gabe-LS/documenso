@@ -16,7 +16,7 @@ export const DocumentSelfSignedEmailTemplate = ({
 }: DocumentSelfSignedTemplateProps) => {
   const { _ } = useLingui();
 
-  const previewText = msg`Completed Document`;
+  const previewText = msg`You've signed ${documentName}`;
 
   return (
     <EmailLayout assetBaseUrl={assetBaseUrl} preview={_(previewText)} reportUrl={reportUrl}>

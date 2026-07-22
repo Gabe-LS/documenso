@@ -1,6 +1,6 @@
 import { Trans } from '@lingui/react/macro';
 
-import { EmailBodyText, EmailHeading, EmailIconLabel } from './email-primitives';
+import { EmailHeading, EmailIconLabel } from './email-primitives';
 import { TemplateDocumentImage } from './template-document-image';
 
 export interface TemplateDocumentRecipientSignedProps {
@@ -32,10 +32,6 @@ export const TemplateDocumentRecipientSigned = ({
           {recipientReference} has signed "{documentName}"
         </Trans>
       </EmailHeading>
-
-      <EmailBodyText>
-        <Trans>{recipientReference} has completed signing the document.</Trans>
-      </EmailBodyText>
     </>
   );
 };

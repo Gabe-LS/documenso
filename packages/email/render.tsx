@@ -29,6 +29,16 @@ const DEFAULT_EMAIL_BRANDING_COLORS: EmailBrandingColors =
   resolveEmailBrandingColors(DEFAULT_BRAND_COLORS) ?? DEFAULT_BRAND_COLORS;
 
 /**
+ * Email-scoped override: a darker `mutedForeground` than the shared shadcn
+ * token, kept here (not in `packages/lib/constants/theme.ts` or
+ * `packages/ui`) because it's only meant to improve contrast for muted text
+ * inside emails — nothing else consuming the shared theme should shift.
+ * Applied on top of the resolved brand colours (default or tenant) so it
+ * always wins regardless of which palette is in play.
+ */
+const EMAIL_MUTED_FOREGROUND_OVERRIDE = '#475569';
+
+/**
  * Map the resolved colour set to flat semantic Tailwind tokens. Templates use
  * these directly (`bg-primary`, `text-muted-foreground`, `border-border`, …),
  * mirroring the app's shadcn tokens, instead of bespoke `slate-*`/`documenso-*`
@@ -36,7 +46,8 @@ const DEFAULT_EMAIL_BRANDING_COLORS: EmailBrandingColors =
  *
  * Always defined: falls back to `DEFAULT_EMAIL_BRANDING_COLORS` when no tenant
  * colours are supplied, so the tokens resolve whether or not custom branding is
- * in play.
+ * in play. `muted-foreground` always resolves to `EMAIL_MUTED_FOREGROUND_OVERRIDE`
+ * rather than the resolved set's own value — see that constant's comment.
  */
 const buildEmailColors = (brandingColors?: EmailBrandingColors): Record<string, string> => {
   const c = brandingColors ?? DEFAULT_EMAIL_BRANDING_COLORS;
@@ -45,7 +56,7 @@ const buildEmailColors = (brandingColors?: EmailBrandingColors): Record<string, 
     background: c.background,
     foreground: c.foreground,
     muted: c.muted,
-    'muted-foreground': c.mutedForeground,
+    'muted-foreground': EMAIL_MUTED_FOREGROUND_OVERRIDE,
     primary: c.primary,
     'primary-foreground': c.primaryForeground,
     secondary: c.secondary,

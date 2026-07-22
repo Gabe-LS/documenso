@@ -118,7 +118,10 @@ export const sendOrganisationAccountLinkConfirmationEmail = async ({
       name: user.name || '',
     },
     from: DOCUMENSO_INTERNAL_EMAIL,
-    subject: type === 'create' ? i18n._(msg`Account creation request`) : i18n._(msg`Account linking request`),
+    subject:
+      type === 'create'
+        ? i18n._(msg`An organisation wants to create an account for you`)
+        : i18n._(msg`Account linking request`),
     html,
     text,
   });

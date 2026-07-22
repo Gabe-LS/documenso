@@ -13,42 +13,52 @@ import { TemplateFooter } from './template-footer';
  * font size, colour, width, or margin for every email means editing exactly
  * one file: this one.
  *
- * --- Text colour palette (exactly three text colours, no more) ---
+ * --- Text colour palette (exactly two text colours, no more) ---
  *
- * Roles are assigned by HIERARCHY, not by component identity: `text-foreground`
- * marks the things a reader's eye should land on first; `text-muted-foreground`
- * marks everything that supports those anchors; `text-primary-foreground` is a
- * contrast utility, not a hierarchy tier.
+ * Roles are assigned by HIERARCHY, not by component identity: ink is the
+ * content the email exists to deliver, muted is the chrome around it.
+ * `text-primary-foreground` is a contrast utility, not a hierarchy tier.
  *
- * 1. `text-foreground` — hierarchy anchors: the headline (`EmailHeading`),
- *    inline links (paired with `underline` — a link is always something to
- *    act on, so it reads as an anchor even mid-sentence), the `outline`
- *    button's label (an action a reader must be able to find), and the 2FA
- *    verification code (`EmailCodeBox`) — the single piece of data the email
- *    exists to deliver. Reserved for things a reader should notice first or
- *    is expected to act on.
- * 2. `text-muted-foreground` — supporting copy and de-emphasized actions:
- *    body text (`EmailBodyText`), callouts (`EmailCallout`), pills
- *    (`EmailPill`), fine print (`EmailFinePrint`), list items (`EmailList`),
- *    the footer (including its `text-xs` address line), the `muted` button
- *    variant's label, and the `EmailCodeBox` label slot. The `muted` button
- *    variant is deliberately gray even though it's clickable: it's used for
- *    secondary/negative actions (e.g. "Decline") that should never compete
- *    visually with the primary action — de-emphasis is the point, not an
- *    oversight. Likewise the bulk-send error list is gray rather than red:
- *    this system has no "error" text colour (see below), so the fact that an
- *    entry is an error is carried by the surrounding wording ("The following
- *    errors occurred:"), not by tinting the text.
+ * 1. Ink — `text-foreground`, `#0f172a`. Primary content, including body
+ *    copy: the headline (`EmailHeading`), body text (`EmailBodyText` /
+ *    `TemplateCustomMessageBody`, sharing `EMAIL_BODY_TEXT_CLASSES`), list
+ *    items (`EmailListItem`), the section label (`EmailSectionLabel`), the
+ *    `outline` button's label (an action a reader must be able to find), and
+ *    the 2FA verification code (`EmailCodeBox`). If it's what the email is
+ *    actually saying, it's ink.
+ * 2. Muted — `text-muted-foreground`, `#475569` (an email-scoped override of
+ *    the shared shadcn token, applied in `render.tsx` only — see
+ *    `EMAIL_MUTED_FOREGROUND_OVERRIDE`). Chrome: callouts (`EmailCallout`),
+ *    pills (`EmailPill`), fine print (`EmailFinePrint`), the footer (its
+ *    report-sender/branding lines and the smaller "sent using Documenso"
+ *    colophon alike), the `muted` button variant's label, and the
+ *    `EmailCodeBox` label slot. The `muted` button variant is deliberately
+ *    gray even though it's clickable: it's used for secondary/negative
+ *    actions (e.g. "Decline") that should never compete visually with the
+ *    primary action — de-emphasis is the point, not an oversight. Likewise
+ *    the bulk-send error list is gray rather than red: this system has no
+ *    "error" text colour (see below), so the fact that an entry is an error
+ *    is carried by the surrounding wording ("The following errors
+ *    occurred:"), not by tinting the text.
  * 3. `text-primary-foreground` — ONLY the label text inside the primary
  *    (`bg-primary`) button variant. It exists purely for contrast against
  *    the button's solid background and must never appear as free-standing
  *    text.
  *
+ * --- The link rule ---
+ *
+ * A link is never a colour event, only an underline event. A `<Link>` takes
+ * the colour of the text around it — ink inside body/card copy, muted
+ * inside footer/fine-print copy — and is ALWAYS given that colour class
+ * explicitly, alongside `underline`, never left to inherit. What marks a
+ * link as a link is the underline, not a third "link colour"; the two-tier
+ * ink/muted palette stays exactly two tiers everywhere, links included.
+ *
  * Status/emotion (rejected, expired, alert, error) is conveyed through
- * imagery (the red/green icon set) and wording, never through a fourth text
+ * imagery (the red/green icon set) and wording, never through a third text
  * colour — there is no `text-destructive`, `text-warning`, or similar in any
  * template. If you're tempted to reach for one, that's a signal the copy or
- * the icon should carry the meaning instead. Any deviation from these three
+ * the icon should carry the meaning instead. Any deviation from these two
  * colours found outside this file is a bug, not a style choice.
  */
 
@@ -61,6 +71,45 @@ const cn = (...classes: Array<string | undefined | false | null>) => classes.fil
  * (Outlook, older Gmail) simply ignore the declaration.
  */
 const BALANCED_TEXT_STYLE: CSSProperties = { textWrap: 'balance' };
+
+/**
+ * Outlook's Word rendering engine sets a line's height from the font's own
+ * metrics and ignores a plain CSS `line-height` declaration unless it's
+ * paired with the (non-standard, Outlook-only) `mso-line-height-rule:
+ * exactly` property telling it to honour the value literally. Everywhere a
+ * Tailwind `leading-[…]` class sets a specific line-height for large/short
+ * text (buttons, the 2FA code), this style object is the Outlook-safe
+ * belt-and-braces companion — not a replacement for the Tailwind class,
+ * which still drives every other client.
+ *
+ * Intentionally untyped as `CSSProperties`: that type has no
+ * `msoLineHeightRule` key, and annotating this object would trigger an
+ * excess-property error. Left to infer its own object type instead, so the
+ * (structurally compatible, just wider) type flows into `style` props
+ * without a cast.
+ */
+const msoExactLineHeight = (px: number) => ({
+  lineHeight: `${px}px`,
+  msoLineHeightRule: 'exactly',
+});
+
+/**
+ * Raw-HTML passthrough for Outlook (Windows) conditional comments —
+ * `<!--[if mso]>…<![endif]-->` — which browsers and every other mail client
+ * treat as an inert HTML comment, but which Outlook's Word engine expands
+ * into literal markup. JSX has no literal-HTML escape hatch, so this is the
+ * only way to emit one: `dangerouslySetInnerHTML` on a bare wrapper element.
+ * FLAG FOR TESTING: the wrapper is an empty, non-rendering `<div>` in every
+ * normal client, but pairing one before/after `<Section>` to open/close an
+ * `<table><tr><td>` only inside the Outlook-expanded markup is exactly the
+ * kind of tag-soup Word's engine is (uniquely) tolerant of — verify in real
+ * Outlook (desktop, Windows) before relying on it.
+ */
+const Mso = ({ html }: { html: string }) => <div dangerouslySetInnerHTML={{ __html: html }} />;
+
+/** Outlook ignores `max-width` on tables; this pins a fixed 720px table. */
+const MSO_FIXED_WIDTH_OPEN = '<!--[if mso]><table role="presentation" align="center" width="720"><tr><td><![endif]-->';
+const MSO_FIXED_WIDTH_CLOSE = '<!--[if mso]></td></tr></table><![endif]-->';
 
 export type EmailLayoutProps = {
   assetBaseUrl: string;
@@ -99,21 +148,24 @@ export const EmailLayout = ({
       <Body className="mx-auto my-auto bg-background font-sans">
         <Preview>{preview}</Preview>
 
+        {/* Outlook ignores max-width; pin a fixed 720px table */}
+        <Mso html={MSO_FIXED_WIDTH_OPEN} />
         <Section>
-          <Container className="mx-auto mt-8 mb-2 max-w-2xl rounded-lg border border-border border-solid p-6">
+          <Container className="mx-auto mt-8 mb-2 max-w-[720px] rounded-lg border border-border border-solid p-6">
             <TemplateBrandingLogo assetBaseUrl={assetBaseUrl} className="mb-4 h-6" />
 
             {children}
           </Container>
 
-          {secondaryContent && <Container className="mx-auto mt-12 max-w-2xl">{secondaryContent}</Container>}
+          {secondaryContent && <Container className="mx-auto mt-12 max-w-[720px]">{secondaryContent}</Container>}
 
-          <Hr className="mx-auto mt-8 max-w-2xl" />
+          <Hr className="mx-auto mt-8 max-w-[720px]" />
 
-          <Container className="mx-auto max-w-2xl">
+          <Container className="mx-auto max-w-[720px]">
             <TemplateFooter isDocument={isDocument} reportUrl={reportUrl} />
           </Container>
         </Section>
+        <Mso html={MSO_FIXED_WIDTH_CLOSE} />
       </Body>
     </Html>
   );
@@ -134,7 +186,7 @@ export const EmailHeading = ({ children, className, align = 'center' }: EmailHea
   return (
     <Text
       className={cn(
-        'mx-auto mb-0 max-w-[80%] break-words font-semibold text-foreground text-lg',
+        'mx-auto mb-0 max-w-[80%] break-words font-semibold text-foreground text-xl leading-[26px]',
         align === 'center' ? 'text-center' : 'text-left',
         className,
       )}
@@ -160,12 +212,12 @@ export type EmailBodyTextProps = {
 };
 
 /**
- * Canonical body-copy classes ("text-base text-muted-foreground") shared by
+ * Canonical body-copy classes ("text-base text-foreground") shared by
  * `EmailBodyText` and `TemplateCustomMessageBody` — the two places that
  * render freeform paragraph copy. Keep this the single source of truth so
  * the two never drift apart.
  */
-export const EMAIL_BODY_TEXT_CLASSES = 'text-base text-muted-foreground';
+export const EMAIL_BODY_TEXT_CLASSES = 'text-base text-foreground';
 
 /**
  * Standard body copy paragraph.
@@ -244,11 +296,18 @@ export const EmailSectionLabel = ({ children, className, align = 'left' }: Email
 export type EmailButtonVariant = 'primary' | 'outline' | 'muted';
 
 const EMAIL_BUTTON_VARIANT_CLASSES: Record<EmailButtonVariant, string> = {
-  primary: 'rounded-lg bg-primary px-6 py-3 text-center font-medium text-primary-foreground text-sm no-underline',
+  primary: 'rounded-lg bg-primary px-6 py-3 text-center font-medium text-primary-foreground text-base no-underline',
   outline:
-    'rounded-lg border border-border border-solid px-4 py-2 text-center font-medium text-foreground text-sm no-underline',
-  muted: 'rounded-lg bg-muted px-6 py-3 text-center font-medium text-muted-foreground text-sm no-underline',
+    'rounded-lg border border-border border-solid px-4 py-2 text-center font-medium text-foreground text-base no-underline',
+  muted: 'rounded-lg bg-muted px-6 py-3 text-center font-medium text-muted-foreground text-base no-underline',
 };
+
+/**
+ * Outlook-safe line-height companion for the button label (see
+ * `msoExactLineHeight`). `16px` matches `text-base`'s font size — buttons
+ * lean on their own vertical padding for height, not extra line-height.
+ */
+const EMAIL_BUTTON_STYLE = msoExactLineHeight(16);
 
 export type EmailButtonProps = {
   href: string;
@@ -276,7 +335,7 @@ export const EmailButton = ({
   iconSize = 20,
 }: EmailButtonProps) => {
   return (
-    <Button href={href} className={cn(EMAIL_BUTTON_VARIANT_CLASSES[variant], className)}>
+    <Button href={href} style={EMAIL_BUTTON_STYLE} className={cn(EMAIL_BUTTON_VARIANT_CLASSES[variant], className)}>
       {iconSrc && (
         <Img src={iconSrc} alt={iconAlt} width={iconSize} height={iconSize} className="mr-2 inline align-middle" />
       )}
@@ -321,7 +380,7 @@ export type EmailPillProps = {
  */
 export const EmailPill = ({ children }: EmailPillProps) => {
   return (
-    <div className="mx-auto my-2 inline-block break-words rounded-lg bg-muted px-4 py-2 text-center font-medium text-base text-muted-foreground">
+    <div className="mx-auto my-2 inline-block break-words rounded-lg bg-muted px-4 py-2 text-center font-medium text-base text-muted-foreground leading-[20px]">
       {children}
     </div>
   );
@@ -391,7 +450,7 @@ export type EmailListItemProps = {
 };
 
 export const EmailListItem = ({ children }: EmailListItemProps) => {
-  return <li className="mt-1 text-muted-foreground text-sm">{children}</li>;
+  return <li className="mt-1 text-foreground text-sm">{children}</li>;
 };
 
 export type EmailCodeBoxProps = {
@@ -403,19 +462,25 @@ export type EmailCodeBoxProps = {
 
 /**
  * The verification-code display: a muted rounded box with a small label and
- * a large code line. `text-2xl` is deliberate here — unlike body copy, this
+ * a large code line. `text-3xl` is deliberate here — unlike body copy, this
  * is a code a reader has to read and re-type, often across the room from
  * their screen or from a second device, so it's sized for display legibility
  * rather than as running text. It's still comfortably above the 12px floor.
  * The code uses `text-foreground`: it's the email's primary content, not
  * supporting copy, so it gets the "hierarchy anchor" colour rather than the
- * muted one.
+ * muted one. `leading-[30px]` (plus its Outlook `mso-line-height-rule`
+ * companion) keeps the tall glyphs from overlapping across clients.
  */
 export const EmailCodeBox = ({ label, children }: EmailCodeBoxProps) => {
   return (
     <Section className="mt-6 rounded-lg bg-muted p-6 text-center">
       <Text className="mb-2 font-medium text-muted-foreground text-sm">{label}</Text>
-      <Text className="font-bold text-2xl text-foreground tracking-wider">{children}</Text>
+      <Text
+        className="font-bold text-3xl text-foreground leading-[30px] tracking-wider"
+        style={msoExactLineHeight(30)}
+      >
+        {children}
+      </Text>
     </Section>
   );
 };

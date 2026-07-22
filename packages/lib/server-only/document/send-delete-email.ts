@@ -7,6 +7,7 @@ import { getI18nInstance } from '../../client-only/providers/i18n-server';
 import { NEXT_PUBLIC_WEBAPP_URL } from '../../constants/app';
 import { AppError, AppErrorCode } from '../../errors/app-error';
 import { extractDerivedDocumentEmailSettings } from '../../types/document-email';
+import { trimEmailTitle } from '../../utils/email-subject';
 import { renderEmailWithI18N } from '../../utils/render-email-with-i18n';
 import { getEmailContext } from '../email/get-email-context';
 
@@ -74,6 +75,7 @@ export const sendDeleteEmail = async ({ envelopeId, reason }: SendDeleteEmailOpt
   ]);
 
   const i18n = await getI18nInstance(emailLanguage);
+  const title = trimEmailTitle(envelope.title);
 
   await emailTransport.sendMail({
     to: {
@@ -81,7 +83,7 @@ export const sendDeleteEmail = async ({ envelopeId, reason }: SendDeleteEmailOpt
       name: name || '',
     },
     from: senderEmail,
-    subject: i18n._(msg`Document Deleted!`),
+    subject: i18n._(msg`Document deleted: ${title}`),
     html,
     text,
   });

@@ -14,7 +14,7 @@ export const TemplateForgotPassword = ({ resetPasswordLink, assetBaseUrl }: Temp
       <TemplateDocumentImage assetBaseUrl={assetBaseUrl} />
 
       <EmailHeading>
-        <Trans>Forgot your password?</Trans>
+        <Trans>No problem, let's reset it</Trans>
       </EmailHeading>
 
       <EmailBodyText>

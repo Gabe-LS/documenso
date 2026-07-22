@@ -18,7 +18,7 @@ export const TeamDeleteEmailTemplate = ({
 }: TeamDeleteEmailProps) => {
   const { _ } = useLingui();
 
-  const previewText = msg`A team you were a part of has been deleted`;
+  const previewText = msg`Your access to the team has ended`;
 
   const title = msg`A team you were a part of has been deleted`;
 

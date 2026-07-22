@@ -733,7 +733,7 @@ msgstr "<0>{senderName} {senderEmail}</0>, per conto di \"{0}\", ti ha invitato 
 
 #: packages/email/templates/confirm-team-email.tsx
 msgid "<0>{teamName}</0> has requested to use your email address for their team on Documenso."
-msgstr "<0>{teamName}</0> ha richiesto di utilizzare il tuo indirizzo email per il loro team su Documenso."
+msgstr "Confermando, concederai a <0>{teamName}</0> l'accesso descritto qui sotto."
 
 #: apps/remix/app/routes/_unauthenticated+/organisation.sso.confirmation.$token.tsx
 msgid "<0>Account management:</0> Modify your account settings, permissions, and preferences"
@@ -992,7 +992,7 @@ msgstr "Un mezzo per stampare o scaricare documenti per i tuoi archivi"
 
 #: packages/email/templates/organisation-join.tsx
 msgid "A member has joined your organisation on Documenso"
-msgstr "Un membro si è unito alla tua organizzazione su Documenso"
+msgstr "Scopri chi è entrato a far parte dell'organizzazione."
 
 #: packages/lib/jobs/definitions/emails/send-organisation-member-left-email.handler.ts
 msgid "A member has left your organisation"
@@ -1004,7 +1004,7 @@ msgstr "Un membro ha lasciato la tua organizzazione {organisationName}"
 
 #: packages/email/templates/organisation-leave.tsx
 msgid "A member has left your organisation on Documenso"
-msgstr "Un membro ha lasciato la tua organizzazione su Documenso"
+msgstr "Scopri chi ha lasciato l'organizzazione."
 
 #: packages/lib/jobs/definitions/emails/send-organisation-member-joined-email.handler.ts
 msgid "A new member has joined your organisation"
@@ -1167,6 +1167,10 @@ msgstr "Account collegato correttamente"
 #: apps/remix/app/routes/_unauthenticated+/organisation.sso.confirmation.$token.tsx
 msgid "Account Linking Request"
 msgstr "Richiesta di Collegamento Account"
+
+#: packages/ee/server-only/lib/send-organisation-account-link-confirmation-email.ts
+msgid "Account linking request"
+msgstr "Richiesta di collegamento account"
 
 #: apps/remix/app/routes/_internal+/[__htmltopdf]+/certificate.tsx
 #: packages/lib/server-only/pdf/generate-certificate-pdf.ts
@@ -1915,6 +1919,10 @@ msgstr "Un'organizzazione ha superato i propri limiti di fair use"
 msgid "An organisation is nearing their fair use limits"
 msgstr "Un'organizzazione si sta avvicinando ai propri limiti di fair use"
 
+#: packages/ee/server-only/lib/send-organisation-account-link-confirmation-email.ts
+msgid "An organisation wants to create an account for you"
+msgstr "Un'organizzazione vuole creare un account per te"
+
 #: apps/remix/app/routes/_unauthenticated+/organisation.sso.confirmation.$token.tsx
 msgid "An organisation wants to create an account for you. Please review the details below."
 msgstr "Un'organizzazione vuole creare un account per te. Per favore controlla i dettagli qui sotto."
@@ -2023,6 +2031,10 @@ msgstr "Chiave API"
 #: apps/remix/app/components/general/organisation-usage-panel.tsx
 msgid "API requests"
 msgstr "Richieste API"
+
+#: packages/email/templates/organisation-limit-alert.tsx
+msgid "API requests are temporarily throttled"
+msgstr "Le richieste API sono temporaneamente rallentate"
 
 #: apps/remix/app/components/general/organisations/organisation-quota-banner.tsx
 msgid "API requests have been temporarily paused"
@@ -2482,12 +2494,12 @@ msgstr "Importazione Massiva"
 
 #: packages/email/templates/bulk-send-complete.tsx
 msgid "Bulk send complete"
-msgstr "Invio multiplo completato"
+msgstr "Invio massivo completato"
 
 #. placeholder {0}: template.title
 #: packages/lib/jobs/definitions/internal/bulk-send-template.handler.ts
 msgid "Bulk Send Complete: {0}"
-msgstr "Invio Massivo Completato: {0}"
+msgstr "Invio massivo completato: {0}"
 
 #: packages/email/templates/bulk-send-complete.tsx
 msgid "Bulk send operation complete for template \"{templateName}\""
@@ -4279,6 +4291,10 @@ msgstr "Creazione del documento"
 msgid "Document creation has been temporarily paused"
 msgstr "La creazione di documenti è stata temporaneamente sospesa."
 
+#: packages/email/templates/organisation-limit-alert.tsx
+msgid "Document creation is temporarily throttled"
+msgstr "La creazione di documenti è temporaneamente rallentata"
+
 #: apps/remix/app/components/dialogs/admin-document-delete-dialog.tsx
 #: apps/remix/app/components/dialogs/envelope-delete-dialog.tsx
 #: apps/remix/app/components/general/admin-global-settings-section.tsx
@@ -4296,8 +4312,8 @@ msgid "Document deleted email"
 msgstr "Email documento eliminato"
 
 #: packages/lib/server-only/document/send-delete-email.ts
-msgid "Document Deleted!"
-msgstr "Documento Eliminato!"
+msgid "Document deleted: {title}"
+msgstr "Documento eliminato: {title}"
 
 #: apps/remix/app/components/general/envelope-editor/envelope-editor-settings-dialog.tsx
 #: apps/remix/app/components/general/envelope-editor/envelope-editor-settings-dialog.tsx
@@ -5020,6 +5036,10 @@ msgstr "Mittente Email"
 #: apps/remix/app/components/general/organisations/organisation-quota-banner.tsx
 msgid "Email sending has been temporarily paused"
 msgstr "L'invio di email è stato temporaneamente sospeso."
+
+#: packages/email/templates/organisation-limit-alert.tsx
+msgid "Email sending is temporarily throttled"
+msgstr "L'invio di email è temporaneamente rallentato"
 
 #: packages/lib/utils/document-audit-logs.ts
 msgctxt "Audit log format"
@@ -6588,7 +6608,7 @@ msgstr "Giapponese"
 
 #: packages/email/templates/organisation-invite.tsx
 msgid "Join {organisationName} on Documenso"
-msgstr "Unisciti a {organisationName} su Documenso"
+msgstr "Unisciti all'organizzazione su Documenso"
 
 #: apps/remix/app/routes/_authenticated+/o.$orgUrl.support.tsx
 msgid "Join our community on <0>Discord</0> for community support and discussion."
@@ -7477,6 +7497,10 @@ msgstr "Nessun modello di organizzazione è ancora condiviso con il tuo team."
 msgid "No organisations found"
 msgstr "Nessuna organizzazione trovata"
 
+#: packages/email/template-components/template-forgot-password.tsx
+msgid "No problem, let's reset it"
+msgstr "Nessun problema, reimpostiamola subito"
+
 #: apps/remix/app/components/tables/settings-public-profile-templates-table.tsx
 msgid "No public profile templates found"
 msgstr "Nessun modello di profilo pubblico trovato"
@@ -8088,7 +8112,7 @@ msgstr "Richiesta di reimpostazione password"
 
 #: packages/email/templates/reset-password.tsx
 msgid "Password Reset Successful"
-msgstr "Reimpostazione password riuscita"
+msgstr "Se non l'hai richiesta tu, contattaci subito."
 
 #: apps/remix/app/components/forms/signup.tsx
 #: apps/remix/app/components/general/claim-account.tsx
@@ -8293,7 +8317,7 @@ msgstr "Per favore conferma la tua email"
 
 #: packages/email/templates/confirm-email.tsx
 msgid "Please confirm your email address"
-msgstr "Per favore conferma il tuo indirizzo email"
+msgstr "Un clic per attivare il tuo account Documenso"
 
 #: apps/remix/app/components/embed/embed-paywall.tsx
 msgid "Please contact <0>support</0> if you have any questions."
@@ -10734,7 +10758,7 @@ msgstr "Email del team rimossa"
 
 #: packages/email/templates/team-email-removed.tsx
 msgid "Team email removed for {teamName} on Documenso"
-msgstr "Email del team rimossa per {teamName} su Documenso"
+msgstr "Il team non potrà più inviare o ricevere email da questo indirizzo."
 
 #: apps/remix/app/routes/_unauthenticated+/team.verify.email.$token.tsx
 msgid "Team email verification"
@@ -11391,7 +11415,7 @@ msgstr "La finestra di firma per \"{recipientName}\" sul documento \"{documentNa
 
 #: packages/email/template-components/template-recipient-expired.tsx
 msgid "The signing window for {displayName} on document \"{documentName}\" has expired. You can resend the document to extend their deadline or cancel the document."
-msgstr "La finestra di firma per {displayName} sul documento \"{documentName}\" è scaduta. Puoi rinviare il documento per estendere la scadenza oppure annullare il documento."
+msgstr "Puoi rinviare \"{documentName}\" a {displayName} per estendere la scadenza, oppure annullarlo."
 
 #: apps/remix/app/components/general/admin-site-banner-section.tsx
 msgid "The site banner is a message that is shown at the top of the site. It can be used to display important information to your users."
@@ -13465,7 +13489,7 @@ msgstr "Benvenuto in {organisationName}"
 
 #: packages/lib/jobs/definitions/emails/send-admin-user-created-email.handler.ts
 msgid "Welcome to Documenso"
-msgstr "Benvenuto in Documenso"
+msgstr "Il tuo account Documenso è pronto"
 
 #: packages/email/template-components/template-admin-user-created.tsx
 #: packages/email/template-components/template-confirmation-email.tsx
@@ -14335,6 +14359,26 @@ msgstr "Riceverai una copia del documento firmato via email non appena tutti avr
 msgid "You're an admin. You can enable AI features for this team right away. Everyone on the team will see AI detection once enabled."
 msgstr "Sei un amministratore. Puoi abilitare subito le funzionalità di IA per questo team. Tutti i membri del team vedranno il rilevamento IA una volta abilitato."
 
+#: packages/email/templates/organisation-limit-alert.tsx
+msgid "You're approaching your plan's API request limit"
+msgstr "Ti stai avvicinando al limite di richieste API del tuo piano"
+
+#: packages/email/templates/organisation-limit-alert.tsx
+msgid "You're approaching your plan's document limit"
+msgstr "Ti stai avvicinando al limite documenti del tuo piano"
+
+#: packages/email/templates/organisation-limit-alert.tsx
+msgid "You're approaching your plan's email limit"
+msgstr "Ti stai avvicinando al limite email del tuo piano"
+
+#: packages/email/templates/organisation-limit-alert.tsx
+msgid "You've exceeded your plan's API request limit"
+msgstr "Hai superato il limite di richieste API del tuo piano"
+
+#: packages/email/templates/organisation-limit-alert.tsx
+msgid "You've exceeded your plan's document limit"
+msgstr "Hai superato il limite documenti del tuo piano"
+
 #: apps/remix/app/components/dialogs/ai-field-detection-dialog.tsx
 #: apps/remix/app/components/dialogs/ai-recipient-detection-dialog.tsx
 msgid "You've made too many detection requests. Please wait a minute before trying again."
@@ -14343,6 +14387,10 @@ msgstr "Hai effettuato troppe richieste di rilevamento. Attendi un minuto prima 
 #: packages/email/template-components/template-document-pending.tsx
 msgid "You've signed \"{documentName}\""
 msgstr "Hai firmato \"{documentName}\""
+
+#: packages/email/templates/document-self-signed.tsx
+msgid "You've signed {documentName}"
+msgstr "Hai firmato {documentName}"
 
 #: packages/email/templates/document-pending.tsx
 msgid "You've signed {documentName}, waiting for others"
@@ -14355,6 +14403,14 @@ msgstr "Hai firmato {title}"
 #: apps/remix/app/routes/_unauthenticated+/organisation.sso.confirmation.$token.tsx
 msgid "Your Account"
 msgstr "Il tuo Account"
+
+#: packages/email/templates/organisation-delete.tsx
+msgid "Your access to the organisation has ended"
+msgstr "Il tuo accesso all'organizzazione è terminato"
+
+#: packages/email/templates/team-delete.tsx
+msgid "Your access to the team has ended"
+msgstr "Il tuo accesso al team è terminato"
 
 #: apps/remix/app/components/dialogs/account-delete-dialog.tsx
 msgid "Your account has been deleted successfully."
@@ -14629,7 +14685,7 @@ msgstr "La tua password è stata aggiornata con successo."
 
 #: packages/email/template-components/template-reset-password.tsx
 msgid "Your password has been updated."
-msgstr "La tua password è stata aggiornata."
+msgstr "Ora puoi accedere con la tua nuova password."
 
 #: apps/remix/app/components/general/organisations/organisation-billing-banner.tsx
 msgid "Your payment is overdue. Please settle the payment to avoid any service disruptions."
@@ -14638,6 +14694,10 @@ msgstr "Il tuo pagamento è in ritardo. Effettua il pagamento per evitare interr
 #: apps/remix/app/components/tables/user-organisations-table.tsx
 msgid "Your personal organisation"
 msgstr "Organizzazione personale"
+
+#: packages/email/templates/organisation-limit-alert.tsx
+msgid "Your plan's email limit has been exceeded"
+msgstr "Hai superato il limite email del tuo piano"
 
 #: apps/remix/app/components/dialogs/organisation-member-invite-dialog.tsx
 msgid "Your plan does not support inviting members. Please upgrade or your plan or contact sales at <0>{SUPPORT_EMAIL}</0> if you would like to discuss your options."
