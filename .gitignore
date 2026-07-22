@@ -56,7 +56,7 @@ logs.json
 
 # claude
 .claude
-CLAUDE.md
+!CLAUDE.md
 
 # agents
 .specs
