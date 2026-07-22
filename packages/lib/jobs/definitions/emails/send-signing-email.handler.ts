@@ -139,7 +139,6 @@ export const run = async ({ payload, io }: { payload: TSendSigningEmailJobDefini
       .with(RecipientRole.APPROVER, () => msg`Approval requested: ${title}`)
       .with(RecipientRole.VIEWER, () => msg`Shared with you: ${title}`)
       .with(RecipientRole.ASSISTANT, () => msg`Assistance requested: ${title}`)
-      .with(RecipientRole.CC, () => msg`Shared with you: ${title}`)
       .exhaustive(),
   );
 

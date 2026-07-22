@@ -226,7 +226,6 @@ export const resendDocument = async ({ id, userId, recipients, teamId, requestMe
           .with(RecipientRole.APPROVER, () => msg`Reminder to approve: ${title}`)
           .with(RecipientRole.VIEWER, () => msg`Reminder to view: ${title}`)
           .with(RecipientRole.ASSISTANT, () => msg`Reminder to assist: ${title}`)
-          .with(RecipientRole.CC, () => msg`Reminder to view: ${title}`)
           .exhaustive(),
       );
 
