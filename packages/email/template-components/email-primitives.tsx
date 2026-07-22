@@ -1,4 +1,4 @@
-import { Children, type ReactNode } from 'react';
+import { Children, type CSSProperties, type ReactNode } from 'react';
 
 import { Body, Button, Column, Container, Hr, Html, Img, Preview, Section, Text } from '../components';
 import { TemplateBrandingLogo } from './template-branding-logo';
@@ -54,6 +54,14 @@ import { TemplateFooter } from './template-footer';
 
 const cn = (...classes: Array<string | undefined | false | null>) => classes.filter(Boolean).join(' ');
 
+/**
+ * `text-wrap: balance` on centered text so multi-line headings and centered
+ * paragraphs wrap into visually even lines instead of leaving a short
+ * orphan line. Progressive enhancement: clients that don't understand it
+ * (Outlook, older Gmail) simply ignore the declaration.
+ */
+const BALANCED_TEXT_STYLE: CSSProperties = { textWrap: 'balance' };
+
 export type EmailLayoutProps = {
   assetBaseUrl: string;
   preview: string;
@@ -92,17 +100,17 @@ export const EmailLayout = ({
         <Preview>{preview}</Preview>
 
         <Section>
-          <Container className="mx-auto mt-8 mb-2 max-w-xl rounded-lg border border-border border-solid p-4">
+          <Container className="mx-auto mt-8 mb-2 max-w-2xl rounded-lg border border-border border-solid p-6">
             <TemplateBrandingLogo assetBaseUrl={assetBaseUrl} className="mb-4 h-6" />
 
             {children}
           </Container>
 
-          {secondaryContent && <Container className="mx-auto mt-12 max-w-xl">{secondaryContent}</Container>}
+          {secondaryContent && <Container className="mx-auto mt-12 max-w-2xl">{secondaryContent}</Container>}
 
-          <Hr className="mx-auto mt-12 max-w-xl" />
+          <Hr className="mx-auto mt-8 max-w-2xl" />
 
-          <Container className="mx-auto max-w-xl">
+          <Container className="mx-auto max-w-2xl">
             <TemplateFooter isDocument={isDocument} reportUrl={reportUrl} />
           </Container>
         </Section>
@@ -130,6 +138,7 @@ export const EmailHeading = ({ children, className, align = 'center' }: EmailHea
         align === 'center' ? 'text-center' : 'text-left',
         className,
       )}
+      style={align === 'center' ? BALANCED_TEXT_STYLE : undefined}
     >
       {children}
     </Text>
@@ -171,6 +180,7 @@ export const EmailBodyText = ({ children, className, align = 'center', fullWidth
         !fullWidth && 'mx-auto max-w-[80%]',
         className,
       )}
+      style={align === 'center' ? BALANCED_TEXT_STYLE : undefined}
     >
       {children}
     </Text>
@@ -193,6 +203,7 @@ export const EmailCallout = ({ children, align = 'center' }: EmailCalloutProps) 
         'mt-4 text-base text-muted-foreground italic',
         align === 'center' ? 'text-center' : 'text-left',
       )}
+      style={align === 'center' ? BALANCED_TEXT_STYLE : undefined}
     >
       {children}
     </Text>

@@ -18,7 +18,7 @@ export const TemplateFooter = ({ isDocument = true, reportUrl }: TemplateFooterP
   return (
     <Section>
       {reportUrl && (
-        <Text className="my-2 text-muted-foreground text-sm">
+        <Text className="my-1 text-muted-foreground text-xs">
           <Trans>
             Did not expect this email?{' '}
             <Link className="text-foreground underline" href={reportUrl}>
@@ -30,7 +30,7 @@ export const TemplateFooter = ({ isDocument = true, reportUrl }: TemplateFooterP
       )}
 
       {isDocument && !branding.brandingHidePoweredBy && (
-        <Text className="my-2 text-muted-foreground text-sm">
+        <Text className="my-1 text-muted-foreground text-xs">
           <Trans>
             This document was sent using{' '}
             <Link className="text-foreground underline" href="https://documen.so/mail-footer">
@@ -62,13 +62,13 @@ export const TemplateFooter = ({ isDocument = true, reportUrl }: TemplateFooterP
         </Text>
       )}
 
-      {!branding.brandingEnabled && (
-        <Text className="mt-4 mb-6 text-muted-foreground text-xs">
-          Documenso, Inc.
-          <br />
-          2261 Market Street, #5211, San Francisco, CA 94114, USA
-        </Text>
-      )}
+      {/*
+        Upstream renders Documenso, Inc.'s San Francisco postal address here
+        when branding is disabled. On a self-hosted instance that address
+        belongs to a third party the recipient has no relationship with, so
+        we render nothing instead. To show your own company details, enable
+        branding in the organisation settings.
+      */}
     </Section>
   );
 };
