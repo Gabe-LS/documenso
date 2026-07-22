@@ -150,10 +150,16 @@ export const sendDocument = async ({ id, userId, teamId, sendEmail, requestMetad
   let recipientsToNotify = envelope.recipients;
 
   if (signingOrder === DocumentSigningOrder.SEQUENTIAL) {
-    // Get the currently active recipient.
-    recipientsToNotify = envelope.recipients
+    // Get the currently active recipient, plus any CC recipients. CC recipients
+    // don't take part in the signing order - they get their send-time
+    // notification straight away regardless of which signer is currently active.
+    const activeRecipient = envelope.recipients
       .filter((r) => r.signingStatus === SigningStatus.NOT_SIGNED && r.role !== RecipientRole.CC)
       .slice(0, 1);
+
+    const ccRecipients = envelope.recipients.filter((r) => r.role === RecipientRole.CC);
+
+    recipientsToNotify = [...activeRecipient, ...ccRecipients];
   }
 
   if (envelope.envelopeItems.length === 0) {
@@ -342,7 +348,7 @@ export const sendDocument = async ({ id, userId, teamId, sendEmail, requestMetad
   if (sendEmail || (isRecipientSigningRequestEmailEnabled && sendEmail === undefined)) {
     await Promise.all(
       recipientsToNotify.map(async (recipient) => {
-        if (recipient.sendStatus === SendStatus.SENT || recipient.role === RecipientRole.CC) {
+        if (recipient.sendStatus === SendStatus.SENT) {
           return;
         }
 

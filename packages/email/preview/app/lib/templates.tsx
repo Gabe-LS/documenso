@@ -6,6 +6,7 @@ import { BulkSendCompleteEmail } from '../../../templates/bulk-send-complete';
 import { ConfirmEmailTemplate } from '../../../templates/confirm-email';
 import { ConfirmTeamEmailTemplate } from '../../../templates/confirm-team-email';
 import { DocumentCancelTemplate } from '../../../templates/document-cancel';
+import { DocumentCcNotificationEmailTemplate } from '../../../templates/document-cc-notification';
 import { DocumentCompletedEmailTemplate } from '../../../templates/document-completed';
 import { DocumentCreatedFromDirectTemplateEmailTemplate } from '../../../templates/document-created-from-direct-template';
 import { DocumentInviteEmailTemplate } from '../../../templates/document-invite';
@@ -154,6 +155,15 @@ export const templates: Record<string, TemplateDefinition> = {
         default: '',
         description: 'Optional. Blank renders no reason block.',
       },
+    },
+  },
+  'document-cc-notification': {
+    name: 'Document CC notification',
+    group: 'Documents',
+    component: DocumentCcNotificationEmailTemplate,
+    fields: {
+      inviterName: { type: 'text', label: 'Inviter name', default: 'Lucas Smith' },
+      documentName: documentNameField,
     },
   },
   'document-rejected': {

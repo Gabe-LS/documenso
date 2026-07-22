@@ -1,21 +1,20 @@
 /**
  * Truncates a document title for safe use inside an email subject line.
  *
- * Most inbox list views (Gmail, Outlook, mobile mail clients) only reliably
- * render the first ~60 visible characters of a subject before clipping it.
- * Every subject we build is `"<short prefix>: <title>"` (e.g. `Da firmare:`,
- * `Signature requested:`), so the prefix itself already eats a chunk of that
- * budget. To keep the combined subject comfortably inside the visible
- * window - across every prefix and every language we ship - the title
- * portion is budgeted much tighter than the subject as a whole, 30 code
- * points by default.
+ * Titles are shown in full: mail clients apply their own visual truncation
+ * to long subjects, so we do not second-guess them. We only cut at 128 code
+ * points to keep genuinely extreme titles (paste accidents, generated
+ * filenames) from bloating headers. When we do cut: word-boundary aware,
+ * surrogate-safe, trailing punctuation stripped, single `…` appended.
+ * Known file extensions (.pdf/.docx/.doc) are always stripped so subjects
+ * read as "Contract" rather than "Contract.pdf".
  *
  * @param title The raw document title, as stored on the envelope.
  * @param maxLength Maximum number of code points to keep before truncating.
  * @returns The trimmed (and possibly truncated) title, safe to interpolate
  * into a subject line.
  */
-export function trimEmailTitle(title: string, maxLength = 30): string {
+export function trimEmailTitle(title: string, maxLength = 128): string {
   const trimmed = title.trim();
 
   if (trimmed.length === 0) {

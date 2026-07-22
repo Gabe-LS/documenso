@@ -1,9 +1,9 @@
+import DocumentCcNotificationEmailTemplate from '@documenso/email/templates/document-cc-notification';
 import DocumentInviteEmailTemplate from '@documenso/email/templates/document-invite';
 import { isRecipientEmailValidForSending } from '@documenso/lib/utils/recipients';
 import { prisma } from '@documenso/prisma';
 import { msg } from '@lingui/core/macro';
 import {
-  DocumentSource,
   DocumentStatus,
   EnvelopeType,
   OrganisationType,
@@ -15,7 +15,7 @@ import { match } from 'ts-pattern';
 
 import { getI18nInstance } from '../../../client-only/providers/i18n-server';
 import { NEXT_PUBLIC_WEBAPP_URL } from '../../../constants/app';
-import { RECIPIENT_ROLE_TO_EMAIL_TYPE, RECIPIENT_ROLES_DESCRIPTION } from '../../../constants/recipient-roles';
+import { RECIPIENT_ROLE_TO_EMAIL_TYPE } from '../../../constants/recipient-roles';
 import { buildEnvelopeEmailHeaders } from '../../../server-only/email/build-envelope-email-headers';
 import { getEmailContext } from '../../../server-only/email/get-email-context';
 import { assertOrganisationRatesAndLimits } from '../../../server-only/rate-limit/assert-organisation-rates-and-limits';
@@ -79,10 +79,6 @@ export const run = async ({ payload, io }: { payload: TSendSigningEmailJobDefini
 
   const { documentMeta, team } = envelope;
 
-  if (recipient.role === RecipientRole.CC) {
-    return;
-  }
-
   const isRecipientSigningRequestEmailEnabled = extractDerivedDocumentEmailSettings(
     envelope.documentMeta,
   ).recipientSigningRequest;
@@ -116,19 +112,97 @@ export const run = async ({ payload, io }: { payload: TSendSigningEmailJobDefini
     return;
   }
 
+  const i18n = await getI18nInstance(emailLanguage);
+
+  const title = trimEmailTitle(envelope.title);
+
+  // CC recipients don't sign/approve/view-request anything - they get a distinct,
+  // purely informational "sent for signature" notice with no CTA, rather than
+  // being run through the role-based invite copy/subject below (which has no CC
+  // case and isn't meant to have one).
+  if (recipient.role === RecipientRole.CC) {
+    const assetBaseUrl = NEXT_PUBLIC_WEBAPP_URL() || 'http://localhost:3000';
+    const reportUrl = `${NEXT_PUBLIC_WEBAPP_URL()}/report/${recipient.token}`;
+
+    const ccEmailSubject = i18n._(msg`Sent for signature: ${title}`);
+
+    const ccTemplate = createElement(DocumentCcNotificationEmailTemplate, {
+      inviterName: user.name || undefined,
+      documentName: envelope.title,
+      assetBaseUrl,
+      reportUrl,
+    });
+
+    if (isRecipientEmailValidForSending(recipient)) {
+      try {
+        await assertOrganisationRatesAndLimits({
+          organisationId,
+          organisationClaim: claims,
+          type: 'email',
+          count: 1,
+        });
+      } catch (_err) {
+        io.logger.warn({
+          msg: 'CC notification email dropped: org rate limit exceeded',
+          organisationId,
+          recipientId: recipient.id,
+          envelopeId: envelope.id,
+        });
+
+        // Job is consumed and NOT retried.
+        return;
+      }
+
+      await io.runTask('send-signing-email', async () => {
+        const [html, text] = await Promise.all([
+          renderEmailWithI18N(ccTemplate, { lang: emailLanguage, branding }),
+          renderEmailWithI18N(ccTemplate, {
+            lang: emailLanguage,
+            branding,
+            plainText: true,
+          }),
+        ]);
+
+        await emailTransport.sendMail({
+          to: {
+            name: recipient.name,
+            address: recipient.email,
+          },
+          from: senderEmail,
+          replyTo: replyToEmail,
+          subject: ccEmailSubject,
+          html,
+          text,
+          headers: buildEnvelopeEmailHeaders({
+            userId,
+            envelopeId: envelope.id,
+            teamId: envelope.teamId,
+          }),
+        });
+      });
+    }
+
+    await io.runTask('update-recipient', async () => {
+      await prisma.recipient.update({
+        where: {
+          id: recipient.id,
+        },
+        data: {
+          sendStatus: SendStatus.SENT,
+          sentAt: new Date(),
+        },
+      });
+    });
+
+    return;
+  }
+
   const customEmail = envelope?.documentMeta;
-  const isDirectTemplate = envelope.source === DocumentSource.TEMPLATE_DIRECT_LINK;
 
   const recipientEmailType = RECIPIENT_ROLE_TO_EMAIL_TYPE[recipient.role];
 
   const { email, name } = recipient;
   const selfSigner = email === user.email;
-
-  const i18n = await getI18nInstance(emailLanguage);
-
-  const recipientActionVerb = i18n._(RECIPIENT_ROLES_DESCRIPTION[recipient.role].actionVerb).toLowerCase();
-
-  const title = trimEmailTitle(envelope.title);
 
   // The subject is now a single role-based default regardless of self-signer,
   // direct-template or organisation context - those branches only affect the
@@ -142,33 +216,11 @@ export const run = async ({ payload, io }: { payload: TSendSigningEmailJobDefini
       .exhaustive(),
   );
 
-  let emailMessage = customEmail?.message || '';
-
-  if (selfSigner) {
-    emailMessage = i18n._(
-      msg`You have initiated the document ${`"${envelope.title}"`} that requires you to ${recipientActionVerb} it.`,
-    );
-  }
-
-  if (isDirectTemplate) {
-    emailMessage = i18n._(
-      msg`A document was created by your direct template that requires you to ${recipientActionVerb} it.`,
-    );
-  }
-
-  if (organisationType === OrganisationType.ORGANISATION) {
-    emailMessage = customEmail?.message ?? '';
-
-    if (!emailMessage) {
-      const inviterName = user.name || '';
-
-      emailMessage = i18n._(
-        settings.includeSenderDetails
-          ? msg`${inviterName} on behalf of "${team.name}" has invited you to ${recipientActionVerb} the document "${envelope.title}".`
-          : msg`${team.name} has invited you to ${recipientActionVerb} the document "${envelope.title}".`,
-      );
-    }
-  }
+  // Only a message the sender actually wrote reaches the email. The upstream
+  // code fabricated per-context default messages here (self-signer,
+  // direct-template, organisation) - all of them restated the heading in the
+  // secondary box below the card, so an empty message now renders nothing.
+  const emailMessage = customEmail?.message || '';
 
   const customEmailTemplate = {
     'signer.name': name,

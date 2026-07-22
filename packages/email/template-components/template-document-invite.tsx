@@ -35,12 +35,24 @@ export const TemplateDocumentInvite = ({
 
   const { actionVerb } = RECIPIENT_ROLES_DESCRIPTION[role];
 
+  // Viewers get the "sharing" frame (matching their "Shared with you" subject)
+  // rather than the invitation frame; the sharer is the team when the document
+  // went out through an organisation, otherwise the person.
+  const sharerName =
+    organisationType === OrganisationType.ORGANISATION && teamName ? teamName : inviterName;
+
   return (
     <>
       <TemplateDocumentImage assetBaseUrl={assetBaseUrl} />
 
       <EmailHeading>
-        {match({ selfSigner, organisationType, includeSenderDetails, teamName })
+        {role === RecipientRole.VIEWER && !selfSigner ? (
+          <Trans>
+            {sharerName} has shared with you
+            <br />"{documentName}"
+          </Trans>
+        ) : (
+          match({ selfSigner, organisationType, includeSenderDetails, teamName })
           .with({ selfSigner: true }, () => (
             <Trans>
               Please {_(actionVerb).toLowerCase()} your document
@@ -71,24 +83,19 @@ export const TemplateDocumentInvite = ({
               {inviterName} has invited you to {_(actionVerb).toLowerCase()}
               <br />"{documentName}"
             </Trans>
-          ))}
+          ))
+        )}
       </EmailHeading>
-
-      <EmailBodyText>
-        {match(role)
-          .with(RecipientRole.SIGNER, () => <Trans>Continue by signing the document.</Trans>)
-          .with(RecipientRole.VIEWER, () => <Trans>Continue by viewing the document.</Trans>)
-          .with(RecipientRole.APPROVER, () => <Trans>Continue by approving the document.</Trans>)
-          .with(RecipientRole.CC, () => '')
-          .with(RecipientRole.ASSISTANT, () => <Trans>Continue by assisting with the document.</Trans>)
-          .exhaustive()}
-      </EmailBodyText>
 
       <EmailButtonSection>
         <EmailButton href={signDocumentLink}>
           {match(role)
             .with(RecipientRole.SIGNER, () => <Trans>View Document to sign</Trans>)
-            .with(RecipientRole.VIEWER, () => <Trans>View Document</Trans>)
+            .with(RecipientRole.VIEWER, () => (
+              // Context keeps this distinct from the app-wide "View Document"
+              // string - the viewer email CTA is a single direct word.
+              <Trans context="Viewer invite email CTA">View</Trans>
+            ))
             .with(RecipientRole.APPROVER, () => <Trans>View Document to approve</Trans>)
             .with(RecipientRole.CC, () => '')
             .with(RecipientRole.ASSISTANT, () => <Trans>View Document to assist</Trans>)
