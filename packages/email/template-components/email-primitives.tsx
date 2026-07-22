@@ -170,7 +170,7 @@ export const EmailLayout = ({
             </>
           )}
 
-          <Container className={cn('mx-auto max-w-[720px] px-6', !secondaryContent && 'mt-8')}>
+          <Container className={cn('mx-auto max-w-[720px] px-6', !secondaryContent && 'mt-4')}>
             <TemplateFooter isDocument={isDocument} reportUrl={reportUrl} />
           </Container>
         </Section>
