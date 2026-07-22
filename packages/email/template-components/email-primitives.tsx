@@ -56,7 +56,7 @@ const cn = (...classes: Array<string | undefined | false | null>) => classes.fil
 
 export type EmailLayoutProps = {
   assetBaseUrl: string;
-  preview: ReactNode;
+  preview: string;
   children: ReactNode;
   isDocument?: boolean;
   reportUrl?: string;
