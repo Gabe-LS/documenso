@@ -133,7 +133,7 @@ export const run = async ({ payload, io }: { payload: TSendDocumentCancelledEmai
           inviterName: documentOwner.name || undefined,
           inviterEmail: documentOwner.email,
           assetBaseUrl: NEXT_PUBLIC_WEBAPP_URL(),
-          cancellationReason: cancellationReason || 'The document has been cancelled.',
+          cancellationReason: cancellationReason || undefined,
         });
 
         const [html, text] = await Promise.all([
