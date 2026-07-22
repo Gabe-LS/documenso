@@ -128,36 +128,73 @@ extensions stripped.
 
 These deviate from upstream — take care during rebases:
 
-- **CC notification**: CC recipients get a send-time "Inviato alla firma"
-  notice via `packages/email/templates/document-cc-notification.tsx`, with
-  branching in `send-signing-email.handler.ts` and fan-out in
-  `send-document.ts`.
-- **No fabricated invite copy**: Invite emails no longer fabricate default
-  secondary messages.
+- **CC notifications**: CC recipients receive all document lifecycle emails
+  (sent for signing, cancelled, deleted, completed). The fix bypasses
+  upstream's `sendStatus === SENT` skip in `send-document.ts` (CC recipients
+  are created with `SENT` by default) and removes the CC exclusion from
+  `send-document-cancelled-emails.handler.ts` and `delete-document.ts`.
+  The CC template uses the team name (not personal name) when sent from an
+  organisation (`send-signing-email.handler.ts`).
+- **No fabricated copy**: Invite emails no longer fabricate default secondary
+  messages. Cancellation emails don't fabricate a default reason.
+- **Removed elements**: No `EmailIconLabel` (completed/pending/signed status
+  badges), no redundant body text in several templates, no `EmailPill` in
+  direct-template emails.
+- **Custom document icon**: `packages/email/static/document.png` and
+  `apps/remix/public/static/document.png` (both must be updated together —
+  the Remix copy is what production serves). Cache-busted with `?v=2` in
+  `template-document-image.tsx`.
+- **Static asset duplication**: Email static assets exist in two places:
+  `packages/email/static/` (preview app) and `apps/remix/public/static/`
+  (production). Both must stay in sync.
 
 ## Deployment
 
-Production images are built by GitHub Actions (`.github/workflows/build.yml`)
-on push to `main`. The image lands at `ghcr.io/gabe-ls/documenso:latest`.
+Production images live at `ghcr.io/gabe-ls/documenso:latest`. Two ways to
+build them:
 
-**Never build production images locally** (this Mac is arm64, production is
-amd64).
+### Option A: Local buildx (preferred for iterative work)
 
-### Deploy flow
+Build an amd64 image on this arm64 Mac via QEMU emulation and push directly
+to ghcr.io. Docker Desktop must have 16+ GB RAM allocated (Settings >
+Resources). First-time setup:
 
-1. Push to `main` and wait for the Actions build:
+```bash
+gh auth refresh -h github.com -s write:packages
+gh auth token | docker login ghcr.io -u Gabe-LS --password-stdin
+```
+
+Build and push:
+
+```bash
+docker buildx build --platform linux/amd64 \
+  -t ghcr.io/gabe-ls/documenso:latest --push \
+  -f docker/Dockerfile .
+```
+
+First build: ~7 min. Cached rebuilds (template-only changes still invalidate
+the source COPY layer, so `turbo run build` reruns): ~7 min. Push of cached
+layers: ~2 min.
+
+### Option B: GitHub Actions
+
+GHA builds automatically on push to `main` (`.github/workflows/build.yml`).
+Same ~7 min build time but adds queue wait. Use when you don't have Docker
+Desktop running or need a hands-off CI build.
 
 ```bash
 gh run watch --repo Gabe-LS/documenso --exit-status
 ```
 
-2. Pull and restart on the VPS:
+### Deploy to VPS
+
+After the image is pushed (by either method):
 
 ```bash
 ssh root@209.38.244.136 "cd /root/services/documenso && docker compose pull app && docker compose up -d"
 ```
 
-3. Verify health:
+Verify health:
 
 ```bash
 ssh root@209.38.244.136 "docker exec documenso wget -qO- http://localhost:3000/api/health"
