@@ -157,11 +157,20 @@ export const EmailLayout = ({
             {children}
           </Container>
 
-          {secondaryContent && <Container className="mx-auto mt-12 max-w-[720px]">{secondaryContent}</Container>}
+          {/*
+            The secondary box and footer align to the card's inner content
+            (border + p-6), hence the px-6 on both. The divider only exists
+            to fence a secondary box off from the footer - with no secondary
+            content the card's own bottom border already provides the break.
+          */}
+          {secondaryContent && (
+            <>
+              <Container className="mx-auto mt-12 max-w-[720px] px-6">{secondaryContent}</Container>
+              <Hr className="mx-auto mt-8 max-w-[720px]" />
+            </>
+          )}
 
-          <Hr className="mx-auto mt-8 max-w-[720px]" />
-
-          <Container className="mx-auto max-w-[720px]">
+          <Container className={cn('mx-auto max-w-[720px] px-6', !secondaryContent && 'mt-8')}>
             <TemplateFooter isDocument={isDocument} reportUrl={reportUrl} />
           </Container>
         </Section>
