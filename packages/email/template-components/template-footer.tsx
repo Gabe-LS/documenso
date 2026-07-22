@@ -56,7 +56,7 @@ export const TemplateFooter = ({ isDocument = true, reportUrl }: TemplateFooterP
       )}
 
       {isDocument && !branding.brandingHidePoweredBy && (
-        <Text className="my-4 text-center text-[13px] text-muted-foreground">
+        <Text className="my-4 text-center text-[12px] text-muted-foreground">
           <Trans>
             This document was sent using{' '}
             <Link className="text-muted-foreground underline" href="https://documen.so/mail-footer">
