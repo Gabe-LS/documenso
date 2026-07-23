@@ -223,3 +223,36 @@ Run `./UPDATE.sh` at the repo root. It rebases onto `upstream/main` and
 force-pushes with lease. Expect conflicts in `packages/email` and
 `it/web.po`. New upstream versions run DB migrations on first boot — confirm
 that morning's backup exists first.
+
+## Weekly agreements report
+
+An n8n workflow generates a PDF report of Documenso agreements every Monday
+and Thursday at 08:00 and delivers it via Slack (#commerciale) and email.
+
+- **Workflow source**: `~/Documents/Developer/n8n Workflows/Documenso Report/`
+- **n8n workflow ID**: `documenso-report-001`
+- **PDF engine**: WeasyPrint microservice (`http://weasyprint:9100` on the
+  Docker `apps` network)
+
+### What it reports
+
+PENDING ("Out for signature" or "Expired"), REJECTED, and recent COMPLETED
+(green, for context). Excludes DRAFT and CANCELLED. Max 18 rows (one page).
+
+### When it skips
+
+- Zero actionable (PENDING + REJECTED) agreements
+- All actionable agreements older than 45 days
+
+### Trigger manually
+
+```bash
+ssh root@209.38.244.136 "docker exec -u node -e N8N_RUNNERS_BROKER_PORT=5681 n8n n8n execute --id=documenso-report-001"
+```
+
+### VPS scripts
+
+- `agreements_report.py` — standalone report generator (API-based, WeasyPrint)
+- `send_document.py` — test document sender
+- `create_fake_agreements.py` — creates test agreements (uses only the 3
+  approved test addresses)

@@ -51,6 +51,27 @@ VPS rules:
 - Never `docker compose down -v` or delete `postgres-data/`
 - Nightly pg_dump at 03:38
 
+## Weekly agreements report
+
+n8n workflow `documenso-report-001` generates a PDF report every Monday and Thursday at 08:00.
+Source: `~/Documents/Developer/n8n Workflows/Documenso Report/`
+
+- Trigger manually: `ssh root@209.38.244.136 "docker exec -u node -e N8N_RUNNERS_BROKER_PORT=5681 n8n n8n execute --id=documenso-report-001"`
+- PDF via WeasyPrint (`http://weasyprint:9100` on Docker `apps` network)
+- Shows PENDING, REJECTED, expired recipients, recent COMPLETED
+- Skips if zero actionable or all actionable >45 days old
+- Delivers to Slack #commerciale + email (configurable in Config node)
+- Max 18 rows (one A4 landscape page)
+
+## Test data
+
+Only use these 3 email addresses for test agreements:
+- gabrielelosurdo@gmail.com
+- gabrielelosurdo@yahoo.com
+- gabrielelosurdo@outlook.com
+
+Never use any other address. Documenso sends real emails.
+
 ## Node version
 
 Use Node 22 (`/opt/homebrew/opt/node@22/bin`), not Node 26 — sharp has no
