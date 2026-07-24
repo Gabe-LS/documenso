@@ -8996,23 +8996,23 @@ msgstr "Ricordi la tua password? <0>Accedi</0>"
 #: packages/lib/jobs/definitions/internal/process-signing-reminder.handler.ts
 #: packages/lib/server-only/document/resend-document.ts
 msgid "Reminder to approve: {title}"
-msgstr "Ancora da approvare: {title}"
+msgstr "Da approvare: {title}"
 
 #: packages/lib/jobs/definitions/internal/process-signing-reminder.handler.ts
 #: packages/lib/server-only/document/resend-document.ts
 msgid "Reminder to assist: {title}"
-msgstr "Ancora da compilare: {title}"
+msgstr "Da compilare: {title}"
 
 #: packages/lib/jobs/definitions/internal/process-signing-reminder.handler.ts
 #: packages/lib/server-only/document/resend-document.ts
 msgid "Reminder to sign: {title}"
-msgstr "Ancora da firmare: {title}"
+msgstr "Da firmare: {title}"
 
 #: packages/lib/jobs/definitions/internal/process-signing-reminder.handler.ts
 #: packages/lib/jobs/definitions/internal/process-signing-reminder.handler.ts
 #: packages/lib/server-only/document/resend-document.ts
 msgid "Reminder to view: {title}"
-msgstr "Ancora da visionare: {title}"
+msgstr "Da visualizzare: {title}"
 
 #. placeholder {0}: envelope.documentMeta.subject
 #: packages/lib/jobs/definitions/internal/process-signing-reminder.handler.ts
