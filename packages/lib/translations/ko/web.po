@@ -1014,6 +1014,10 @@ msgctxt "Audit log format"
 msgid "A recipient was updated"
 msgstr "수신자가 업데이트되었습니다."
 
+#: packages/email/templates/document-cc-reminder-notification.tsx
+msgid "A reminder for \"{documentName}\" has been sent to {recipientName}"
+msgstr ""
+
 #: packages/email/templates/organisation-account-link-confirmation.tsx
 msgid "A request has been made to create an account for you"
 msgstr "귀하를 위한 계정 생성 요청이 있습니다."
@@ -7406,10 +7410,6 @@ msgstr "다음 수신자 이름"
 msgid "No"
 msgstr "아니요"
 
-#: packages/email/templates/document-cc-notification.tsx
-msgid "No action is needed on your part."
-msgstr ""
-
 #: apps/remix/app/components/tables/documents-table-empty-state.tsx
 msgid "No active drafts"
 msgstr "활성 초안 없음"
@@ -8991,6 +8991,11 @@ msgstr "새로고침"
 #: apps/remix/app/routes/_unauthenticated+/forgot-password.tsx
 msgid "Remembered your password? <0>Sign In</0>"
 msgstr "비밀번호가 기억나시나요? <0>로그인</0>"
+
+#: packages/lib/jobs/definitions/internal/process-signing-reminder.handler.ts
+#: packages/lib/server-only/document/resend-document.ts
+msgid "Reminder sent: {title}"
+msgstr ""
 
 #: packages/lib/jobs/definitions/internal/process-signing-reminder.handler.ts
 #: packages/lib/server-only/document/resend-document.ts
@@ -14340,6 +14345,7 @@ msgid "You will receive an email copy of the signed document once everyone has s
 msgstr "모두 서명하면 서명된 문서의 사본이 이메일로 전송됩니다."
 
 #: packages/email/templates/document-cc-notification.tsx
+#: packages/email/templates/document-cc-reminder-notification.tsx
 msgid "You'll be notified as soon as the document has been signed."
 msgstr ""
 

@@ -1,3 +1,4 @@
+import DocumentCcReminderNotificationEmailTemplate from '@documenso/email/templates/document-cc-reminder-notification';
 import { DocumentInviteEmailTemplate } from '@documenso/email/templates/document-invite';
 import DocumentReminderEmailTemplate from '@documenso/email/templates/document-reminder';
 import { resolveExpiresAt } from '@documenso/lib/constants/envelope-expiration';
@@ -193,11 +194,25 @@ export const resendDocument = async ({ id, userId, recipients, teamId, requestMe
     return envelope;
   }
 
+  // CC recipients follow every chasing action on the document, so each
+  // reminder also produces an informational notice to every CC recipient.
+  // Recipients that were never sent the invite get it now instead of a
+  // reminder, and CC was already notified for them at distribution time.
+  const remindedRecipients = recipientsToRemind.filter(
+    (recipient) => recipient.sendStatus === SendStatus.SENT && isRecipientEmailValidForSending(recipient),
+  );
+
+  const ccRecipients = envelope.recipients.filter(
+    (recipient) => recipient.role === RecipientRole.CC && isRecipientEmailValidForSending(recipient),
+  );
+
+  const ccNotificationCount = remindedRecipients.length * ccRecipients.length;
+
   // Assert that there is enough quota to send the emails.
   await assertOrganisationRatesAndLimits({
     organisationId,
     organisationClaim: claims,
-    count: recipientsToRemind.length,
+    count: recipientsToRemind.length + ccNotificationCount,
     type: 'email',
   });
 
@@ -356,6 +371,47 @@ export const resendDocument = async ({ id, userId, recipients, teamId, requestMe
       });
     }),
   );
+
+  if (ccNotificationCount > 0) {
+    const i18n = await getI18nInstance(emailLanguage);
+    const title = trimEmailTitle(envelope.title);
+    const assetBaseUrl = NEXT_PUBLIC_WEBAPP_URL() || 'http://localhost:3000';
+
+    await Promise.all(
+      ccRecipients.flatMap((ccRecipient) =>
+        remindedRecipients.map(async (remindedRecipient) => {
+          const ccTemplate = createElement(DocumentCcReminderNotificationEmailTemplate, {
+            documentName: envelope.title,
+            recipientName: remindedRecipient.name || remindedRecipient.email,
+            assetBaseUrl,
+            reportUrl: `${NEXT_PUBLIC_WEBAPP_URL()}/report/${ccRecipient.token}`,
+          });
+
+          const [html, text] = await Promise.all([
+            renderEmailWithI18N(ccTemplate, { lang: emailLanguage, branding }),
+            renderEmailWithI18N(ccTemplate, { lang: emailLanguage, branding, plainText: true }),
+          ]);
+
+          await emailTransport.sendMail({
+            to: {
+              address: ccRecipient.email,
+              name: ccRecipient.name,
+            },
+            from: senderEmail,
+            replyTo: replyToEmail,
+            subject: i18n._(msg`Reminder sent: ${title}`),
+            html,
+            text,
+            headers: buildEnvelopeEmailHeaders({
+              userId: envelope.userId,
+              envelopeId: envelope.id,
+              teamId: envelope.teamId,
+            }),
+          });
+        }),
+      ),
+    );
+  }
 
   await triggerWebhook({
     event: WebhookTriggerEvents.DOCUMENT_REMINDER_SENT,

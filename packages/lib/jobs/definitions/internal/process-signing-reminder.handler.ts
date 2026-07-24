@@ -1,3 +1,4 @@
+import DocumentCcReminderNotificationEmailTemplate from '@documenso/email/templates/document-cc-reminder-notification';
 import DocumentReminderEmailTemplate from '@documenso/email/templates/document-reminder';
 import { prisma } from '@documenso/prisma';
 import { msg } from '@lingui/core/macro';
@@ -24,6 +25,7 @@ import { extractDerivedDocumentEmailSettings } from '../../../types/document-ema
 import { mapEnvelopeToWebhookDocumentPayload, ZWebhookDocumentSchema } from '../../../types/webhook-payload';
 import { createDocumentAuditLogData } from '../../../utils/document-audit-logs';
 import { trimEmailTitle } from '../../../utils/email-subject';
+import { isRecipientEmailValidForSending } from '../../../utils/recipients';
 import { renderCustomEmailTemplate } from '../../../utils/render-custom-email-template';
 import { renderEmailWithI18N } from '../../../utils/render-email-with-i18n';
 import type { JobRunIO } from '../../client/_internal/job';
@@ -102,23 +104,15 @@ export const run = async ({ payload, io }: { payload: TProcessSigningReminderJob
     return;
   }
 
-  const {
-    branding,
-    emailLanguage,
-    senderEmail,
-    replyToEmail,
-    organisationId,
-    claims,
-    emailsDisabled,
-    emailTransport,
-  } = await getEmailContext({
-    emailType: 'RECIPIENT',
-    source: {
-      type: 'team',
-      teamId: envelope.teamId,
-    },
-    meta: envelope.documentMeta,
-  });
+  const { branding, emailLanguage, senderEmail, replyToEmail, organisationId, claims, emailsDisabled, emailTransport } =
+    await getEmailContext({
+      emailType: 'RECIPIENT',
+      source: {
+        type: 'team',
+        teamId: envelope.teamId,
+      },
+      meta: envelope.documentMeta,
+    });
 
   // Don't send reminders if the owner is disabled (e.g. banned) or the organisation
   // has email sending disabled.
@@ -249,6 +243,71 @@ export const run = async ({ payload, io }: { payload: TProcessSigningReminderJob
       userId: envelope.userId,
       teamId: envelope.teamId,
     });
+
+    // CC recipients follow every chasing action on the document, so they are
+    // told whenever a recipient is reminded. They must not receive the
+    // reminder email itself (it carries the recipient's signing token) and
+    // instead get a purely informational notice.
+    const ccRecipients = envelope.recipients.filter(
+      (r) => r.role === RecipientRole.CC && isRecipientEmailValidForSending(r),
+    );
+
+    for (const ccRecipient of ccRecipients) {
+      const ccRateLimited = await assertOrganisationRatesAndLimits({
+        organisationId,
+        organisationClaim: claims,
+        type: 'email',
+        count: 1,
+      })
+        .then(() => false)
+        .catch((_err) => {
+          io.logger.warn({
+            msg: 'CC reminder notification dropped: org email limit exceeded',
+            organisationId,
+            recipientId: ccRecipient.id,
+            envelopeId: envelope.id,
+          });
+
+          return true;
+        });
+
+      if (ccRateLimited) {
+        break;
+      }
+
+      const ccTemplate = createElement(DocumentCcReminderNotificationEmailTemplate, {
+        documentName: envelope.title,
+        recipientName: recipient.name || recipient.email,
+        assetBaseUrl,
+        reportUrl: `${NEXT_PUBLIC_WEBAPP_URL()}/report/${ccRecipient.token}`,
+      });
+
+      const [ccHtml, ccText] = await Promise.all([
+        renderEmailWithI18N(ccTemplate, { lang: emailLanguage, branding }),
+        renderEmailWithI18N(ccTemplate, {
+          lang: emailLanguage,
+          branding,
+          plainText: true,
+        }),
+      ]);
+
+      await emailTransport.sendMail({
+        to: {
+          name: ccRecipient.name,
+          address: ccRecipient.email,
+        },
+        from: senderEmail,
+        replyTo: replyToEmail,
+        subject: i18n._(msg`Reminder sent: ${title}`),
+        html: ccHtml,
+        text: ccText,
+        headers: buildEnvelopeEmailHeaders({
+          userId: envelope.userId,
+          envelopeId: envelope.id,
+          teamId: envelope.teamId,
+        }),
+      });
+    }
   }
 
   // reminderCount was incremented in the atomic claim above, so the value read

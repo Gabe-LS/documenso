@@ -1010,6 +1010,10 @@ msgctxt "Audit log format"
 msgid "A recipient was updated"
 msgstr "A recipient was updated"
 
+#: packages/email/templates/document-cc-reminder-notification.tsx
+msgid "A reminder for \"{documentName}\" has been sent to {recipientName}"
+msgstr "A reminder for \"{documentName}\" has been sent to {recipientName}"
+
 #: packages/email/templates/organisation-account-link-confirmation.tsx
 msgid "A request has been made to create an account for you"
 msgstr "A request has been made to create an account for you"
@@ -7402,10 +7406,6 @@ msgstr "Next Recipient Name"
 msgid "No"
 msgstr "No"
 
-#: packages/email/templates/document-cc-notification.tsx
-msgid "No action is needed on your part."
-msgstr "No action is needed on your part."
-
 #: apps/remix/app/components/tables/documents-table-empty-state.tsx
 msgid "No active drafts"
 msgstr "No active drafts"
@@ -8987,6 +8987,11 @@ msgstr "Reload"
 #: apps/remix/app/routes/_unauthenticated+/forgot-password.tsx
 msgid "Remembered your password? <0>Sign In</0>"
 msgstr "Remembered your password? <0>Sign In</0>"
+
+#: packages/lib/jobs/definitions/internal/process-signing-reminder.handler.ts
+#: packages/lib/server-only/document/resend-document.ts
+msgid "Reminder sent: {title}"
+msgstr "Reminder sent: {title}"
 
 #: packages/lib/jobs/definitions/internal/process-signing-reminder.handler.ts
 #: packages/lib/server-only/document/resend-document.ts
@@ -14336,6 +14341,7 @@ msgid "You will receive an email copy of the signed document once everyone has s
 msgstr "You will receive an email copy of the signed document once everyone has signed."
 
 #: packages/email/templates/document-cc-notification.tsx
+#: packages/email/templates/document-cc-reminder-notification.tsx
 msgid "You'll be notified as soon as the document has been signed."
 msgstr "You'll be notified as soon as the document has been signed."
 

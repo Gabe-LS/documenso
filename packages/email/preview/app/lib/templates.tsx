@@ -7,6 +7,7 @@ import { ConfirmEmailTemplate } from '../../../templates/confirm-email';
 import { ConfirmTeamEmailTemplate } from '../../../templates/confirm-team-email';
 import { DocumentCancelTemplate } from '../../../templates/document-cancel';
 import { DocumentCcNotificationEmailTemplate } from '../../../templates/document-cc-notification';
+import { DocumentCcReminderNotificationEmailTemplate } from '../../../templates/document-cc-reminder-notification';
 import { DocumentCompletedEmailTemplate } from '../../../templates/document-completed';
 import { DocumentCreatedFromDirectTemplateEmailTemplate } from '../../../templates/document-created-from-direct-template';
 import { DocumentInviteEmailTemplate } from '../../../templates/document-invite';
@@ -163,6 +164,15 @@ export const templates: Record<string, TemplateDefinition> = {
     component: DocumentCcNotificationEmailTemplate,
     fields: {
       inviterName: { type: 'text', label: 'Inviter name', default: 'Lucas Smith' },
+      documentName: documentNameField,
+    },
+  },
+  'document-cc-reminder-notification': {
+    name: 'Document CC reminder notification',
+    group: 'Documents',
+    component: DocumentCcReminderNotificationEmailTemplate,
+    fields: {
+      recipientName: recipientNameField,
       documentName: documentNameField,
     },
   },
