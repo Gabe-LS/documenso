@@ -1,8 +1,9 @@
 import { DocumentInviteEmailTemplate } from '@documenso/email/templates/document-invite';
+import DocumentReminderEmailTemplate from '@documenso/email/templates/document-reminder';
 import { resolveExpiresAt } from '@documenso/lib/constants/envelope-expiration';
 import { RECIPIENT_ROLE_TO_EMAIL_TYPE, RECIPIENT_ROLES_DESCRIPTION } from '@documenso/lib/constants/recipient-roles';
 import { AppError } from '@documenso/lib/errors/app-error';
-import { DOCUMENT_AUDIT_LOG_TYPE } from '@documenso/lib/types/document-audit-logs';
+import { DOCUMENT_AUDIT_LOG_TYPE, DOCUMENT_EMAIL_TYPE } from '@documenso/lib/types/document-audit-logs';
 import type { ApiRequestMetadata } from '@documenso/lib/universal/extract-request-metadata';
 import { createDocumentAuditLogData } from '@documenso/lib/utils/document-audit-logs';
 import { trimEmailTitle } from '@documenso/lib/utils/email-subject';
@@ -208,10 +209,18 @@ export const resendDocument = async ({ id, userId, recipients, teamId, requestMe
 
       const i18n = await getI18nInstance(emailLanguage);
 
-      const recipientEmailType = RECIPIENT_ROLE_TO_EMAIL_TYPE[recipient.role];
-
       const { email, name } = recipient;
       const selfSigner = email === user.email;
+
+      // Recipients added after the initial send have never received the
+      // invite, so a resend is their first send and uses the invite email.
+      // Everyone else gets the same reminder email as the scheduled
+      // reminder job (process-signing-reminder.handler.ts).
+      const isFirstSendToRecipient = recipient.sendStatus === SendStatus.NOT_SENT;
+
+      const recipientEmailType = isFirstSendToRecipient
+        ? RECIPIENT_ROLE_TO_EMAIL_TYPE[recipient.role]
+        : DOCUMENT_EMAIL_TYPE.REMINDER;
 
       const recipientActionVerb = i18n._(RECIPIENT_ROLES_DESCRIPTION[recipient.role].actionVerb).toLowerCase();
 
@@ -220,7 +229,7 @@ export const resendDocument = async ({ id, userId, recipients, teamId, requestMe
       // The subject is now a single role-based default - the self-signer and
       // organisation-invite wording used to differ here, but that context
       // lives in the body, not the subject.
-      let emailSubject = i18n._(
+      const emailSubject = i18n._(
         match(recipient.role)
           .with(RecipientRole.SIGNER, () => msg`Reminder to sign: ${title}`)
           .with(RecipientRole.APPROVER, () => msg`Reminder to approve: ${title}`)
@@ -255,22 +264,35 @@ export const resendDocument = async ({ id, userId, recipients, teamId, requestMe
       const signDocumentLink = `${NEXT_PUBLIC_WEBAPP_URL()}/sign/${recipient.token}`;
       const reportUrl = `${NEXT_PUBLIC_WEBAPP_URL()}/report/${recipient.token}`;
 
-      const template = createElement(DocumentInviteEmailTemplate, {
-        documentName: envelope.title,
-        inviterName: user.name || undefined,
-        inviterEmail:
-          organisationType === OrganisationType.ORGANISATION
-            ? envelope.team?.teamEmail?.email || user.email
-            : user.email,
-        assetBaseUrl,
-        signDocumentLink,
-        customBody: renderCustomEmailTemplate(emailMessage, customEmailTemplate),
-        role: recipient.role,
-        selfSigner,
-        organisationType,
-        teamName: envelope.team?.name,
-        reportUrl,
-      });
+      const template = isFirstSendToRecipient
+        ? createElement(DocumentInviteEmailTemplate, {
+            documentName: envelope.title,
+            inviterName: user.name || undefined,
+            inviterEmail:
+              organisationType === OrganisationType.ORGANISATION
+                ? envelope.team?.teamEmail?.email || user.email
+                : user.email,
+            assetBaseUrl,
+            signDocumentLink,
+            customBody: renderCustomEmailTemplate(emailMessage, customEmailTemplate),
+            role: recipient.role,
+            selfSigner,
+            organisationType,
+            teamName: envelope.team?.name,
+            reportUrl,
+          })
+        : createElement(DocumentReminderEmailTemplate, {
+            recipientName: name,
+            documentName: envelope.title,
+            assetBaseUrl,
+            signDocumentLink,
+            customBody: envelope.documentMeta.message
+              ? renderCustomEmailTemplate(envelope.documentMeta.message, customEmailTemplate)
+              : undefined,
+            role: recipient.role,
+            reportUrl,
+            inviterName: user.name || undefined,
+          });
 
       const [html, text] = await Promise.all([
         renderEmailWithI18N(template, {
