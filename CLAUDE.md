@@ -38,10 +38,9 @@ cancelled, deleted, completed. Key fork changes:
 
 ## Deployment
 
-Two build options (see `DEVELOPMENT.md` for details):
-- **Local buildx** (preferred): `docker buildx build --platform linux/amd64 -t ghcr.io/gabe-ls/documenso:latest --push -f docker/Dockerfile .`
-  Requires Docker Desktop with 16+ GB RAM and `docker login ghcr.io`.
-- **GitHub Actions**: automatic on push to `main`, ~7 min.
+Images are built by GitHub Actions on push to `main` (~6-9 min, ~1 min
+when fully cached). There is no local build path — benchmarked slower than
+GHA once push time is included (see `DEVELOPMENT.md`).
 
 Deploy: `ssh root@209.38.244.136 "cd /root/services/documenso && docker compose pull app && docker compose up -d"`
 

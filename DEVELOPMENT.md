@@ -150,37 +150,16 @@ These deviate from upstream — take care during rebases:
 
 ## Deployment
 
-Production images live at `ghcr.io/gabe-ls/documenso:latest`. Two ways to
-build them:
+Production images live at `ghcr.io/gabe-ls/documenso:latest`, built by
+GitHub Actions on every push to `main` (`.github/workflows/build.yml`).
 
-### Option A: Local buildx (preferred for iterative work)
+Code-change builds take ~6-9 min including the push; runs where the image
+layers are fully cached finish in ~1 min. Benchmarked 2026-07-24: a local
+`docker buildx` amd64 build on this arm64 Mac took the same ~6.5 min with a
+warm cache *before* the push, so there is no local build path — GHA is
+always at least as fast and keeps the laptop free.
 
-Build an amd64 image on this arm64 Mac via QEMU emulation and push directly
-to ghcr.io. Docker Desktop must have 16+ GB RAM allocated (Settings >
-Resources). First-time setup:
-
-```bash
-gh auth refresh -h github.com -s write:packages
-gh auth token | docker login ghcr.io -u Gabe-LS --password-stdin
-```
-
-Build and push:
-
-```bash
-docker buildx build --platform linux/amd64 \
-  -t ghcr.io/gabe-ls/documenso:latest --push \
-  -f docker/Dockerfile .
-```
-
-First build: ~7 min. Cached rebuilds (template-only changes still invalidate
-the source COPY layer, so `turbo run build` reruns): ~7 min. Push of cached
-layers: ~2 min.
-
-### Option B: GitHub Actions
-
-GHA builds automatically on push to `main` (`.github/workflows/build.yml`).
-Same ~7 min build time but adds queue wait. Use when you don't have Docker
-Desktop running or need a hands-off CI build.
+Watch the build:
 
 ```bash
 gh run watch --repo Gabe-LS/documenso --exit-status
@@ -188,7 +167,7 @@ gh run watch --repo Gabe-LS/documenso --exit-status
 
 ### Deploy to VPS
 
-After the image is pushed (by either method):
+After the workflow pushes the image:
 
 ```bash
 ssh root@209.38.244.136 "cd /root/services/documenso && docker compose pull app && docker compose up -d"
