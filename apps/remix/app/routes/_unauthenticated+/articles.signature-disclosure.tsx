@@ -12,134 +12,153 @@ export default function SignatureDisclosure() {
         </h1>
 
         <h2>
-          <Trans>Welcome</Trans>
+          <Trans context="Signature disclosure greeting">Welcome</Trans>
         </h2>
         <p>
           <Trans>
-            Thank you for using Documenso to perform your electronic document signing. The purpose of this disclosure is
-            to inform you about the process, legality, and your rights regarding the use of electronic signatures on our
-            platform. By opting to use an electronic signature, you are agreeing to the terms and conditions outlined
-            below.
+            This page explains in plain language how electronic signing works on this platform, its legal basis in the
+            European Union and Italy, and your rights.
           </Trans>
         </p>
 
         <h2>
-          <Trans>Acceptance and Consent</Trans>
+          <Trans>Signing Electronically</Trans>
         </h2>
         <p>
           <Trans>
-            When you use our platform to affix your electronic signature to documents, you are consenting to do so under
-            the Electronic Signatures in Global and National Commerce Act (E-Sign Act) and other applicable laws. This
-            action indicates your agreement to use electronic means to sign documents and receive notifications.
+            When you sign a document on this platform, you approve it digitally instead of on paper, and all related
+            communications reach you by email.
+          </Trans>
+        </p>
+        <p>
+          <Trans>
+            In the European Union, electronic signatures are governed by Regulation (EU) No 910/2014 (the 'eIDAS
+            Regulation') and, in Italy, by the Digital Administration Code (Legislative Decree 82/2005).
           </Trans>
         </p>
 
         <h2>
-          <Trans>Legality of Electronic Signatures</Trans>
+          <Trans>Are Electronic Signatures Legally Valid?</Trans>
         </h2>
         <p>
           <Trans>
-            An electronic signature provided by you on our platform, achieved through clicking through to a document and
-            entering your name, or any other electronic signing method we provide, is legally binding. It carries the
-            same weight and enforceability as a manual signature written with ink on paper.
+            The signature you apply through this platform is what EU law defines as an 'electronic signature', commonly
+            called a 'simple electronic signature'. Opening the document does not sign it. The signature is applied only
+            when, after filling in the required fields, you confirm the signing operation.
+          </Trans>
+        </p>
+        <p>
+          <Trans>
+            Under Article 25(1) of the eIDAS Regulation, a simple electronic signature cannot be denied legal effect or
+            admissibility as evidence solely because it is electronic or not qualified.
+          </Trans>
+        </p>
+        <p>
+          <Trans>Signatures of this kind are widely used across the EU for everyday commercial agreements.</Trans>
+        </p>
+        <p>
+          <Trans>
+            A 'qualified electronic signature', created with a qualified certificate and a qualified signature creation
+            device, automatically has the same legal effect as a handwritten signature (Article 25(2) of the eIDAS
+            Regulation).
+          </Trans>
+        </p>
+        <p>
+          <Trans>This platform, however, does not offer qualified signatures.</Trans>
+        </p>
+        <p>
+          <Trans>
+            For a simple electronic signature, a court assesses its evidential weight case by case under national law,
+            based on the security and integrity of the signing process. To support that assessment, every completed
+            document comes with a detailed record of the signing operations (audit trail) and is cryptographically
+            sealed, so that later changes to the file can be detected. These records document the signing session linked
+            to your email address and contribute, together with other available evidence, to attributing the signature.
           </Trans>
         </p>
 
         <h2>
-          <Trans>System Requirements</Trans>
+          <Trans>What Signing Means</Trans>
         </h2>
         <p>
-          <Trans>To use our electronic signature service, you must have access to:</Trans>
+          <Trans>
+            EU law requires Member States to allow contracts to be concluded electronically. Such contracts cannot be
+            deprived of legal effect merely because they were concluded electronically (Directive 2000/31/EC, Article
+            9(1)).
+          </Trans>
+        </p>
+        <p>
+          <Trans>
+            Your signature expresses your acceptance of the document it is applied to. We therefore recommend reading it
+            carefully before signing.
+          </Trans>
+        </p>
+
+        <h2>
+          <Trans>If You Have Second Thoughts</Trans>
+        </h2>
+        <p>
+          <Trans>
+            Before you confirm the final signing step, you can stop at any time. If you would rather sign in a different
+            way, you can ask the sender whether an alternative is available. If you cannot reach the sender at the
+            address that sent you the document, you can write to <a href={`mailto:${SUPPORT_EMAIL}`}>{SUPPORT_EMAIL}</a>
+            .
+          </Trans>
+        </p>
+
+        <h2>
+          <Trans>Personal Data</Trans>
+        </h2>
+        <p>
+          <Trans>
+            Personal data is a separate matter. Any consent required under data-protection law can be withdrawn as
+            described in the applicable privacy notice, and withdrawing it does not cancel a signature you have already
+            completed.
+          </Trans>
+        </p>
+
+        <h2>
+          <Trans>Keep a Copy of Your Documents</Trans>
+        </h2>
+        <p>
+          <Trans>
+            After signing, we recommend downloading and keeping the completed document. The completed document and its
+            record of the signing operations (audit trail) also remain available on this platform for three years after
+            completion. After that period, they may no longer be accessible online. The copy you keep is therefore your
+            safest reference.
+          </Trans>
+        </p>
+
+        <h2>
+          <Trans>Your Confirmation</Trans>
+        </h2>
+        <p>
+          <Trans>By proceeding to sign on this platform, you confirm that:</Trans>
         </p>
         <ul>
           <li>
-            <Trans>A stable internet connection</Trans>
+            <Trans>this page was made available to you before signing and you had the opportunity to read it</Trans>
           </li>
           <li>
-            <Trans>An email account</Trans>
+            <Trans>you choose to use the simple electronic signature described here</Trans>
           </li>
           <li>
-            <Trans>A device capable of accessing, opening, and reading documents</Trans>
-          </li>
-          <li>
-            <Trans>A means to print or download documents for your records</Trans>
+            <Trans>you agree to receive documents and related communications electronically</Trans>
           </li>
         </ul>
-
-        <h2>
-          <Trans>Electronic Delivery of Documents</Trans>
-        </h2>
         <p>
           <Trans>
-            All documents related to the electronic signing process will be provided to you electronically through our
-            platform or via email. It is your responsibility to ensure that your email address is current and that you
-            can receive and open our emails.
+            This page describes only the signing mechanism. It does not replace the contract you are signing, nor the
+            sender's contractual or privacy notices.
           </Trans>
         </p>
 
         <h2>
-          <Trans>Consent to Electronic Transactions</Trans>
+          <Trans>Questions?</Trans>
         </h2>
         <p>
           <Trans>
-            By using the electronic signature feature, you are consenting to conduct transactions and receive
-            disclosures electronically. You acknowledge that your electronic signature on documents is binding and that
-            you accept the terms outlined in the documents you are signing.
-          </Trans>
-        </p>
-
-        <h2>
-          <Trans>Withdrawing Consent</Trans>
-        </h2>
-        <p>
-          <Trans>
-            You have the right to withdraw your consent to use electronic signatures at any time before completing the
-            signing process. To withdraw your consent, please contact the sender of the document. In failing to contact
-            the sender you may reach out to <a href={`mailto:${SUPPORT_EMAIL}`}>{SUPPORT_EMAIL}</a> for assistance. Be
-            aware that withdrawing consent may delay or halt the completion of the related transaction or service.
-          </Trans>
-        </p>
-
-        <h2>
-          <Trans>Updating Your Information</Trans>
-        </h2>
-        <p>
-          <Trans>
-            It is crucial to keep your contact information, especially your email address, up to date with us. Please
-            notify us immediately of any changes to ensure that you continue to receive all necessary communications.
-          </Trans>
-        </p>
-
-        <h2>
-          <Trans>Retention of Documents</Trans>
-        </h2>
-        <p>
-          <Trans>
-            After signing a document electronically, you will be provided the opportunity to view, download, and print
-            the document for your records. It is highly recommended that you retain a copy of all electronically signed
-            documents for your personal records. We will also retain a copy of the signed document for our records
-            however we may not be able to provide you with a copy of the signed document after a certain period of time.
-          </Trans>
-        </p>
-
-        <h2>
-          <Trans>Acknowledgment</Trans>
-        </h2>
-        <p>
-          <Trans>
-            By proceeding to use the electronic signature service provided by Documenso, you affirm that you have read
-            and understood this disclosure. You agree to all terms and conditions related to the use of electronic
-            signatures and electronic transactions as outlined herein.
-          </Trans>
-        </p>
-
-        <h2>
-          <Trans>Contact Information</Trans>
-        </h2>
-        <p>
-          <Trans>
-            For any questions regarding this disclosure, electronic signatures, or any related process, please contact
-            us at: <a href={`mailto:${SUPPORT_EMAIL}`}>{SUPPORT_EMAIL}</a>
+            If you need further clarification about electronic signatures or the use of this platform, contact support
+            at <a href={`mailto:${SUPPORT_EMAIL}`}>{SUPPORT_EMAIL}</a>.
           </Trans>
         </p>
       </article>
