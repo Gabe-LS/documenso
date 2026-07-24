@@ -1,6 +1,7 @@
 import RecipientRemovedFromDocumentTemplate from '@documenso/email/templates/recipient-removed-from-document';
 import { prisma } from '@documenso/prisma';
 import { msg } from '@lingui/core/macro';
+import { OrganisationType } from '@prisma/client';
 import { createElement } from 'react';
 
 import { getI18nInstance } from '../../../client-only/providers/i18n-server';
@@ -23,6 +24,11 @@ export const run = async ({ payload, io }: { payload: TSendRecipientRemovedEmail
     },
     include: {
       documentMeta: true,
+      team: {
+        select: {
+          name: true,
+        },
+      },
     },
   });
 
@@ -40,15 +46,24 @@ export const run = async ({ payload, io }: { payload: TSendRecipientRemovedEmail
     return;
   }
 
-  const { branding, emailLanguage, senderEmail, replyToEmail, organisationId, claims, emailsDisabled, emailTransport } =
-    await getEmailContext({
-      emailType: 'RECIPIENT',
-      source: {
-        type: 'team',
-        teamId: envelope.teamId,
-      },
-      meta: envelope.documentMeta,
-    });
+  const {
+    branding,
+    emailLanguage,
+    organisationType,
+    senderEmail,
+    replyToEmail,
+    organisationId,
+    claims,
+    emailsDisabled,
+    emailTransport,
+  } = await getEmailContext({
+    emailType: 'RECIPIENT',
+    source: {
+      type: 'team',
+      teamId: envelope.teamId,
+    },
+    meta: envelope.documentMeta,
+  });
 
   // Don't send the removal email if the organisation has email sending disabled.
   if (emailsDisabled) {
@@ -79,7 +94,12 @@ export const run = async ({ payload, io }: { payload: TSendRecipientRemovedEmail
 
   const template = createElement(RecipientRemovedFromDocumentTemplate, {
     documentName: envelope.title,
-    inviterName: inviterName || undefined,
+    // Customer-facing sender identity: the team when the document went out
+    // through an organisation, otherwise the personal name from the payload.
+    inviterName:
+      organisationType === OrganisationType.ORGANISATION && envelope.team?.name
+        ? envelope.team.name
+        : inviterName || undefined,
     assetBaseUrl,
   });
 

@@ -4,7 +4,7 @@ import DocumentRejectionConfirmedEmail from '@documenso/email/templates/document
 import { isRecipientEmailValidForSending } from '@documenso/lib/utils/recipients';
 import { prisma } from '@documenso/prisma';
 import { msg } from '@lingui/core/macro';
-import { EnvelopeType, SendStatus, SigningStatus } from '@prisma/client';
+import { EnvelopeType, OrganisationType, SendStatus, SigningStatus } from '@prisma/client';
 import { createElement } from 'react';
 
 import { getI18nInstance } from '../../../client-only/providers/i18n-server';
@@ -65,14 +65,15 @@ export const run = async ({ payload, io }: { payload: TSendSigningRejectionEmail
     return;
   }
 
-  const { branding, emailLanguage, senderEmail, replyToEmail, emailsDisabled, emailTransport } = await getEmailContext({
-    emailType: 'RECIPIENT',
-    source: {
-      type: 'team',
-      teamId: envelope.teamId,
-    },
-    meta: envelope.documentMeta,
-  });
+  const { branding, emailLanguage, organisationType, senderEmail, replyToEmail, emailsDisabled, emailTransport } =
+    await getEmailContext({
+      emailType: 'RECIPIENT',
+      source: {
+        type: 'team',
+        teamId: envelope.teamId,
+      },
+      meta: envelope.documentMeta,
+    });
 
   const i18n = await getI18nInstance(emailLanguage);
 
@@ -87,7 +88,12 @@ export const run = async ({ payload, io }: { payload: TSendSigningRejectionEmail
       const recipientTemplate = createElement(DocumentRejectionConfirmedEmail, {
         recipientName: recipient.name,
         documentName: envelope.title,
-        documentOwnerName: envelope.user.name || envelope.user.email,
+        // Customer-facing sender identity: the team when the document went out
+        // through an organisation, otherwise the owner.
+        documentOwnerName:
+          organisationType === OrganisationType.ORGANISATION && envelope.team?.name
+            ? envelope.team.name
+            : envelope.user.name || envelope.user.email,
         reason: recipient.rejectionReason || '',
         assetBaseUrl: NEXT_PUBLIC_WEBAPP_URL(),
       });

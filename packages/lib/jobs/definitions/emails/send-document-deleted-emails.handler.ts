@@ -1,5 +1,7 @@
 import DocumentCancelTemplate from '@documenso/email/templates/document-cancel';
+import { prisma } from '@documenso/prisma';
 import { msg } from '@lingui/core/macro';
+import { OrganisationType } from '@prisma/client';
 import { createElement } from 'react';
 
 import { getI18nInstance } from '../../../client-only/providers/i18n-server';
@@ -18,14 +20,15 @@ export const run = async ({ payload, io }: { payload: TSendDocumentDeletedEmails
     return;
   }
 
-  const { branding, emailLanguage, senderEmail, replyToEmail, emailsDisabled, emailTransport } = await getEmailContext({
-    emailType: 'RECIPIENT',
-    source: {
-      type: 'team',
-      teamId,
-    },
-    meta,
-  });
+  const { branding, emailLanguage, organisationType, senderEmail, replyToEmail, emailsDisabled, emailTransport } =
+    await getEmailContext({
+      emailType: 'RECIPIENT',
+      source: {
+        type: 'team',
+        teamId,
+      },
+      meta,
+    });
 
   // Don't send cancellation emails if the organisation has email sending
   // disabled. Re-checked here (not just at enqueue time) because the org can be
@@ -38,6 +41,20 @@ export const run = async ({ payload, io }: { payload: TSendDocumentDeletedEmails
   const i18n = await getI18nInstance(emailLanguage);
   const title = trimEmailTitle(documentName);
 
+  // Customer-facing sender identity: the team when the document went out
+  // through an organisation, otherwise the personal name from the payload.
+  // The envelope is hard-deleted before this job runs, so the team is looked
+  // up directly.
+  const team =
+    organisationType === OrganisationType.ORGANISATION
+      ? await prisma.team.findFirst({
+          where: { id: teamId },
+          select: { name: true },
+        })
+      : null;
+
+  const senderName = team?.name || inviterName || undefined;
+
   for (const recipient of recipients) {
     await io.runTask(`send-document-deleted-emails-${recipient.email}`, async () => {
       if (!isRecipientEmailValidForSending(recipient)) {
@@ -46,7 +63,7 @@ export const run = async ({ payload, io }: { payload: TSendDocumentDeletedEmails
 
       const template = createElement(DocumentCancelTemplate, {
         documentName,
-        inviterName: inviterName || undefined,
+        inviterName: senderName,
         inviterEmail,
         assetBaseUrl,
       });

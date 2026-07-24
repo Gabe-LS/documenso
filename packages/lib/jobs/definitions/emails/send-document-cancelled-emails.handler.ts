@@ -2,7 +2,7 @@ import DocumentCancelTemplate from '@documenso/email/templates/document-cancel';
 import { isRecipientEmailValidForSending } from '@documenso/lib/utils/recipients';
 import { prisma } from '@documenso/prisma';
 import { msg } from '@lingui/core/macro';
-import { EnvelopeType, ReadStatus, SendStatus, SigningStatus } from '@prisma/client';
+import { EnvelopeType, OrganisationType, ReadStatus, SendStatus, SigningStatus } from '@prisma/client';
 import { createElement } from 'react';
 
 import { getI18nInstance } from '../../../client-only/providers/i18n-server';
@@ -48,17 +48,34 @@ export const run = async ({ payload, io }: { payload: TSendDocumentCancelledEmai
     },
   });
 
-  const { branding, emailLanguage, senderEmail, replyToEmail, organisationId, claims, emailsDisabled, emailTransport } =
-    await getEmailContext({
-      emailType: 'RECIPIENT',
-      source: {
-        type: 'team',
-        teamId: envelope.teamId,
-      },
-      meta: envelope.documentMeta,
-    });
+  const {
+    branding,
+    emailLanguage,
+    organisationType,
+    senderEmail,
+    replyToEmail,
+    organisationId,
+    claims,
+    emailsDisabled,
+    emailTransport,
+  } = await getEmailContext({
+    emailType: 'RECIPIENT',
+    source: {
+      type: 'team',
+      teamId: envelope.teamId,
+    },
+    meta: envelope.documentMeta,
+  });
 
   const { documentMeta, user: documentOwner } = envelope;
+
+  // Customer-facing sender identity: the team when the document went out
+  // through an organisation, otherwise the owner. Matches the invite,
+  // reminder and CC notification emails.
+  const senderName =
+    organisationType === OrganisationType.ORGANISATION && envelope.team?.name
+      ? envelope.team.name
+      : documentOwner.name || undefined;
 
   // Don't send cancellation emails if the organisation has email sending disabled or the owner is disabled (e.g. banned).
   if (emailsDisabled || documentOwner.disabled) {
@@ -125,7 +142,7 @@ export const run = async ({ payload, io }: { payload: TSendDocumentCancelledEmai
 
         const template = createElement(DocumentCancelTemplate, {
           documentName: envelope.title,
-          inviterName: documentOwner.name || undefined,
+          inviterName: senderName,
           inviterEmail: documentOwner.email,
           assetBaseUrl: NEXT_PUBLIC_WEBAPP_URL(),
           cancellationReason: cancellationReason || undefined,

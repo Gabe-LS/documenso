@@ -148,7 +148,9 @@ export const deleteEnvelopeRecipient = async ({
         envelopeId: envelope.id,
         recipientEmail: recipientToDelete.email,
         recipientName: recipientToDelete.name,
-        inviterName: envelope.team?.name || user.name || undefined,
+        // Personal name only - the job handler resolves the customer-facing
+        // sender identity (team for organisation sends) itself.
+        inviterName: user.name || undefined,
       },
     });
   }
