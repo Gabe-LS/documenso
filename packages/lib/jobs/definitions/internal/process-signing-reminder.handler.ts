@@ -5,6 +5,7 @@ import { msg } from '@lingui/core/macro';
 import {
   DocumentDistributionMethod,
   DocumentStatus,
+  OrganisationType,
   RecipientRole,
   SendStatus,
   SigningStatus,
@@ -104,15 +105,24 @@ export const run = async ({ payload, io }: { payload: TProcessSigningReminderJob
     return;
   }
 
-  const { branding, emailLanguage, senderEmail, replyToEmail, organisationId, claims, emailsDisabled, emailTransport } =
-    await getEmailContext({
-      emailType: 'RECIPIENT',
-      source: {
-        type: 'team',
-        teamId: envelope.teamId,
-      },
-      meta: envelope.documentMeta,
-    });
+  const {
+    branding,
+    emailLanguage,
+    organisationType,
+    senderEmail,
+    replyToEmail,
+    organisationId,
+    claims,
+    emailsDisabled,
+    emailTransport,
+  } = await getEmailContext({
+    emailType: 'RECIPIENT',
+    source: {
+      type: 'team',
+      teamId: envelope.teamId,
+    },
+    meta: envelope.documentMeta,
+  });
 
   // Don't send reminders if the owner is disabled (e.g. banned) or the organisation
   // has email sending disabled.
@@ -185,6 +195,14 @@ export const run = async ({ payload, io }: { payload: TProcessSigningReminderJob
       `Sending signing reminder for envelope ${envelope.id} to recipient ${recipient.id} (${recipient.email})`,
     );
 
+    // The sender shown in the reminder matches the invite and the CC
+    // notification: the team when the document went out through an
+    // organisation, otherwise the person.
+    const reminderSenderName =
+      organisationType === OrganisationType.ORGANISATION && envelope.team?.name
+        ? envelope.team.name
+        : envelope.user.name || undefined;
+
     const template = createElement(DocumentReminderEmailTemplate, {
       recipientName: recipient.name,
       documentName: envelope.title,
@@ -193,7 +211,7 @@ export const run = async ({ payload, io }: { payload: TProcessSigningReminderJob
       customBody: emailMessage,
       role: recipient.role,
       reportUrl,
-      inviterName: envelope.user.name || undefined,
+      inviterName: reminderSenderName,
     });
 
     const [html, text] = await Promise.all([

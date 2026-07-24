@@ -306,7 +306,13 @@ export const resendDocument = async ({ id, userId, recipients, teamId, requestMe
               : undefined,
             role: recipient.role,
             reportUrl,
-            inviterName: user.name || undefined,
+            // The sender shown in the reminder matches the invite and the CC
+            // notification: the team when the document went out through an
+            // organisation, otherwise the person.
+            inviterName:
+              organisationType === OrganisationType.ORGANISATION && envelope.team?.name
+                ? envelope.team.name
+                : user.name || undefined,
           });
 
       const [html, text] = await Promise.all([
