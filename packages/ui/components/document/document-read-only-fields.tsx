@@ -142,11 +142,11 @@ export const DocumentReadOnlyFields = ({
                       </Badge>
                     )}
 
-                    <p className="text-center font-semibold">
+                    <p className="text-balance text-center font-semibold">
                       <span>{parseMessageDescriptor(_, FRIENDLY_FIELD_TYPE[field.type])} field</span>
                     </p>
 
-                    <p className="mt-1 text-center text-muted-foreground text-xs">
+                    <p className="mt-1 text-balance text-center text-muted-foreground text-xs">
                       {getRecipientDisplayText(field.recipient)}
                     </p>
 

@@ -47,7 +47,7 @@ export const DocumentsTableEmptyState = ({ status }: DocumentsTableEmptyStatePro
     >
       <Icon className="h-12 w-12" strokeWidth={1.5} />
 
-      <div className="text-center">
+      <div className="text-balance text-center">
         <h3 className="font-semibold text-lg">{_(title)}</h3>
 
         <p className="mt-2 max-w-[60ch]">{_(message)}</p>

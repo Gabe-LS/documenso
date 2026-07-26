@@ -99,7 +99,7 @@ export default function PublicProfilePage({ loaderData }: Route.ComponentProps) 
 
         <div className="mt-4 space-y-1 text-muted-foreground">
           {(profile.bio ?? '').split('\n').map((line, index) => (
-            <p key={index} className="max-w-[60ch] whitespace-pre-wrap break-words text-center text-sm">
+            <p key={index} className="max-w-[60ch] whitespace-pre-wrap text-balance break-words text-center text-sm">
               {line}
             </p>
           ))}
@@ -108,7 +108,7 @@ export default function PublicProfilePage({ loaderData }: Route.ComponentProps) 
 
       {templates.length === 0 && (
         <div className="mt-4 w-full max-w-xl border-t pt-4">
-          <p className="max-w-[60ch] whitespace-pre-wrap break-words text-center text-muted-foreground text-sm leading-relaxed">
+          <p className="max-w-[60ch] whitespace-pre-wrap text-balance break-words text-center text-muted-foreground text-sm leading-relaxed">
             <Trans>It looks like {publicProfile.name} hasn't added any documents to their profile yet.</Trans>{' '}
             {!user?.id && (
               <span className="mt-2 inline-block">

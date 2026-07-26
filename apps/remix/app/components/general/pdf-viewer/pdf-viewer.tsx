@@ -183,7 +183,7 @@ export default function PDFViewer({
   if (!data) {
     return (
       <div ref={$el} className={cn('h-full w-full', className)} {...props}>
-        <p className="py-32 text-center text-muted-foreground text-sm">
+        <p className="text-balance py-32 text-center text-muted-foreground text-sm">
           <Trans>No document found</Trans>
         </p>
       </div>

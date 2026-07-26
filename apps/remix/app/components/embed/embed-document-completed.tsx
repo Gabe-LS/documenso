@@ -24,7 +24,7 @@ export const EmbedDocumentCompleted = ({ name, signature }: EmbedDocumentComplet
         />
       </div>
 
-      <p className="mt-8 max-w-[50ch] text-center text-muted-foreground text-sm">
+      <p className="mt-8 max-w-[50ch] text-balance text-center text-muted-foreground text-sm">
         <Trans>
           The document is now completed, please follow any instructions provided within the parent application.
         </Trans>

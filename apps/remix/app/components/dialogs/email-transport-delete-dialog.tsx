@@ -69,7 +69,7 @@ export const EmailTransportDeleteDialog = ({
         </DialogHeader>
 
         <Alert variant="neutral">
-          <AlertDescription className="text-center font-semibold">{transportName}</AlertDescription>
+          <AlertDescription className="text-balance text-center font-semibold">{transportName}</AlertDescription>
         </Alert>
 
         {isInUse && (

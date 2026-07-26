@@ -49,7 +49,7 @@ export default function OrganisationSettingsTeamsPage() {
 
         {canExecuteOrganisationAction('MANAGE_ORGANISATION', organisation.currentOrganisationRole) ? (
           <>
-            <p className="mb-8 max-w-md text-center text-muted-foreground text-sm">
+            <p className="mb-8 max-w-md text-balance text-center text-muted-foreground text-sm">
               <Trans>
                 Teams help you organise your work and collaborate with others. Create your first team to get started.
               </Trans>
@@ -91,7 +91,7 @@ export default function OrganisationSettingsTeamsPage() {
             </div>
           </>
         ) : (
-          <p className="mb-8 max-w-md text-center text-muted-foreground text-sm">
+          <p className="mb-8 max-w-md text-balance text-center text-muted-foreground text-sm">
             <Trans>
               You currently have no access to any teams within this organisation. Please contact your organisation to
               request access.

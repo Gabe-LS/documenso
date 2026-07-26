@@ -171,7 +171,7 @@ export const TeamGroupUpdateDialog = ({
         ) : (
           <>
             <Alert variant="neutral">
-              <AlertDescription className="text-center font-semibold">
+              <AlertDescription className="text-balance text-center font-semibold">
                 <Trans>You cannot modify a group which has a higher role than you.</Trans>
               </AlertDescription>
             </Alert>

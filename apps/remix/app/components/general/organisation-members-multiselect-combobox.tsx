@@ -102,7 +102,7 @@ export const OrganisationMembersMultiSelectCombobox = ({
         </p>
       }
       emptyIndicator={
-        <p className="py-4 text-center text-muted-foreground text-sm">
+        <p className="text-balance py-4 text-center text-muted-foreground text-sm">
           <Trans>No members found</Trans>
         </p>
       }

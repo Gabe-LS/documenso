@@ -171,13 +171,15 @@ export function EnvelopeRecipientFieldTooltip({
           </Badge>
         )}
 
-        <p className="text-center font-semibold">
+        <p className="text-balance text-center font-semibold">
           <span>
             <Trans>{t(FRIENDLY_FIELD_TYPE[field.type])} field</Trans>
           </span>
         </p>
 
-        <p className="mt-1 text-center text-muted-foreground text-xs">{getRecipientDisplayText(field.recipient)}</p>
+        <p className="mt-1 text-balance text-center text-muted-foreground text-xs">
+          {getRecipientDisplayText(field.recipient)}
+        </p>
 
         <button
           className="absolute top-0 right-0 my-1 p-2 focus:outline-none focus-visible:ring-0"

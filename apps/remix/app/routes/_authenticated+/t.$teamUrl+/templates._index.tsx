@@ -134,7 +134,7 @@ export default function TemplatesPage() {
               <div className="flex h-96 flex-col items-center justify-center gap-y-4 text-muted-foreground/60">
                 <Bird className="h-12 w-12" strokeWidth={1.5} />
 
-                <div className="text-center">
+                <div className="text-balance text-center">
                   <h3 className="font-semibold text-lg">
                     <Trans>We're all empty</Trans>
                   </h3>

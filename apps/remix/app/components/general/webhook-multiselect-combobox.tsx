@@ -39,7 +39,7 @@ export const WebhookMultiSelectCombobox = ({ listValues, onChange }: WebhookMult
       hideClearAllButton
       hidePlaceholderWhenSelected
       emptyIndicator={
-        <p className="text-center text-sm">
+        <p className="text-balance text-center text-sm">
           <Trans>No triggers available</Trans>
         </p>
       }

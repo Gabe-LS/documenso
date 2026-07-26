@@ -333,7 +333,7 @@ export const AddSubjectFormPartial = ({
                 className="rounded-lg border"
               >
                 {document.status === DocumentStatus.DRAFT ? (
-                  <div className="py-16 text-center text-muted-foreground text-sm">
+                  <div className="text-balance py-16 text-center text-muted-foreground text-sm">
                     <p>
                       <Trans>We won't send anything to notify recipients.</Trans>
                     </p>

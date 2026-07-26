@@ -62,7 +62,7 @@ export const ClaimDeleteDialog = ({ claimId, claimName, claimLocked, trigger }: 
         </DialogHeader>
 
         <Alert variant="neutral">
-          <AlertDescription className="text-center font-semibold">
+          <AlertDescription className="text-balance text-center font-semibold">
             {claimLocked ? <Trans>This claim is locked and cannot be deleted.</Trans> : claimName}
           </AlertDescription>
         </Alert>

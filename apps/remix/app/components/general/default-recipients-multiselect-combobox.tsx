@@ -107,7 +107,7 @@ export const DefaultRecipientsMultiSelectCombobox = ({
         ) : undefined
       }
       emptyIndicator={
-        <p className="text-center text-sm">
+        <p className="text-balance text-center text-sm">
           <Trans>Type an email address to add a recipient</Trans>
         </p>
       }

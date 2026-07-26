@@ -273,10 +273,13 @@ const FieldItemInner = ({
     >
       {(field.type === FieldType.RADIO || field.type === FieldType.CHECKBOX) && field.fieldMeta?.label && (
         <div
-          className={cn('absolute -top-16 right-0 left-0 rounded-md p-2 text-center text-gray-700 text-xs', {
-            'border border-primary bg-foreground/5': !fieldHasCheckedValues,
-            'border border-primary bg-documenso-200': fieldHasCheckedValues,
-          })}
+          className={cn(
+            'absolute -top-16 right-0 left-0 text-balance rounded-md p-2 text-center text-gray-700 text-xs',
+            {
+              'border border-primary bg-foreground/5': !fieldHasCheckedValues,
+              'border border-primary bg-documenso-200': fieldHasCheckedValues,
+            },
+          )}
         >
           {field.fieldMeta.label}
         </div>

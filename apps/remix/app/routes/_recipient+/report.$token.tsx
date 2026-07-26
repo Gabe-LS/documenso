@@ -58,7 +58,7 @@ export default function ReportSenderPage({ loaderData }: Route.ComponentProps) {
           <Trans>Sender reported</Trans>
         </h1>
 
-        <p className="mt-4 max-w-[60ch] text-center text-muted-foreground leading-normal">
+        <p className="mt-4 max-w-[60ch] text-balance text-center text-muted-foreground leading-normal">
           <Trans>
             Thank you for letting us know, we have flagged this sender for review. If you have any concerns please feel
             free to reach out to our{' '}
@@ -78,7 +78,7 @@ export default function ReportSenderPage({ loaderData }: Route.ComponentProps) {
         <Trans>Report this sender?</Trans>
       </h1>
 
-      <p className="mt-4 max-w-[60ch] text-center text-muted-foreground leading-normal">
+      <p className="mt-4 max-w-[60ch] text-balance text-center text-muted-foreground leading-normal">
         <Trans>
           If you did not expect this email or believe it is spam, you can report the sender to our team for review.
         </Trans>

@@ -149,7 +149,7 @@ export const DocumentDropzone = ({
 
           <p className="mt-6 font-medium text-foreground">{_(heading[type])}</p>
 
-          <p className="mt-1 text-center text-muted-foreground/80 text-sm">
+          <p className="mt-1 text-balance text-center text-muted-foreground/80 text-sm">
             {_(disabled ? disabledMessage : msg`Drag & drop your document here.`)}
           </p>
 

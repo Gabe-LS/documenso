@@ -31,11 +31,11 @@ export const UserProfileTimur = ({ className, rows = 2 }: UserProfileTimurProps)
           <VerifiedIcon className="h-8 w-8 text-primary" />
         </div>
 
-        <p className="mt-4 max-w-[40ch] text-center text-muted-foreground text-sm">
+        <p className="mt-4 max-w-[40ch] text-balance text-center text-muted-foreground text-sm">
           <Trans>Hey I’m Timur</Trans>
         </p>
 
-        <p className="mt-1 max-w-[40ch] text-center text-muted-foreground text-sm">
+        <p className="mt-1 max-w-[40ch] text-balance text-center text-muted-foreground text-sm">
           <Trans>Pick any of the following agreements below and start signing to get started</Trans>
         </p>
       </div>

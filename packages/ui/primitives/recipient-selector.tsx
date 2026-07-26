@@ -122,7 +122,10 @@ export const RecipientSelector = ({
               </div>
 
               {roleRecipients.length === 0 && (
-                <div key={`${role}-empty`} className="px-4 pt-2.5 pb-4 text-center text-muted-foreground/80 text-xs">
+                <div
+                  key={`${role}-empty`}
+                  className="text-balance px-4 pt-2.5 pb-4 text-center text-muted-foreground/80 text-xs"
+                >
                   <Trans>No recipients with this role</Trans>
                 </div>
               )}

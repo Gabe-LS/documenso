@@ -151,7 +151,7 @@ export function MultiSignDocumentList({ envelopes, onDocumentSelect }: MultiSign
       )}
 
       {allDocumentsCompleted && (
-        <Alert className="mt-6 text-center">
+        <Alert className="mt-6 text-balance text-center">
           <AlertTitle>
             <Trans>All documents have been completed!</Trans>
           </AlertTitle>

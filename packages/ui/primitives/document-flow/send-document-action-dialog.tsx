@@ -32,10 +32,10 @@ export const SendDocumentActionDialog = ({ loading, className, ...props }: SendD
 
       <DialogContent className="max-w-md">
         <DialogHeader>
-          <DialogTitle className="text-center font-semibold text-lg">
+          <DialogTitle className="text-balance text-center font-semibold text-lg">
             <Trans>Send Document</Trans>
           </DialogTitle>
-          <DialogDescription className="text-center text-base">
+          <DialogDescription className="text-balance text-center text-base">
             <Trans>You are about to send this document to the recipients. Are you sure you want to continue?</Trans>
           </DialogDescription>
         </DialogHeader>

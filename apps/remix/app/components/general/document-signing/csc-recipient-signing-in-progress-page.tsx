@@ -65,11 +65,11 @@ export const CscRecipientSigningInProgressPage = ({
         <>
           <AlertTriangleIcon className="h-12 w-12 text-destructive" />
 
-          <h2 className="mt-6 max-w-[35ch] text-center font-semibold text-2xl leading-normal md:text-3xl lg:text-4xl">
+          <h2 className="mt-6 max-w-[35ch] text-balance text-center font-semibold text-2xl leading-normal md:text-3xl lg:text-4xl">
             <Trans>Signing failed</Trans>
           </h2>
 
-          <p className="mt-2.5 max-w-[60ch] text-center font-medium text-muted-foreground/60 text-sm md:text-base">
+          <p className="mt-2.5 max-w-[60ch] text-balance text-center font-medium text-muted-foreground/60 text-sm md:text-base">
             {error === AppErrorCode.CSC_TSP_TIMEOUT ? (
               <Trans>The signing provider did not respond in time. Please retry.</Trans>
             ) : error === AppErrorCode.CSC_SAD_EXPIRED_PRE_SIGN ? (
@@ -91,11 +91,11 @@ export const CscRecipientSigningInProgressPage = ({
         <>
           <Loader2Icon className="h-12 w-12 animate-spin text-primary" />
 
-          <h2 className="mt-6 max-w-[35ch] text-center font-semibold text-2xl leading-normal md:text-3xl lg:text-4xl">
+          <h2 className="mt-6 max-w-[35ch] text-balance text-center font-semibold text-2xl leading-normal md:text-3xl lg:text-4xl">
             <Trans>Applying your signature</Trans>
           </h2>
 
-          <p className="mt-2.5 max-w-[60ch] text-center font-medium text-muted-foreground/60 text-sm md:text-base">
+          <p className="mt-2.5 max-w-[60ch] text-balance text-center font-medium text-muted-foreground/60 text-sm md:text-base">
             <Trans>Please don't close this tab. The signing provider is finalising your signature.</Trans>
           </p>
         </>

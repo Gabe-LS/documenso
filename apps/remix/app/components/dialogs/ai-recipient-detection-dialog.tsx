@@ -195,7 +195,7 @@ export const AiRecipientDetectionDialog = ({
                 </p>
               )}
 
-              <p className="mt-2 max-w-[40ch] text-center text-muted-foreground/60 text-xs">
+              <p className="mt-2 max-w-[40ch] text-balance text-center text-muted-foreground/60 text-xs">
                 <Trans>This can take a minute or two depending on the size of your document.</Trans>
               </p>
 
@@ -225,10 +225,10 @@ export const AiRecipientDetectionDialog = ({
               {detectedRecipients.length === 0 ? (
                 <div className="flex flex-col items-center py-8">
                   <UserIcon className="h-12 w-12 text-muted-foreground/50" />
-                  <p className="mt-4 text-center text-muted-foreground text-sm">
+                  <p className="mt-4 text-balance text-center text-muted-foreground text-sm">
                     <Trans>No recipients were detected in your document.</Trans>
                   </p>
-                  <p className="mt-1 text-center text-muted-foreground/70 text-xs">
+                  <p className="mt-1 text-balance text-center text-muted-foreground/70 text-xs">
                     <Trans>You can add recipients manually in the editor.</Trans>
                   </p>
                 </div>

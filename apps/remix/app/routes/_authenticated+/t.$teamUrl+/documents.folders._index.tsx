@@ -131,7 +131,7 @@ export default function DocumentsFoldersPage() {
 
           <div>
             {searchTerm && !hasSearchResults && (
-              <div className="mt-6 text-center text-muted-foreground">
+              <div className="mt-6 text-balance text-center text-muted-foreground">
                 <Trans>No folders found matching "{searchTerm}"</Trans>
               </div>
             )}

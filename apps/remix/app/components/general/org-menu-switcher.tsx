@@ -224,7 +224,7 @@ export const OrgMenuSwitcher = () => {
                     </div>
                   ))
                 ) : (
-                  <div className="my-12 flex items-center justify-center px-2 text-center text-muted-foreground text-sm">
+                  <div className="my-12 flex items-center justify-center text-balance px-2 text-center text-muted-foreground text-sm">
                     <Trans>Select an organisation to view teams</Trans>
                   </div>
                 )}

@@ -222,12 +222,12 @@ export default function CompletedSigningPage({ loaderData }: Route.ComponentProp
 
             {match({ status: signingStatus, deletedAt: document.deletedAt })
               .with({ status: 'COMPLETED' }, () => (
-                <p className="mt-2.5 max-w-[60ch] text-center font-medium text-muted-foreground/60 text-sm md:text-base">
+                <p className="mt-2.5 max-w-[60ch] text-balance text-center font-medium text-muted-foreground/60 text-sm md:text-base">
                   <Trans>Everyone has signed! You will receive an email copy of the signed document.</Trans>
                 </p>
               ))
               .with({ status: 'PROCESSING' }, () => (
-                <p className="mt-2.5 max-w-[60ch] text-center font-medium text-muted-foreground/60 text-sm md:text-base">
+                <p className="mt-2.5 max-w-[60ch] text-balance text-center font-medium text-muted-foreground/60 text-sm md:text-base">
                   <Trans>
                     All recipients have signed. The document is being processed and you will receive an email copy
                     shortly.
@@ -235,12 +235,12 @@ export default function CompletedSigningPage({ loaderData }: Route.ComponentProp
                 </p>
               ))
               .with({ deletedAt: null }, () => (
-                <p className="mt-2.5 max-w-[60ch] text-center font-medium text-muted-foreground/60 text-sm md:text-base">
+                <p className="mt-2.5 max-w-[60ch] text-balance text-center font-medium text-muted-foreground/60 text-sm md:text-base">
                   <Trans>You will receive an email copy of the signed document once everyone has signed.</Trans>
                 </p>
               ))
               .otherwise(() => (
-                <p className="mt-2.5 max-w-[60ch] text-center font-medium text-muted-foreground/60 text-sm md:text-base">
+                <p className="mt-2.5 max-w-[60ch] text-balance text-center font-medium text-muted-foreground/60 text-sm md:text-base">
                   <Trans>
                     This document has been cancelled by the owner and is no longer available for others to sign.
                   </Trans>
@@ -276,11 +276,11 @@ export default function CompletedSigningPage({ loaderData }: Route.ComponentProp
           <div className="flex flex-col items-center">
             {canSignUp && (
               <div className="flex max-w-xl flex-col items-center justify-center p-4 md:p-12">
-                <h2 className="mt-8 text-center font-semibold text-xl md:mt-0">
+                <h2 className="mt-8 text-balance text-center font-semibold text-xl md:mt-0">
                   <Trans>Need to sign documents?</Trans>
                 </h2>
 
-                <p className="mt-4 max-w-[55ch] text-center text-muted-foreground/60 leading-normal">
+                <p className="mt-4 max-w-[55ch] text-balance text-center text-muted-foreground/60 leading-normal">
                   <Trans>Create your account and start using state-of-the-art document signing.</Trans>
                 </p>
 

@@ -8,23 +8,23 @@ export const EmbedDocumentRejected = () => {
         <div className="flex items-center gap-x-4">
           <XCircle className="h-10 w-10 text-destructive" />
 
-          <h2 className="max-w-[35ch] text-center font-semibold text-2xl leading-normal md:text-3xl lg:text-4xl">
+          <h2 className="max-w-[35ch] text-balance text-center font-semibold text-2xl leading-normal md:text-3xl lg:text-4xl">
             <Trans>Document Rejected</Trans>
           </h2>
         </div>
 
-        <div className="mt-4 flex items-center text-center text-destructive text-sm">
+        <div className="mt-4 flex items-center text-balance text-center text-destructive text-sm">
           <Trans>You have rejected this document</Trans>
         </div>
 
-        <p className="mt-6 max-w-[60ch] text-center text-muted-foreground text-sm">
+        <p className="mt-6 max-w-[60ch] text-balance text-center text-muted-foreground text-sm">
           <Trans>
             The document owner has been notified of your decision. They may contact you with further instructions if
             necessary.
           </Trans>
         </p>
 
-        <p className="mt-2 max-w-[60ch] text-center text-muted-foreground text-sm">
+        <p className="mt-2 max-w-[60ch] text-balance text-center text-muted-foreground text-sm">
           <Trans>No further action is required from you at this time.</Trans>
         </p>
       </div>

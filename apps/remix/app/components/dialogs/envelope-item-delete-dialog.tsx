@@ -75,7 +75,7 @@ export const EnvelopeItemDeleteDialog = ({
           </DialogHeader>
 
           <Alert variant="neutral">
-            <AlertDescription className="text-center font-semibold">{envelopeItemTitle}</AlertDescription>
+            <AlertDescription className="text-balance text-center font-semibold">{envelopeItemTitle}</AlertDescription>
           </Alert>
 
           <fieldset disabled={isDeleting}>

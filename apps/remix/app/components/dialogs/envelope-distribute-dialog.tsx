@@ -442,7 +442,7 @@ export const EnvelopeDistributeDialog = ({
                         exit={{ opacity: 0, transition: { duration: 0.15 } }}
                         className="min-h-60 rounded-lg border"
                       >
-                        <div className="py-24 text-center text-muted-foreground text-sm">
+                        <div className="text-balance py-24 text-center text-muted-foreground text-sm">
                           <p>
                             <Trans>We won't send anything to notify recipients.</Trans>
                           </p>

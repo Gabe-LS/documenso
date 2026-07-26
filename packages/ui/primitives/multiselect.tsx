@@ -133,7 +133,12 @@ const CommandEmpty = ({ className, ...props }: React.ComponentProps<typeof Comma
   }
 
   return (
-    <div className={cn('px-2 py-4 text-center text-sm', className)} cmdk-empty="" role="presentation" {...props} />
+    <div
+      className={cn('text-balance px-2 py-4 text-center text-sm', className)}
+      cmdk-empty=""
+      role="presentation"
+      {...props}
+    />
   );
 };
 

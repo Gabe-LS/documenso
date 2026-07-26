@@ -436,13 +436,13 @@ const SigningPageV1 = ({ data }: { data: Awaited<ReturnType<typeof handleV1Loade
             </span>
           </div>
 
-          <h2 className="mt-6 max-w-[35ch] text-center font-semibold text-2xl leading-normal md:text-3xl lg:text-4xl">
+          <h2 className="mt-6 max-w-[35ch] text-balance text-center font-semibold text-2xl leading-normal md:text-3xl lg:text-4xl">
             <Trans>
               <span className="mt-1.5 block">"{document.title}"</span> is no longer available to sign
             </Trans>
           </h2>
 
-          <p className="mt-2.5 max-w-[60ch] text-center font-medium text-muted-foreground/60 text-sm md:text-base">
+          <p className="mt-2.5 max-w-[60ch] text-balance text-center font-medium text-muted-foreground/60 text-sm md:text-base">
             <Trans>This document has been cancelled by the owner.</Trans>
           </p>
 
@@ -535,13 +535,13 @@ const SigningPageV2 = ({ data }: { data: Awaited<ReturnType<typeof handleV2Loade
             </span>
           </div>
 
-          <h2 className="mt-6 max-w-[35ch] text-center font-semibold text-2xl leading-normal md:text-3xl lg:text-4xl">
+          <h2 className="mt-6 max-w-[35ch] text-balance text-center font-semibold text-2xl leading-normal md:text-3xl lg:text-4xl">
             <Trans>
               <span className="mt-1.5 block">"{envelope.title}"</span> is no longer available to sign
             </Trans>
           </h2>
 
-          <p className="mt-2.5 max-w-[60ch] text-center font-medium text-muted-foreground/60 text-sm md:text-base">
+          <p className="mt-2.5 max-w-[60ch] text-balance text-center font-medium text-muted-foreground/60 text-sm md:text-base">
             <Trans>This document has been cancelled by the owner.</Trans>
           </p>
 

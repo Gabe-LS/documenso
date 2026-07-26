@@ -5,7 +5,7 @@ import { Link } from 'react-router';
 export const EmbedPaywall = () => {
   return (
     <div className="flex min-h-screen items-center justify-center p-4">
-      <div className="text-center text-muted-foreground">
+      <div className="text-balance text-center text-muted-foreground">
         <p className="font-semibold text-lg">
           <Trans>This feature is not available on your current plan</Trans>
         </p>
