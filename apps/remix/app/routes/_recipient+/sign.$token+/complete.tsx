@@ -223,7 +223,7 @@ export default function CompletedSigningPage({ loaderData }: Route.ComponentProp
             {match({ status: signingStatus, deletedAt: document.deletedAt })
               .with({ status: 'COMPLETED' }, () => (
                 <p className="mt-2.5 max-w-[60ch] text-balance text-center font-medium text-muted-foreground/60 text-sm md:text-base">
-                  <Trans>Everyone has signed! You will receive an email copy of the signed document.</Trans>
+                  <Trans>You will receive an email copy of the signed document.</Trans>
                 </p>
               ))
               .with({ status: 'PROCESSING' }, () => (

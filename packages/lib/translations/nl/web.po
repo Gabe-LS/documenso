@@ -5475,10 +5475,6 @@ msgstr "Iedereen kan toegang krijgen tot en het document bekijken"
 msgid "Everyone has signed"
 msgstr "Iedereen heeft getekend"
 
-#: apps/remix/app/routes/_recipient+/sign.$token+/complete.tsx
-msgid "Everyone has signed! You will receive an email copy of the signed document."
-msgstr "Iedereen heeft ondertekend! U ontvangt een kopie van het ondertekende document per e-mail."
-
 #: apps/remix/app/components/general/organisation-usage-panel.tsx
 msgid "Exceeded"
 msgstr ""
@@ -9912,11 +9908,6 @@ msgstr "Instellen"
 #: packages/ui/components/document/document-share-button.tsx
 msgid "Share"
 msgstr "Delen"
-
-#: apps/remix/app/components/general/document/document-page-view-dropdown.tsx
-#: apps/remix/app/components/tables/documents-table-action-dropdown.tsx
-msgid "Share Signing Card"
-msgstr "Ondertekenkaart delen"
 
 #: packages/lib/constants/template.ts
 msgid "Share the Link"
@@ -14352,6 +14343,10 @@ msgstr "Je moet nu bij het inloggen een code uit je authenticator‑app invoeren
 #: apps/remix/app/routes/_recipient+/sign.$token+/complete.tsx
 msgid "You will receive an email copy of the signed document once everyone has signed."
 msgstr "U ontvangt een kopie van het ondertekende document per e-mail zodra iedereen heeft ondertekend."
+
+#: apps/remix/app/routes/_recipient+/sign.$token+/complete.tsx
+msgid "You will receive an email copy of the signed document."
+msgstr ""
 
 #: packages/email/templates/document-cc-notification.tsx
 #: packages/email/templates/document-cc-reminder-notification.tsx

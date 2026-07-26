@@ -5471,10 +5471,6 @@ msgstr "Everyone can access and view the document"
 msgid "Everyone has signed"
 msgstr "Everyone has signed"
 
-#: apps/remix/app/routes/_recipient+/sign.$token+/complete.tsx
-msgid "Everyone has signed! You will receive an email copy of the signed document."
-msgstr "Everyone has signed! You will receive an email copy of the signed document."
-
 #: apps/remix/app/components/general/organisation-usage-panel.tsx
 msgid "Exceeded"
 msgstr "Exceeded"
@@ -9908,11 +9904,6 @@ msgstr "Setup"
 #: packages/ui/components/document/document-share-button.tsx
 msgid "Share"
 msgstr "Share"
-
-#: apps/remix/app/components/general/document/document-page-view-dropdown.tsx
-#: apps/remix/app/components/tables/documents-table-action-dropdown.tsx
-msgid "Share Signing Card"
-msgstr "Share Signing Card"
 
 #: packages/lib/constants/template.ts
 msgid "Share the Link"
@@ -14348,6 +14339,10 @@ msgstr "You will now be required to enter a code from your authenticator app whe
 #: apps/remix/app/routes/_recipient+/sign.$token+/complete.tsx
 msgid "You will receive an email copy of the signed document once everyone has signed."
 msgstr "You will receive an email copy of the signed document once everyone has signed."
+
+#: apps/remix/app/routes/_recipient+/sign.$token+/complete.tsx
+msgid "You will receive an email copy of the signed document."
+msgstr "You will receive an email copy of the signed document."
 
 #: packages/email/templates/document-cc-notification.tsx
 #: packages/email/templates/document-cc-reminder-notification.tsx

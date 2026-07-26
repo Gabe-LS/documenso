@@ -5475,10 +5475,6 @@ msgstr "所有人都可以访问并查看该文档"
 msgid "Everyone has signed"
 msgstr "所有人都已签署"
 
-#: apps/remix/app/routes/_recipient+/sign.$token+/complete.tsx
-msgid "Everyone has signed! You will receive an email copy of the signed document."
-msgstr "所有人都已签署！您将收到一份已签署文档的电子邮件副本。"
-
 #: apps/remix/app/components/general/organisation-usage-panel.tsx
 msgid "Exceeded"
 msgstr ""
@@ -9912,11 +9908,6 @@ msgstr "设置"
 #: packages/ui/components/document/document-share-button.tsx
 msgid "Share"
 msgstr "分享"
-
-#: apps/remix/app/components/general/document/document-page-view-dropdown.tsx
-#: apps/remix/app/components/tables/documents-table-action-dropdown.tsx
-msgid "Share Signing Card"
-msgstr "分享签署卡片"
 
 #: packages/lib/constants/template.ts
 msgid "Share the Link"
@@ -14352,6 +14343,10 @@ msgstr "今后登录时，你需要输入验证器应用中的验证码。"
 #: apps/remix/app/routes/_recipient+/sign.$token+/complete.tsx
 msgid "You will receive an email copy of the signed document once everyone has signed."
 msgstr "当所有人签署完成后，您将收到一份已签署文档的电子邮件副本。"
+
+#: apps/remix/app/routes/_recipient+/sign.$token+/complete.tsx
+msgid "You will receive an email copy of the signed document."
+msgstr ""
 
 #: packages/email/templates/document-cc-notification.tsx
 #: packages/email/templates/document-cc-reminder-notification.tsx
