@@ -172,9 +172,7 @@ export default function CompletedSigningPage({ loaderData }: Route.ComponentProp
             })}
           >
             <Badge variant="neutral" size="default" className="mb-6 rounded-xl border bg-transparent">
-              <span className="block max-w-[10rem] truncate font-medium hover:underline md:max-w-[20rem]">
-                {document.title}
-              </span>
+              <span className="block max-w-[16rem] truncate font-medium md:max-w-[28rem]">{document.title}</span>
             </Badge>
 
             {/* Card with recipient */}
