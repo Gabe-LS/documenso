@@ -1,7 +1,14 @@
 import { SUPPORT_EMAIL } from '@documenso/lib/constants/app';
 import { Button } from '@documenso/ui/primitives/button';
+import { msg } from '@lingui/core/macro';
 import { Trans } from '@lingui/react/macro';
 import { Link } from 'react-router';
+
+import { appMetaTags } from '~/utils/meta';
+
+export function meta() {
+  return appMetaTags(msg`Signature Disclosure`);
+}
 
 export default function SignatureDisclosure() {
   return (

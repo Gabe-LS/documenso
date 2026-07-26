@@ -10092,6 +10092,10 @@ msgstr "Sign Up with OIDC"
 msgid "Signature"
 msgstr "Signature"
 
+#: apps/remix/app/routes/_unauthenticated+/articles.signature-disclosure.tsx
+msgid "Signature Disclosure"
+msgstr "Signature Disclosure"
+
 #: apps/remix/app/routes/_internal+/[__htmltopdf]+/certificate.tsx
 #: packages/lib/server-only/pdf/render-certificate.ts
 msgid "Signature ID"
