@@ -1,13 +1,10 @@
 import { Trans } from '@lingui/react/macro';
-import { XCircle } from 'lucide-react';
 
 export const EmbedDocumentRejected = () => {
   return (
     <div className="embed--DocumentRejected relative mx-auto flex min-h-[100dvh] max-w-screen-lg flex-col items-center justify-center p-6">
       <div className="flex flex-col items-center">
         <div className="flex items-center gap-x-4">
-          <XCircle className="h-10 w-10 text-destructive" />
-
           <h2 className="max-w-[35ch] text-balance text-center font-semibold text-2xl leading-normal md:text-3xl lg:text-4xl">
             <Trans>Document Rejected</Trans>
           </h2>

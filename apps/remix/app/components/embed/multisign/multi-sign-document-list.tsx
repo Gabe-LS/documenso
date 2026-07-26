@@ -6,7 +6,7 @@ import { Button } from '@documenso/ui/primitives/button';
 import { Progress } from '@documenso/ui/primitives/progress';
 import { Trans } from '@lingui/react/macro';
 import { ReadStatus, RecipientRole, SigningStatus } from '@prisma/client';
-import { ArrowRight, EyeIcon, XCircle } from 'lucide-react';
+import { ArrowRight, EyeIcon } from 'lucide-react';
 import { match } from 'ts-pattern';
 
 // Get the return type from getRecipientByToken
@@ -54,10 +54,6 @@ export function MultiSignDocumentList({ envelopes, onDocumentSelect }: MultiSign
   if (hasAssistantOrCcRecipient) {
     return (
       <div className="mx-auto mt-16 flex w-full max-w-lg flex-col md:mt-16 md:rounded-2xl md:border md:px-8 md:py-16 md:shadow-lg">
-        <div className="flex items-center justify-center">
-          <XCircle className="h-16 w-16 text-destructive md:h-24 md:w-24" strokeWidth={1.2} />
-        </div>
-
         <h2 className="mt-12 font-bold text-xl md:text-2xl">
           <Trans>It looks like we ran into an issue!</Trans>
         </h2>

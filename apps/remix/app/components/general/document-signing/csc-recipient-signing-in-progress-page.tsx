@@ -2,7 +2,7 @@ import { AppError, AppErrorCode } from '@documenso/lib/errors/app-error';
 import { trpc } from '@documenso/trpc/react';
 import { Button } from '@documenso/ui/primitives/button';
 import { Trans } from '@lingui/react/macro';
-import { AlertTriangleIcon, Loader2Icon } from 'lucide-react';
+import { Loader2Icon } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 
 export type CscRecipientSigningInProgressPageProps = {
@@ -63,8 +63,6 @@ export const CscRecipientSigningInProgressPage = ({
     <div className="-mx-4 flex max-w-[100vw] flex-col items-center overflow-x-hidden px-4 pt-16 md:-mx-8 md:px-8 lg:pt-16 xl:pt-24">
       {error ? (
         <>
-          <AlertTriangleIcon className="h-12 w-12 text-destructive" />
-
           <h2 className="mt-6 max-w-[35ch] text-balance text-center font-semibold text-2xl leading-normal md:text-3xl lg:text-4xl">
             <Trans>Signing failed</Trans>
           </h2>

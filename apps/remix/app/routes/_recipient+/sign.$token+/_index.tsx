@@ -32,7 +32,6 @@ import { prisma } from '@documenso/prisma';
 import { SigningCard3D } from '@documenso/ui/components/signing-card';
 import { Trans } from '@lingui/react/macro';
 import { DocumentSigningOrder, DocumentStatus, RecipientRole, SigningStatus } from '@prisma/client';
-import { Clock8 } from 'lucide-react';
 import { Link, redirect } from 'react-router';
 import { getOptionalLoaderContext } from 'server/utils/get-loader-session';
 import { match } from 'ts-pattern';
@@ -202,7 +201,9 @@ const handleV2Loader = async ({ params, request }: Route.LoaderArgs) => {
       const error = AppError.parseError(e);
 
       if (error.code === AppErrorCode.UNAUTHORIZED) {
-        const requiredAccessData = await getEnvelopeRequiredAccessData({ token });
+        const requiredAccessData = await getEnvelopeRequiredAccessData({
+          token,
+        });
 
         return {
           isDocumentAccessValid: false,
@@ -285,7 +286,9 @@ const handleV2Loader = async ({ params, request }: Route.LoaderArgs) => {
         isDocumentAccessValid: true,
         envelopeForSigning,
         csc: { state: 'blocked', code: blockingError.code } as const,
-        responseHeaders: { 'Set-Cookie': buildClearCscBlockingErrorCookieHeader() },
+        responseHeaders: {
+          'Set-Cookie': buildClearCscBlockingErrorCookieHeader(),
+        },
       } as const;
     }
 
@@ -307,7 +310,10 @@ const handleV2Loader = async ({ params, request }: Route.LoaderArgs) => {
         return {
           isDocumentAccessValid: true,
           envelopeForSigning,
-          csc: { state: 'signing-in-progress', sessionId: sadSessionId } as const,
+          csc: {
+            state: 'signing-in-progress',
+            sessionId: sadSessionId,
+          } as const,
         } as const;
       }
     }
@@ -429,13 +435,6 @@ const SigningPageV1 = ({ data }: { data: Awaited<ReturnType<typeof handleV1Loade
         />
 
         <div className="relative mt-2 flex w-full flex-col items-center">
-          <div className="mt-8 flex items-center text-center text-red-600">
-            <Clock8 className="mr-2 h-5 w-5" />
-            <span className="text-sm">
-              <Trans>Document Cancelled</Trans>
-            </span>
-          </div>
-
           <h2 className="mt-6 max-w-[35ch] text-balance text-center font-semibold text-2xl leading-normal md:text-3xl lg:text-4xl">
             <Trans>
               <span className="mt-1.5 block">"{document.title}"</span> is no longer available to sign
@@ -528,13 +527,6 @@ const SigningPageV2 = ({ data }: { data: Awaited<ReturnType<typeof handleV2Loade
         />
 
         <div className="relative mt-2 flex w-full flex-col items-center">
-          <div className="mt-8 flex items-center text-center text-red-600">
-            <Clock8 className="mr-2 h-5 w-5" />
-            <span className="text-sm">
-              <Trans>Document Cancelled</Trans>
-            </span>
-          </div>
-
           <h2 className="mt-6 max-w-[35ch] text-balance text-center font-semibold text-2xl leading-normal md:text-3xl lg:text-4xl">
             <Trans>
               <span className="mt-1.5 block">"{envelope.title}"</span> is no longer available to sign

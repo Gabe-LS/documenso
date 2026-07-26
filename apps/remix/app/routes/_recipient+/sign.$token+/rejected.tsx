@@ -9,7 +9,6 @@ import { Badge } from '@documenso/ui/primitives/badge';
 import { Button } from '@documenso/ui/primitives/button';
 import { Trans } from '@lingui/react/macro';
 import { FieldType } from '@prisma/client';
-import { XCircle } from 'lucide-react';
 import { Link } from 'react-router';
 
 import { DocumentSigningAuthPageView } from '~/components/general/document-signing/document-signing-auth-page';
@@ -37,7 +36,9 @@ export async function loader({ params, request }: Route.LoaderArgs) {
     throw new Response('Not Found', { status: 404 });
   }
 
-  const branding = await loadRecipientBrandingByTeamId({ teamId: document.teamId });
+  const branding = await loadRecipientBrandingByTeamId({
+    teamId: document.teamId,
+  });
 
   const truncatedTitle = truncateTitle(document.title);
 
@@ -103,8 +104,6 @@ export default function RejectedSigningPage({ loaderData }: Route.ComponentProps
 
         <div className="flex flex-col items-center">
           <div className="flex items-center gap-x-4">
-            <XCircle className="h-10 w-10 text-destructive" />
-
             <h2 className="max-w-[35ch] text-balance text-center font-semibold text-2xl leading-normal md:text-3xl lg:text-4xl">
               <Trans>Document Rejected</Trans>
             </h2>

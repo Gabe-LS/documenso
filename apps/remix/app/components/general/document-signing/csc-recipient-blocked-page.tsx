@@ -1,7 +1,6 @@
 import { AppErrorCode } from '@documenso/lib/errors/app-error';
 import { Button } from '@documenso/ui/primitives/button';
 import { Trans } from '@lingui/react/macro';
-import { AlertTriangleIcon } from 'lucide-react';
 
 export type CscRecipientBlockedPageProps = {
   code: string;
@@ -23,8 +22,6 @@ export const CscRecipientBlockedPage = ({ code, recipientToken }: CscRecipientBl
 
   return (
     <div className="-mx-4 flex max-w-[100vw] flex-col items-center overflow-x-hidden px-4 pt-16 md:-mx-8 md:px-8 lg:pt-16 xl:pt-24">
-      <AlertTriangleIcon className="h-12 w-12 text-destructive" />
-
       <h2 className="mt-6 max-w-[35ch] text-balance text-center font-semibold text-2xl leading-normal md:text-3xl lg:text-4xl">
         {code === AppErrorCode.CSC_CREDENTIAL_LIST_EMPTY ? (
           <Trans>No signing credentials available</Trans>
