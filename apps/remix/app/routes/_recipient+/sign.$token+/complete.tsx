@@ -18,7 +18,7 @@ import { Button } from '@documenso/ui/primitives/button';
 import { useLingui } from '@lingui/react';
 import { Trans } from '@lingui/react/macro';
 import { DocumentStatus, FieldType, RecipientRole } from '@prisma/client';
-import { CheckCircle2, Clock8, DownloadIcon, Loader2 } from 'lucide-react';
+import { DownloadIcon } from 'lucide-react';
 import { Link } from 'react-router';
 import { match } from 'ts-pattern';
 
@@ -48,7 +48,9 @@ export async function loader({ params, request }: Route.LoaderArgs) {
     throw new Response('Not Found', { status: 404 });
   }
 
-  const branding = await loadRecipientBrandingByTeamId({ teamId: document.teamId });
+  const branding = await loadRecipientBrandingByTeamId({
+    teamId: document.teamId,
+  });
 
   const [fields, recipient] = await Promise.all([
     getFieldsForToken({ token }),
@@ -74,7 +76,9 @@ export async function loader({ params, request }: Route.LoaderArgs) {
     } as const;
   }
 
-  const signatures = await getRecipientSignatures({ recipientId: recipient.id });
+  const signatures = await getRecipientSignatures({
+    recipientId: recipient.id,
+  });
   const isExistingUser = await getUserByEmail({ email: recipient.email })
     .then((u) => !!u)
     .catch(() => false);
@@ -185,40 +189,6 @@ export default function CompletedSigningPage({ loaderData }: Route.ComponentProp
               {recipient.role === RecipientRole.VIEWER && <Trans>Document Viewed</Trans>}
               {recipient.role === RecipientRole.APPROVER && <Trans>Document Approved</Trans>}
             </h2>
-
-            {match({ status: signingStatus, deletedAt: document.deletedAt })
-              .with({ status: 'COMPLETED' }, () => (
-                <div className="mt-4 flex items-center text-center text-documenso-700">
-                  <CheckCircle2 className="mr-2 h-5 w-5" />
-                  <span className="text-sm">
-                    <Trans>Everyone has signed</Trans>
-                  </span>
-                </div>
-              ))
-              .with({ status: 'PROCESSING' }, () => (
-                <div className="mt-4 flex items-center text-center text-orange-600">
-                  <Loader2 className="mr-2 h-5 w-5 animate-spin" />
-                  <span className="text-sm">
-                    <Trans>Processing document</Trans>
-                  </span>
-                </div>
-              ))
-              .with({ deletedAt: null }, () => (
-                <div className="mt-4 flex items-center text-center text-blue-600">
-                  <Clock8 className="mr-2 h-5 w-5" />
-                  <span className="text-sm">
-                    <Trans>Waiting for others to sign</Trans>
-                  </span>
-                </div>
-              ))
-              .otherwise(() => (
-                <div className="flex items-center text-center text-red-600">
-                  <Clock8 className="mr-2 h-5 w-5" />
-                  <span className="text-sm">
-                    <Trans>Document no longer available to sign</Trans>
-                  </span>
-                </div>
-              ))}
 
             {match({ status: signingStatus, deletedAt: document.deletedAt })
               .with({ status: 'COMPLETED' }, () => (

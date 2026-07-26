@@ -4345,10 +4345,6 @@ msgctxt "Audit log format"
 msgid "Document moved to team"
 msgstr "文档已移动到团队"
 
-#: apps/remix/app/routes/_recipient+/sign.$token+/complete.tsx
-msgid "Document no longer available to sign"
-msgstr "文档已不再可供签署"
-
 #: packages/lib/utils/document-audit-logs.ts
 msgctxt "Audit log format"
 msgid "Document opened"
@@ -5470,10 +5466,6 @@ msgstr "所有人"
 #: apps/remix/app/components/forms/document-preferences-form.tsx
 msgid "Everyone can access and view the document"
 msgstr "所有人都可以访问并查看该文档"
-
-#: apps/remix/app/routes/_recipient+/sign.$token+/complete.tsx
-msgid "Everyone has signed"
-msgstr "所有人都已签署"
 
 #: apps/remix/app/components/general/organisation-usage-panel.tsx
 msgid "Exceeded"
@@ -8536,10 +8528,6 @@ msgstr "私有模板只能由你查看和修改。"
 #: apps/remix/app/components/dialogs/assistant-confirmation-dialog.tsx
 msgid "Proceed"
 msgstr "继续"
-
-#: apps/remix/app/routes/_recipient+/sign.$token+/complete.tsx
-msgid "Processing document"
-msgstr "正在处理文档"
 
 #: apps/remix/app/components/general/app-command-menu.tsx
 #: apps/remix/app/components/general/settings-nav-desktop.tsx
@@ -13004,10 +12992,6 @@ msgstr "可见性"
 #: apps/remix/app/components/general/stack-avatars-with-tooltip.tsx
 msgid "Waiting"
 msgstr "等待中"
-
-#: apps/remix/app/routes/_recipient+/sign.$token+/complete.tsx
-msgid "Waiting for others to sign"
-msgstr "正在等待其他人签署"
 
 #: apps/remix/app/components/embed/embed-document-waiting-for-turn.tsx
 #: apps/remix/app/routes/_recipient+/sign.$token+/waiting.tsx

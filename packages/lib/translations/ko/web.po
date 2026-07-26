@@ -4345,10 +4345,6 @@ msgctxt "Audit log format"
 msgid "Document moved to team"
 msgstr "문서가 팀으로 이동되었습니다."
 
-#: apps/remix/app/routes/_recipient+/sign.$token+/complete.tsx
-msgid "Document no longer available to sign"
-msgstr "문서를 더 이상 서명할 수 없습니다"
-
 #: packages/lib/utils/document-audit-logs.ts
 msgctxt "Audit log format"
 msgid "Document opened"
@@ -5470,10 +5466,6 @@ msgstr "모두"
 #: apps/remix/app/components/forms/document-preferences-form.tsx
 msgid "Everyone can access and view the document"
 msgstr "모든 사용자가 문서에 접근하여 열람할 수 있습니다"
-
-#: apps/remix/app/routes/_recipient+/sign.$token+/complete.tsx
-msgid "Everyone has signed"
-msgstr "모든 사람이 서명했습니다"
 
 #: apps/remix/app/components/general/organisation-usage-panel.tsx
 msgid "Exceeded"
@@ -8536,10 +8528,6 @@ msgstr "비공개 템플릿은 본인만 수정 및 열람할 수 있습니다."
 #: apps/remix/app/components/dialogs/assistant-confirmation-dialog.tsx
 msgid "Proceed"
 msgstr "계속"
-
-#: apps/remix/app/routes/_recipient+/sign.$token+/complete.tsx
-msgid "Processing document"
-msgstr "문서 처리 중"
 
 #: apps/remix/app/components/general/app-command-menu.tsx
 #: apps/remix/app/components/general/settings-nav-desktop.tsx
@@ -13004,10 +12992,6 @@ msgstr "공개 범위"
 #: apps/remix/app/components/general/stack-avatars-with-tooltip.tsx
 msgid "Waiting"
 msgstr "대기 중"
-
-#: apps/remix/app/routes/_recipient+/sign.$token+/complete.tsx
-msgid "Waiting for others to sign"
-msgstr "다른 사람이 서명하기를 기다리는 중"
 
 #: apps/remix/app/components/embed/embed-document-waiting-for-turn.tsx
 #: apps/remix/app/routes/_recipient+/sign.$token+/waiting.tsx

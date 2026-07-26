@@ -4341,10 +4341,6 @@ msgctxt "Audit log format"
 msgid "Document moved to team"
 msgstr "Document moved to team"
 
-#: apps/remix/app/routes/_recipient+/sign.$token+/complete.tsx
-msgid "Document no longer available to sign"
-msgstr "Document no longer available to sign"
-
 #: packages/lib/utils/document-audit-logs.ts
 msgctxt "Audit log format"
 msgid "Document opened"
@@ -5466,10 +5462,6 @@ msgstr "Everyone"
 #: apps/remix/app/components/forms/document-preferences-form.tsx
 msgid "Everyone can access and view the document"
 msgstr "Everyone can access and view the document"
-
-#: apps/remix/app/routes/_recipient+/sign.$token+/complete.tsx
-msgid "Everyone has signed"
-msgstr "Everyone has signed"
 
 #: apps/remix/app/components/general/organisation-usage-panel.tsx
 msgid "Exceeded"
@@ -8532,10 +8524,6 @@ msgstr "Private templates can only be modified and viewed by you."
 #: apps/remix/app/components/dialogs/assistant-confirmation-dialog.tsx
 msgid "Proceed"
 msgstr "Proceed"
-
-#: apps/remix/app/routes/_recipient+/sign.$token+/complete.tsx
-msgid "Processing document"
-msgstr "Processing document"
 
 #: apps/remix/app/components/general/app-command-menu.tsx
 #: apps/remix/app/components/general/settings-nav-desktop.tsx
@@ -13000,10 +12988,6 @@ msgstr "Visibility"
 #: apps/remix/app/components/general/stack-avatars-with-tooltip.tsx
 msgid "Waiting"
 msgstr "Waiting"
-
-#: apps/remix/app/routes/_recipient+/sign.$token+/complete.tsx
-msgid "Waiting for others to sign"
-msgstr "Waiting for others to sign"
 
 #: apps/remix/app/components/embed/embed-document-waiting-for-turn.tsx
 #: apps/remix/app/routes/_recipient+/sign.$token+/waiting.tsx
