@@ -11145,7 +11145,7 @@ msgstr "Il documento è ora completato: segui le eventuali istruzioni fornite ne
 #: apps/remix/app/components/embed/embed-document-rejected.tsx
 #: apps/remix/app/routes/_recipient+/sign.$token+/rejected.tsx
 msgid "The document owner has been notified of your decision. They may contact you with further instructions if necessary."
-msgstr "Il proprietario del documento è stato informato della tua decisione. Potrebbe contattarti per ulteriori istruzioni, se necessario."
+msgstr "Il mittente è stato informato della tua decisione. Potrebbe contattarti per ulteriori istruzioni, se necessario."
 
 #. placeholder {0}: data.delegatedOwnerName || data.delegatedOwnerEmail
 #. placeholder {1}: data.teamName
@@ -11396,7 +11396,7 @@ msgstr "Il nome del firmatario"
 
 #: apps/remix/app/routes/_recipient+/sign.$token+/expired.tsx
 msgid "The signing deadline for this document has passed. Please contact the document owner if you need a new copy to sign."
-msgstr "Il termine per firmare questo documento è scaduto. Contatta il proprietario del documento se ti serve una nuova copia da firmare."
+msgstr "Il termine per firmare questo documento è scaduto. Contatta il mittente se ti serve una nuova copia da firmare."
 
 #: apps/remix/app/components/general/avatar-with-recipient.tsx
 #: apps/remix/app/components/general/document/document-page-view-recipients.tsx
@@ -11621,12 +11621,12 @@ msgstr "Questo documento è stato annullato"
 
 #: apps/remix/app/routes/_recipient+/sign.$token+/complete.tsx
 msgid "This document has been cancelled by the owner and is no longer available for others to sign."
-msgstr "Questo documento è stato annullato dal proprietario e non è più disponibile per la firma di altri."
+msgstr "Questo documento è stato annullato dal mittente e non è più disponibile per la firma di altri."
 
 #: apps/remix/app/routes/_recipient+/sign.$token+/_index.tsx
 #: apps/remix/app/routes/_recipient+/sign.$token+/_index.tsx
 msgid "This document has been cancelled by the owner."
-msgstr "Questo documento è stato annullato dal proprietario."
+msgstr "Questo documento è stato annullato dal mittente."
 
 #: apps/remix/app/routes/_authenticated+/t.$teamUrl+/documents.$id._index.tsx
 msgid "This document has been rejected by a recipient"
