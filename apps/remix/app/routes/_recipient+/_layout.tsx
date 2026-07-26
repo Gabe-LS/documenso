@@ -33,12 +33,12 @@ export default function RecipientLayout({ matches }: Route.ComponentProps) {
   );
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-dvh">
       {!hideHeader && sessionData?.user && <AuthenticatedHeader />}
 
       <main
         className={cn({
-          'mt-8 mb-8 px-4 md:mt-12 md:mb-12 md:px-8': !hideHeader,
+          'px-4 pt-8 pb-8 md:px-8 md:pt-12 md:pb-12': !hideHeader,
         })}
       >
         <Outlet />
