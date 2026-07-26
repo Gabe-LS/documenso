@@ -2494,13 +2494,13 @@ msgstr "2단계 인증을 활성화하면 이메일과 비밀번호로 로그인
 msgid "By proceeding to sign on this platform, you confirm that:"
 msgstr ""
 
-#: apps/remix/app/components/general/document-signing/document-signing-disclosure.tsx
-msgid "By proceeding with your electronic signature, you acknowledge and consent that it will be used to sign the given document and holds the same legal validity as a handwritten signature. By completing the electronic signing process, you affirm your understanding and acceptance of these conditions."
-msgstr "전자 서명을 진행함으로써 귀하는 해당 서명이 문서 서명에 사용되며 자필 서명과 동일한 법적 효력을 가진다는 점을 인지하고 동의하는 것입니다. 전자 서명 프로세스를 완료함으로써 이러한 조건을 이해하고 수락했음을 확인합니다."
-
 #: apps/remix/app/components/forms/signup.tsx
 msgid "By proceeding, you agree to our <0>Terms of Service</0> and <1>Privacy Policy</1>."
 msgstr "계속 진행함으로써 <0>서비스 이용약관</0>과 <1>개인정보 처리방침</1>에 동의하는 것으로 간주됩니다."
+
+#: apps/remix/app/components/general/document-signing/document-signing-disclosure.tsx
+msgid "By proceeding, you consent to the use of your electronic signature to sign this document and acknowledge that the operation has legal effect and is binding on you. By completing it, you confirm that you have understood and accepted these conditions."
+msgstr ""
 
 #: packages/ui/components/recipient/recipient-role-select.tsx
 msgid "Can prepare"

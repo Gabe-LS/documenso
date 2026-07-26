@@ -2494,13 +2494,13 @@ msgstr "Door 2FA in te schakelen, moet je elke keer dat je inlogt met e-mail en 
 msgid "By proceeding to sign on this platform, you confirm that:"
 msgstr ""
 
-#: apps/remix/app/components/general/document-signing/document-signing-disclosure.tsx
-msgid "By proceeding with your electronic signature, you acknowledge and consent that it will be used to sign the given document and holds the same legal validity as a handwritten signature. By completing the electronic signing process, you affirm your understanding and acceptance of these conditions."
-msgstr "Door verder te gaan met je elektronische handtekening erken en stem je ermee in dat deze wordt gebruikt om het betreffende document te ondertekenen en dat deze dezelfde juridische geldigheid heeft als een handgeschreven handtekening. Door het elektronische ondertekeningsproces te voltooien, bevestig je dat je deze voorwaarden begrijpt en accepteert."
-
 #: apps/remix/app/components/forms/signup.tsx
 msgid "By proceeding, you agree to our <0>Terms of Service</0> and <1>Privacy Policy</1>."
 msgstr "Door verder te gaan ga je akkoord met onze <0>Servicevoorwaarden</0> en <1>Privacyverklaring</1>."
+
+#: apps/remix/app/components/general/document-signing/document-signing-disclosure.tsx
+msgid "By proceeding, you consent to the use of your electronic signature to sign this document and acknowledge that the operation has legal effect and is binding on you. By completing it, you confirm that you have understood and accepted these conditions."
+msgstr ""
 
 #: packages/ui/components/recipient/recipient-role-select.tsx
 msgid "Can prepare"

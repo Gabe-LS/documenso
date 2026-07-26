@@ -2494,13 +2494,13 @@ msgstr "En activant l'authentification à deux facteurs, vous devrez entrer un c
 msgid "By proceeding to sign on this platform, you confirm that:"
 msgstr ""
 
-#: apps/remix/app/components/general/document-signing/document-signing-disclosure.tsx
-msgid "By proceeding with your electronic signature, you acknowledge and consent that it will be used to sign the given document and holds the same legal validity as a handwritten signature. By completing the electronic signing process, you affirm your understanding and acceptance of these conditions."
-msgstr "En procédant avec votre signature électronique, vous reconnaissez et consentez à ce qu'elle soit utilisée pour signer le document donné et a la même validité légale qu'une signature manuscrite. En complétant le processus de signature électronique, vous affirmez votre compréhension et votre acceptation de ces conditions."
-
 #: apps/remix/app/components/forms/signup.tsx
 msgid "By proceeding, you agree to our <0>Terms of Service</0> and <1>Privacy Policy</1>."
 msgstr "En poursuivant, vous acceptez nos <0>Conditions d'Utilisation</0> et notre <1>Politique de Confidentialité</1>."
+
+#: apps/remix/app/components/general/document-signing/document-signing-disclosure.tsx
+msgid "By proceeding, you consent to the use of your electronic signature to sign this document and acknowledge that the operation has legal effect and is binding on you. By completing it, you confirm that you have understood and accepted these conditions."
+msgstr ""
 
 #: packages/ui/components/recipient/recipient-role-select.tsx
 msgid "Can prepare"

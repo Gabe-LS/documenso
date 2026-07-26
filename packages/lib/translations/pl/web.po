@@ -2494,13 +2494,13 @@ msgstr "Po włączeniu weryfikacji dwuetapowej konieczne będzie wpisanie kodu z
 msgid "By proceeding to sign on this platform, you confirm that:"
 msgstr ""
 
-#: apps/remix/app/components/general/document-signing/document-signing-disclosure.tsx
-msgid "By proceeding with your electronic signature, you acknowledge and consent that it will be used to sign the given document and holds the same legal validity as a handwritten signature. By completing the electronic signing process, you affirm your understanding and acceptance of these conditions."
-msgstr "Korzystając z podpisu elektronicznego, wyrażasz zgodę na jego wykorzystanie do podpisania dokumentu oraz uznajesz, że ma on taką samą moc prawną jak podpis odręczny. Zakończenie procesu podpisywania elektronicznego oznacza akceptację niniejszych warunków."
-
 #: apps/remix/app/components/forms/signup.tsx
 msgid "By proceeding, you agree to our <0>Terms of Service</0> and <1>Privacy Policy</1>."
 msgstr "Kontynuując, akceptujesz nasz <0>Regulamin</0> i <1>Politykę prywatności</1>."
+
+#: apps/remix/app/components/general/document-signing/document-signing-disclosure.tsx
+msgid "By proceeding, you consent to the use of your electronic signature to sign this document and acknowledge that the operation has legal effect and is binding on you. By completing it, you confirm that you have understood and accepted these conditions."
+msgstr ""
 
 #: packages/ui/components/recipient/recipient-role-select.tsx
 msgid "Can prepare"

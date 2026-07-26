@@ -2495,13 +2495,13 @@ msgstr "Abilitando la 2FA, ti sarà richiesto di inserire un codice dalla tua ap
 msgid "By proceeding to sign on this platform, you confirm that:"
 msgstr "Procedendo con la firma su questa piattaforma, confermi:"
 
-#: apps/remix/app/components/general/document-signing/document-signing-disclosure.tsx
-msgid "By proceeding with your electronic signature, you acknowledge and consent that it will be used to sign the given document and holds the same legal validity as a handwritten signature. By completing the electronic signing process, you affirm your understanding and acceptance of these conditions."
-msgstr "Procedendo con la tua firma elettronica, riconosci e acconsenti che sarà utilizzata per firmare questo documento e che avrà la stessa validità legale di una firma autografa. Completando il processo di firma elettronica, confermi di aver compreso e accettato queste condizioni."
-
 #: apps/remix/app/components/forms/signup.tsx
 msgid "By proceeding, you agree to our <0>Terms of Service</0> and <1>Privacy Policy</1>."
 msgstr "Procedendo, accetti i nostri <0>Termini di Servizio</0> e <1>Informativa sulla Privacy</1>."
+
+#: apps/remix/app/components/general/document-signing/document-signing-disclosure.tsx
+msgid "By proceeding, you consent to the use of your electronic signature to sign this document and acknowledge that the operation has legal effect and is binding on you. By completing it, you confirm that you have understood and accepted these conditions."
+msgstr "Procedendo, acconsenti all'uso della firma elettronica per sottoscrivere questo documento e riconosci che l'operazione produce effetti giuridici ed è per te vincolante. Completandola, confermi di aver compreso e accettato queste condizioni."
 
 #: packages/ui/components/recipient/recipient-role-select.tsx
 msgid "Can prepare"

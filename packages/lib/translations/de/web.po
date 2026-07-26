@@ -2494,13 +2494,13 @@ msgstr "Wenn 2FA aktiviert wird, müssen Sie bei jedem Anmelden mit E-Mail-Passw
 msgid "By proceeding to sign on this platform, you confirm that:"
 msgstr ""
 
-#: apps/remix/app/components/general/document-signing/document-signing-disclosure.tsx
-msgid "By proceeding with your electronic signature, you acknowledge and consent that it will be used to sign the given document and holds the same legal validity as a handwritten signature. By completing the electronic signing process, you affirm your understanding and acceptance of these conditions."
-msgstr "Indem Sie fortfahren, Ihre elektronische Unterschrift zu leisten, erkennen Sie an und stimmen zu, dass sie verwendet wird, um das gegebene Dokument zu unterzeichnen, und die gleiche rechtliche Gültigkeit wie eine handschriftliche Unterschrift hat. Durch den Abschluss des elektronischen Unterzeichnungsprozesses bestätigen Sie Ihr Verständnis und Ihre Akzeptanz dieser Bedingungen."
-
 #: apps/remix/app/components/forms/signup.tsx
 msgid "By proceeding, you agree to our <0>Terms of Service</0> and <1>Privacy Policy</1>."
 msgstr "Indem Sie fortfahren, stimmen Sie unseren <0>Nutzungsbedingungen</0> und <1>Datenschutzrichtlinien</1> zu."
+
+#: apps/remix/app/components/general/document-signing/document-signing-disclosure.tsx
+msgid "By proceeding, you consent to the use of your electronic signature to sign this document and acknowledge that the operation has legal effect and is binding on you. By completing it, you confirm that you have understood and accepted these conditions."
+msgstr ""
 
 #: packages/ui/components/recipient/recipient-role-select.tsx
 msgid "Can prepare"
