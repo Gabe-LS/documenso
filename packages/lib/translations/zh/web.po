@@ -353,10 +353,6 @@ msgstr "{expiresInMinutes, plural, other {此代码将在 # 分钟后过期。}}
 msgid "{inviterName} <0>({inviterEmail})</0>"
 msgstr "{inviterName} <0>（{inviterEmail}）</0>"
 
-#: packages/email/templates/document-cancel.tsx
-msgid "{inviterName} has cancelled the document {documentName}, you don't need to sign it anymore."
-msgstr "{inviterName} 已取消文档 {documentName}，您不再需要签署。"
-
 #: packages/email/template-components/template-document-cancel.tsx
 msgid "{inviterName} has cancelled the document<0/>\"{documentName}\""
 msgstr "{inviterName} 已取消文档<0/>“{documentName}”"
@@ -365,14 +361,6 @@ msgstr "{inviterName} 已取消文档<0/>“{documentName}”"
 #: packages/email/template-components/template-document-invite.tsx
 msgid "{inviterName} has invited you to {0}<0/>\"{documentName}\""
 msgstr "{inviterName} 已邀请您 {0}<0/>“{documentName}”"
-
-#: packages/email/templates/document-invite.tsx
-msgid "{inviterName} has invited you to {action} {documentName}"
-msgstr "{inviterName} 已邀请您 {action} {documentName}"
-
-#: packages/email/templates/recipient-removed-from-document.tsx
-msgid "{inviterName} has removed you from the document {documentName}."
-msgstr "{inviterName} 已将您从文档 {documentName} 中移除。"
 
 #: packages/email/templates/recipient-removed-from-document.tsx
 msgid "{inviterName} has removed you from the document<0/>\"{documentName}\""
@@ -386,10 +374,6 @@ msgstr ""
 #: packages/email/template-components/template-document-invite.tsx
 msgid "{inviterName} on behalf of \"{teamName}\" has invited you to {0}<0/>\"{documentName}\""
 msgstr "{inviterName} 代表“{teamName}”已邀请您 {0}<0/>“{documentName}”"
-
-#: packages/email/templates/document-invite.tsx
-msgid "{inviterName} on behalf of \"{teamName}\" has invited you to {action} {documentName}"
-msgstr "{inviterName} 代表“{teamName}”已邀请您 {action} {documentName}"
 
 #: apps/remix/app/components/dialogs/passkey-create-dialog.tsx
 msgid "{MAXIMUM_PASSKEYS, plural, one {You cannot have more than # passkey.} other {You cannot have more than # passkeys.}}"
@@ -410,6 +394,7 @@ msgstr ""
 msgid "{name} has signed {title}"
 msgstr ""
 
+#: packages/lib/jobs/definitions/emails/send-document-cancelled-emails.handler.ts
 #: packages/lib/jobs/definitions/emails/send-rejection-emails.handler.ts
 msgid "{name} rejected {title}"
 msgstr ""
@@ -435,17 +420,9 @@ msgstr "{recipientCount} 位收件人"
 msgid "{recipientName} {action} \"{documentName}\" via a direct link"
 msgstr ""
 
-#: packages/email/templates/document-rejected.tsx
-msgid "{recipientName} has rejected the document '{documentName}'"
-msgstr "{recipientName} 已拒签文档“{documentName}”"
-
 #: packages/email/template-components/template-document-recipient-signed.tsx
 msgid "{recipientReference} has signed \"{documentName}\""
 msgstr "{recipientReference} 已签署“{documentName}”"
-
-#: packages/email/templates/document-recipient-signed.tsx
-msgid "{recipientReference} has signed {documentName}"
-msgstr "{recipientReference} 已签署 {documentName}"
 
 #: apps/remix/app/components/dialogs/public-profile-template-manage-dialog.tsx
 #: apps/remix/app/components/forms/public-profile-form.tsx
@@ -472,10 +449,6 @@ msgstr "{subscriptionClaimCount, plural, other {# 订阅认领}}"
 #: packages/email/template-components/template-document-invite.tsx
 msgid "{teamName} has invited you to {0}<0/>\"{documentName}\""
 msgstr "{teamName} 已邀请您 {0}<0/>“{documentName}”"
-
-#: packages/email/templates/document-invite.tsx
-msgid "{teamName} has invited you to {action} {documentName}"
-msgstr "{teamName} 已邀请您 {action} {documentName}"
 
 #: packages/lib/utils/document-audit-logs.ts
 msgid "{user} added a field"
@@ -982,6 +955,10 @@ msgstr "有成员已离开您的组织 {organisationName}"
 msgid "A name to help you identify this token later."
 msgstr ""
 
+#: packages/email/templates/admin-user-created.tsx
+msgid "A new account was created."
+msgstr ""
+
 #: packages/lib/jobs/definitions/emails/send-organisation-member-joined-email.handler.ts
 msgid "A new member has joined your organisation"
 msgstr "有新成员已加入您的组织"
@@ -1071,9 +1048,9 @@ msgstr "接受"
 msgid "Accept & Link Account"
 msgstr "接受并关联账户"
 
-#: packages/email/templates/confirm-team-email.tsx
-msgid "Accept team email request for {teamName} on Documenso"
-msgstr "在 Documenso 上接受 {teamName} 的团队邮箱请求"
+#: packages/email/templates/organisation-invite.tsx
+msgid "Accept the invitation to join the team."
+msgstr ""
 
 #: apps/remix/app/components/dialogs/team-inherit-member-disable-dialog.tsx
 msgid "Access disabled"
@@ -1562,6 +1539,10 @@ msgstr "所有收件人都已签署。文档正在处理中，您很快会收到
 msgid "All recipients will be notified"
 msgstr "所有收件人都会收到通知"
 
+#: packages/email/templates/organisation-delete.tsx
+msgid "All related documents and teams were removed."
+msgstr ""
+
 #: apps/remix/app/components/general/app-nav-mobile.tsx
 msgid "All rights reserved."
 msgstr "版权所有。"
@@ -1637,10 +1618,6 @@ msgstr "已经有账号？<0>改为登录</0>"
 #: apps/remix/app/components/tables/organisation-billing-invoices-table.tsx
 msgid "Amount"
 msgstr "金额"
-
-#: packages/email/templates/document-super-delete.tsx
-msgid "An admin has deleted your document \"{documentName}\"."
-msgstr "管理员已删除您的文档“{documentName}”。"
 
 #: packages/email/template-components/template-admin-user-created.tsx
 msgid "An administrator has created a Documenso account for you."
@@ -2033,6 +2010,10 @@ msgstr "审批"
 #: apps/remix/app/components/general/document-signing/document-signing-page-view-v2.tsx
 msgid "Approve Document"
 msgstr "批准文档"
+
+#: packages/email/templates/confirm-team-email.tsx
+msgid "Approve or decline the request."
+msgstr ""
 
 #: apps/remix/app/components/general/document/document-page-view-recipients.tsx
 msgid "Approved"
@@ -2455,10 +2436,6 @@ msgstr ""
 #: packages/lib/jobs/definitions/internal/bulk-send-template.handler.ts
 msgid "Bulk Send Complete: {0}"
 msgstr "批量发送完成：{0}"
-
-#: packages/email/templates/bulk-send-complete.tsx
-msgid "Bulk send operation complete for template \"{templateName}\""
-msgstr "模板“{templateName}”的批量发送操作已完成"
 
 #: apps/remix/app/components/dialogs/template-bulk-send-dialog.tsx
 msgid "Bulk Send Template via CSV"
@@ -3049,6 +3026,10 @@ msgstr "确认删除"
 #: packages/email/template-components/template-confirmation-email.tsx
 msgid "Confirm email"
 msgstr "确认邮箱"
+
+#: packages/email/templates/confirm-email.tsx
+msgid "Confirm your address to activate your account."
+msgstr ""
 
 #: apps/remix/app/components/forms/send-confirmation-email.tsx
 #: apps/remix/app/routes/_unauthenticated+/o.$orgUrl.signin.tsx
@@ -3797,6 +3778,7 @@ msgstr "删除账号"
 #: apps/remix/app/components/dialogs/account-delete-dialog.tsx
 #: apps/remix/app/components/dialogs/admin-user-delete-dialog.tsx
 #: apps/remix/app/components/dialogs/admin-user-delete-dialog.tsx
+#: apps/remix/app/components/dialogs/admin-user-delete-dialog.tsx
 msgid "Delete Account"
 msgstr "删除账号"
 
@@ -4377,6 +4359,7 @@ msgstr "文档已被拒签"
 
 #: apps/remix/app/components/embed/embed-document-rejected.tsx
 #: apps/remix/app/routes/_recipient+/sign.$token+/rejected.tsx
+#: apps/remix/app/routes/_recipient+/sign.$token+/rejected.tsx
 #: packages/email/template-components/template-document-rejected.tsx
 msgid "Document Rejected"
 msgstr "文档已被拒签"
@@ -4403,6 +4386,7 @@ msgstr "文档已发送"
 msgid "Document Settings"
 msgstr "文档设置"
 
+#: apps/remix/app/routes/_recipient+/sign.$token+/complete.tsx
 #: apps/remix/app/routes/_recipient+/sign.$token+/complete.tsx
 msgid "Document Signed"
 msgstr "文档已签署"
@@ -4656,6 +4640,11 @@ msgstr "下载 PDF"
 #: apps/remix/app/components/dialogs/template-bulk-send-dialog.tsx
 msgid "Download Template CSV"
 msgstr "下载模板 CSV"
+
+#: packages/email/templates/document-completed.tsx
+#: packages/email/templates/document-self-signed.tsx
+msgid "Download your signed copy."
+msgstr ""
 
 #: apps/remix/app/components/general/document/document-status.tsx
 #: apps/remix/app/components/general/envelope-editor/envelope-editor-header.tsx
@@ -5887,10 +5876,6 @@ msgstr "发件地址"
 msgid "From name"
 msgstr "发件人名称"
 
-#: packages/email/templates/document-created-from-direct-template.tsx
-msgid "From your template: {documentName}"
-msgstr ""
-
 #: packages/lib/jobs/definitions/emails/send-document-created-from-direct-template-email.handler.ts
 msgid "From your template: {title}"
 msgstr ""
@@ -6245,6 +6230,10 @@ msgstr "如果你没有预料到会收到这封邮件，或认为它是垃圾邮
 msgid "If you didn't expect this account or have any questions, please <0>contact support</0>."
 msgstr "如果你并未预期会收到此账户，或者有任何疑问，请<0>联系支持团队</0>。"
 
+#: packages/email/templates/reset-password.tsx
+msgid "If you didn't request this change, contact us immediately."
+msgstr ""
+
 #: packages/email/template-components/template-access-auth-2fa.tsx
 msgid "If you didn't request this verification code, you can safely ignore this email."
 msgstr "如果您没有请求此验证码，您可以放心忽略这封邮件。"
@@ -6564,6 +6553,10 @@ msgstr "现在还不是你签署的顺序。轮到你签署时，你会收到一
 #: packages/lib/constants/i18n.ts
 msgid "Italian"
 msgstr "意大利语"
+
+#: packages/email/templates/team-delete.tsx
+msgid "Its documents and members were removed."
+msgstr ""
 
 #: packages/lib/constants/i18n.ts
 msgid "Japanese"
@@ -7607,6 +7600,10 @@ msgstr "不支持"
 msgid "Nothing cancelled"
 msgstr "未取消任何内容"
 
+#: packages/email/templates/document-rejection-confirmed.tsx
+msgid "Nothing else is required from you."
+msgstr ""
+
 #: apps/remix/app/components/tables/documents-table-empty-state.tsx
 #: apps/remix/app/components/tables/documents-table-empty-state.tsx
 msgid "Nothing to do"
@@ -7728,6 +7725,10 @@ msgstr "噢！出错了。"
 #: apps/remix/app/routes/_authenticated+/o.$orgUrl._index.tsx
 msgid "Open menu"
 msgstr "打开菜单"
+
+#: packages/email/templates/document-invite.tsx
+msgid "Open the document to review and sign it."
+msgstr ""
 
 #: apps/remix/app/components/general/stack-avatars-with-tooltip.tsx
 msgid "Opened"
@@ -8237,10 +8238,6 @@ msgstr "没有配置传输方式的套餐将使用系统默认邮件程序。"
 #: packages/email/template-components/template-document-invite.tsx
 msgid "Please {0} your document<0/>\"{documentName}\""
 msgstr "请 {0} 您的文档<0/>“{documentName}”"
-
-#: packages/email/templates/document-invite.tsx
-msgid "Please {action} your document {documentName}"
-msgstr "请 {action} 您的文档 {documentName}"
 
 #: apps/remix/app/components/dialogs/organisation-member-invite-dialog.tsx
 msgid "Please check the CSV file and make sure it is according to our format"
@@ -9109,6 +9106,7 @@ msgid "Reply To Email <0>(Optional)</0>"
 msgstr "回复电子邮件 <0>（可选）</0>"
 
 #: apps/remix/app/routes/_recipient+/report.$token.tsx
+#: apps/remix/app/routes/_recipient+/report.$token.tsx
 msgid "Report sender"
 msgstr "举报发件人"
 
@@ -9245,6 +9243,10 @@ msgstr ""
 msgid "Reset Two Factor Authentication"
 msgstr "重置双重身份验证"
 
+#: packages/email/templates/forgot-password.tsx
+msgid "Reset your password with the link inside."
+msgstr ""
+
 #: apps/remix/app/components/forms/reset-password.tsx
 msgid "Resetting Password..."
 msgstr "正在重置密码..."
@@ -9327,6 +9329,10 @@ msgstr "返回模板列表"
 #: packages/email/templates/organisation-account-link-confirmation.tsx
 msgid "Review request"
 msgstr "审查请求"
+
+#: packages/email/templates/organisation-leave.tsx
+msgid "Review the remaining team members."
+msgstr ""
 
 #: apps/remix/app/components/general/teams/team-email-usage.tsx
 #: apps/remix/app/routes/_authenticated+/settings+/security.sessions.tsx
@@ -9515,9 +9521,21 @@ msgstr "安全活动"
 msgid "See Documentation"
 msgstr "查看文档"
 
+#: packages/email/templates/bulk-send-complete.tsx
+msgid "See how many documents were sent."
+msgstr ""
+
 #: apps/remix/app/routes/_authenticated+/admin+/documents.$id.tsx
 msgid "See the background jobs tab for the status"
 msgstr "状态请查看后台作业选项卡"
+
+#: packages/email/templates/document-rejected.tsx
+msgid "See the reason and decide how to proceed."
+msgstr ""
+
+#: packages/email/templates/organisation-join.tsx
+msgid "See who joined and manage access."
+msgstr ""
 
 #: apps/remix/app/components/general/document-signing/document-signing-dropdown-field.tsx
 #: packages/ui/primitives/document-flow/field-content.tsx
@@ -9666,6 +9684,7 @@ msgstr "选择行"
 
 #: apps/remix/app/components/embed/authoring/configure-document-advanced-settings.tsx
 #: apps/remix/app/components/forms/document-preferences-form.tsx
+#: apps/remix/app/components/general/envelope-editor/envelope-editor-settings-dialog.tsx
 #: packages/ui/primitives/document-flow/add-settings.tsx
 #: packages/ui/primitives/template-flow/add-template-settings.tsx
 msgid "Select signature types"
@@ -9740,6 +9759,10 @@ msgstr "选择器"
 #: packages/ui/primitives/document-flow/send-document-action-dialog.tsx
 msgid "Send"
 msgstr "发送"
+
+#: packages/email/templates/recipient-expired.tsx
+msgid "Send a new link if you still need the signature."
+msgstr ""
 
 #: apps/remix/app/components/dialogs/email-transport-send-test-dialog.tsx
 msgid "Send a test email using this transport to verify the configuration."
@@ -9981,12 +10004,9 @@ msgstr "签署文档"
 #: apps/remix/app/components/general/document-signing/document-signing-mobile-widget.tsx
 #: apps/remix/app/components/general/document-signing/document-signing-page-view-v1.tsx
 #: apps/remix/app/components/general/document-signing/document-signing-page-view-v2.tsx
+#: apps/remix/app/routes/_recipient+/_layout.tsx
 msgid "Sign Document"
 msgstr "签署文档"
-
-#: apps/remix/app/routes/_recipient+/_layout.tsx
-msgid "Sign Document - Documenso"
-msgstr "签署文档 - Documenso"
 
 #: apps/remix/app/components/embed/multisign/multi-sign-document-list.tsx
 msgid "Sign Documents"
@@ -10128,10 +10148,6 @@ msgctxt "Signed document (adjective)"
 msgid "Signed"
 msgstr "已签署"
 
-#: packages/email/templates/document-completed.tsx
-msgid "Signed by all: {documentName}"
-msgstr ""
-
 #: packages/lib/jobs/definitions/emails/send-document-completed-emails.handler.ts
 #: packages/lib/jobs/definitions/emails/send-document-completed-emails.handler.ts
 msgid "Signed by all: {title}"
@@ -10179,6 +10195,7 @@ msgstr "签名证书无效"
 msgid "Signing certificate provided by"
 msgstr "签署证书由以下机构提供"
 
+#: apps/remix/app/routes/_recipient+/sign.$token+/expired.tsx
 #: apps/remix/app/routes/_recipient+/sign.$token+/expired.tsx
 msgid "Signing Deadline Expired"
 msgstr "签署截止日期已过期"
@@ -10268,6 +10285,10 @@ msgstr ""
 #: packages/ui/primitives/document-flow/missing-signature-field-dialog.tsx
 msgid "Some signers have not been assigned a signature field. Please assign at least 1 signature field to each signer before proceeding."
 msgstr "部分签署人尚未被分配签名字段。请在继续前为每位签署人至少分配 1 个签名字段。"
+
+#: packages/email/templates/document-created-from-direct-template.tsx
+msgid "Someone completed your direct link template."
+msgstr ""
 
 #: apps/remix/app/components/dialogs/envelope-cancel-dialog.tsx
 #: apps/remix/app/components/dialogs/envelope-delete-dialog.tsx
@@ -10732,10 +10753,6 @@ msgstr "团队邮件名称"
 msgid "Team email removed"
 msgstr "团队邮箱已被移除"
 
-#: packages/email/templates/team-email-removed.tsx
-msgid "Team email removed for {teamName} on Documenso"
-msgstr "Documenso 上团队 {teamName} 的团队邮箱已被移除"
-
 #: apps/remix/app/routes/_unauthenticated+/team.verify.email.$token.tsx
 msgid "Team email verification"
 msgstr "团队邮箱验证"
@@ -11118,6 +11135,10 @@ msgstr "文档已保存，无法更改。"
 msgid "The document is now completed, please follow any instructions provided within the parent application."
 msgstr "文档现已完成，请按照宿主应用中的后续说明进行操作。"
 
+#: packages/email/templates/document-reminder.tsx
+msgid "The document is still waiting for your signature."
+msgstr ""
+
 #: apps/remix/app/components/embed/embed-document-rejected.tsx
 #: apps/remix/app/routes/_recipient+/sign.$token+/rejected.tsx
 msgid "The document owner has been notified of your decision. They may contact you with further instructions if necessary."
@@ -11385,10 +11406,6 @@ msgstr "签署链接已复制到剪贴板。"
 msgid "The signing provider did not respond in time. Please retry."
 msgstr "签名服务提供商未在规定时间内响应。请重试。"
 
-#: packages/email/templates/recipient-expired.tsx
-msgid "The signing window for \"{recipientName}\" on document \"{documentName}\" has expired."
-msgstr "收件人 “{recipientName}” 在文档 “{documentName}” 的签署时间窗口已过期。"
-
 #: apps/remix/app/components/general/admin-site-banner-section.tsx
 msgid "The site banner is a message that is shown at the top of the site. It can be used to display important information to your users."
 msgstr "站点横幅是在站点顶部显示的一条消息。你可以利用它向用户展示重要信息。"
@@ -11623,6 +11640,10 @@ msgstr "此文档在您的 Documenso 账户中可用。您可以在那里查看�
 #: apps/remix/app/routes/_authenticated+/t.$teamUrl+/documents.$id._index.tsx
 msgid "This document is currently a draft and has not been sent"
 msgstr "该文档目前是草稿，尚未发送"
+
+#: packages/email/templates/document-super-delete.tsx
+msgid "This document is no longer available."
+msgstr ""
 
 #: apps/remix/app/components/general/legacy-field-warning-popover.tsx
 msgid "This document is using legacy field insertion, we recommend using the new field insertion method for more accurate results."
@@ -12991,7 +13012,12 @@ msgstr "可见性"
 msgid "Waiting"
 msgstr "等待中"
 
+#: packages/email/templates/document-recipient-signed.tsx
+msgid "Waiting for the remaining signatures."
+msgstr ""
+
 #: apps/remix/app/components/embed/embed-document-waiting-for-turn.tsx
+#: apps/remix/app/routes/_recipient+/sign.$token+/waiting.tsx
 #: apps/remix/app/routes/_recipient+/sign.$token+/waiting.tsx
 msgid "Waiting for Your Turn"
 msgstr "正在等待你的顺序"
@@ -13352,6 +13378,10 @@ msgstr "我们将为你生成签署链接，你可以使用任意方式将这些
 #: packages/ui/primitives/document-flow/add-subject.tsx
 msgid "We won't send anything to notify recipients."
 msgstr "我们不会发送任何通知给收件人。"
+
+#: packages/email/templates/document-pending.tsx
+msgid "We'll email you when everyone has signed."
+msgstr ""
 
 #: apps/remix/app/routes/_authenticated+/o.$orgUrl.support.tsx
 msgid "We'll get back to you as soon as possible via email."
@@ -13724,6 +13754,14 @@ msgstr "你正在更新通行密钥 <0>{passkeyName}</0>。"
 msgid "You are currently updating the <0>{teamGroupName}</0> team group."
 msgstr "您当前正在更新 <0>{teamGroupName}</0> 团队组。"
 
+#: packages/email/templates/document-cc-notification.tsx
+msgid "You are in copy. No action needed."
+msgstr ""
+
+#: packages/email/templates/document-cc-reminder-notification.tsx
+msgid "You are in copy. The document is still awaiting signatures."
+msgstr ""
+
 #: apps/remix/app/components/dialogs/envelopes-bulk-move-dialog.tsx
 msgid "You are not allowed to move these items."
 msgstr "你无权移动这些项目。"
@@ -14010,10 +14048,6 @@ msgstr "你已达到文档数量上限。"
 msgid "You have reached your document limit. <0>Upgrade your account to continue!</0>"
 msgstr "你已达到文档数量上限。<0>升级账号以继续！</0>"
 
-#: packages/email/templates/document-rejection-confirmed.tsx
-msgid "You have rejected the document '{documentName}'"
-msgstr "您已拒签文档“{documentName}”"
-
 #: apps/remix/app/components/embed/embed-document-rejected.tsx
 #: apps/remix/app/routes/_recipient+/sign.$token+/rejected.tsx
 msgid "You have rejected this document"
@@ -14201,6 +14235,14 @@ msgstr "您需要设置通行密钥 (passkey) 才能查看此文档。"
 msgid "You need to setup a passkey to view this field."
 msgstr "您需要设置通行密钥 (passkey) 才能查看此字段。"
 
+#: packages/email/templates/recipient-removed-from-document.tsx
+msgid "You no longer have access to this document."
+msgstr ""
+
+#: packages/email/templates/document-cancel.tsx
+msgid "You no longer need to sign it."
+msgstr ""
+
 #: packages/lib/utils/document-audit-logs.ts
 msgid "You opened the document"
 msgstr "你打开了此文档"
@@ -14363,10 +14405,6 @@ msgstr "您发起了太多检测请求。请等待一分钟后再试。"
 msgid "You've signed \"{documentName}\""
 msgstr ""
 
-#: packages/email/templates/document-pending.tsx
-msgid "You've signed {documentName}, waiting for others"
-msgstr ""
-
 #: packages/lib/jobs/definitions/emails/send-document-pending-email.handler.ts
 msgid "You've signed {title}"
 msgstr ""
@@ -14378,6 +14416,10 @@ msgstr "您的账户"
 #: apps/remix/app/components/dialogs/account-delete-dialog.tsx
 msgid "Your account has been deleted successfully."
 msgstr "你的账号已成功删除。"
+
+#: packages/email/templates/team-email-removed.tsx
+msgid "Your address is no longer used by this team."
+msgstr ""
 
 #: apps/remix/app/components/forms/avatar-image.tsx
 msgid "Your avatar has been updated successfully."
@@ -14785,8 +14827,8 @@ msgid "Your two-factor authentication code"
 msgstr "您的双重身份验证码"
 
 #: packages/email/templates/access-auth-2fa.tsx
-msgid "Your verification code is {code}"
-msgstr "您的验证码是 {code}"
+msgid "Your verification code is inside."
+msgstr ""
 
 #: packages/email/template-components/template-access-auth-2fa.tsx
 msgid "Your verification code:"
