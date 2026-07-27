@@ -23,10 +23,10 @@ export function DocumentRejectedEmail({
 }: DocumentRejectedEmailProps) {
   const { _ } = useLingui();
 
-  const previewText = _(msg`${recipientName} has rejected the document '${documentName}'`);
+  const previewText = msg`See the reason and decide how to proceed.`;
 
   return (
-    <EmailLayout assetBaseUrl={assetBaseUrl} preview={previewText} reportUrl={reportUrl}>
+    <EmailLayout assetBaseUrl={assetBaseUrl} preview={_(previewText)} reportUrl={reportUrl}>
       <TemplateDocumentRejected
         recipientName={recipientName}
         documentName={documentName}

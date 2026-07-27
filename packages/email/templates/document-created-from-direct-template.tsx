@@ -28,7 +28,7 @@ export const DocumentCreatedFromDirectTemplateEmailTemplate = ({
 
   const action = _(RECIPIENT_ROLES_DESCRIPTION[recipientRole].actioned).toLowerCase();
 
-  const previewText = msg`From your template: ${documentName}`;
+  const previewText = msg`Someone completed your direct link template.`;
 
   return (
     <EmailLayout assetBaseUrl={assetBaseUrl} preview={_(previewText)} reportUrl={reportUrl}>

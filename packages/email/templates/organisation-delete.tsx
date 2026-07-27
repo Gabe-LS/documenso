@@ -21,6 +21,8 @@ export const OrganisationDeleteEmailTemplate = ({
 }: OrganisationDeleteEmailProps) => {
   const { _ } = useLingui();
 
+  const previewText = msg`All related documents and teams were removed.`;
+
   const title = msg`Your organisation has been deleted`;
 
   const description = deletedByAdmin
@@ -28,7 +30,7 @@ export const OrganisationDeleteEmailTemplate = ({
     : msg`The following organisation has been deleted. You and your members will no longer be able to access this organisation, its teams, or its associated data.`;
 
   return (
-    <EmailLayout assetBaseUrl={assetBaseUrl} isDocument={false}>
+    <EmailLayout assetBaseUrl={assetBaseUrl} preview={_(previewText)} isDocument={false}>
       <TemplateImage assetBaseUrl={assetBaseUrl} staticAsset="delete-team.png" width={120} height={106} />
 
       <EmailHeading>{_(title)}</EmailHeading>

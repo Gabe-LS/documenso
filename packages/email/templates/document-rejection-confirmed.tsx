@@ -23,10 +23,10 @@ export function DocumentRejectionConfirmedEmail({
 }: DocumentRejectionConfirmedEmailProps) {
   const { _ } = useLingui();
 
-  const previewText = _(msg`You have rejected the document '${documentName}'`);
+  const previewText = msg`Nothing else is required from you.`;
 
   return (
-    <EmailLayout assetBaseUrl={assetBaseUrl} preview={previewText} reportUrl={reportUrl}>
+    <EmailLayout assetBaseUrl={assetBaseUrl} preview={_(previewText)} reportUrl={reportUrl}>
       <TemplateDocumentRejectionConfirmed
         recipientName={recipientName}
         documentName={documentName}

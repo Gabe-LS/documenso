@@ -19,7 +19,7 @@ export const DocumentSuperDeleteEmailTemplate = ({
 }: DocumentDeleteEmailTemplateProps) => {
   const { _ } = useLingui();
 
-  const previewText = msg`An admin has deleted your document "${documentName}".`;
+  const previewText = msg`This document is no longer available.`;
 
   return (
     <EmailLayout assetBaseUrl={assetBaseUrl} preview={_(previewText)} reportUrl={reportUrl}>

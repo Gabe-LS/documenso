@@ -1,3 +1,5 @@
+import { msg } from '@lingui/core/macro';
+import { useLingui } from '@lingui/react';
 import { Trans } from '@lingui/react/macro';
 
 import { EmailBodyText, EmailHeading, EmailLayout } from '../template-components/email-primitives';
@@ -22,8 +24,12 @@ export const DocumentCcNotificationEmailTemplate = ({
   assetBaseUrl = 'http://localhost:3002',
   reportUrl,
 }: DocumentCcNotificationEmailTemplateProps) => {
+  const { _ } = useLingui();
+
+  const previewText = msg`You are in copy. No action needed.`;
+
   return (
-    <EmailLayout assetBaseUrl={assetBaseUrl} reportUrl={reportUrl}>
+    <EmailLayout assetBaseUrl={assetBaseUrl} preview={_(previewText)} reportUrl={reportUrl}>
       <TemplateDocumentImage assetBaseUrl={assetBaseUrl} />
 
       <EmailHeading>

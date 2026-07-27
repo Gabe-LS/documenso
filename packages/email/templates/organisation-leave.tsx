@@ -1,3 +1,5 @@
+import { msg } from '@lingui/core/macro';
+import { useLingui } from '@lingui/react';
 import { Trans } from '@lingui/react/macro';
 
 import { EmailHeading, EmailLayout, EmailPill } from '../template-components/email-primitives';
@@ -20,8 +22,12 @@ export const OrganisationLeaveEmailTemplate = ({
   organisationName = 'Organisation Name',
   organisationUrl = 'demo',
 }: OrganisationLeaveEmailProps) => {
+  const { _ } = useLingui();
+
+  const previewText = msg`Review the remaining team members.`;
+
   return (
-    <EmailLayout assetBaseUrl={assetBaseUrl} isDocument={false}>
+    <EmailLayout assetBaseUrl={assetBaseUrl} preview={_(previewText)} isDocument={false}>
       <TemplateImage assetBaseUrl={assetBaseUrl} staticAsset="delete-user.png" width={102} height={87} />
 
       <EmailHeading>

@@ -20,7 +20,7 @@ export const RecipientRemovedFromDocumentTemplate = ({
 }: RecipientRemovedFromDocumentEmailTemplateProps) => {
   const { _ } = useLingui();
 
-  const previewText = msg`${inviterName} has removed you from the document ${documentName}.`;
+  const previewText = msg`You no longer have access to this document.`;
 
   return (
     <EmailLayout assetBaseUrl={assetBaseUrl} preview={_(previewText)} reportUrl={reportUrl}>

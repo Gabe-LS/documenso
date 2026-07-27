@@ -23,7 +23,7 @@ export const AccessAuth2FAEmailTemplate = ({
 }: AccessAuth2FAEmailTemplateProps) => {
   const { _ } = useLingui();
 
-  const previewText = msg`Your verification code is ${code}`;
+  const previewText = msg`Your verification code is inside.`;
 
   return (
     <EmailLayout assetBaseUrl={assetBaseUrl} preview={_(previewText)} isDocument={false}>

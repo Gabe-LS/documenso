@@ -1,3 +1,5 @@
+import { msg } from '@lingui/core/macro';
+import { useLingui } from '@lingui/react';
 import { Trans } from '@lingui/react/macro';
 
 import {
@@ -25,8 +27,12 @@ export const OrganisationInviteEmailTemplate = ({
   organisationName = 'Organisation Name',
   token = '',
 }: OrganisationInviteEmailProps) => {
+  const { _ } = useLingui();
+
+  const previewText = msg`Accept the invitation to join the team.`;
+
   return (
-    <EmailLayout assetBaseUrl={assetBaseUrl} isDocument={false}>
+    <EmailLayout assetBaseUrl={assetBaseUrl} preview={_(previewText)} isDocument={false}>
       <TemplateImage assetBaseUrl={assetBaseUrl} staticAsset="add-user.png" width={120} height={120} />
 
       <EmailHeading>

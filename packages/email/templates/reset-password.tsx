@@ -1,4 +1,6 @@
 import { SUPPORT_EMAIL } from '@documenso/lib/constants/app';
+import { msg } from '@lingui/core/macro';
+import { useLingui } from '@lingui/react';
 import { Trans } from '@lingui/react/macro';
 
 import { Link } from '../components';
@@ -16,9 +18,14 @@ export const ResetPasswordTemplate = ({
   userEmail = 'lucas@documenso.com',
   assetBaseUrl = 'http://localhost:3002',
 }: ResetPasswordTemplateProps) => {
+  const { _ } = useLingui();
+
+  const previewText = msg`If you didn't request this change, contact us immediately.`;
+
   return (
     <EmailLayout
       assetBaseUrl={assetBaseUrl}
+      preview={_(previewText)}
       isDocument={false}
       secondaryContent={
         <>

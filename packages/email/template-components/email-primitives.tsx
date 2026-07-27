@@ -113,6 +113,32 @@ const MSO_FIXED_WIDTH_CLOSE = '<!--[if mso]></td></tr></table><![endif]-->';
 
 export type EmailLayoutProps = {
   assetBaseUrl: string;
+  /**
+   * Inbox preview text (the "preheader") — the grey snippet mail clients show
+   * next to the subject, and the text that lands on lock-screen notifications.
+   * Omitting it does NOT mean "no preview": the client falls back to scraping
+   * the top of the body, which is unpredictable. Every customer-facing email
+   * must set it.
+   *
+   * Rules, in priority order:
+   *
+   * 1. NEVER wrap a placeholder in single quotes. ICU MessageFormat treats `'`
+   *    as an escape character, so msg`… the document '${documentName}'`
+   *    emits the LITERAL text `{documentName}` to the recipient. Use double
+   *    quotes, or omit the value entirely. Two live templates shipped this bug
+   *    before it was caught; prefer previews with no placeholders at all.
+   * 2. Never restate the subject. The subject names the event, the preview
+   *    says what it means or what happens next. If there is nothing to add,
+   *    the subject needs improving — not duplicating.
+   * 3. Never name Documenso. Same white-label rule as the footer.
+   * 4. Keep it under ~90 characters; Gmail and Outlook truncate past that.
+   * 5. Never put a secret in it. Verification codes, tokens and links render
+   *    on lock screens. `access-auth-2fa` deliberately says the code is
+   *    "inside" rather than printing it.
+   * 6. Italian follows the catalog rules: informal "tu", feminine "email",
+   *    no "Si prega di", no em dashes, straight apostrophes, and no past
+   *    participles that agree with the recipient's gender.
+   */
   preview?: string;
   children: ReactNode;
   isDocument?: boolean;

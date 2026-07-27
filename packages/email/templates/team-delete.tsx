@@ -18,12 +18,14 @@ export const TeamDeleteEmailTemplate = ({
 }: TeamDeleteEmailProps) => {
   const { _ } = useLingui();
 
+  const previewText = msg`Its documents and members were removed.`;
+
   const title = msg`A team you were a part of has been deleted`;
 
   const description = msg`The following team has been deleted. You will no longer be able to access this team and its documents`;
 
   return (
-    <EmailLayout assetBaseUrl={assetBaseUrl} isDocument={false}>
+    <EmailLayout assetBaseUrl={assetBaseUrl} preview={_(previewText)} isDocument={false}>
       <TemplateImage assetBaseUrl={assetBaseUrl} staticAsset="delete-team.png" width={120} height={106} />
 
       <EmailHeading>{_(title)}</EmailHeading>

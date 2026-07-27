@@ -32,7 +32,7 @@ export const BulkSendCompleteEmail = ({
 }: BulkSendCompleteEmailProps) => {
   const { _ } = useLingui();
 
-  const previewText = msg`Bulk send operation complete for template "${templateName}"`;
+  const previewText = msg`See how many documents were sent.`;
 
   return (
     <EmailLayout assetBaseUrl={assetBaseUrl} preview={_(previewText)} isDocument={false}>

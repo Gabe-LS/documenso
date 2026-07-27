@@ -19,7 +19,7 @@ export const RecipientExpiredTemplate = ({
 }: RecipientExpiredEmailTemplateProps) => {
   const { _ } = useLingui();
 
-  const previewText = msg`The signing window for "${recipientName}" on document "${documentName}" has expired.`;
+  const previewText = msg`Send a new link if you still need the signature.`;
 
   return (
     <EmailLayout assetBaseUrl={assetBaseUrl} preview={_(previewText)} reportUrl={reportUrl}>

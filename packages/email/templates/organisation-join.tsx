@@ -1,3 +1,5 @@
+import { msg } from '@lingui/core/macro';
+import { useLingui } from '@lingui/react';
 import { Trans } from '@lingui/react/macro';
 
 import { EmailHeading, EmailLayout, EmailPill } from '../template-components/email-primitives';
@@ -20,8 +22,12 @@ export const OrganisationJoinEmailTemplate = ({
   organisationName = 'Organisation Name',
   organisationUrl = 'demo',
 }: OrganisationJoinEmailProps) => {
+  const { _ } = useLingui();
+
+  const previewText = msg`See who joined and manage access.`;
+
   return (
-    <EmailLayout assetBaseUrl={assetBaseUrl} isDocument={false}>
+    <EmailLayout assetBaseUrl={assetBaseUrl} preview={_(previewText)} isDocument={false}>
       <TemplateImage assetBaseUrl={assetBaseUrl} staticAsset="add-user.png" width={120} height={120} />
 
       <EmailHeading>

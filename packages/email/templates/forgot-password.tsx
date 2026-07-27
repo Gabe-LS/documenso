@@ -1,3 +1,6 @@
+import { msg } from '@lingui/core/macro';
+import { useLingui } from '@lingui/react';
+
 import { EmailLayout } from '../template-components/email-primitives';
 import type { TemplateForgotPasswordProps } from '../template-components/template-forgot-password';
 import { TemplateForgotPassword } from '../template-components/template-forgot-password';
@@ -8,8 +11,12 @@ export const ForgotPasswordTemplate = ({
   resetPasswordLink = 'https://documenso.com',
   assetBaseUrl = 'http://localhost:3002',
 }: ForgotPasswordTemplateProps) => {
+  const { _ } = useLingui();
+
+  const previewText = msg`Reset your password with the link inside.`;
+
   return (
-    <EmailLayout assetBaseUrl={assetBaseUrl} isDocument={false}>
+    <EmailLayout assetBaseUrl={assetBaseUrl} preview={_(previewText)} isDocument={false}>
       <TemplateForgotPassword resetPasswordLink={resetPasswordLink} assetBaseUrl={assetBaseUrl} />
     </EmailLayout>
   );

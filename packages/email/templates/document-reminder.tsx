@@ -1,3 +1,5 @@
+import { msg } from '@lingui/core/macro';
+import { useLingui } from '@lingui/react';
 import { RecipientRole } from '@prisma/client';
 
 import { EmailLayout } from '../template-components/email-primitives';
@@ -25,9 +27,14 @@ export const DocumentReminderEmailTemplate = ({
   reportUrl,
   inviterName = 'Lucas Smith',
 }: DocumentReminderEmailTemplateProps) => {
+  const { _ } = useLingui();
+
+  const previewText = msg`The document is still waiting for your signature.`;
+
   return (
     <EmailLayout
       assetBaseUrl={assetBaseUrl}
+      preview={_(previewText)}
       reportUrl={reportUrl}
       secondaryContent={customBody && <TemplateCustomMessageBody text={customBody} />}
     >
