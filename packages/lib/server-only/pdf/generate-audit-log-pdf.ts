@@ -3,6 +3,7 @@ import { prisma } from '@documenso/prisma';
 import { PDF } from '@libpdf/core';
 import { i18n } from '@lingui/core';
 
+import { IS_BILLING_ENABLED } from '../../constants/app';
 import { ZSupportedLanguageCodeSchema } from '../../constants/i18n';
 import { parseDocumentAuditLogData } from '../../utils/document-audit-logs';
 import { getTranslations } from '../../utils/i18n';
@@ -48,7 +49,9 @@ export const generateAuditLogPdf = async (options: GenerateAuditLogPdfOptions) =
     envelopeItems,
     recipients,
     auditLogs,
-    hidePoweredBy: organisationClaim.flags.hidePoweredBy ?? false,
+    // See generate-certificate-pdf.ts — kept in step with the web and email
+    // branding resolvers so a billing-disabled instance is white-label everywhere.
+    hidePoweredBy: !IS_BILLING_ENABLED() || organisationClaim.flags.hidePoweredBy === true,
     pageWidth,
     pageHeight,
     i18n,

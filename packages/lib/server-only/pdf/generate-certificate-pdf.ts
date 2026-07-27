@@ -6,6 +6,7 @@ import { FieldType } from '@prisma/client';
 import { prop, sortBy } from 'remeda';
 import { match } from 'ts-pattern';
 
+import { IS_BILLING_ENABLED } from '../../constants/app';
 import { ZSupportedLanguageCodeSchema } from '../../constants/i18n';
 import type { TDocumentAuditLogBaseSchema } from '../../types/document-audit-logs';
 import { extractDocumentAuthMethods } from '../../utils/document-auth';
@@ -138,7 +139,10 @@ export const generateCertificatePdf = async (options: GenerateCertificatePdfOpti
     envelopeOwner,
     envelopeId: envelope.id,
     qrToken: envelope.qrToken,
-    hidePoweredBy: organisationClaim.flags.hidePoweredBy ?? false,
+    // Mirrors load-recipient-branding.ts and get-email-context.ts: with billing
+    // disabled there are no plan claims to gate on, so the branding must be
+    // hidden unconditionally. The certificate is a recipient-facing attachment.
+    hidePoweredBy: !IS_BILLING_ENABLED() || organisationClaim.flags.hidePoweredBy === true,
     pageWidth,
     pageHeight,
     i18n,

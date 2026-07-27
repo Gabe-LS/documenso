@@ -217,13 +217,21 @@ const handleOrganisationEmailContext = async (organisationId: string) => {
 
   const allowedEmails = getAllowedEmails(organisation);
 
+  const billingEnabled = IS_BILLING_ENABLED();
+
+  // Mirror the web resolver (server-only/branding/load-recipient-branding.ts): when billing is
+  // disabled there are no plans to gate on, so claim flags are never populated and the branding
+  // must be hidden unconditionally. Without this fallback self-hosted instances would keep the
+  // "Powered by Documenso" footer in emails while their web pages already hide it.
+  const hidePoweredBy = !billingEnabled || claims.flags.hidePoweredBy === true;
+
   const branding = organisationGlobalSettingsToBranding(
     organisation.organisationGlobalSettings,
     organisation.id,
-    claims.flags.hidePoweredBy ?? false,
+    hidePoweredBy,
   );
 
-  const allowBrandedEmailColors = !IS_BILLING_ENABLED() || claims.flags.embedSigningWhiteLabel === true;
+  const allowBrandedEmailColors = !billingEnabled || claims.flags.embedSigningWhiteLabel === true;
 
   if (!allowBrandedEmailColors) {
     branding.brandingColors = undefined;
@@ -281,9 +289,15 @@ const handleTeamEmailContext = async (teamId: number) => {
 
   const teamSettings = extractDerivedTeamSettings(organisation.organisationGlobalSettings, team.teamGlobalSettings);
 
-  const branding = teamGlobalSettingsToBranding(teamSettings, teamId, claims.flags.hidePoweredBy ?? false);
+  const billingEnabled = IS_BILLING_ENABLED();
 
-  const allowBrandedEmailColors = !IS_BILLING_ENABLED() || claims.flags.embedSigningWhiteLabel === true;
+  // See handleOrganisationEmailContext above: kept in sync with the web resolver in
+  // server-only/branding/load-recipient-branding.ts so emails and recipient-facing pages agree.
+  const hidePoweredBy = !billingEnabled || claims.flags.hidePoweredBy === true;
+
+  const branding = teamGlobalSettingsToBranding(teamSettings, teamId, hidePoweredBy);
+
+  const allowBrandedEmailColors = !billingEnabled || claims.flags.embedSigningWhiteLabel === true;
 
   if (!allowBrandedEmailColors) {
     branding.brandingColors = undefined;
