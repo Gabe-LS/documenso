@@ -425,7 +425,16 @@ const SigningPageV1 = ({ data }: { data: Awaited<ReturnType<typeof handleV1Loade
     recipientWithFields,
   } = data;
 
-  if (document.deletedAt || document.status === DocumentStatus.REJECTED) {
+  // CANCELLED belongs here alongside REJECTED: cancelDocument sets the status
+  // but does not invalidate recipient tokens, so the original link from the
+  // signing email stays live. Without this the recipient gets a full signing
+  // invitation and only discovers the document is dead when the server
+  // rejects their signature.
+  if (
+    document.deletedAt ||
+    document.status === DocumentStatus.REJECTED ||
+    document.status === DocumentStatus.CANCELLED
+  ) {
     return (
       <div className="-mx-4 flex max-w-[100vw] flex-col items-center overflow-x-hidden px-4 pt-16 md:-mx-8 md:px-8 lg:pt-16 xl:pt-24">
         <SigningCard3D
@@ -507,7 +516,13 @@ const SigningPageV2 = ({ data }: { data: Awaited<ReturnType<typeof handleV2Loade
 
   const { envelope, recipientSignature, recipient } = data.envelopeForSigning;
 
-  if (envelope.deletedAt || envelope.status === DocumentStatus.REJECTED) {
+  // See the equivalent guard in SigningPageV1 — a cancelled envelope keeps its
+  // recipient tokens live, so it must land here rather than on the signing UI.
+  if (
+    envelope.deletedAt ||
+    envelope.status === DocumentStatus.REJECTED ||
+    envelope.status === DocumentStatus.CANCELLED
+  ) {
     return (
       <div className="-mx-4 flex max-w-[100vw] flex-col items-center overflow-x-hidden px-4 pt-16 md:-mx-8 md:px-8 lg:pt-16 xl:pt-24">
         <SigningCard3D
