@@ -68,7 +68,9 @@ export const AdminUserDeleteDialog = ({ className, user }: AdminUserDeleteDialog
     <div className={className}>
       <Alert className="flex flex-col items-center justify-between gap-4 p-6 md:flex-row" variant="neutral">
         <div>
-          <AlertTitle>Delete Account</AlertTitle>
+          <AlertTitle>
+            <Trans>Delete Account</Trans>
+          </AlertTitle>
           <AlertDescription className="mr-2">
             <Trans>
               Delete the users account and all its contents. This action is irreversible and will cancel their

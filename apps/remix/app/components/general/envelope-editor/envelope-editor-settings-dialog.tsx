@@ -455,7 +455,7 @@ export const EnvelopeEditorSettingsDialog = ({ trigger, ...props }: EnvelopeEdit
                                   selectedValues={field.value}
                                   onChange={field.onChange}
                                   className="w-full bg-background"
-                                  emptySelectionPlaceholder="Select signature types"
+                                  emptySelectionPlaceholder={t`Select signature types`}
                                 />
                               </FormControl>
 
