@@ -7,6 +7,10 @@ const SEND_DOCUMENT_CANCELLED_EMAILS_JOB_DEFINITION_ID = 'send.document.cancelle
 const SEND_DOCUMENT_CANCELLED_EMAILS_JOB_DEFINITION_SCHEMA = z.object({
   documentId: z.number(),
   cancellationReason: z.string().optional(),
+  // Set when the notification is caused by a recipient REJECTING the document
+  // rather than the owner cancelling it. Recipients must not be told the sender
+  // cancelled something a co-signer actually rejected.
+  rejectedByName: z.string().optional(),
   requestMetadata: z.any().optional(),
 });
 

@@ -166,12 +166,17 @@ export async function rejectDocumentOnBehalfOf({
     },
   });
 
-  // Send cancellation emails to other recipients.
+  // Notify the other recipients. This reuses the cancellation job, so pass
+  // rejectedByName to select the rejection wording — without it every other
+  // recipient is told the sender cancelled a document that a co-signer actually
+  // rejected. Kept in step with reject-document-with-token.ts, per the note at
+  // the top of this file.
   await jobs.triggerJob({
     name: 'send.document.cancelled.emails',
     payload: {
       documentId: legacyDocumentId,
       cancellationReason: reason,
+      rejectedByName: recipient.name || recipient.email,
       requestMetadata: requestMetadata.requestMetadata,
     },
   });

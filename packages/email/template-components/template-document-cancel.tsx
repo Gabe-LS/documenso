@@ -9,6 +9,13 @@ export interface TemplateDocumentCancelProps {
   documentName: string;
   assetBaseUrl: string;
   cancellationReason?: string;
+  /**
+   * Whether any recipient had actually signed before the cancellation. When
+   * nobody had, the "all signatures have been voided" line is omitted — the
+   * Italian translation ("Tutte le firme apposte sul documento…") presupposes
+   * signatures existed, so it asserts something false over an empty set.
+   */
+  hasSignatures?: boolean;
 }
 
 export const TemplateDocumentCancel = ({
@@ -16,6 +23,7 @@ export const TemplateDocumentCancel = ({
   documentName,
   assetBaseUrl,
   cancellationReason,
+  hasSignatures,
 }: TemplateDocumentCancelProps) => {
   return (
     <>
@@ -28,9 +36,11 @@ export const TemplateDocumentCancel = ({
         </Trans>
       </EmailHeading>
 
-      <EmailBodyText>
-        <Trans>All signatures have been voided.</Trans>
-      </EmailBodyText>
+      {hasSignatures && (
+        <EmailBodyText>
+          <Trans>All signatures have been voided.</Trans>
+        </EmailBodyText>
+      )}
 
       {cancellationReason && (
         <EmailCallout>

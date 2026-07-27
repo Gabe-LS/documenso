@@ -15,11 +15,14 @@ export const DocumentCancelTemplate = ({
   documentName = 'Open Source Pledge.pdf',
   assetBaseUrl = 'http://localhost:3002',
   cancellationReason,
+  // Defaults to true so the preview app shows the fullest version of the
+  // email; the handler always passes an explicit value.
+  hasSignatures = true,
   reportUrl,
 }: DocumentCancelEmailTemplateProps) => {
   const { _ } = useLingui();
 
-  const previewText = msg`${inviterName} has cancelled the document ${documentName}, you don't need to sign it anymore.`;
+  const previewText = msg`You no longer need to sign it.`;
 
   return (
     <EmailLayout assetBaseUrl={assetBaseUrl} preview={_(previewText)} reportUrl={reportUrl}>
@@ -29,6 +32,7 @@ export const DocumentCancelTemplate = ({
         documentName={documentName}
         assetBaseUrl={assetBaseUrl}
         cancellationReason={cancellationReason}
+        hasSignatures={hasSignatures}
       />
     </EmailLayout>
   );

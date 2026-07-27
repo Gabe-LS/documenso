@@ -105,12 +105,15 @@ export async function rejectDocumentWithToken({ token, id, reason, requestMetada
     },
   });
 
-  // Send cancellation emails to other recipients
+  // Notify the other recipients. This reuses the cancellation job, so pass
+  // rejectedByName to select the rejection wording — without it every other
+  // recipient is told the sender cancelled the document.
   await jobs.triggerJob({
     name: 'send.document.cancelled.emails',
     payload: {
       documentId: legacyDocumentId,
       cancellationReason: reason,
+      rejectedByName: recipient.name || recipient.email,
       requestMetadata,
     },
   });

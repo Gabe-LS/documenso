@@ -1,4 +1,5 @@
 import DocumentCancelTemplate from '@documenso/email/templates/document-cancel';
+import DocumentRejectedEmail from '@documenso/email/templates/document-rejected';
 import { isRecipientEmailValidForSending } from '@documenso/lib/utils/recipients';
 import { prisma } from '@documenso/prisma';
 import { msg } from '@lingui/core/macro';
@@ -17,7 +18,7 @@ import type { JobRunIO } from '../../client/_internal/job';
 import type { TSendDocumentCancelledEmailsJobDefinition } from './send-document-cancelled-emails';
 
 export const run = async ({ payload, io }: { payload: TSendDocumentCancelledEmailsJobDefinition; io: JobRunIO }) => {
-  const { documentId, cancellationReason } = payload;
+  const { documentId, cancellationReason, rejectedByName } = payload;
 
   const envelope = await prisma.envelope.findFirstOrThrow({
     where: unsafeBuildEnvelopeIdQuery(
@@ -108,6 +109,26 @@ export const run = async ({ payload, io }: { payload: TSendDocumentCancelledEmai
 
   const title = trimEmailTitle(envelope.title);
 
+  // Named `name` deliberately — see the subject line below.
+  const name = rejectedByName;
+
+  // Only claim signatures were voided if a signature actually exists. Count the
+  // Signature rows rather than checking signingStatus: CC recipients are
+  // persisted as SIGNED at creation time (see create-envelope-recipients.ts),
+  // and marking a document as viewed also sets SIGNED, so signingStatus is not
+  // a proxy for "somebody signed". Over an empty set the English is vacuously
+  // true but the Italian ("Tutte le firme apposte sul documento…") presupposes
+  // signatures existed, and so asserts something false.
+  const signatureCount = await prisma.signature.count({
+    where: {
+      recipient: {
+        envelopeId: envelope.id,
+      },
+    },
+  });
+
+  const hasSignatures = signatureCount > 0;
+
   const recipientsToNotify = envelope.recipients.filter(
     (recipient) =>
       (recipient.sendStatus === SendStatus.SENT || recipient.readStatus === ReadStatus.OPENED) &&
@@ -140,13 +161,29 @@ export const run = async ({ payload, io }: { payload: TSendDocumentCancelledEmai
           return;
         }
 
-        const template = createElement(DocumentCancelTemplate, {
-          documentName: envelope.title,
-          inviterName: senderName,
-          inviterEmail: documentOwner.email,
-          assetBaseUrl: NEXT_PUBLIC_WEBAPP_URL(),
-          cancellationReason: cancellationReason || undefined,
-        });
+        // A rejection routes through this job too (see
+        // reject-document-with-token.ts). The document was not cancelled by the
+        // sender in that case, so use the rejection template rather than
+        // attributing a co-signer's rejection to the owner.
+        const template = rejectedByName
+          ? createElement(DocumentRejectedEmail, {
+              recipientName: rejectedByName,
+              documentName: envelope.title,
+              documentUrl: `${NEXT_PUBLIC_WEBAPP_URL()}/sign/${recipient.token}`,
+              rejectionReason: cancellationReason || '',
+              assetBaseUrl: NEXT_PUBLIC_WEBAPP_URL(),
+              // These recipients get the report link on their invite and on the
+              // completion email, so omitting it here would be the odd one out.
+              reportUrl: `${NEXT_PUBLIC_WEBAPP_URL()}/report/${recipient.token}`,
+            })
+          : createElement(DocumentCancelTemplate, {
+              documentName: envelope.title,
+              inviterName: senderName,
+              inviterEmail: documentOwner.email,
+              assetBaseUrl: NEXT_PUBLIC_WEBAPP_URL(),
+              cancellationReason: cancellationReason || undefined,
+              hasSignatures,
+            });
 
         const [html, text] = await Promise.all([
           renderEmailWithI18N(template, { lang: emailLanguage, branding }),
@@ -164,7 +201,11 @@ export const run = async ({ payload, io }: { payload: TSendDocumentCancelledEmai
           },
           from: senderEmail,
           replyTo: replyToEmail,
-          subject: i18n._(msg`Document cancelled: ${title}`),
+          // The interpolation must be named `name` so the msgid matches the
+          // already-translated "{name} rejected {title}" used by
+          // send-rejection-emails.handler.ts. Renaming the variable would mint
+          // a new msgid and silently fall back to English.
+          subject: name ? i18n._(msg`${name} rejected ${title}`) : i18n._(msg`Document cancelled: ${title}`),
           html,
           text,
         });
