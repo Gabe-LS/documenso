@@ -16,7 +16,10 @@ services:
       - POSTGRES_PASSWORD=password
       - POSTGRES_DB=documenso
     ports:
-      - 54320:5432
+      # 15432, not 54320: macOS's ephemeral port range starts at 49152, so
+      # 54320 gets squatted by outbound connections (Tailscale MagicDNS holds
+      # a socket on it) and Docker's bind fails.
+      - 15432:5432
 
   inbucket:
     image: inbucket/inbucket
