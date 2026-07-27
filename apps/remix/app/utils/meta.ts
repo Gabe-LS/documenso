@@ -1,6 +1,22 @@
 import { NEXT_PUBLIC_WEBAPP_URL } from '@documenso/lib/constants/app';
 import { i18n, type MessageDescriptor } from '@lingui/core';
 
+/**
+ * Meta tags for recipient facing pages (signing, direct templates, reporting).
+ *
+ * Meta is not merged across routes in React Router, the deepest route that exports
+ * `meta` wins. So every recipient route must re-declare the `noindex` robots tag
+ * alongside its own title.
+ *
+ * No brand suffix is appended, these pages are white labelled.
+ */
+export const recipientMetaTags = (title: MessageDescriptor) => {
+  return [
+    { title: i18n._(title) },
+    { name: 'robots', content: 'noindex, nofollow, noarchive, nosnippet, noimageindex' },
+  ];
+};
+
 export const appMetaTags = (title?: MessageDescriptor) => {
   const description =
     'Join Documenso, the open signing infrastructure, and get a 10x better signing experience. Pricing starts at $30/mo. forever! Sign in now and enjoy a faster, smarter, and more beautiful document signing process. Integrates with your favorite tools, customizable, and expandable. Support our mission and become a part of our open-source community.';

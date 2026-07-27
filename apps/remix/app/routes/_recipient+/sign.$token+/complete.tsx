@@ -15,6 +15,7 @@ import { SigningCard3D } from '@documenso/ui/components/signing-card';
 import { cn } from '@documenso/ui/lib/utils';
 import { Badge } from '@documenso/ui/primitives/badge';
 import { Button } from '@documenso/ui/primitives/button';
+import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 import { Trans } from '@lingui/react/macro';
 import { DocumentStatus, FieldType, RecipientRole } from '@prisma/client';
@@ -26,9 +27,14 @@ import { EnvelopeDownloadDialog } from '~/components/dialogs/envelope-download-d
 import { ClaimAccount } from '~/components/general/claim-account';
 import { DocumentSigningAuthPageView } from '~/components/general/document-signing/document-signing-auth-page';
 import { RecipientBranding } from '~/components/general/recipient-branding';
+import { recipientMetaTags } from '~/utils/meta';
 import { useCspNonce } from '~/utils/nonce';
 
 import type { Route } from './+types/complete';
+
+export function meta() {
+  return recipientMetaTags(msg`Document Signed`);
+}
 
 export async function loader({ params, request }: Route.LoaderArgs) {
   const { user } = await getOptionalSession(request);

@@ -3,10 +3,17 @@ import { prisma } from '@documenso/prisma';
 import { trpc } from '@documenso/trpc/react';
 import { Button } from '@documenso/ui/primitives/button';
 import { useToast } from '@documenso/ui/primitives/use-toast';
+import { msg } from '@lingui/core/macro';
 import { Trans, useLingui } from '@lingui/react/macro';
 import { useState } from 'react';
 
+import { recipientMetaTags } from '~/utils/meta';
+
 import type { Route } from './+types/report.$token';
+
+export function meta() {
+  return recipientMetaTags(msg`Report sender`);
+}
 
 export async function loader({ params }: Route.LoaderArgs) {
   const { token } = params;

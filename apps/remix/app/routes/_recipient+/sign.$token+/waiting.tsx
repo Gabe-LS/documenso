@@ -6,15 +6,21 @@ import { getRecipientByToken } from '@documenso/lib/server-only/recipient/get-re
 import { getTeamById } from '@documenso/lib/server-only/team/get-team';
 import { formatDocumentsPath } from '@documenso/lib/utils/teams';
 import { Button } from '@documenso/ui/primitives/button';
+import { msg } from '@lingui/core/macro';
 import { Trans } from '@lingui/react/macro';
 import type { Team } from '@prisma/client';
 import { DocumentStatus, EnvelopeType } from '@prisma/client';
 import { Link, redirect } from 'react-router';
 
 import { RecipientBranding } from '~/components/general/recipient-branding';
+import { recipientMetaTags } from '~/utils/meta';
 import { useCspNonce } from '~/utils/nonce';
 
 import type { Route } from './+types/waiting';
+
+export function meta() {
+  return recipientMetaTags(msg`Waiting for Your Turn`);
+}
 
 export async function loader({ params, request }: Route.LoaderArgs) {
   const { user } = await getOptionalSession(request);

@@ -7,16 +7,22 @@ import { getFieldsForToken } from '@documenso/lib/server-only/field/get-fields-f
 import { getRecipientByToken } from '@documenso/lib/server-only/recipient/get-recipient-by-token';
 import { Badge } from '@documenso/ui/primitives/badge';
 import { Button } from '@documenso/ui/primitives/button';
+import { msg } from '@lingui/core/macro';
 import { Trans } from '@lingui/react/macro';
 import { FieldType } from '@prisma/client';
 import { Link } from 'react-router';
 
 import { DocumentSigningAuthPageView } from '~/components/general/document-signing/document-signing-auth-page';
 import { RecipientBranding } from '~/components/general/recipient-branding';
+import { recipientMetaTags } from '~/utils/meta';
 import { useCspNonce } from '~/utils/nonce';
 import { truncateTitle } from '~/utils/truncate-title';
 
 import type { Route } from './+types/rejected';
+
+export function meta() {
+  return recipientMetaTags(msg`Document Rejected`);
+}
 
 export async function loader({ params, request }: Route.LoaderArgs) {
   const { user } = await getOptionalSession(request);
