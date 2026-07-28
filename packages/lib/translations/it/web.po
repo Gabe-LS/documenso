@@ -660,7 +660,7 @@ msgstr "<0>{organisationName}</0> ha richiesto di creare un account per tuo cont
 
 #: packages/email/templates/organisation-account-link-confirmation.tsx
 msgid "<0>{organisationName}</0> has requested to link your existing account to their organisation."
-msgstr "<0>{organisationName}</0> ha chiesto di collegare il tuo account esistente alla propria organizzazione."
+msgstr "<0>{organisationName}</0> desidera collegare il tuo account a quello dell'organizzazione."
 
 #: apps/remix/app/components/general/document-signing/document-signing-page-view-v1.tsx
 msgid "<0>{senderName} {senderEmail}</0> has invited you to approve this document"
@@ -995,7 +995,7 @@ msgstr "È stato aggiornato un destinatario"
 
 #: packages/email/templates/document-cc-reminder-notification.tsx
 msgid "A reminder for \"{documentName}\" has been sent to {recipientName}"
-msgstr "È stato inviato un promemoria a {recipientName} per \"{documentName}\""
+msgstr "{recipientName} ha ricevuto un sollecito per \"{documentName}\""
 
 #: packages/email/templates/organisation-account-link-confirmation.tsx
 msgid "A request has been made to create an account for you"
@@ -1571,7 +1571,7 @@ msgstr "Consenti a tutti i membri dell'organizzazione di accedere a questo team"
 
 #: packages/email/templates/confirm-team-email.tsx
 msgid "Allow document recipients to reply directly to this email address"
-msgstr "Consentire ai destinatari dei documenti di rispondere direttamente a questo indirizzo email"
+msgstr "Consenti ai destinatari del documento di rispondere direttamente a questo indirizzo email"
 
 #: apps/remix/app/routes/_authenticated+/o.$orgUrl.settings.sso.tsx
 msgid "Allow Personal Organisations"
@@ -9796,7 +9796,7 @@ msgstr "Invia documento"
 
 #: packages/email/templates/confirm-team-email.tsx
 msgid "Send documents on behalf of the team using the email address"
-msgstr "Inviare documenti per conto del team utilizzando questo indirizzo email"
+msgstr "Invia documenti per conto del team utilizzando questo indirizzo email"
 
 #: apps/remix/app/components/dialogs/template-bulk-send-dialog.tsx
 msgid "Send documents to recipients immediately"
@@ -10290,7 +10290,7 @@ msgstr "Alcuni firmatari non hanno un campo firma assegnato. Assegna almeno 1 ca
 
 #: packages/email/templates/document-created-from-direct-template.tsx
 msgid "Someone completed your direct link template."
-msgstr "Qualcuno ha compilato il tuo modello con link diretto."
+msgstr "Qualcuno ha compilato il tuo modello tramite un link diretto."
 
 #: apps/remix/app/components/dialogs/envelope-cancel-dialog.tsx
 #: apps/remix/app/components/dialogs/envelope-delete-dialog.tsx
@@ -12854,7 +12854,7 @@ msgstr "Visualizza attività"
 
 #: packages/email/templates/confirm-team-email.tsx
 msgid "View all documents sent to and from this email address"
-msgstr "Visualizzare tutti i documenti inviati a questo indirizzo email o da questo indirizzo"
+msgstr "Visualizza tutti i documenti inviati o ricevuti da questo indirizzo email"
 
 #: apps/remix/app/components/general/teams/team-email-usage.tsx
 msgid "View all documents sent to your account"
@@ -13496,7 +13496,7 @@ msgstr "Benvenuto in {organisationName}"
 #: packages/email/template-components/template-admin-user-created.tsx
 #: packages/email/template-components/template-confirmation-email.tsx
 msgid "Welcome to Documenso!"
-msgstr "È un piacere averti con noi!"
+msgstr "Benvenutə!"
 
 #: apps/remix/app/routes/_authenticated+/o.$orgUrl.settings.sso.tsx
 msgid "Well-known URL is required"
@@ -13761,7 +13761,7 @@ msgstr "Sei in copia. Non devi fare nulla."
 
 #: packages/email/templates/document-cc-reminder-notification.tsx
 msgid "You are in copy. The document is still awaiting signatures."
-msgstr "Sei in copia. Il documento attende ancora delle firme."
+msgstr "Sei in copia. Nel documento mancano ancora delle firme."
 
 #: apps/remix/app/components/dialogs/envelopes-bulk-move-dialog.tsx
 msgid "You are not allowed to move these items."
