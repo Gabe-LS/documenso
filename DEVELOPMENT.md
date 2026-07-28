@@ -64,6 +64,82 @@ For the full monorepo build (slower, includes Prisma generation):
 npm run build
 ```
 
+## Running the e2e suite
+
+```bash
+export PATH="/opt/homebrew/opt/node@22/bin:$PATH"
+DANGEROUS_BYPASS_RATE_LIMITS=true npm run ci
+```
+
+Four things will waste an afternoon if you don't know them.
+
+### The rate limiter makes the suite unrunnable without the bypass
+
+`loginRateLimit` allows **50 logins per IP per 15 minutes**
+(`packages/lib/server-only/rate-limit/rate-limits.ts`). Every test calls
+`apiSignin`, and all ~1,100 come from `127.0.0.1`, so everything after the
+first 50 gets a 429.
+
+`apiSignin` never checks the response, so the test carries on, lands on the
+sign-in page, and dies on a 15s click timeout. The result looks like hundreds
+of unrelated UI failures rather than one auth problem. Measured on this repo:
+
+| | failed |
+|---|---|
+| without the bypass | 381 |
+| with the bypass | 4 |
+
+`DANGEROUS_BYPASS_RATE_LIMITS` is an existing escape hatch in
+`rate-limit.ts`; it only short-circuits the check and is never set in
+production.
+
+### A production build needs the signing certificate path set
+
+`.env` must contain:
+
+```
+NEXT_PRIVATE_SIGNING_LOCAL_FILE_PATH=<repo>/apps/remix/example/cert.p12
+```
+
+`packages/signing/transports/local.ts` falls back to `./example/cert.p12`
+only when `NODE_ENV !== 'production'`. `npm run ci` builds and runs in
+production mode, so without the path every document fails to seal with
+"No certificate found for local signing", and every completion test times out
+waiting for a status that never arrives.
+
+### Reset the database before each run
+
+Tests seed users, teams and documents and never clean up. A single full run
+adds ~3,000 envelopes. Left to accumulate, list and folder queries slow down
+enough to trip the 15s `actionTimeout`.
+
+```bash
+npm run prisma:migrate-reset
+```
+
+Comparing two runs (for example a branch against `main`) is only meaningful
+if both start from the same seed state.
+
+### `start-server-and-test` does not exit
+
+When the suite finishes, the tally prints but the process keeps the server
+alive and cron jobs keep firing. It looks like the run is stuck. Wait for the
+`N passed / N failed` line, then Ctrl-C. Kill any leftover server before the
+next run, or it will bind port 3000 first and the new run will silently test
+the **previous** build:
+
+```bash
+pkill -f "build/server/main.js"
+```
+
+### Known flaky tests
+
+The folder pin/unpin tests in `e2e/folders/team-account-folders.spec.ts` fail
+a different subset on every run, on `main` as well as on branches. The two
+visual-regression specs (`envelope-alignment`, `envelope-overflow`) are
+machine-dependent. Expect a handful of failures from these and diff against a
+`main` baseline before treating any of them as a regression.
+
 ## Translations (lingui)
 
 The single catalog lives at `packages/lib/translations/{locale}/web.po`.
