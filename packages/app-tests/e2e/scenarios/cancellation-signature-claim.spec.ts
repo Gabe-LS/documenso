@@ -12,32 +12,34 @@ const META = { auth: null, requestMetadata: {}, source: 'app' as const };
 
 const VOIDED_IT = 'tutte le firme apposte sul documento sono state annullate';
 
-const lastMessage = async (address: string) => {
+/**
+ * Waits for a specific message rather than merely for the mailbox to be
+ * non-empty. The signing invite always lands first, so polling on "any mail
+ * arrived" reads the invite and asserts against the wrong email whenever the
+ * cancellation job is still in flight — which is exactly what happens when the
+ * suite runs with more than one worker.
+ */
+const messageMatching = async (address: string, subjectIncludes: string) => {
   const local = address.split('@')[0];
-
-  // Emails are dispatched through async jobs; poll rather than assume.
   let list: { id: string; subject: string }[] = [];
 
-  for (let attempt = 0; attempt < 30; attempt++) {
+  for (let attempt = 0; attempt < 45; attempt++) {
     list = await fetch(`${INBUCKET}/api/v1/mailbox/${local}`).then((r) => r.json());
 
-    if (list.length > 0) {
-      break;
+    const hit = list.find((m) => m.subject.toLowerCase().includes(subjectIncludes.toLowerCase()));
+
+    if (hit) {
+      const full = await fetch(`${INBUCKET}/api/v1/mailbox/${local}/${hit.id}`).then((r) => r.json());
+
+      return { subject: hit.subject, text: (full.body?.text ?? '').trim() };
     }
 
     await new Promise((r) => setTimeout(r, 1_000));
   }
 
-  console.log(`[mailbox] ${local}: ${list.length} message(s) — ${list.map((m) => m.subject).join(' | ')}`);
-
-  if (list.length === 0) {
-    throw new Error(`No mail arrived for ${address}`);
-  }
-
-  const msg = list[list.length - 1];
-  const full = await fetch(`${INBUCKET}/api/v1/mailbox/${local}/${msg.id}`).then((r) => r.json());
-
-  return { subject: msg.subject, text: (full.body?.text ?? '').trim() };
+  throw new Error(
+    `No message matching "${subjectIncludes}" for ${address}; saw: ${list.map((m) => m.subject).join(' | ') || '(nothing)'}`,
+  );
 };
 
 const buildAndSend = async (owner: Awaited<ReturnType<typeof seedUser>>['user'], teamId: number, tag: string) => {
@@ -150,10 +152,9 @@ test('[E6] cancellation only claims voided signatures when some exist', async ()
     requestMetadata: META,
   });
 
-  await new Promise((r) => setTimeout(r, 6_000));
-
-  const noneMail = await lastMessage(unsigned.signerEmail);
-  const someMail = await lastMessage(signed.signerEmail);
+  // Wait for the cancellation specifically; the invite is already in the mailbox.
+  const noneMail = await messageMatching(unsigned.signerEmail, 'annullato');
+  const someMail = await messageMatching(signed.signerEmail, 'annullato');
 
   console.log('\n===== NOBODY SIGNED =====');
   console.log(noneMail.subject);
