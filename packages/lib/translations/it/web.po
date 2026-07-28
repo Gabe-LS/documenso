@@ -4512,7 +4512,7 @@ msgstr "Documenti"
 
 #: apps/remix/app/components/general/document-signing/document-signing-attachments-popover.tsx
 msgid "Documents and resources related to this envelope."
-msgstr "Documenti e risorse allegati a questo documento."
+msgstr "Documenti e risorse relativi a questo accordo."
 
 #: apps/remix/app/components/dialogs/envelopes-bulk-cancel-dialog.tsx
 msgid "Documents cancelled"
