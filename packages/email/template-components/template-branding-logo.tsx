@@ -28,9 +28,7 @@ export const TemplateBrandingLogo = ({ assetBaseUrl, className = 'mb-4 h-6' }: T
   // Display height matches the default `h-6` (24px). Width is intentionally
   // omitted: the custom logo's intrinsic aspect ratio is unknown at build
   // time, so only height is pinned and `max-w-full` keeps it from overflowing.
-  const brandingLogo = (
-    <Img src={branding.brandingLogo} alt="" className={`${className} max-w-full`} height={24} />
-  );
+  const brandingLogo = <Img src={branding.brandingLogo} alt="" className={`${className} max-w-full`} height={24} />;
 
   const safeBrandingUrl = getSafeBrandingUrl(branding.brandingUrl);
 

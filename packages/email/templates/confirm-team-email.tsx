@@ -63,7 +63,7 @@ export const ConfirmTeamEmailTemplate = ({
 
           <EmailBodyText align="left" fullWidth>
             <Trans>
-              You can revoke access at any time in your team settings on Documenso{' '}
+              You can revoke access at any time in your team settings{' '}
               <Link className="text-foreground underline" href={`${baseUrl}/settings/teams`}>
                 here
               </Link>
@@ -81,8 +81,7 @@ export const ConfirmTeamEmailTemplate = ({
 
       <EmailBodyText>
         <Trans>
-          <span className="font-semibold">{teamName}</span> has requested to use your email address for their team on
-          Documenso.
+          <span className="font-semibold">{teamName}</span> has requested to use your email address for their team.
         </Trans>
       </EmailBodyText>
 

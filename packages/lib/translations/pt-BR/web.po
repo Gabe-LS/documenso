@@ -653,8 +653,8 @@ msgid "<0>{organisationName}</0> has requested to create an account on your beha
 msgstr "<0>{organisationName}</0> solicitou a criação de uma conta em seu nome."
 
 #: packages/email/templates/organisation-account-link-confirmation.tsx
-msgid "<0>{organisationName}</0> has requested to link your current Documenso account to their organisation."
-msgstr "<0>{organisationName}</0> solicitou vincular sua conta atual do Documenso à organização deles."
+msgid "<0>{organisationName}</0> has requested to link your existing account to their organisation."
+msgstr ""
 
 #: apps/remix/app/components/general/document-signing/document-signing-page-view-v1.tsx
 msgid "<0>{senderName} {senderEmail}</0> has invited you to approve this document"
@@ -693,8 +693,8 @@ msgid "<0>{senderName} {senderEmail}</0> on behalf of \"{0}\" has invited you to
 msgstr "<0>{senderName} {senderEmail}</0> em nome de \"{0}\" convidou você para visualizar este documento"
 
 #: packages/email/templates/confirm-team-email.tsx
-msgid "<0>{teamName}</0> has requested to use your email address for their team on Documenso."
-msgstr "<0>{teamName}</0> solicitou o uso do seu endereço de e-mail para a equipe deles no Documenso."
+msgid "<0>{teamName}</0> has requested to use your email address for their team."
+msgstr ""
 
 #: apps/remix/app/routes/_unauthenticated+/organisation.sso.confirmation.$token.tsx
 msgid "<0>Account management:</0> Modify your account settings, permissions, and preferences"
@@ -994,10 +994,6 @@ msgstr ""
 #: packages/email/templates/organisation-account-link-confirmation.tsx
 msgid "A request has been made to create an account for you"
 msgstr "Uma solicitação foi feita para criar uma conta para você"
-
-#: packages/email/templates/organisation-account-link-confirmation.tsx
-msgid "A request has been made to link your Documenso account"
-msgstr "Uma solicitação foi feita para vincular sua conta Documenso"
 
 #: apps/remix/app/components/dialogs/webhook-create-dialog.tsx
 #: apps/remix/app/components/dialogs/webhook-edit-dialog.tsx
@@ -1615,7 +1611,7 @@ msgid "Amount"
 msgstr "Valor"
 
 #: packages/email/template-components/template-admin-user-created.tsx
-msgid "An administrator has created a Documenso account for you."
+msgid "An administrator has created an account for you."
 msgstr ""
 
 #: apps/remix/app/components/dialogs/organisation-member-invite-dialog.tsx
@@ -1827,6 +1823,10 @@ msgstr "Ocorreu um erro ao fazer upload do seu documento."
 #: apps/remix/app/components/forms/support-ticket-form.tsx
 msgid "An error occurred. Please try again later."
 msgstr "Ocorreu um erro. Por favor, tente novamente mais tarde."
+
+#: packages/email/templates/organisation-account-link-confirmation.tsx
+msgid "An organisation asked to link your existing account"
+msgstr ""
 
 #: packages/lib/jobs/definitions/emails/send-organisation-limit-alert-email.handler.ts
 msgid "An organisation has exceeded their fair use limits"
@@ -3887,6 +3887,10 @@ msgstr "Excluído"
 msgid "Deleting account..."
 msgstr "Excluindo conta..."
 
+#: apps/remix/app/components/dialogs/account-delete-dialog.tsx
+msgid "Deleting your account will also delete <0>all of your documents</0>, along with all of your completed documents, signatures, and all other resources belonging to your Account."
+msgstr ""
+
 #: apps/remix/app/components/dialogs/admin-organisation-delete-dialog.tsx
 msgid "Deletion scheduled"
 msgstr ""
@@ -4108,10 +4112,6 @@ msgstr "Registros DNS"
 #: apps/remix/app/components/general/admin-license-card.tsx
 msgid "Documenso License"
 msgstr ""
-
-#: apps/remix/app/components/dialogs/account-delete-dialog.tsx
-msgid "Documenso will delete <0>all of your documents</0>, along with all of your completed documents, signatures, and all other resources belonging to your Account."
-msgstr "A Documenso excluirá <0>todos os seus documentos</0>, juntamente com todos os seus documentos concluídos, assinaturas e todos os outros recursos pertencentes à sua conta."
 
 #: apps/remix/app/components/general/settings-nav-desktop.tsx
 #: apps/remix/app/components/general/template/template-page-view-documents-table.tsx
@@ -6564,8 +6564,8 @@ msgid "Japanese"
 msgstr ""
 
 #: packages/email/templates/organisation-invite.tsx
-msgid "Join {organisationName} on Documenso"
-msgstr "Junte-se a {organisationName} no Documenso"
+msgid "Join {organisationName}"
+msgstr ""
 
 #: apps/remix/app/routes/_authenticated+/o.$orgUrl.support.tsx
 msgid "Join our community on <0>Discord</0> for community support and discussion."
@@ -6777,8 +6777,8 @@ msgid "Link template"
 msgstr ""
 
 #: packages/email/templates/organisation-account-link-confirmation.tsx
-msgid "Link your Documenso account"
-msgstr "Vincule sua conta Documenso"
+msgid "Link your account"
+msgstr ""
 
 #: apps/remix/app/routes/_authenticated+/settings+/security._index.tsx
 #: apps/remix/app/routes/_authenticated+/settings+/security.linked-accounts.tsx
@@ -9306,10 +9306,6 @@ msgstr "Retornar"
 msgid "Return Home"
 msgstr ""
 
-#: apps/remix/app/routes/_unauthenticated+/o.$orgUrl.signin.tsx
-msgid "Return to Documenso sign in page here"
-msgstr "Retornar para a página de login do Documenso aqui"
-
 #: apps/remix/app/components/general/envelope-editor/envelope-editor.tsx
 msgid "Return to documents"
 msgstr "Retornar para documentos"
@@ -9326,6 +9322,10 @@ msgstr "Retornar para login"
 #: apps/remix/app/components/general/envelope-editor/envelope-editor.tsx
 msgid "Return to templates"
 msgstr "Retornar para modelos"
+
+#: apps/remix/app/routes/_unauthenticated+/o.$orgUrl.signin.tsx
+msgid "Return to the sign in page here"
+msgstr ""
 
 #: packages/email/templates/organisation-account-link-confirmation.tsx
 msgid "Review request"
@@ -11630,8 +11630,8 @@ msgid "This document has too many recipients. Please remove some recipients or c
 msgstr ""
 
 #: apps/remix/app/components/general/document/document-certificate-qr-view.tsx
-msgid "This document is available in your Documenso account. You can view more details, recipients, and audit logs there."
-msgstr "Este documento está disponível em sua conta Documenso. Você pode ver mais detalhes, destinatários e logs de auditoria lá."
+msgid "This document is available in your account. You can view more details, recipients, and audit logs there."
+msgstr ""
 
 #: apps/remix/app/routes/_authenticated+/t.$teamUrl+/documents.$id._index.tsx
 msgid "This document is currently a draft and has not been sent"
@@ -13828,7 +13828,7 @@ msgid "You can only detect fields in draft envelopes"
 msgstr "Você só pode detectar campos em envelopes de rascunho"
 
 #: packages/email/templates/confirm-team-email.tsx
-msgid "You can revoke access at any time in your team settings on Documenso <0>here</0>."
+msgid "You can revoke access at any time in your team settings <0>here</0>."
 msgstr ""
 
 #: apps/remix/app/components/forms/public-profile-form.tsx

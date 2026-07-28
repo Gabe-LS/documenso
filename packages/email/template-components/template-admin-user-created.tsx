@@ -2,13 +2,7 @@ import { SUPPORT_EMAIL } from '@documenso/lib/constants/app';
 import { Trans } from '@lingui/react/macro';
 
 import { Link } from '../components';
-import {
-  EmailBodyText,
-  EmailButton,
-  EmailButtonSection,
-  EmailFinePrint,
-  EmailHeading,
-} from './email-primitives';
+import { EmailBodyText, EmailButton, EmailButtonSection, EmailFinePrint, EmailHeading } from './email-primitives';
 import { TemplateDocumentImage } from './template-document-image';
 
 export type TemplateAdminUserCreatedProps = {
@@ -26,7 +20,7 @@ export const TemplateAdminUserCreated = ({ resetPasswordLink, assetBaseUrl }: Te
       </EmailHeading>
 
       <EmailBodyText>
-        <Trans>An administrator has created a Documenso account for you.</Trans>
+        <Trans>An administrator has created an account for you.</Trans>
       </EmailBodyText>
 
       <EmailBodyText>

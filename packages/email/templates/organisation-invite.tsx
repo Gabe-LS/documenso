@@ -36,7 +36,7 @@ export const OrganisationInviteEmailTemplate = ({
       <TemplateImage assetBaseUrl={assetBaseUrl} staticAsset="add-user.png" width={120} height={120} />
 
       <EmailHeading>
-        <Trans>Join {organisationName} on Documenso</Trans>
+        <Trans>Join {organisationName}</Trans>
       </EmailHeading>
 
       <EmailPill>{organisationName}</EmailPill>
