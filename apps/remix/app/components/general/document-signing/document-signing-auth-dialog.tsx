@@ -91,10 +91,10 @@ export const DocumentSigningAuthDialog = ({
                 <Button type="button" variant="ghost" size="sm" onClick={handleBackToChooser} className="h-6 w-6 p-0">
                   <ChevronLeftIcon className="h-4 w-4" />
                 </Button>
-                <span>{title || <Trans>Sign field</Trans>}</span>
+                <span>{title || <Trans>Authentication required</Trans>}</span>
               </div>
             )}
-            {(!selectedAuthType || validAuthTypes.length === 1) && (title || <Trans>Sign field</Trans>)}
+            {(!selectedAuthType || validAuthTypes.length === 1) && (title || <Trans>Authentication required</Trans>)}
           </DialogTitle>
 
           <DialogDescription>

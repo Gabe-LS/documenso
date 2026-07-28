@@ -290,6 +290,11 @@ msgstr "{0} 个直接签署模板"
 msgid "{0} field"
 msgstr "{0} 字段"
 
+#. placeholder {0}: team.name
+#: packages/lib/server-only/team/create-team-email-verification.ts
+msgid "{0} has requested to use your email address"
+msgstr ""
+
 #. placeholder {0}: remaining.documents
 #. placeholder {1}: quota.documents
 #: apps/remix/app/components/general/document/document-upload-button-legacy.tsx
@@ -998,11 +1003,6 @@ msgstr "已收到为您创建账户的请求"
 #: packages/email/templates/organisation-account-link-confirmation.tsx
 msgid "A request has been made to link your Documenso account"
 msgstr "已收到关联您的 Documenso 账户的请求"
-
-#. placeholder {0}: team.name
-#: packages/lib/server-only/team/create-team-email-verification.ts
-msgid "A request to use your email has been initiated by {0} on Documenso"
-msgstr "{0} 在 Documenso 上发起了一个使用您邮箱的请求"
 
 #: apps/remix/app/components/dialogs/webhook-create-dialog.tsx
 #: apps/remix/app/components/dialogs/webhook-edit-dialog.tsx
@@ -2215,6 +2215,8 @@ msgid "Authentication Portal Not Found"
 msgstr "未找到认证门户"
 
 #: apps/remix/app/components/general/direct-template/direct-template-signing-auth-page.tsx
+#: apps/remix/app/components/general/document-signing/document-signing-auth-dialog.tsx
+#: apps/remix/app/components/general/document-signing/document-signing-auth-dialog.tsx
 #: apps/remix/app/components/general/document-signing/document-signing-auth-page.tsx
 msgid "Authentication required"
 msgstr "需要身份验证"
@@ -5223,6 +5225,10 @@ msgstr "输入数字"
 #: apps/remix/app/components/dialogs/sign-field-text-dialog.tsx
 msgid "Enter Text"
 msgstr "输入文本"
+
+#: packages/email/templates/access-auth-2fa.tsx
+msgid "Enter the code to finish signing in."
+msgstr ""
 
 #: apps/remix/app/components/dialogs/organisation-email-domain-create-dialog.tsx
 msgid "Enter the domain you want to use for sending emails (without http:// or www)"
@@ -10012,11 +10018,6 @@ msgstr "签署文档"
 msgid "Sign Documents"
 msgstr "签署文档"
 
-#: apps/remix/app/components/general/document-signing/document-signing-auth-dialog.tsx
-#: apps/remix/app/components/general/document-signing/document-signing-auth-dialog.tsx
-msgid "Sign field"
-msgstr "签署字段"
-
 #: apps/remix/app/components/forms/signup.tsx
 msgid "Sign Here"
 msgstr "在此签名"
@@ -10702,8 +10703,8 @@ msgstr "团队"
 
 #. placeholder {0}: team.name
 #: packages/lib/server-only/team/delete-team.ts
-msgid "Team \"{0}\" has been deleted on Documenso"
-msgstr "团队“{0}”已在 Documenso 上被删除"
+msgid "Team \"{0}\" has been deleted"
+msgstr ""
 
 #: packages/lib/constants/teams-translations.ts
 msgid "Team Admin"
@@ -12307,9 +12308,6 @@ msgstr "无法登录"
 msgid "Unable to start the signing flow"
 msgstr "无法启动签名流程"
 
-#: apps/remix/app/components/general/document-signing/document-signing-auth-2fa.tsx
-#: apps/remix/app/components/general/document-signing/document-signing-auth-passkey.tsx
-#: apps/remix/app/components/general/document-signing/document-signing-auth-password.tsx
 #: apps/remix/app/routes/_authenticated+/o.$orgUrl.settings._layout.tsx
 #: apps/remix/app/routes/_authenticated+/t.$teamUrl+/settings._layout.tsx
 #: apps/remix/app/routes/_authenticated+/t.$teamUrl+/settings.tokens.tsx
@@ -12775,6 +12773,12 @@ msgstr "验证邮件已发送"
 #: apps/remix/app/components/general/verify-email-banner.tsx
 msgid "Verification email sent successfully."
 msgstr "验证邮件发送成功。"
+
+#: apps/remix/app/components/general/document-signing/document-signing-auth-2fa.tsx
+#: apps/remix/app/components/general/document-signing/document-signing-auth-passkey.tsx
+#: apps/remix/app/components/general/document-signing/document-signing-auth-password.tsx
+msgid "Verification failed"
+msgstr ""
 
 #: apps/remix/app/components/general/document-signing/access-auth-2fa-form.tsx
 msgid "Verify & Complete"
@@ -13488,10 +13492,6 @@ msgstr "欢迎回来！以下是您的账户概览。"
 msgid "Welcome to {organisationName}"
 msgstr "欢迎加入 {organisationName}"
 
-#: packages/lib/jobs/definitions/emails/send-admin-user-created-email.handler.ts
-msgid "Welcome to Documenso"
-msgstr "欢迎使用 Documenso"
-
 #: packages/email/template-components/template-admin-user-created.tsx
 #: packages/email/template-components/template-confirmation-email.tsx
 msgid "Welcome to Documenso!"
@@ -13984,8 +13984,8 @@ msgstr "您已被 <0>{0}</0> 邀请加入其组织。"
 
 #. placeholder {0}: organisation.name
 #: packages/lib/server-only/organisation/create-organisation-member-invites.ts
-msgid "You have been invited to join {0} on Documenso"
-msgstr "您已被邀请加入 Documenso 上的 {0}"
+msgid "You have been invited to join {0}"
+msgstr ""
 
 #: apps/remix/app/components/embed/multisign/multi-sign-document-list.tsx
 msgid "You have been requested to sign the following documents. Review each document carefully and complete the signing process."
@@ -14417,6 +14417,10 @@ msgstr "您的账户"
 msgid "Your account has been deleted successfully."
 msgstr "你的账号已成功删除。"
 
+#: packages/lib/jobs/definitions/emails/send-admin-user-created-email.handler.ts
+msgid "Your account is ready"
+msgstr ""
+
 #: packages/email/templates/team-email-removed.tsx
 msgid "Your address is no longer used by this team."
 msgstr ""
@@ -14825,10 +14829,6 @@ msgstr "你的令牌已过期！"
 #: packages/lib/server-only/2fa/email/send-2fa-token-email.ts
 msgid "Your two-factor authentication code"
 msgstr "您的双重身份验证码"
-
-#: packages/email/templates/access-auth-2fa.tsx
-msgid "Your verification code is inside."
-msgstr ""
 
 #: packages/email/template-components/template-access-auth-2fa.tsx
 msgid "Your verification code:"

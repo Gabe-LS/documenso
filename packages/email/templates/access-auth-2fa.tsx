@@ -23,7 +23,9 @@ export const AccessAuth2FAEmailTemplate = ({
 }: AccessAuth2FAEmailTemplateProps) => {
   const { _ } = useLingui();
 
-  const previewText = msg`Your verification code is inside.`;
+  // Deliberately excludes the code itself: preheaders render on lock screens.
+  // Also must not restate the subject ("Your two-factor authentication code").
+  const previewText = msg`Enter the code to finish signing in.`;
 
   return (
     <EmailLayout assetBaseUrl={assetBaseUrl} preview={_(previewText)} isDocument={false}>

@@ -286,6 +286,11 @@ msgstr "{0} direct signing templates"
 msgid "{0} field"
 msgstr "{0} field"
 
+#. placeholder {0}: team.name
+#: packages/lib/server-only/team/create-team-email-verification.ts
+msgid "{0} has requested to use your email address"
+msgstr "{0} has requested to use your email address"
+
 #. placeholder {0}: remaining.documents
 #. placeholder {1}: quota.documents
 #: apps/remix/app/components/general/document/document-upload-button-legacy.tsx
@@ -994,11 +999,6 @@ msgstr "A request has been made to create an account for you"
 #: packages/email/templates/organisation-account-link-confirmation.tsx
 msgid "A request has been made to link your Documenso account"
 msgstr "A request has been made to link your Documenso account"
-
-#. placeholder {0}: team.name
-#: packages/lib/server-only/team/create-team-email-verification.ts
-msgid "A request to use your email has been initiated by {0} on Documenso"
-msgstr "A request to use your email has been initiated by {0} on Documenso"
 
 #: apps/remix/app/components/dialogs/webhook-create-dialog.tsx
 #: apps/remix/app/components/dialogs/webhook-edit-dialog.tsx
@@ -2211,6 +2211,8 @@ msgid "Authentication Portal Not Found"
 msgstr "Authentication Portal Not Found"
 
 #: apps/remix/app/components/general/direct-template/direct-template-signing-auth-page.tsx
+#: apps/remix/app/components/general/document-signing/document-signing-auth-dialog.tsx
+#: apps/remix/app/components/general/document-signing/document-signing-auth-dialog.tsx
 #: apps/remix/app/components/general/document-signing/document-signing-auth-page.tsx
 msgid "Authentication required"
 msgstr "Authentication required"
@@ -5219,6 +5221,10 @@ msgstr "Enter Number"
 #: apps/remix/app/components/dialogs/sign-field-text-dialog.tsx
 msgid "Enter Text"
 msgstr "Enter Text"
+
+#: packages/email/templates/access-auth-2fa.tsx
+msgid "Enter the code to finish signing in."
+msgstr "Enter the code to finish signing in."
 
 #: apps/remix/app/components/dialogs/organisation-email-domain-create-dialog.tsx
 msgid "Enter the domain you want to use for sending emails (without http:// or www)"
@@ -10008,11 +10014,6 @@ msgstr "Sign Document"
 msgid "Sign Documents"
 msgstr "Sign Documents"
 
-#: apps/remix/app/components/general/document-signing/document-signing-auth-dialog.tsx
-#: apps/remix/app/components/general/document-signing/document-signing-auth-dialog.tsx
-msgid "Sign field"
-msgstr "Sign field"
-
 #: apps/remix/app/components/forms/signup.tsx
 msgid "Sign Here"
 msgstr "Sign Here"
@@ -10698,8 +10699,8 @@ msgstr "Team"
 
 #. placeholder {0}: team.name
 #: packages/lib/server-only/team/delete-team.ts
-msgid "Team \"{0}\" has been deleted on Documenso"
-msgstr "Team \"{0}\" has been deleted on Documenso"
+msgid "Team \"{0}\" has been deleted"
+msgstr "Team \"{0}\" has been deleted"
 
 #: packages/lib/constants/teams-translations.ts
 msgid "Team Admin"
@@ -12303,9 +12304,6 @@ msgstr "Unable to sign in"
 msgid "Unable to start the signing flow"
 msgstr "Unable to start the signing flow"
 
-#: apps/remix/app/components/general/document-signing/document-signing-auth-2fa.tsx
-#: apps/remix/app/components/general/document-signing/document-signing-auth-passkey.tsx
-#: apps/remix/app/components/general/document-signing/document-signing-auth-password.tsx
 #: apps/remix/app/routes/_authenticated+/o.$orgUrl.settings._layout.tsx
 #: apps/remix/app/routes/_authenticated+/t.$teamUrl+/settings._layout.tsx
 #: apps/remix/app/routes/_authenticated+/t.$teamUrl+/settings.tokens.tsx
@@ -12771,6 +12769,12 @@ msgstr "Verification Email Sent"
 #: apps/remix/app/components/general/verify-email-banner.tsx
 msgid "Verification email sent successfully."
 msgstr "Verification email sent successfully."
+
+#: apps/remix/app/components/general/document-signing/document-signing-auth-2fa.tsx
+#: apps/remix/app/components/general/document-signing/document-signing-auth-passkey.tsx
+#: apps/remix/app/components/general/document-signing/document-signing-auth-password.tsx
+msgid "Verification failed"
+msgstr "Verification failed"
 
 #: apps/remix/app/components/general/document-signing/access-auth-2fa-form.tsx
 msgid "Verify & Complete"
@@ -13484,10 +13488,6 @@ msgstr "Welcome back! Here's an overview of your account."
 msgid "Welcome to {organisationName}"
 msgstr "Welcome to {organisationName}"
 
-#: packages/lib/jobs/definitions/emails/send-admin-user-created-email.handler.ts
-msgid "Welcome to Documenso"
-msgstr "Welcome to Documenso"
-
 #: packages/email/template-components/template-admin-user-created.tsx
 #: packages/email/template-components/template-confirmation-email.tsx
 msgid "Welcome to Documenso!"
@@ -13980,8 +13980,8 @@ msgstr "You have been invited by <0>{0}</0> to join their organisation."
 
 #. placeholder {0}: organisation.name
 #: packages/lib/server-only/organisation/create-organisation-member-invites.ts
-msgid "You have been invited to join {0} on Documenso"
-msgstr "You have been invited to join {0} on Documenso"
+msgid "You have been invited to join {0}"
+msgstr "You have been invited to join {0}"
 
 #: apps/remix/app/components/embed/multisign/multi-sign-document-list.tsx
 msgid "You have been requested to sign the following documents. Review each document carefully and complete the signing process."
@@ -14413,6 +14413,10 @@ msgstr "Your Account"
 msgid "Your account has been deleted successfully."
 msgstr "Your account has been deleted successfully."
 
+#: packages/lib/jobs/definitions/emails/send-admin-user-created-email.handler.ts
+msgid "Your account is ready"
+msgstr "Your account is ready"
+
 #: packages/email/templates/team-email-removed.tsx
 msgid "Your address is no longer used by this team."
 msgstr "Your address is no longer used by this team."
@@ -14821,10 +14825,6 @@ msgstr "Your token has expired!"
 #: packages/lib/server-only/2fa/email/send-2fa-token-email.ts
 msgid "Your two-factor authentication code"
 msgstr "Your two-factor authentication code"
-
-#: packages/email/templates/access-auth-2fa.tsx
-msgid "Your verification code is inside."
-msgstr "Your verification code is inside."
 
 #: packages/email/template-components/template-access-auth-2fa.tsx
 msgid "Your verification code:"

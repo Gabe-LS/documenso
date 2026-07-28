@@ -177,7 +177,7 @@ export const DocumentSigningAuth2FA = ({
             {formErrorCode && (
               <Alert variant="destructive">
                 <AlertTitle>
-                  <Trans>Unauthorized</Trans>
+                  <Trans>Verification failed</Trans>
                 </AlertTitle>
                 <AlertDescription>
                   <Trans>We were unable to verify your details. Please try again or contact support</Trans>

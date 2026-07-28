@@ -291,6 +291,11 @@ msgstr "{0} modelli di firma diretta"
 msgid "{0} field"
 msgstr "Campo {0}"
 
+#. placeholder {0}: team.name
+#: packages/lib/server-only/team/create-team-email-verification.ts
+msgid "{0} has requested to use your email address"
+msgstr "{0} ha chiesto di usare il tuo indirizzo email"
+
 #. placeholder {0}: remaining.documents
 #. placeholder {1}: quota.documents
 #: apps/remix/app/components/general/document/document-upload-button-legacy.tsx
@@ -1000,11 +1005,6 @@ msgstr "Qualcuno ha richiesto di creare un account per te"
 msgid "A request has been made to link your Documenso account"
 msgstr "Richiesta di collegamento del tuo account"
 
-#. placeholder {0}: team.name
-#: packages/lib/server-only/team/create-team-email-verification.ts
-msgid "A request to use your email has been initiated by {0} on Documenso"
-msgstr "Una richiesta per utilizzare la tua email è stata avviata da {0} su Documenso"
-
 #: apps/remix/app/components/dialogs/webhook-create-dialog.tsx
 #: apps/remix/app/components/dialogs/webhook-edit-dialog.tsx
 msgid "A secret that will be sent to your URL so you can verify that the request has been sent by Documenso."
@@ -1575,7 +1575,7 @@ msgstr "Consenti a tutti i membri dell'organizzazione di accedere a questo team"
 
 #: packages/email/templates/confirm-team-email.tsx
 msgid "Allow document recipients to reply directly to this email address"
-msgstr "Consenti ai destinatari del documento di rispondere direttamente a questo indirizzo email"
+msgstr "Consentire ai destinatari dei documenti di rispondere direttamente a questo indirizzo email"
 
 #: apps/remix/app/routes/_authenticated+/o.$orgUrl.settings.sso.tsx
 msgid "Allow Personal Organisations"
@@ -2216,6 +2216,8 @@ msgid "Authentication Portal Not Found"
 msgstr "Portale di autenticazione non trovato"
 
 #: apps/remix/app/components/general/direct-template/direct-template-signing-auth-page.tsx
+#: apps/remix/app/components/general/document-signing/document-signing-auth-dialog.tsx
+#: apps/remix/app/components/general/document-signing/document-signing-auth-dialog.tsx
 #: apps/remix/app/components/general/document-signing/document-signing-auth-page.tsx
 msgid "Authentication required"
 msgstr "Autenticazione richiesta"
@@ -5224,6 +5226,10 @@ msgstr "Inserisci il numero"
 #: apps/remix/app/components/dialogs/sign-field-text-dialog.tsx
 msgid "Enter Text"
 msgstr "Inserisci il testo"
+
+#: packages/email/templates/access-auth-2fa.tsx
+msgid "Enter the code to finish signing in."
+msgstr "Inserisci il codice per completare l'accesso."
 
 #: apps/remix/app/components/dialogs/organisation-email-domain-create-dialog.tsx
 msgid "Enter the domain you want to use for sending emails (without http:// or www)"
@@ -9790,7 +9796,7 @@ msgstr "Invia documento"
 
 #: packages/email/templates/confirm-team-email.tsx
 msgid "Send documents on behalf of the team using the email address"
-msgstr "Invia documenti per conto del team utilizzando l'indirizzo email"
+msgstr "Inviare documenti per conto del team utilizzando questo indirizzo email"
 
 #: apps/remix/app/components/dialogs/template-bulk-send-dialog.tsx
 msgid "Send documents to recipients immediately"
@@ -10012,11 +10018,6 @@ msgstr "Firma documento"
 #: apps/remix/app/components/embed/multisign/multi-sign-document-list.tsx
 msgid "Sign Documents"
 msgstr "Firma documenti"
-
-#: apps/remix/app/components/general/document-signing/document-signing-auth-dialog.tsx
-#: apps/remix/app/components/general/document-signing/document-signing-auth-dialog.tsx
-msgid "Sign field"
-msgstr "Campo di firma"
 
 #: apps/remix/app/components/forms/signup.tsx
 msgid "Sign Here"
@@ -10703,8 +10704,8 @@ msgstr "Squadra"
 
 #. placeholder {0}: team.name
 #: packages/lib/server-only/team/delete-team.ts
-msgid "Team \"{0}\" has been deleted on Documenso"
-msgstr "Il team \"{0}\" è stato eliminato su Documenso"
+msgid "Team \"{0}\" has been deleted"
+msgstr "Il team \"{0}\" è stato eliminato"
 
 #: packages/lib/constants/teams-translations.ts
 msgid "Team Admin"
@@ -12308,9 +12309,6 @@ msgstr "Impossibile accedere"
 msgid "Unable to start the signing flow"
 msgstr "Impossibile avviare il flusso di firma"
 
-#: apps/remix/app/components/general/document-signing/document-signing-auth-2fa.tsx
-#: apps/remix/app/components/general/document-signing/document-signing-auth-passkey.tsx
-#: apps/remix/app/components/general/document-signing/document-signing-auth-password.tsx
 #: apps/remix/app/routes/_authenticated+/o.$orgUrl.settings._layout.tsx
 #: apps/remix/app/routes/_authenticated+/t.$teamUrl+/settings._layout.tsx
 #: apps/remix/app/routes/_authenticated+/t.$teamUrl+/settings.tokens.tsx
@@ -12777,6 +12775,12 @@ msgstr "Email di Verifica Inviata"
 msgid "Verification email sent successfully."
 msgstr "Email di verifica inviata con successo."
 
+#: apps/remix/app/components/general/document-signing/document-signing-auth-2fa.tsx
+#: apps/remix/app/components/general/document-signing/document-signing-auth-passkey.tsx
+#: apps/remix/app/components/general/document-signing/document-signing-auth-password.tsx
+msgid "Verification failed"
+msgstr "Verifica non riuscita"
+
 #: apps/remix/app/components/general/document-signing/access-auth-2fa-form.tsx
 msgid "Verify & Complete"
 msgstr "Verifica e completa"
@@ -12850,7 +12854,7 @@ msgstr "Visualizza attività"
 
 #: packages/email/templates/confirm-team-email.tsx
 msgid "View all documents sent to and from this email address"
-msgstr "Visualizza tutti i documenti inviati o ricevuti da questo indirizzo email"
+msgstr "Visualizzare tutti i documenti inviati a questo indirizzo email o da questo indirizzo"
 
 #: apps/remix/app/components/general/teams/team-email-usage.tsx
 msgid "View all documents sent to your account"
@@ -13489,10 +13493,6 @@ msgstr "Bentornato! Ecco una panoramica del tuo account."
 msgid "Welcome to {organisationName}"
 msgstr "Benvenuto in {organisationName}"
 
-#: packages/lib/jobs/definitions/emails/send-admin-user-created-email.handler.ts
-msgid "Welcome to Documenso"
-msgstr "Il tuo account Documenso è pronto"
-
 #: packages/email/template-components/template-admin-user-created.tsx
 #: packages/email/template-components/template-confirmation-email.tsx
 msgid "Welcome to Documenso!"
@@ -13985,7 +13985,7 @@ msgstr "Sei stato invitato da <0>{0}</0> a unirti alla loro organizzazione."
 
 #. placeholder {0}: organisation.name
 #: packages/lib/server-only/organisation/create-organisation-member-invites.ts
-msgid "You have been invited to join {0} on Documenso"
+msgid "You have been invited to join {0}"
 msgstr "Hai ricevuto un invito a unirti a {0}"
 
 #: apps/remix/app/components/embed/multisign/multi-sign-document-list.tsx
@@ -14418,6 +14418,10 @@ msgstr "Il tuo Account"
 msgid "Your account has been deleted successfully."
 msgstr "Il tuo account è stato eliminato con successo."
 
+#: packages/lib/jobs/definitions/emails/send-admin-user-created-email.handler.ts
+msgid "Your account is ready"
+msgstr "Il tuo account è pronto"
+
 #: packages/email/templates/team-email-removed.tsx
 msgid "Your address is no longer used by this team."
 msgstr "Il tuo indirizzo non è più usato da questo team."
@@ -14826,10 +14830,6 @@ msgstr "Il tuo token è scaduto!"
 #: packages/lib/server-only/2fa/email/send-2fa-token-email.ts
 msgid "Your two-factor authentication code"
 msgstr "Il tuo codice di autenticazione a due fattori"
-
-#: packages/email/templates/access-auth-2fa.tsx
-msgid "Your verification code is inside."
-msgstr "Il tuo codice di verifica è in questa email."
 
 #: packages/email/template-components/template-access-auth-2fa.tsx
 msgid "Your verification code:"
