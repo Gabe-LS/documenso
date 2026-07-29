@@ -2806,7 +2806,7 @@ msgstr "Clicca per copiare il link di firma da inviare al destinatario"
 #: apps/remix/app/components/general/document-signing/document-signing-form.tsx
 #: apps/remix/app/components/general/envelope-signing/envelope-signer-page-renderer.tsx
 msgid "Click to insert field"
-msgstr "Clicca per inserire il campo"
+msgstr "Clicca per compilare il campo"
 
 #: apps/remix/app/routes/_authenticated+/o.$orgUrl.settings.sso.tsx
 msgid "Client ID"
