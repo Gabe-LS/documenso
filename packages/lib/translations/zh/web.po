@@ -2015,6 +2015,10 @@ msgstr "批准文档"
 msgid "Approve or decline the request."
 msgstr ""
 
+#: packages/email/templates/document-invite.tsx
+msgid "Approve or reject the document"
+msgstr ""
+
 #: apps/remix/app/components/general/document/document-page-view-recipients.tsx
 msgid "Approved"
 msgstr "已批准"
@@ -5756,6 +5760,10 @@ msgstr "填写详细信息以创建新的电子邮件传输方式。"
 msgid "Fill in the details to create a new subscription claim."
 msgstr "填写详细信息以创建新的订阅声明。"
 
+#: packages/email/templates/document-invite.tsx
+msgid "Fill out the document"
+msgstr ""
+
 #: apps/remix/app/routes/_authenticated+/admin+/email-domains._index.tsx
 msgid "Filter by status"
 msgstr "按状态筛选"
@@ -7731,10 +7739,6 @@ msgstr "噢！出错了。"
 #: apps/remix/app/routes/_authenticated+/o.$orgUrl._index.tsx
 msgid "Open menu"
 msgstr "打开菜单"
-
-#: packages/email/templates/document-invite.tsx
-msgid "Open the document to review and sign it."
-msgstr ""
 
 #: apps/remix/app/components/general/stack-avatars-with-tooltip.tsx
 msgid "Opened"
@@ -12900,6 +12904,10 @@ msgstr "查看并管理与您账户关联的所有登录方式。"
 msgid "View and sign"
 msgstr ""
 
+#: packages/email/templates/document-invite.tsx
+msgid "View and sign the document"
+msgstr ""
+
 #: apps/remix/app/routes/_authenticated+/admin+/documents.$id.tsx
 msgid "View Audit Logs"
 msgstr "查看审计日志"
@@ -12972,6 +12980,10 @@ msgstr "查看团队"
 #: apps/remix/app/routes/_authenticated+/o.$orgUrl.settings.email-domains.$id.tsx
 msgid "View the DNS records for this email domain"
 msgstr "查看此邮箱域名的 DNS 记录"
+
+#: packages/email/templates/document-invite.tsx
+msgid "View the document"
+msgstr ""
 
 #: apps/remix/app/routes/_authenticated+/admin+/organisation-stats._index.tsx
 msgid "View, sort and filter monthly usage stats across organisations"

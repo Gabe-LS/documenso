@@ -2016,6 +2016,10 @@ msgstr "Approva documento"
 msgid "Approve or decline the request."
 msgstr "Approva o rifiuta la richiesta."
 
+#: packages/email/templates/document-invite.tsx
+msgid "Approve or reject the document"
+msgstr "Approva o rifiuta il documento"
+
 #: apps/remix/app/components/general/document/document-page-view-recipients.tsx
 msgid "Approved"
 msgstr "Approvato"
@@ -5757,6 +5761,10 @@ msgstr "Compila i dettagli per creare un nuovo trasporto email."
 msgid "Fill in the details to create a new subscription claim."
 msgstr "Compila i dettagli per creare una nuova rivendicazione di abbonamento."
 
+#: packages/email/templates/document-invite.tsx
+msgid "Fill out the document"
+msgstr "Compila il documento"
+
 #: apps/remix/app/routes/_authenticated+/admin+/email-domains._index.tsx
 msgid "Filter by status"
 msgstr "Filtra per stato"
@@ -7732,10 +7740,6 @@ msgstr "Ops! Qualcosa è andato storto."
 #: apps/remix/app/routes/_authenticated+/o.$orgUrl._index.tsx
 msgid "Open menu"
 msgstr "Apri menu"
-
-#: packages/email/templates/document-invite.tsx
-msgid "Open the document to review and sign it."
-msgstr "Visualizza e firma il documento"
 
 #: apps/remix/app/components/general/stack-avatars-with-tooltip.tsx
 msgid "Opened"
@@ -12901,6 +12905,10 @@ msgstr "Visualizza e gestisci tutti i metodi di accesso collegati al tuo account
 msgid "View and sign"
 msgstr "Visualizza e firma"
 
+#: packages/email/templates/document-invite.tsx
+msgid "View and sign the document"
+msgstr "Visualizza e firma il documento"
+
 #: apps/remix/app/routes/_authenticated+/admin+/documents.$id.tsx
 msgid "View Audit Logs"
 msgstr "Visualizza registri di controllo"
@@ -12973,6 +12981,10 @@ msgstr "Visualizza squadre"
 #: apps/remix/app/routes/_authenticated+/o.$orgUrl.settings.email-domains.$id.tsx
 msgid "View the DNS records for this email domain"
 msgstr "Visualizza i record DNS per questo dominio email"
+
+#: packages/email/templates/document-invite.tsx
+msgid "View the document"
+msgstr "Visualizza il documento"
 
 #: apps/remix/app/routes/_authenticated+/admin+/organisation-stats._index.tsx
 msgid "View, sort and filter monthly usage stats across organisations"

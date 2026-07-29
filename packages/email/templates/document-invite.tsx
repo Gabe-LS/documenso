@@ -1,8 +1,8 @@
 import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 import { Trans } from '@lingui/react/macro';
-import type { RecipientRole } from '@prisma/client';
-import { OrganisationType } from '@prisma/client';
+import { OrganisationType, RecipientRole } from '@prisma/client';
+import { match } from 'ts-pattern';
 
 import { Link } from '../components';
 import { EmailBodyText, EmailLayout } from '../template-components/email-primitives';
@@ -37,7 +37,13 @@ export const DocumentInviteEmailTemplate = ({
 }: DocumentInviteEmailTemplateProps) => {
   const { _ } = useLingui();
 
-  const previewText = msg`Open the document to review and sign it.`;
+  // Role-aware: a viewer never signs and an approver approves rather than signs,
+  // so a single preview would assert the wrong action for three of four roles.
+  const previewText = match(role)
+    .with(RecipientRole.APPROVER, () => msg`Approve or reject the document`)
+    .with(RecipientRole.VIEWER, () => msg`View the document`)
+    .with(RecipientRole.ASSISTANT, () => msg`Fill out the document`)
+    .otherwise(() => msg`View and sign the document`);
 
   return (
     <EmailLayout
