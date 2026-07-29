@@ -13384,6 +13384,10 @@ msgstr "Genereremo link di firma per te, che potrai inviare ai destinatari trami
 msgid "We won't send anything to notify recipients."
 msgstr "Non invieremo nulla per notificare i destinatari."
 
+#: packages/email/templates/document-cc-notification.tsx
+msgid "We'll email you as soon as it's signed."
+msgstr "Ti avviseremo non appena il documento sarà stato firmato."
+
 #: packages/email/templates/document-pending.tsx
 msgid "We'll email you when everyone has signed."
 msgstr "Ti invieremo un'email quando tutti avranno firmato."
@@ -13754,10 +13758,6 @@ msgstr "Stai attualmente aggiornando la chiave d'accesso <0>{passkeyName}</0>."
 #: apps/remix/app/components/dialogs/team-group-update-dialog.tsx
 msgid "You are currently updating the <0>{teamGroupName}</0> team group."
 msgstr "Stai attualmente aggiornando il gruppo di team <0>{teamGroupName}</0>."
-
-#: packages/email/templates/document-cc-notification.tsx
-msgid "You are in copy. No action needed."
-msgstr "Ti avviseremo non appena il documento sarà stato firmato."
 
 #: packages/email/templates/document-cc-reminder-notification.tsx
 msgid "You are in copy. The document is still awaiting signatures."

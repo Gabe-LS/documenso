@@ -13383,6 +13383,10 @@ msgstr "We genereren ondertekeningslinks voor je, die je via je eigen kanaal naa
 msgid "We won't send anything to notify recipients."
 msgstr "We sturen niets om ontvangers op de hoogte te brengen."
 
+#: packages/email/templates/document-cc-notification.tsx
+msgid "We'll email you as soon as it's signed."
+msgstr ""
+
 #: packages/email/templates/document-pending.tsx
 msgid "We'll email you when everyone has signed."
 msgstr ""
@@ -13753,10 +13757,6 @@ msgstr "Je bent momenteel de passkey <0>{passkeyName}</0> aan het bijwerken."
 #: apps/remix/app/components/dialogs/team-group-update-dialog.tsx
 msgid "You are currently updating the <0>{teamGroupName}</0> team group."
 msgstr "Je werkt momenteel de teamgroep <0>{teamGroupName}</0> bij."
-
-#: packages/email/templates/document-cc-notification.tsx
-msgid "You are in copy. No action needed."
-msgstr ""
 
 #: packages/email/templates/document-cc-reminder-notification.tsx
 msgid "You are in copy. The document is still awaiting signatures."

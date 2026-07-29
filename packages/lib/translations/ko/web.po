@@ -13383,6 +13383,10 @@ msgstr "수신자에게 보낼 서명 링크를 생성해 드립니다. 링크�
 msgid "We won't send anything to notify recipients."
 msgstr "수신자에게 알림을 보내지 않습니다."
 
+#: packages/email/templates/document-cc-notification.tsx
+msgid "We'll email you as soon as it's signed."
+msgstr ""
+
 #: packages/email/templates/document-pending.tsx
 msgid "We'll email you when everyone has signed."
 msgstr ""
@@ -13753,10 +13757,6 @@ msgstr "현재 <0>{passkeyName}</0> 패스키를 업데이트하는 중입니다
 #: apps/remix/app/components/dialogs/team-group-update-dialog.tsx
 msgid "You are currently updating the <0>{teamGroupName}</0> team group."
 msgstr "현재 <0>{teamGroupName}</0> 팀 그룹을 업데이트하고 있습니다."
-
-#: packages/email/templates/document-cc-notification.tsx
-msgid "You are in copy. No action needed."
-msgstr ""
 
 #: packages/email/templates/document-cc-reminder-notification.tsx
 msgid "You are in copy. The document is still awaiting signatures."

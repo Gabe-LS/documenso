@@ -13378,6 +13378,10 @@ msgstr "Geraremos links de assinatura para você, que você pode enviar aos dest
 msgid "We won't send anything to notify recipients."
 msgstr "Não enviaremos nada para notificar os destinatários."
 
+#: packages/email/templates/document-cc-notification.tsx
+msgid "We'll email you as soon as it's signed."
+msgstr ""
+
 #: packages/email/templates/document-pending.tsx
 msgid "We'll email you when everyone has signed."
 msgstr ""
@@ -13748,10 +13752,6 @@ msgstr "Você está atualizando a passkey <0>{passkeyName}</0>."
 #: apps/remix/app/components/dialogs/team-group-update-dialog.tsx
 msgid "You are currently updating the <0>{teamGroupName}</0> team group."
 msgstr "Você está atualizando o grupo de equipe <0>{teamGroupName}</0>."
-
-#: packages/email/templates/document-cc-notification.tsx
-msgid "You are in copy. No action needed."
-msgstr ""
 
 #: packages/email/templates/document-cc-reminder-notification.tsx
 msgid "You are in copy. The document is still awaiting signatures."

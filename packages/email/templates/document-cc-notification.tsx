@@ -26,7 +26,10 @@ export const DocumentCcNotificationEmailTemplate = ({
 }: DocumentCcNotificationEmailTemplateProps) => {
   const { _ } = useLingui();
 
-  const previewText = msg`You are in copy. No action needed.`;
+  // Deliberately not the body's own "You'll be notified as soon as the document
+  // has been signed." - lingui keys on the English text, so an identical string
+  // would collapse the preheader and the body into one msgid.
+  const previewText = msg`We'll email you as soon as it's signed.`;
 
   return (
     <EmailLayout assetBaseUrl={assetBaseUrl} preview={_(previewText)} reportUrl={reportUrl}>
