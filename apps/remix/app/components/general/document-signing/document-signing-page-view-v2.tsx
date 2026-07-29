@@ -116,7 +116,7 @@ export const DocumentSigningPageViewV2 = () => {
 
           <div className={cn('flex flex-1 flex-col overflow-hidden py-4', isSidebarCollapsed && 'invisible w-0')}>
             <div className="px-4">
-              <h3 className="flex items-end justify-between font-semibold text-foreground text-sm">
+              <h3 className="flex items-center justify-between font-semibold text-foreground text-sm">
                 {match(recipient.role)
                   .with(RecipientRole.VIEWER, () => <Trans>View Document</Trans>)
                   .with(RecipientRole.SIGNER, () => <Trans>Sign Document</Trans>)

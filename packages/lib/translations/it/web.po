@@ -7735,7 +7735,7 @@ msgstr "Apri menu"
 
 #: packages/email/templates/document-invite.tsx
 msgid "Open the document to review and sign it."
-msgstr "Apri il documento per rivederlo e firmarlo."
+msgstr "Visualizza e firma il documento"
 
 #: apps/remix/app/components/general/stack-avatars-with-tooltip.tsx
 msgid "Opened"

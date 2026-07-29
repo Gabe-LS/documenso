@@ -229,7 +229,7 @@ export const EnvelopeEditor = () => {
             </div>
           ) : (
             <div className="px-4">
-              <h3 className="flex items-end justify-between font-semibold text-foreground text-sm">
+              <h3 className="flex items-center justify-between font-semibold text-foreground text-sm">
                 {isDocument ? <Trans>Document Editor</Trans> : <Trans>Template Editor</Trans>}
 
                 <span className="ml-2 rounded border bg-muted/50 px-2 py-0.5 text-muted-foreground text-xs">
