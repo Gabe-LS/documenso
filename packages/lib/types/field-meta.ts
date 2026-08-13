@@ -148,6 +148,7 @@ export const ZRadioFieldMeta = ZBaseFieldMeta.extend({
     )
     .optional(),
   direction: z.enum(['vertical', 'horizontal']).optional().default('vertical'),
+  columns: z.coerce.number().int().min(1).max(10).optional().default(1),
 });
 
 export type TRadioFieldMeta = z.infer<typeof ZRadioFieldMeta>;
@@ -166,6 +167,7 @@ export const ZCheckboxFieldMeta = ZBaseFieldMeta.extend({
   validationRule: z.string().optional(),
   validationLength: z.number().optional(),
   direction: z.enum(['vertical', 'horizontal']).optional().default('vertical'),
+  columns: z.coerce.number().int().min(1).max(10).optional().default(1),
 });
 
 export type TCheckboxFieldMeta = z.infer<typeof ZCheckboxFieldMeta>;
@@ -358,6 +360,7 @@ export const FIELD_RADIO_META_DEFAULT_VALUES: TRadioFieldMeta = {
   required: false,
   readOnly: false,
   direction: 'vertical',
+  columns: 1,
 };
 
 export const FIELD_CHECKBOX_META_DEFAULT_VALUES: TCheckboxFieldMeta = {
@@ -369,6 +372,7 @@ export const FIELD_CHECKBOX_META_DEFAULT_VALUES: TCheckboxFieldMeta = {
   required: false,
   readOnly: false,
   direction: 'vertical',
+  columns: 1,
 };
 
 export const FIELD_DROPDOWN_META_DEFAULT_VALUES: TDropdownFieldMeta = {

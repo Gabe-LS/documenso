@@ -36,6 +36,7 @@ export const DocumentSigningRadioField = ({ field, onSignField, onUnsignField }:
 
   const parsedFieldMeta = ZRadioFieldMeta.parse(field.fieldMeta);
   const isReadOnly = parsedFieldMeta.readOnly;
+  const useGridLayout = parsedFieldMeta.direction !== 'horizontal' && (parsedFieldMeta.columns ?? 1) > 1;
   const values = parsedFieldMeta.values?.map((item) => ({
     ...item,
     value: item.value.length > 0 ? item.value : `empty-value-${item.id}`,
@@ -146,7 +147,13 @@ export const DocumentSigningRadioField = ({ field, onSignField, onUnsignField }:
       {isLoading && <DocumentSigningFieldsLoader />}
 
       {!field.inserted && (
-        <RadioGroup onValueChange={(value) => handleSelectItem(value)} className="z-10 my-0.5 gap-y-1">
+        <RadioGroup
+          onValueChange={(value) => handleSelectItem(value)}
+          className="z-10 my-0.5 gap-y-1"
+          style={
+            useGridLayout ? { gridTemplateColumns: `repeat(${parsedFieldMeta.columns}, minmax(0, 1fr))` } : undefined
+          }
+        >
           {values?.map((item, index) => (
             <div key={index} className="flex items-center">
               <RadioGroupItem
@@ -167,7 +174,12 @@ export const DocumentSigningRadioField = ({ field, onSignField, onUnsignField }:
       )}
 
       {field.inserted && (
-        <RadioGroup className="my-0.5 gap-y-1">
+        <RadioGroup
+          className="my-0.5 gap-y-1"
+          style={
+            useGridLayout ? { gridTemplateColumns: `repeat(${parsedFieldMeta.columns}, minmax(0, 1fr))` } : undefined
+          }
+        >
           {values?.map((item, index) => (
             <div key={index} className="flex items-center">
               <RadioGroupItem

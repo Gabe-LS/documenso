@@ -32,6 +32,7 @@ import {
 const ZCheckboxFieldFormSchema = ZCheckboxFieldMeta.pick({
   label: true,
   direction: true,
+  columns: true,
   validationRule: true,
   validationLength: true,
   required: true,
@@ -70,6 +71,7 @@ export const EditorFieldCheckboxForm = ({
   value = {
     type: 'checkbox',
     direction: 'vertical',
+    columns: 1,
   },
   onValueChange,
 }: EditorFieldCheckboxFormProps) => {
@@ -79,6 +81,7 @@ export const EditorFieldCheckboxForm = ({
     defaultValues: {
       label: value.label || '',
       direction: value.direction || 'vertical',
+      columns: value.columns || 1,
       validationRule: value.validationRule || '',
       validationLength: value.validationLength || 0,
       values: value.values || [{ id: 1, checked: false, value: '' }],
@@ -178,6 +181,30 @@ export const EditorFieldCheckboxForm = ({
                       </SelectItem>
                     </SelectContent>
                   </Select>
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="columns"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>
+                  <Trans>Columns</Trans>
+                </FormLabel>
+                <FormControl>
+                  <Input
+                    type="number"
+                    min={1}
+                    max={10}
+                    disabled={formValues.direction === 'horizontal'}
+                    className="w-full bg-background text-muted-foreground"
+                    {...field}
+                    onChange={(e) => field.onChange(Number(e.target.value))}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>

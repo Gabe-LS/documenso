@@ -63,6 +63,7 @@ export const DocumentSigningCheckboxField = ({
   );
 
   const isReadOnly = parsedFieldMeta.readOnly;
+  const useGridLayout = parsedFieldMeta.direction !== 'horizontal' && (parsedFieldMeta.columns ?? 1) > 1;
 
   const checkboxValidationRule = parsedFieldMeta.validationRule;
   const checkboxValidationLength = parsedFieldMeta.validationLength;
@@ -254,9 +255,16 @@ export const DocumentSigningCheckboxField = ({
           )}
           <div
             className={cn(
-              'z-50 my-0.5 flex gap-1',
-              parsedFieldMeta.direction === 'horizontal' ? 'flex-row flex-wrap' : 'flex-col gap-y-1',
+              'z-50 my-0.5',
+              parsedFieldMeta.direction === 'horizontal'
+                ? 'flex flex-row flex-wrap gap-1'
+                : useGridLayout
+                  ? 'grid gap-y-1'
+                  : 'flex flex-col gap-1 gap-y-1',
             )}
+            style={
+              useGridLayout ? { gridTemplateColumns: `repeat(${parsedFieldMeta.columns}, minmax(0, 1fr))` } : undefined
+            }
           >
             {values?.map((item: { id: number; value: string; checked: boolean }, index: number) => {
               const itemValue = item.value || `empty-value-${item.id}`;
@@ -288,9 +296,16 @@ export const DocumentSigningCheckboxField = ({
       {field.inserted && (
         <div
           className={cn(
-            'my-0.5 flex gap-1',
-            parsedFieldMeta.direction === 'horizontal' ? 'flex-row flex-wrap' : 'flex-col gap-y-1',
+            'my-0.5',
+            parsedFieldMeta.direction === 'horizontal'
+              ? 'flex flex-row flex-wrap gap-1'
+              : useGridLayout
+                ? 'grid gap-y-1'
+                : 'flex flex-col gap-1 gap-y-1',
           )}
+          style={
+            useGridLayout ? { gridTemplateColumns: `repeat(${parsedFieldMeta.columns}, minmax(0, 1fr))` } : undefined
+          }
         >
           {values?.map((item: { id: number; value: string; checked: boolean }, index: number) => {
             const itemValue = item.value || `empty-value-${item.id}`;

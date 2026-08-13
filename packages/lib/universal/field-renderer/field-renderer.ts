@@ -133,6 +133,11 @@ type CalculateMultiItemPositionOptions = {
    */
   direction: 'horizontal' | 'vertical';
 
+  /**
+   * Number of columns for grid layout (only used when direction is 'vertical').
+   */
+  columns?: number;
+
   type: 'checkbox' | 'radio';
 };
 
@@ -149,8 +154,11 @@ export const calculateMultiItemPosition = (options: CalculateMultiItemPositionOp
     spacingBetweenItemAndText,
     fieldPadding,
     direction,
+    columns: rawColumns,
     type,
   } = options;
+
+  const columns = rawColumns && rawColumns > 1 && direction === 'vertical' ? rawColumns : undefined;
 
   const innerFieldHeight = fieldHeight - fieldPadding * 2;
   const innerFieldWidth = fieldWidth - fieldPadding; // This is purposefully not using fullPadding to allow flush text.
@@ -179,6 +187,40 @@ export const calculateMultiItemPosition = (options: CalculateMultiItemPositionOp
     // Multiplied by 2 for extra padding on the right hand side of the text and the next item.
     const textWidth = itemWidth - itemSize - spacingBetweenItemAndText * 2;
     const textHeight = itemHeight;
+
+    return {
+      itemInputX,
+      itemInputY,
+      textX,
+      textY,
+      textWidth,
+      textHeight,
+    };
+  }
+
+  if (columns) {
+    const rows = Math.ceil(itemCount / columns);
+    const colWidth = innerFieldWidth / columns;
+    const rowHeight = innerFieldHeight / rows;
+
+    const col = itemIndex % columns;
+    const row = Math.floor(itemIndex / columns);
+
+    const x = col * colWidth + innerFieldX;
+    const y = row * rowHeight + innerFieldY;
+
+    let itemInputY = y + rowHeight / 2 - itemSize / 2;
+    let itemInputX = x;
+
+    if (type === 'radio') {
+      itemInputX = x + itemSize / 2;
+      itemInputY = y + rowHeight / 2;
+    }
+
+    const textX = x + itemSize + spacingBetweenItemAndText;
+    const textY = y;
+    const textWidth = colWidth - itemSize - spacingBetweenItemAndText * 2;
+    const textHeight = rowHeight;
 
     return {
       itemInputX,

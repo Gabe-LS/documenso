@@ -125,6 +125,7 @@ const getDefaultState = (fieldType: FieldType): FieldMeta => {
         required: false,
         readOnly: false,
         direction: 'vertical',
+        columns: 1,
       };
     case FieldType.CHECKBOX:
       return {
@@ -135,6 +136,7 @@ const getDefaultState = (fieldType: FieldType): FieldMeta => {
         required: false,
         readOnly: false,
         direction: 'vertical',
+        columns: 1,
       };
     case FieldType.DROPDOWN:
       return {

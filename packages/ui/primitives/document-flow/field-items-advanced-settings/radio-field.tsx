@@ -76,6 +76,7 @@ export const RadioFieldAdvancedSettings = ({
       values,
       type: 'radio',
       direction: 'vertical',
+      columns: 1,
     });
     handleErrors(errors);
 
@@ -107,6 +108,7 @@ export const RadioFieldAdvancedSettings = ({
       values,
       type: 'radio',
       direction: 'vertical',
+      columns: 1,
     });
     handleErrors(errors);
   }, [values]);

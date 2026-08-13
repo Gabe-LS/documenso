@@ -80,6 +80,7 @@ export const renderRadioFieldElement = (field: FieldToRender, options: RenderFie
         fieldPadding: radioFieldPadding,
         type: 'radio',
         direction: radioMeta?.direction || 'vertical',
+        columns: radioMeta?.columns || 1,
       });
 
       circleElement.setAttrs({
@@ -143,6 +144,7 @@ export const renderRadioFieldElement = (field: FieldToRender, options: RenderFie
       fieldPadding: radioFieldPadding,
       type: 'radio',
       direction: radioMeta?.direction || 'vertical',
+      columns: radioMeta?.columns || 1,
     });
 
     // Circle which represents the radio button.

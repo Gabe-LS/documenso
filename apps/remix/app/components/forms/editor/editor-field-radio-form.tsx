@@ -24,6 +24,7 @@ import {
 const ZRadioFieldFormSchema = ZRadioFieldMeta.pick({
   label: true,
   direction: true,
+  columns: true,
   values: true,
   required: true,
   readOnly: true,
@@ -54,6 +55,7 @@ export const EditorFieldRadioForm = ({
   value = {
     type: 'radio',
     direction: 'vertical',
+    columns: 1,
   },
   onValueChange,
 }: EditorFieldRadioFormProps) => {
@@ -68,6 +70,7 @@ export const EditorFieldRadioForm = ({
       required: value.required || false,
       readOnly: value.readOnly || false,
       direction: value.direction || 'vertical',
+      columns: value.columns || 1,
       fontSize: value.fontSize || DEFAULT_FIELD_FONT_SIZE,
     },
   });
@@ -139,6 +142,30 @@ export const EditorFieldRadioForm = ({
                       </SelectItem>
                     </SelectContent>
                   </Select>
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="columns"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>
+                  <Trans>Columns</Trans>
+                </FormLabel>
+                <FormControl>
+                  <Input
+                    type="number"
+                    min={1}
+                    max={10}
+                    disabled={formValues.direction === 'horizontal'}
+                    className="w-full bg-background text-muted-foreground"
+                    {...field}
+                    onChange={(e) => field.onChange(Number(e.target.value))}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>

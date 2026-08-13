@@ -66,12 +66,20 @@ export const FieldContent = ({ field, documentMeta }: FieldIconProps) => {
       );
     }
 
+    const checkboxColumns = field.fieldMeta.columns ?? 1;
+    const useCheckboxGrid = field.fieldMeta.direction !== 'horizontal' && checkboxColumns > 1;
+
     return (
       <div
         className={cn(
-          'flex gap-1 py-0.5',
-          field.fieldMeta.direction === 'horizontal' ? 'flex-row flex-wrap' : 'flex-col gap-y-1',
+          'gap-1 py-0.5',
+          useCheckboxGrid
+            ? 'grid'
+            : field.fieldMeta.direction === 'horizontal'
+              ? 'flex flex-row flex-wrap'
+              : 'flex flex-col gap-y-1',
         )}
+        style={useCheckboxGrid ? { gridTemplateColumns: `repeat(${checkboxColumns}, minmax(0, 1fr))` } : undefined}
       >
         {field.fieldMeta.values.map((item, index) => (
           <div key={index} className="flex items-center">
@@ -101,9 +109,23 @@ export const FieldContent = ({ field, documentMeta }: FieldIconProps) => {
     field.fieldMeta.values &&
     field.fieldMeta.values.length > 0
   ) {
+    const radioColumns = field.fieldMeta.columns ?? 1;
+    const radioDirection = field.fieldMeta.direction ?? 'vertical';
+    const useRadioGrid = radioDirection !== 'horizontal' && radioColumns > 1;
+
     return (
-      <div className="flex flex-col gap-y-2 py-0.5">
-        <RadioGroup className="gap-y-1">
+      <div className="py-0.5">
+        <RadioGroup
+          className={cn(
+            'gap-1',
+            useRadioGrid
+              ? 'grid'
+              : radioDirection === 'horizontal'
+                ? 'flex flex-row flex-wrap'
+                : 'flex flex-col gap-y-1',
+          )}
+          style={useRadioGrid ? { gridTemplateColumns: `repeat(${radioColumns}, minmax(0, 1fr))` } : undefined}
+        >
           {field.fieldMeta.values.map((item, index) => (
             <div key={index} className="flex items-center">
               <RadioGroupItem

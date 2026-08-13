@@ -18,7 +18,7 @@ type CheckboxFieldAdvancedSettingsProps = {
   fieldState: CheckboxFieldMeta;
   handleFieldChange: (
     key: keyof CheckboxFieldMeta,
-    value: string | { checked: boolean; value: string }[] | boolean,
+    value: string | { checked: boolean; value: string }[] | boolean | number,
   ) => void;
   handleErrors: (errors: string[]) => void;
 };
@@ -37,19 +37,28 @@ export const CheckboxFieldAdvancedSettings = ({
   const [validationLength, setValidationLength] = useState(fieldState.validationLength ?? 0);
   const [validationRule, setValidationRule] = useState(fieldState.validationRule ?? '');
   const [direction, setDirection] = useState<'vertical' | 'horizontal'>(fieldState.direction ?? 'vertical');
+  const [columns, setColumns] = useState(fieldState.columns ?? 1);
 
-  const handleToggleChange = (field: keyof CheckboxFieldMeta, value: string | boolean) => {
+  const handleToggleChange = (field: keyof CheckboxFieldMeta, value: string | boolean | number) => {
     const readOnly = field === 'readOnly' ? Boolean(value) : Boolean(fieldState.readOnly);
     const required = field === 'required' ? Boolean(value) : Boolean(fieldState.required);
     const validationRule = field === 'validationRule' ? String(value) : String(fieldState.validationRule);
     const validationLength = field === 'validationLength' ? Number(value) : Number(fieldState.validationLength);
     const currentDirection = field === 'direction' && String(value) === 'horizontal' ? 'horizontal' : 'vertical';
+    const currentColumns = field === 'columns' ? Number(value) : (fieldState.columns ?? 1);
 
     setReadOnly(readOnly);
     setRequired(required);
     setValidationRule(validationRule);
     setValidationLength(validationLength);
     setDirection(currentDirection);
+    setColumns(currentColumns);
+
+    // Reset columns to 1 when switching to horizontal
+    if (field === 'direction' && currentDirection === 'horizontal' && currentColumns > 1) {
+      setColumns(1);
+      handleFieldChange('columns', 1);
+    }
 
     const errors = validateCheckboxField(
       values.map((item) => item.value),
@@ -59,6 +68,7 @@ export const CheckboxFieldAdvancedSettings = ({
         validationRule,
         validationLength,
         direction: currentDirection,
+        columns: currentColumns,
         type: 'checkbox',
       },
     );
@@ -81,6 +91,7 @@ export const CheckboxFieldAdvancedSettings = ({
         validationRule,
         validationLength,
         direction: direction,
+        columns: columns,
         type: 'checkbox',
       },
     );
@@ -151,6 +162,25 @@ export const CheckboxFieldAdvancedSettings = ({
             </SelectItem>
           </SelectContent>
         </Select>
+      </div>
+
+      <div className="mb-2">
+        <Label>
+          <Trans>Columns</Trans>
+        </Label>
+        <Input
+          id="columns"
+          type="number"
+          className="mt-2 bg-background"
+          min={1}
+          max={10}
+          value={columns}
+          disabled={direction === 'horizontal'}
+          onChange={(e) => {
+            const val = Math.min(10, Math.max(1, parseInt(e.target.value, 10) || 1));
+            handleToggleChange('columns', val);
+          }}
+        />
       </div>
 
       <div className="flex flex-row items-center gap-x-4">

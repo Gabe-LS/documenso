@@ -226,6 +226,7 @@ export const insertFieldInPDFV1 = async (pdf: PDFDocument, field: FieldWithSigna
 
       const selected: string[] = fromCheckboxValue(field.customText);
       const direction = meta.data.direction ?? 'vertical';
+      const columns = meta.data.columns ?? 1;
 
       const topPadding = 12;
       const leftCheckboxPadding = 8;
@@ -272,6 +273,39 @@ export const insertFieldInPDFV1 = async (pdf: PDFDocument, field: FieldWithSigna
 
           currentX += itemWidth;
         }
+      } else if (columns > 1) {
+        // Grid layout: vertical direction with multiple columns
+        const itemCount = (values ?? []).length;
+        const rows = Math.ceil(itemCount / columns);
+        const columnWidth = fieldWidth / columns;
+
+        for (const [index, item] of (values ?? []).entries()) {
+          const col = index % columns;
+          const row = Math.floor(index / columns);
+          const offsetX = col * columnWidth;
+          const offsetY = row * checkboxSpaceY + topPadding;
+
+          const checkbox = pdf.getForm().createCheckBox(`checkbox.${field.secondaryId}.${index}`);
+
+          if (selected.includes(item.value)) {
+            checkbox.check();
+          }
+
+          page.drawText(item.value.includes('empty-value-') ? '' : item.value, {
+            x: fieldX + offsetX + leftCheckboxPadding + leftCheckboxLabelPadding,
+            y: pageHeight - (fieldY + offsetY),
+            size: 12,
+            font,
+            rotate: degrees(pageRotationInDegrees),
+          });
+
+          checkbox.addToPage(page, {
+            x: fieldX + offsetX + leftCheckboxPadding,
+            y: pageHeight - (fieldY + offsetY),
+            height: 8,
+            width: 8,
+          });
+        }
       } else {
         // Vertical layout: original behavior
         for (const [index, item] of (values ?? []).entries()) {
@@ -315,36 +349,73 @@ export const insertFieldInPDFV1 = async (pdf: PDFDocument, field: FieldWithSigna
       }));
 
       const selected = field.customText.split(',');
+      const direction = meta.data.direction ?? 'vertical';
+      const columns = meta.data.columns ?? 1;
 
       const topPadding = 12;
       const leftRadioPadding = 8;
       const leftRadioLabelPadding = 12;
       const radioSpaceY = 13;
 
-      for (const [index, item] of (values ?? []).entries()) {
-        const offsetY = index * radioSpaceY + topPadding;
+      if (direction === 'vertical' && columns > 1) {
+        // Grid layout: vertical direction with multiple columns
+        const itemCount = (values ?? []).length;
+        const rows = Math.ceil(itemCount / columns);
+        const columnWidth = fieldWidth / columns;
 
-        const radio = pdf.getForm().createRadioGroup(`radio.${field.secondaryId}.${index}`);
+        for (const [index, item] of (values ?? []).entries()) {
+          const col = index % columns;
+          const row = Math.floor(index / columns);
+          const offsetX = col * columnWidth;
+          const offsetY = row * radioSpaceY + topPadding;
 
-        // Draw label.
-        page.drawText(item.value.includes('empty-value-') ? '' : item.value, {
-          x: fieldX + leftRadioPadding + leftRadioLabelPadding,
-          y: pageHeight - (fieldY + offsetY),
-          size: 12,
-          font,
-          rotate: degrees(pageRotationInDegrees),
-        });
+          const radio = pdf.getForm().createRadioGroup(`radio.${field.secondaryId}.${index}`);
 
-        // Draw radio button.
-        radio.addOptionToPage(item.value, page, {
-          x: fieldX + leftRadioPadding,
-          y: pageHeight - (fieldY + offsetY),
-          height: 8,
-          width: 8,
-        });
+          page.drawText(item.value.includes('empty-value-') ? '' : item.value, {
+            x: fieldX + offsetX + leftRadioPadding + leftRadioLabelPadding,
+            y: pageHeight - (fieldY + offsetY),
+            size: 12,
+            font,
+            rotate: degrees(pageRotationInDegrees),
+          });
 
-        if (selected.includes(item.value)) {
-          radio.select(item.value);
+          radio.addOptionToPage(item.value, page, {
+            x: fieldX + offsetX + leftRadioPadding,
+            y: pageHeight - (fieldY + offsetY),
+            height: 8,
+            width: 8,
+          });
+
+          if (selected.includes(item.value)) {
+            radio.select(item.value);
+          }
+        }
+      } else {
+        for (const [index, item] of (values ?? []).entries()) {
+          const offsetY = index * radioSpaceY + topPadding;
+
+          const radio = pdf.getForm().createRadioGroup(`radio.${field.secondaryId}.${index}`);
+
+          // Draw label.
+          page.drawText(item.value.includes('empty-value-') ? '' : item.value, {
+            x: fieldX + leftRadioPadding + leftRadioLabelPadding,
+            y: pageHeight - (fieldY + offsetY),
+            size: 12,
+            font,
+            rotate: degrees(pageRotationInDegrees),
+          });
+
+          // Draw radio button.
+          radio.addOptionToPage(item.value, page, {
+            x: fieldX + leftRadioPadding,
+            y: pageHeight - (fieldY + offsetY),
+            height: 8,
+            width: 8,
+          });
+
+          if (selected.includes(item.value)) {
+            radio.select(item.value);
+          }
         }
       }
     })

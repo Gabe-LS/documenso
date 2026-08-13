@@ -209,6 +209,7 @@ const getUpdatedFieldMeta = (field: Field, prefillField?: TFieldMetaPrefillField
         label: field.label,
         values: newValues,
         direction: radioMeta.direction ?? 'vertical',
+        columns: radioMeta.columns ?? 1,
       };
 
       return meta;
@@ -254,6 +255,7 @@ const getUpdatedFieldMeta = (field: Field, prefillField?: TFieldMetaPrefillField
         label: field.label,
         values: newValues,
         direction: checkboxMeta.direction ?? 'vertical',
+        columns: checkboxMeta.columns ?? 1,
       };
 
       return meta;
