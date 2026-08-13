@@ -69,3 +69,10 @@
     --font-noto: "Noto Sans", "Noto Sans Korean", "Noto Sans Japanese", "Noto Sans Chinese";
   }
 }
+
+/* Highlight individual checkbox/radio squares when validation fires */
+.field--validating[data-field-type="CHECKBOX"] button[role="checkbox"],
+.field--validating[data-field-type="RADIO"] button[role="radio"] {
+  border-color: rgb(253 186 116);
+  box-shadow: 0 0 0 1px rgb(253 186 116);
+}

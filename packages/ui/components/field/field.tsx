@@ -123,7 +123,13 @@ export function FieldRootContainer({ field, children, color, className, readonly
           {
             'px-2': field.type !== FieldType.SIGNATURE && field.type !== FieldType.FREE_SIGNATURE,
             'justify-center': !field.inserted,
-            'ring-orange-300': isValidating && isFieldUnsignedAndRequired(field),
+            'ring-2 ring-gray-200': field.type !== FieldType.CHECKBOX && field.type !== FieldType.RADIO,
+            'ring-orange-300':
+              isValidating &&
+              isFieldUnsignedAndRequired(field) &&
+              field.type !== FieldType.CHECKBOX &&
+              field.type !== FieldType.RADIO,
+            'field--validating': isValidating && isFieldUnsignedAndRequired(field),
           },
           className,
         )}
