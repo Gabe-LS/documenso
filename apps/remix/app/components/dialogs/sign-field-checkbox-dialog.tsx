@@ -77,8 +77,9 @@ export const SignFieldCheckboxDialog = createCallable<SignFieldCheckboxDialogPro
           <DialogHeader>
             <DialogTitle>{fieldMeta.label || <Trans>Select Options</Trans>}</DialogTitle>
 
+            {fieldMeta.hint && <DialogDescription className="mt-4">{fieldMeta.hint}</DialogDescription>}
             <DialogDescription
-              className={cn('mt-4', {
+              className={cn(fieldMeta.hint ? 'mt-1' : 'mt-4', {
                 'text-destructive': Object.keys(form.formState.errors).length > 0,
               })}
             >

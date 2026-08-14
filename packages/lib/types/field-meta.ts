@@ -68,6 +68,7 @@ const ZFieldMetaVerticalAlign = z.enum(['top', 'middle', 'bottom']).describe('Th
 export const ZBaseFieldMeta = z.object({
   label: z.string().optional(),
   placeholder: z.string().optional(),
+  hint: z.string().optional(),
   required: z.boolean().optional(),
   readOnly: z.boolean().optional(),
   fontSize: z.number().min(8).max(96).default(DEFAULT_FIELD_FONT_SIZE).optional(),

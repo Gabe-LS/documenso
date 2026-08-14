@@ -100,9 +100,7 @@ export const SignFieldNumberDialog = createCallable<SignFieldNumberDialogProps, 
           <DialogHeader>
             <DialogTitle>{fieldMeta.label || <Trans>Enter Number</Trans>}</DialogTitle>
 
-            <DialogDescription className="mt-4">
-              <Trans>Please enter a number</Trans>
-            </DialogDescription>
+            {fieldMeta.hint && <DialogDescription className="mt-4">{fieldMeta.hint}</DialogDescription>}
           </DialogHeader>
 
           <Form {...form}>
