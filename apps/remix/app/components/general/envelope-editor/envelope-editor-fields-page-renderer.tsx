@@ -81,7 +81,7 @@ export const EnvelopeEditorFieldsPageRenderer = ({ pageData }: { pageData: PageR
 
       const pageWidth = scaledViewport.width;
       const pageHeight = scaledViewport.height;
-      const step = e.shiftKey ? 10 : 1;
+      const step = e.shiftKey ? 5 : 0.5;
       const dx = e.key === 'ArrowLeft' ? -step : e.key === 'ArrowRight' ? step : 0;
       const dy = e.key === 'ArrowUp' ? -step : e.key === 'ArrowDown' ? step : 0;
       const dxPercent = (dx / pageWidth) * 100;
