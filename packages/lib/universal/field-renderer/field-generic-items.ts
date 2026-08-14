@@ -1,4 +1,5 @@
 import { DEFAULT_RECT_BACKGROUND, getRecipientColorStyles } from '@documenso/ui/lib/recipient-colors';
+import { FieldType } from '@prisma/client';
 import Konva from 'konva';
 
 import type { FieldToRender, RenderFieldElementOptions } from './field-renderer';
@@ -54,11 +55,16 @@ export const upsertFieldRect = (field: FieldToRender, options: RenderFieldElemen
       name: 'field-rect',
     });
 
+  const isMultiChoice = field.type === FieldType.CHECKBOX || field.type === FieldType.RADIO;
+  const hideFieldRect = isMultiChoice && mode === 'sign';
+
   fieldRect.setAttrs({
     width: fieldWidth,
     height: fieldHeight,
-    fill: fieldCanvasStyle?.backgroundColor ?? DEFAULT_RECT_BACKGROUND,
-    stroke: fieldCanvasStyle?.borderColor ?? (color ? getRecipientColorStyles(color).baseRing : '#e5e7eb'),
+    fill: hideFieldRect ? 'transparent' : (fieldCanvasStyle?.backgroundColor ?? DEFAULT_RECT_BACKGROUND),
+    stroke: hideFieldRect
+      ? 'transparent'
+      : (fieldCanvasStyle?.borderColor ?? (color ? getRecipientColorStyles(color).baseRing : '#e5e7eb')),
     strokeWidth: fieldCanvasStyle?.borderWidth ?? 2,
     cornerRadius: fieldCanvasStyle?.borderRadius ?? 2,
     strokeScaleEnabled: false,
