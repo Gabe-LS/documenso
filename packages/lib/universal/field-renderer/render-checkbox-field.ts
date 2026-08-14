@@ -89,6 +89,7 @@ export const renderCheckboxFieldElement = (field: FieldToRender, options: Render
         spacingBetweenItemAndText: spacingBetweenCheckboxAndText,
         fieldPadding: checkboxFieldPadding,
         direction: checkboxMeta?.direction || 'vertical',
+        columns: checkboxMeta?.columns || 1,
         type: 'checkbox',
       });
 
