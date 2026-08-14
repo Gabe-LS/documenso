@@ -31,6 +31,7 @@ import {
 
 const ZCheckboxFieldFormSchema = ZCheckboxFieldMeta.pick({
   label: true,
+  hint: true,
   direction: true,
   columns: true,
   validationRule: true,
@@ -80,6 +81,7 @@ export const EditorFieldCheckboxForm = ({
     mode: 'onChange',
     defaultValues: {
       label: value.label || '',
+      hint: value.hint || '',
       direction: value.direction || 'vertical',
       columns: value.columns || 1,
       validationRule: value.validationRule || '',
@@ -155,6 +157,22 @@ export const EditorFieldCheckboxForm = ({
       <form>
         <fieldset className="flex flex-col gap-2">
           <EditorGenericFontSizeField formControl={form.control} />
+
+          <FormField
+            control={form.control}
+            name="hint"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>
+                  <Trans>Hint</Trans>
+                </FormLabel>
+                <FormControl>
+                  <Input placeholder={t`Signing dialog description`} {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
 
           <FormField
             control={form.control}

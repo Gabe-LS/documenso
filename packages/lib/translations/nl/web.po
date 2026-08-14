@@ -2861,6 +2861,12 @@ msgstr "Sluiten"
 msgid "Collapse sidebar"
 msgstr "Zijbalk samenvouwen"
 
+#: apps/remix/app/components/forms/editor/editor-field-checkbox-form.tsx
+#: apps/remix/app/components/forms/editor/editor-field-radio-form.tsx
+#: packages/ui/primitives/document-flow/field-items-advanced-settings/checkbox-field.tsx
+msgid "Columns"
+msgstr ""
+
 #: apps/remix/app/components/general/admin-email-blocklist-section.tsx
 msgid "Comma-separated list of email domains to block from signing up."
 msgstr "Komma-gescheiden lijst met e‑maildomeinen die voor registratie moeten worden geblokkeerd."
@@ -6143,6 +6149,13 @@ msgstr "Verbergen"
 msgid "Hide license key"
 msgstr "Licentiesleutel verbergen"
 
+#: apps/remix/app/components/forms/editor/editor-field-checkbox-form.tsx
+#: apps/remix/app/components/forms/editor/editor-field-number-form.tsx
+#: apps/remix/app/components/forms/editor/editor-field-radio-form.tsx
+#: apps/remix/app/components/forms/editor/editor-field-text-form.tsx
+msgid "Hint"
+msgstr ""
+
 #: apps/remix/app/components/dialogs/folder-move-dialog.tsx
 #: apps/remix/app/components/general/folder/folder-grid.tsx
 #: apps/remix/app/components/general/generic-error-layout.tsx
@@ -8308,16 +8321,8 @@ msgid "Please don't close this tab. The signing provider is finalising your sign
 msgstr "Sluit dit tabblad niet. De ondertekenprovider rondt uw handtekening af."
 
 #: apps/remix/app/components/dialogs/sign-field-number-dialog.tsx
-msgid "Please enter a number"
-msgstr "Voer een nummer in"
-
-#: apps/remix/app/components/dialogs/sign-field-number-dialog.tsx
 msgid "Please enter a valid number"
 msgstr "Voer een geldig nummer in"
-
-#: apps/remix/app/components/dialogs/sign-field-text-dialog.tsx
-msgid "Please enter a value"
-msgstr "Voer een waarde in"
 
 #: apps/remix/app/components/dialogs/sign-field-email-dialog.tsx
 msgid "Please enter your email address"
@@ -10204,6 +10209,13 @@ msgstr "Ondertekeningscertificaat verstrekt door"
 #: apps/remix/app/routes/_recipient+/sign.$token+/expired.tsx
 msgid "Signing Deadline Expired"
 msgstr "Onderteken-deadline verstreken"
+
+#: apps/remix/app/components/forms/editor/editor-field-checkbox-form.tsx
+#: apps/remix/app/components/forms/editor/editor-field-number-form.tsx
+#: apps/remix/app/components/forms/editor/editor-field-radio-form.tsx
+#: apps/remix/app/components/forms/editor/editor-field-text-form.tsx
+msgid "Signing dialog description"
+msgstr ""
 
 #: apps/remix/app/routes/_unauthenticated+/articles.signature-disclosure.tsx
 msgid "Signing Electronically"

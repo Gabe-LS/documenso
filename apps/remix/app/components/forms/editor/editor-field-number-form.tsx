@@ -32,6 +32,7 @@ import {
 const ZNumberFieldFormSchema = ZNumberFieldMeta.pick({
   label: true,
   placeholder: true,
+  hint: true,
   value: true,
   numberFormat: true,
   fontSize: true,
@@ -93,6 +94,7 @@ export const EditorFieldNumberForm = ({
     defaultValues: {
       label: value.label || '',
       placeholder: value.placeholder || '',
+      hint: value.hint || '',
       value: value.value || '',
       numberFormat: value.numberFormat || null,
       fontSize: value.fontSize || DEFAULT_FIELD_FONT_SIZE,
@@ -158,6 +160,22 @@ export const EditorFieldNumberForm = ({
                     placeholder={t`Placeholder`}
                     {...field}
                   />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="hint"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>
+                  <Trans>Hint</Trans>
+                </FormLabel>
+                <FormControl>
+                  <Input placeholder={t`Signing dialog description`} {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>

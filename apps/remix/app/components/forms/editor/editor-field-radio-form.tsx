@@ -23,6 +23,7 @@ import {
 
 const ZRadioFieldFormSchema = ZRadioFieldMeta.pick({
   label: true,
+  hint: true,
   direction: true,
   columns: true,
   values: true,
@@ -66,6 +67,7 @@ export const EditorFieldRadioForm = ({
     mode: 'onChange',
     defaultValues: {
       label: value.label || '',
+      hint: value.hint || '',
       values: value.values || [{ id: 1, checked: false, value: t`Default value` }],
       required: value.required || false,
       readOnly: value.readOnly || false,
@@ -116,6 +118,22 @@ export const EditorFieldRadioForm = ({
       <form>
         <fieldset className="flex flex-col gap-2">
           <EditorGenericFontSizeField formControl={form.control} />
+
+          <FormField
+            control={form.control}
+            name="hint"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>
+                  <Trans>Hint</Trans>
+                </FormLabel>
+                <FormControl>
+                  <Input placeholder={t`Signing dialog description`} {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
 
           <FormField
             control={form.control}

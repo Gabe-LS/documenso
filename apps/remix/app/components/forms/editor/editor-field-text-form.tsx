@@ -29,6 +29,7 @@ import {
 const ZTextFieldFormSchema = ZTextFieldMeta.pick({
   label: true,
   placeholder: true,
+  hint: true,
   text: true,
   characterLimit: true,
   fontSize: true,
@@ -70,6 +71,7 @@ export const EditorFieldTextForm = ({
     defaultValues: {
       label: value.label || '',
       placeholder: value.placeholder || '',
+      hint: value.hint || '',
       text: value.text || '',
       characterLimit: value.characterLimit || 0,
       fontSize: value.fontSize || DEFAULT_FIELD_FONT_SIZE,
@@ -142,6 +144,22 @@ export const EditorFieldTextForm = ({
                 </FormLabel>
                 <FormControl>
                   <Input data-testid="field-form-placeholder" placeholder={t`Field placeholder`} {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="hint"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>
+                  <Trans>Hint</Trans>
+                </FormLabel>
+                <FormControl>
+                  <Input placeholder={t`Signing dialog description`} {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>

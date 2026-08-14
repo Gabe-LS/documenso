@@ -2861,6 +2861,12 @@ msgstr "닫기"
 msgid "Collapse sidebar"
 msgstr "사이드바 접기"
 
+#: apps/remix/app/components/forms/editor/editor-field-checkbox-form.tsx
+#: apps/remix/app/components/forms/editor/editor-field-radio-form.tsx
+#: packages/ui/primitives/document-flow/field-items-advanced-settings/checkbox-field.tsx
+msgid "Columns"
+msgstr ""
+
 #: apps/remix/app/components/general/admin-email-blocklist-section.tsx
 msgid "Comma-separated list of email domains to block from signing up."
 msgstr "가입을 차단할 이메일 도메인을 쉼표로 구분하여 입력하세요."
@@ -6143,6 +6149,13 @@ msgstr "숨기기"
 msgid "Hide license key"
 msgstr "라이선스 키 숨기기"
 
+#: apps/remix/app/components/forms/editor/editor-field-checkbox-form.tsx
+#: apps/remix/app/components/forms/editor/editor-field-number-form.tsx
+#: apps/remix/app/components/forms/editor/editor-field-radio-form.tsx
+#: apps/remix/app/components/forms/editor/editor-field-text-form.tsx
+msgid "Hint"
+msgstr ""
+
 #: apps/remix/app/components/dialogs/folder-move-dialog.tsx
 #: apps/remix/app/components/general/folder/folder-grid.tsx
 #: apps/remix/app/components/general/generic-error-layout.tsx
@@ -8308,16 +8321,8 @@ msgid "Please don't close this tab. The signing provider is finalising your sign
 msgstr "이 탭을 닫지 마십시오. 서명 제공자가 서명을 마무리하고 있습니다."
 
 #: apps/remix/app/components/dialogs/sign-field-number-dialog.tsx
-msgid "Please enter a number"
-msgstr "숫자를 입력하세요"
-
-#: apps/remix/app/components/dialogs/sign-field-number-dialog.tsx
 msgid "Please enter a valid number"
 msgstr "올바른 숫자를 입력하세요"
-
-#: apps/remix/app/components/dialogs/sign-field-text-dialog.tsx
-msgid "Please enter a value"
-msgstr "값을 입력하세요"
 
 #: apps/remix/app/components/dialogs/sign-field-email-dialog.tsx
 msgid "Please enter your email address"
@@ -10204,6 +10209,13 @@ msgstr "서명 인증서 제공자"
 #: apps/remix/app/routes/_recipient+/sign.$token+/expired.tsx
 msgid "Signing Deadline Expired"
 msgstr "서명 마감 기한 만료"
+
+#: apps/remix/app/components/forms/editor/editor-field-checkbox-form.tsx
+#: apps/remix/app/components/forms/editor/editor-field-number-form.tsx
+#: apps/remix/app/components/forms/editor/editor-field-radio-form.tsx
+#: apps/remix/app/components/forms/editor/editor-field-text-form.tsx
+msgid "Signing dialog description"
+msgstr ""
 
 #: apps/remix/app/routes/_unauthenticated+/articles.signature-disclosure.tsx
 msgid "Signing Electronically"
