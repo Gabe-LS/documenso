@@ -1,8 +1,9 @@
+import { getRecipientColorStyles } from '@documenso/ui/lib/recipient-colors';
 import Konva from 'konva';
 import { match } from 'ts-pattern';
-
 import { DEFAULT_STANDARD_FONT_SIZE } from '../../constants/pdf';
 import type { TRadioFieldMeta } from '../../types/field-meta';
+
 import {
   createFieldHoverInteraction,
   konvaTextFill,
@@ -147,6 +148,12 @@ export const renderRadioFieldElement = (field: FieldToRender, options: RenderFie
       columns: radioMeta?.columns || 1,
     });
 
+    const circleStroke = field.isValidating
+      ? 'rgb(253, 186, 116)'
+      : color
+        ? getRecipientColorStyles(color).baseRing
+        : '#374151';
+
     // Circle which represents the radio button.
     const circle = new Konva.Circle({
       internalRadioIndex: index,
@@ -155,7 +162,7 @@ export const renderRadioFieldElement = (field: FieldToRender, options: RenderFie
       x: itemInputX,
       y: itemInputY,
       radius: calculateRadioSize(fontSize) / 2,
-      stroke: '#374151',
+      stroke: circleStroke,
       strokeWidth: 1.5,
       fill: 'white',
     });

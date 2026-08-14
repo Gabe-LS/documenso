@@ -1,9 +1,10 @@
+import { getRecipientColorStyles } from '@documenso/ui/lib/recipient-colors';
 import Konva from 'konva';
 import { match } from 'ts-pattern';
-
 import { DEFAULT_STANDARD_FONT_SIZE } from '../../constants/pdf';
 import type { TCheckboxFieldMeta } from '../../types/field-meta';
 import { parseCheckboxCustomText } from '../../utils/fields';
+
 import {
   createFieldHoverInteraction,
   konvaTextFill,
@@ -157,6 +158,12 @@ export const renderCheckboxFieldElement = (field: FieldToRender, options: Render
       type: 'checkbox',
     });
 
+    const squareStroke = field.isValidating
+      ? 'rgb(253, 186, 116)'
+      : color
+        ? getRecipientColorStyles(color).baseRing
+        : '#374151';
+
     const square = new Konva.Rect({
       internalCheckboxIndex: index,
       id: `checkbox-square-${index}`,
@@ -165,7 +172,7 @@ export const renderCheckboxFieldElement = (field: FieldToRender, options: Render
       y: itemInputY,
       width: itemSize,
       height: itemSize,
-      stroke: '#374151',
+      stroke: squareStroke,
       strokeWidth: 1.5,
       cornerRadius: 2,
       fill: 'white',
