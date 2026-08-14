@@ -147,6 +147,22 @@ export const EditorFieldNumberForm = ({
 
           <FormField
             control={form.control}
+            name="hint"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>
+                  <Trans>Hint</Trans>
+                </FormLabel>
+                <FormControl>
+                  <Input placeholder={t`Signing dialog description`} {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
             name="placeholder"
             render={({ field }) => (
               <FormItem>
@@ -160,22 +176,6 @@ export const EditorFieldNumberForm = ({
                     placeholder={t`Placeholder`}
                     {...field}
                   />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          <FormField
-            control={form.control}
-            name="hint"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>
-                  <Trans>Hint</Trans>
-                </FormLabel>
-                <FormControl>
-                  <Input placeholder={t`Signing dialog description`} {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>

@@ -136,22 +136,6 @@ export const EditorFieldTextForm = ({
 
           <FormField
             control={form.control}
-            name="placeholder"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>
-                  <Trans>Placeholder</Trans>
-                </FormLabel>
-                <FormControl>
-                  <Input data-testid="field-form-placeholder" placeholder={t`Field placeholder`} {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          <FormField
-            control={form.control}
             name="hint"
             render={({ field }) => (
               <FormItem>
@@ -160,6 +144,22 @@ export const EditorFieldTextForm = ({
                 </FormLabel>
                 <FormControl>
                   <Input placeholder={t`Signing dialog description`} {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="placeholder"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>
+                  <Trans>Placeholder</Trans>
+                </FormLabel>
+                <FormControl>
+                  <Input data-testid="field-form-placeholder" placeholder={t`Field placeholder`} {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
