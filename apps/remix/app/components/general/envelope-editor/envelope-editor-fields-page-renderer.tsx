@@ -63,6 +63,52 @@ export const EnvelopeEditorFieldsPageRenderer = ({ pageData }: { pageData: PageR
 
   const { scale, pageNumber } = pageData;
 
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (!selectedKonvaFieldGroups.length) {
+        return;
+      }
+      if (!['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(e.key)) {
+        return;
+      }
+
+      const tag = (e.target as HTMLElement)?.tagName;
+      if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT') {
+        return;
+      }
+
+      e.preventDefault();
+
+      const pageWidth = scaledViewport.width;
+      const pageHeight = scaledViewport.height;
+      const step = e.shiftKey ? 10 : 1;
+      const dx = e.key === 'ArrowLeft' ? -step : e.key === 'ArrowRight' ? step : 0;
+      const dy = e.key === 'ArrowUp' ? -step : e.key === 'ArrowDown' ? step : 0;
+      const dxPercent = (dx / pageWidth) * 100;
+      const dyPercent = (dy / pageHeight) * 100;
+
+      for (const fieldGroup of selectedKonvaFieldGroups) {
+        const formId = fieldGroup.id();
+        const field = editorFields.localFields.find((f) => f.formId === formId);
+        if (!field) {
+          continue;
+        }
+
+        fieldGroup.move({ x: dx, y: dy });
+
+        editorFields.updateFieldByFormId(formId, {
+          positionX: field.positionX + dxPercent,
+          positionY: field.positionY + dyPercent,
+        });
+      }
+
+      pageLayer.current?.batchDraw();
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [selectedKonvaFieldGroups, scaledViewport, editorFields, pageLayer]);
+
   const localPageFields = useMemo(
     () =>
       editorFields.localFields.filter(
