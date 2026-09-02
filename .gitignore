@@ -64,6 +64,7 @@ logs.json
 # scripts
 scripts/output*
 scripts/bench-*
+scripts/vps/*.toml
 
 # license
 .documenso-license.json
