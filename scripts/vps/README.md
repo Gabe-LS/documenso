@@ -21,14 +21,14 @@ The script reads the Documenso API key from the macOS Keychain, so it
 never appears in commands, scripts, or shell history.
 
 ```bash
-security add-generic-password -s documenso-api-key -a api -w
+security add-generic-password -s documenso-api-key -a gabrielelosurdo -w
 ```
 
 You will be prompted to enter the key. To update it later:
 
 ```bash
-security delete-generic-password -s documenso-api-key -a api
-security add-generic-password -s documenso-api-key -a api -w
+security delete-generic-password -s documenso-api-key -a gabrielelosurdo
+security add-generic-password -s documenso-api-key -a gabrielelosurdo -w
 ```
 
 ### 2. Create the config file

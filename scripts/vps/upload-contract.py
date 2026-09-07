@@ -6,9 +6,9 @@ Creates a draft envelope with signature fields and recipients by calling
 the Documenso API directly. Does NOT send unless --send is passed.
 
 The API key is read from the macOS Keychain (service: documenso-api-key,
-account: api). Store it once with:
+account: gabrielelosurdo). Store it once with:
 
-    security add-generic-password -s documenso-api-key -a api -w
+    security add-generic-password -s documenso-api-key -a gabrielelosurdo -w
 
 Defaults (url, cc) are read from upload-contract.toml next to this
 script. CLI arguments override.
@@ -43,7 +43,7 @@ FIELDS_EN = [
 ]
 
 KEYCHAIN_SERVICE = "documenso-api-key"
-KEYCHAIN_ACCOUNT = "api"
+KEYCHAIN_ACCOUNT = "gabrielelosurdo"
 
 
 def error(msg):
@@ -166,6 +166,7 @@ def main():
     parser.add_argument("--skip-validation", action="store_true", help="Skip PDF validation checks")
     parser.add_argument("--signer-email", default=None, help="Signer email (prompted if omitted)")
     parser.add_argument("--signer-name", default=None, help="Signer display name (prompted if omitted)")
+    parser.add_argument("--no-cc", action="store_true", help="Do not add a CC recipient")
     parser.add_argument("--cc-email", default=cc.get("email"), help="CC recipient email (default: from config)")
     parser.add_argument("--cc-name", default=cc.get("name"), help="CC recipient name (default: from config)")
     args = parser.parse_args()
@@ -187,6 +188,7 @@ def main():
             parser.error("Signer name is required")
 
     base_url = args.url.rstrip("/")
+    api_key = get_api_key_from_keychain()
     filename = pdf_path.rsplit("/", 1)[-1]
 
     try:
@@ -242,7 +244,7 @@ def main():
     recipients_data = [
         {"email": args.signer_email, "name": args.signer_name, "role": "SIGNER"},
     ]
-    if args.cc_email:
+    if args.cc_email and not args.no_cc:
         recipients_data.append({
             "email": args.cc_email,
             "name": args.cc_name or args.cc_email,
@@ -257,7 +259,7 @@ def main():
     )
     signer_id = result["data"][0]["id"]
     print(f"Signer: {args.signer_name} <{args.signer_email}> (ID: {signer_id})")
-    if args.cc_email:
+    if args.cc_email and not args.no_cc:
         print(f"CC: {args.cc_name or args.cc_email} <{args.cc_email}>")
 
     # 4. Add signature fields
