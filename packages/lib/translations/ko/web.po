@@ -977,6 +977,10 @@ msgstr "새 구성원이 조직 {organisationName}에 가입했습니다."
 msgid "A password reset email has been sent, if you have an account you should see it in your inbox shortly."
 msgstr "비밀번호 재설정 이메일을 발송했습니다. 계정이 있으시다면 곧 받은 편지함에서 확인하실 수 있습니다."
 
+#: packages/email/templates/document-recipient-signed.tsx
+msgid "A recipient has signed your document."
+msgstr ""
+
 #: packages/lib/utils/document-audit-logs.ts
 msgctxt "Audit log format"
 msgid "A recipient was added"
@@ -13039,10 +13043,6 @@ msgstr "공개 범위"
 #: apps/remix/app/components/general/stack-avatars-with-tooltip.tsx
 msgid "Waiting"
 msgstr "대기 중"
-
-#: packages/email/templates/document-recipient-signed.tsx
-msgid "Waiting for the remaining signatures."
-msgstr ""
 
 #: apps/remix/app/components/embed/embed-document-waiting-for-turn.tsx
 #: apps/remix/app/routes/_recipient+/sign.$token+/waiting.tsx

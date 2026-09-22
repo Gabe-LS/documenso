@@ -26,6 +26,17 @@ Read `DEVELOPMENT.md` at the repo root for setup, commands, and deploy flow.
    When replacing an image, update both and bump the cache-buster query
    string in the template (e.g. `?v=2` → `?v=3`).
 
+## Fork patches (verify after upstream rebase)
+
+These are small fork-only changes. After rebasing on upstream, verify each
+is still present and re-apply if lost:
+
+- `send-recipient-signed-email.handler.ts`: skip the "X has signed" email
+  when there's only one non-CC recipient (the "completed" email suffices)
+- `document-recipient-signed.tsx`: preview text changed from "Waiting for
+  the remaining signatures" to "A recipient has signed your document"
+- `it/web.po`: Italian translation for the above preview text
+
 ## CC recipients
 
 CC recipients receive all document lifecycle emails: sent for signing,

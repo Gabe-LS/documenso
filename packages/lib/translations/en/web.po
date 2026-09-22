@@ -973,6 +973,10 @@ msgstr "A new member has joined your organisation {organisationName}"
 msgid "A password reset email has been sent, if you have an account you should see it in your inbox shortly."
 msgstr "A password reset email has been sent, if you have an account you should see it in your inbox shortly."
 
+#: packages/email/templates/document-recipient-signed.tsx
+msgid "A recipient has signed your document."
+msgstr "A recipient has signed your document."
+
 #: packages/lib/utils/document-audit-logs.ts
 msgctxt "Audit log format"
 msgid "A recipient was added"
@@ -13035,10 +13039,6 @@ msgstr "Visibility"
 #: apps/remix/app/components/general/stack-avatars-with-tooltip.tsx
 msgid "Waiting"
 msgstr "Waiting"
-
-#: packages/email/templates/document-recipient-signed.tsx
-msgid "Waiting for the remaining signatures."
-msgstr "Waiting for the remaining signatures."
 
 #: apps/remix/app/components/embed/embed-document-waiting-for-turn.tsx
 #: apps/remix/app/routes/_recipient+/sign.$token+/waiting.tsx

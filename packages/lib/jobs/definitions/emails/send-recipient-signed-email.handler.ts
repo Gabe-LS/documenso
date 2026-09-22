@@ -1,7 +1,7 @@
 import { DocumentRecipientSignedEmailTemplate } from '@documenso/email/templates/document-recipient-signed';
 import { prisma } from '@documenso/prisma';
 import { msg } from '@lingui/core/macro';
-import { EnvelopeType } from '@prisma/client';
+import { EnvelopeType, RecipientRole } from '@prisma/client';
 import { createElement } from 'react';
 
 import { getI18nInstance } from '../../../client-only/providers/i18n-server';
@@ -61,6 +61,19 @@ export const run = async ({ payload, io }: { payload: TSendRecipientSignedEmailJ
   const isRecipientSignedEmailEnabled = extractDerivedDocumentEmailSettings(envelope.documentMeta).recipientSigned;
 
   if (!isRecipientSignedEmailEnabled) {
+    return;
+  }
+
+  // Skip "X has signed" when there's only one signable recipient — the
+  // "completed" email is sufficient and arrives seconds later.
+  const signableCount = await prisma.recipient.count({
+    where: {
+      envelopeId: envelope.id,
+      role: { not: RecipientRole.CC },
+    },
+  });
+
+  if (signableCount <= 1) {
     return;
   }
 

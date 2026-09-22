@@ -21,7 +21,7 @@ export const DocumentRecipientSignedEmailTemplate = ({
 }: DocumentRecipientSignedEmailTemplateProps) => {
   const { _ } = useLingui();
 
-  const previewText = msg`Waiting for the remaining signatures.`;
+  const previewText = msg`A recipient has signed your document.`;
 
   return (
     <EmailLayout assetBaseUrl={assetBaseUrl} preview={_(previewText)} reportUrl={reportUrl}>
