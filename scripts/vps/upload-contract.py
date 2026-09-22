@@ -187,6 +187,11 @@ def main():
         if not args.signer_name:
             parser.error("Signer name is required")
 
+    args.signer_name = args.signer_name.strip(";, \t\"'")
+    args.signer_email = args.signer_email.strip(";, \t\"'")
+    if not args.signer_name or not args.signer_email:
+        error("Signer name and email must not be empty after cleanup")
+
     base_url = args.url.rstrip("/")
     api_key = get_api_key_from_keychain()
     filename = pdf_path.rsplit("/", 1)[-1]
